@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Distinguish between syntax, semantics, and pragmatics.
+  \item Understand morphology and explain why agglutinative languages challenge fixed-vocabulary systems.
+  \item Explain Zipf's Law and its mathematical implications for rare-word modeling.
+  \item Understand why formal grammars (like Context-Free Grammars) are insufficient for natural language.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +16,110 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:05:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Language modeling research is a branch of Computer Science, but our data structure is a product of human evolution and culture. While modern Deep Learning emphasizes throwing scale at raw data without hand-coded linguistic rules (a philosophy popularized as "the bitter lesson"), ignoring linguistics entirely is an engineering mistake.
+
+Why? Because the statistical properties of natural language heavily dictate our tokenization schemes, our scaling laws, and our evaluation metrics. If you understand Zipf's Law, you understand why large vocabularies are mathematically mandatory. If you understand morphology, you understand why German and Turkish break bad tokenizers. 
+
+This chapter is not a crash course in Chomsky; it provides the absolute minimum descriptive linguistics required to debug, evaluate, and scale language models across English and multilingual corpora.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:05:sec:setup}
 
-TODO: Define notation and state assumptions.
+Linguists analyze language across a hierarchy of abstraction:
+\begin{itemize}
+    \item \textbf{Phonetics/Phonology}: The physical sounds and sound systems of speech. (Largely irrelevant for text-based LLMs).
+    \item \textbf{Morphology}: The internal structure of words (roots, prefixes, suffixes).
+    \item \textbf{Syntax}: The rules governing the structural arrangement of words into phrases and sentences.
+    \item \textbf{Semantics}: The literal meaning of words, phrases, and sentences.
+    \item \textbf{Pragmatics}: Meaning derived from context, intent, and social convention.
+\end{itemize}
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{Morphology and Typology}
 \label{ch:05:sec:main}
 
-TODO: Core technical content.
+\textbf{Morphemes} are the smallest units of meaning in a language. The word "unbelievable" is composed of three morphemes: \textit{un-} (not), \textit{believe} (verb root), \textit{-able} (can be done). 
+
+Languages handle morphemes very differently (Typology):
+\begin{enumerate}
+    \item \textbf{Isolating Languages} (e.g., Chinese, Vietnamese): Words mostly consist of single morphemes. Plurality or tense is handled by adding entirely separate words.
+    \item \textbf{Fusional Languages} (e.g., Spanish, Russian): Complex suffixes blend multiple meanings. A single suffix on a Spanish verb conveys person, number, tense, and mood simultaneously.
+    \item \textbf{Agglutinative Languages} (e.g., Turkish, Finnish, Korean): Morphemes are chained together endlessly like train cars. In Turkish, \textit{uygarlaşamadıklarımızdanmışsınızcasına} is a single valid word meaning "as if you were among those whom we could not civilize."
+\end{enumerate}
+
+If your system uses a fixed-word dictionary, an agglutinative language will cause an infinite explosion of Out-Of-Vocabulary (OOV) errors. This is the linguistic justification for the subword tokenization mechanisms (BPE) discussed in Chapter 7. Our tokenizers attempt to statistically reverse-engineer morphology.
+
+\section{Syntax vs. Semantics}
+
+In 1957, Noam Chomsky famously proposed the sentence:
+\begin{quote}
+    \textit{Colorless green ideas sleep furiously.}
+\end{quote}
+
+This sentence is \textbf{syntactically valid} (it perfectly obeys the grammar rules of English verbs, adjectives, and adverbs). However, it is \textbf{semantically void} (it makes no logical sense).
+
+Historically, early NLP tried to code explicit Context-Free Grammars (CFGs) to parse syntax trees. This failed because natural language is riddled with ambiguities that can only be resolved via semantics and pragmatics. 
+
+Classical example: \textit{"I saw the man with the telescope."} 
+Did I use a telescope to see the man, or did the man possess a telescope? Syntax cannot resolve this. A neutral language model solves this by looking at broader context (pragmatics). Neural LLMs do not keep explicit parse trees in memory; they project context into continuous vector space, collapsing syntax and semantics into a unified statistical probability.
+
+\section{Zipf's Law}
+
+Zipf's Law is the most important empirical law in NLP. It states that given a large sample of words, the frequency of any word is inversely proportional to its rank in the frequency table.
+
+Let $r$ be the rank of a word (the most frequent word is $r=1$, the second is $r=2$). Its frequency $f$ obeys:
+\begin{equation}
+f(r) \propto \frac{1}{r^\alpha}
+\end{equation}
+where $\alpha \approx 1$.
+
+\textbf{Implications:}
+1. \textbf{The Heavy Tail}: A tiny handful of words (like "the", "of", "and") make up a massive percentage of any corpus.
+2. \textbf{The Long Tail}: The vast majority of words in a vocabulary appear extremely rarely. 
+3. \textbf{Data Sparsity}: No matter how large your training dataset is (even trillions of tokens), you will always encounter words or $N$-grams during testing that you have \emph{never} seen before. 
+
+This mathematical property is why the $N$-gram models of Chapter 8 ultimately failed and why we rely on the continuous space embeddings of neural networks to guess properties of the long-tail words based on their structural similarities to common words.
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Checking Zipf on a Small Sample}
 \label{ch:05:sec:example}
 
-TODO: Complete worked example.
+In the Brown Corpus of American English (approx. 1 million words):
+- "the" (Rank 1) appears ~69,971 times.
+- "of" (Rank 2) appears ~36,411 times. (Roughly $\frac{1}{2}$ of Rank 1).
+- "and" (Rank 3) appears ~28,852 times. (Roughly $\frac{1}{3}$ of Rank 1).
+
+If we plot $\log(\text{Rank})$ vs. $\log(\text{Frequency})$, Zipf's Law predicts a straight line with a slope of $-1$. All human languages exhibit this exact power-law distribution. Language models must allocate an enormous parameter budget (via embeddings) solely to handle the heavy tail of rare concepts.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:05:sec:systems}
 
-TODO: Implementation and performance implications.
+Because of Zipf's Law, when an LLM computes the softmax denominator over a vocabulary of 50,000, it wastes immense amounts of compute driving the probabilities of 49,000 extremely rare words functionally to zero. Optimization techniques like Adaptive Softmax or Hierarchical Softmax historically exploited Zipf's law by clustering rare words together into a sub-tree to avoid computing them unless necessary. However, on modern GPUs with block matrices, hardware accelerates dense, balanced arrays faster than it runs sparse, imbalanced logic trees. Today, we simply bite the bullet and compute the full dense Softmax, favoring hardware symmetry over linguistic asymmetry.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Broca's Area vs. Wernicke's Area}
   \paragraph{Where the analogy helps.}
-  TODO
+  Clinical neuroscience historically divided language processing: Broca's Area (frontal lobe) was associated with syntax and language production (grammar), while Wernicke's Area (temporal lobe) was associated with semantics and comprehension (meaning). This mirrors the linguist's split between Syntax and Semantics.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Modern imaging shows this brain split is highly oversimplified—syntax and semantics are deeply distributed and intertwined networks. In an LLM, there is zero modular separation whatsoever. A single Transformer block handles grammar, meaning, and logic simultaneously in exactly the same monolithic weight matrices.  
 
   \paragraph{What intuition to keep.}
-  TODO
+  While linguistic theory cleanly separates grammar from meaning, the geometry of high-dimensional continuous representations natively blurs them together. For a neural net, resolving grammar is just another vector operation, identical to retrieving a fact.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:05:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``LLMs learn the grammar rules of English.''} LLMs memorize no explicit syntactic rules. They learn a continuous approximation of the probability distribution of language. If a text is grammatically broken but statistically probable (e.g., internet slang), the model treats it as correct.
+  \item \textbf{``Words have fixed meanings.''} A linguist will tell you meaning is contextual (Pragmatics). This is why static embeddings (like Word2Vec) were replaced by contextual embeddings (like Transformers), where the mathematical vector for "bank" dynamically changes depending on the surrounding tokens.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,22 +127,25 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item Label the following errors as Syntactic, Semantic, or Pragmatic: 
+        (a) "The angry pizza drove explicitly." 
+        (b) "Cat the on sat mat."
+        (c) Answering "Yes" to "Do you have the time?" and standing in silence.
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item If an agglutinative language builds words exponentially via combinations of $N$ suffixes, mathematically demonstrate why subword tokenization creates a linear $O(N)$ vocabulary size while whole-word tokenization requires an exponential $O(2^N)$ vocabulary.
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A4]} Using Python's `collections.Counter`, write a short script that plots the log-rank vs. log-frequency graph for any given text file to verify Zipf's Law.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item If an LLM is trained purely on text, does it construct semantics (meaning) or is it just generating highly complex syntax? (Refer to the "Bender's Octopus" thought experiment in NLP literature). 
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +153,6 @@ TODO: Implementation and performance implications.
 \label{ch:05:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textit{Speech and Language Processing} (Jurafsky \& Martin). The gold standard textbook for classical NLP and computational linguistics.
+  \item \textit{Zipf's Law and the Economy of Words} (Original Paper). A deeper dive into why power laws naturally occur in human communication as a tension between speaker effort and listener effort.
 \end{itemize}

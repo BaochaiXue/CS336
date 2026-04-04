@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Understand the fundamental architectural differences between CPUs and GPUs.
+  \item Explain the CUDA programming model: grids, blocks, and threads.
+  \item Differentiate between High Bandwidth Memory (HBM) and SRAM (Shared Memory), and explain memory bandwidth bottlenecks.
+  \item Understand the concept of arithmetic intensity.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +16,127 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:04:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Language models do not run on floating, abstract mathematical planes; they run on brutally physical silicon grids. If Chapter 3 explained how PyTorch organizes data in RAM, this chapter explains why we need specialized hardware to compute on it.
+
+A CPU is a sports car: it is incredibly fast at executing a complex, sequential set of instructions to get one passenger to a destination quickly. A GPU is a freight train: it is slow to get moving and inflexible in its route, but it can transport ten thousand passengers simultaneously. 
+
+Because modern neural network arithmetic primarily consists of massive, independent matrix dot-products, we exclusively train them on GPUs. However, squeezing performance out of a GPU requires understanding its memory hierarchy. The hardest part of scaling language models is not doing the math, but moving the data exactly to the right place at the right time so the math units don't idle.
+
+This chapter introduces the fundamental concepts of GPU execution, preparing you for the deep systems analysis in Chapters 14–17.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:04:sec:setup}
 
-TODO: Define notation and state assumptions.
+We abstract the GPU as two separate domains: \textbf{Compute} and \textbf{Memory}.
+\begin{itemize}
+    \item \textbf{FLOPs (Compute)}: Floating Point Operations per second. This is how fast the GPU can multiply and add numbers.
+    \item \textbf{Bandwidth (Memory)}: Bytes per second. This is how fast data can be moved from the storage to the compute units.
+\end{itemize}
+
+A \textbf{kernel} is a small program (usually written in CUDA C++ or Triton) that is compiled by the CPU but executed natively on the GPU. PyTorch hides these kernels behind clean API calls (e.g., `tensor.matmul()`).
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{The Compute Hierarchy: Grids, Blocks, Threads}
 \label{ch:04:sec:main}
 
-TODO: Core technical content.
+When you launch a kernel on a GPU, you cannot just tell it "process this matrix." You must define an execution grid.
+
+\paragraph{1. Thread (The Engine)}
+A thread is the smallest unit of execution. It possesses its own registers. A single thread might be responsible for computing exactly one element of an output matrix.
+
+\paragraph{2. Block (The Train Car)}
+Threads are grouped into \textbf{thread blocks} (e.g., $16 \times 16 = 256$ threads). All threads in a block execute simultaneously on the same physical Streaming Multiprocessor (SM). Crucially, threads within the same block can communicate instantly and share a pool of ultrafast memory.
+
+\paragraph{3. Grid (The Train)}
+Blocks are grouped into a \textbf{grid}. If we want to compute an output matrix of size $M \times N$, and our blocks are $16 \times 16$, we need a grid of size $\lceil M/16 \rceil \times \lceil N/16 \rceil$ blocks. 
+
+The GPU scheduler dictates which block runs on which SM. You have no guarantee of the order in which blocks execute.
+
+\section{The Memory Hierarchy and the Bandwidth Wall}
+
+The single most important concept in modern AI engineering is the memory hierarchy.
+
+\textbf{1. High Bandwidth Memory (HBM | VRAM)}
+The 80GB of memory advertised on an NVIDIA A100 is HBM. It is massive, but relative to computation, it is extremely \emph{slow}. Standard PyTorch tensors live here. Fetching data from HBM takes hundreds of clock cycles.
+
+\textbf{2. SRAM (Shared Memory / L1 Cache)}
+Each SM has a tiny sliver (e.g., 192 KB) of static RAM. It is physically located right next to the math cores. Accessing it takes only a few clock cycles.
+
+\textbf{3. Registers}
+The ultra-fast memory physically inside the thread.
+
+\subsection{The Bandwidth Bottleneck}
+Suppose an A100 GPU can do $3 \times 10^{14}$ math operations per second (300 TFLOPs), but its HBM bandwidth is only $2 \times 10^{12}$ bytes per second (2 TB/s).
+
+If you want to add two vectors $\vz = \vx + \vy$, you must load two floats (8 bytes total) and write one float (4 bytes). Total movement: 12 bytes. Total compute: 1 FLOP. 
+The mathematical hardware will finish the addition instantly, then sit completely idle waiting for the data to arrive from HBM. The operation is strictly \textbf{memory-bound}.
+
+Because math is fast and memory is slow, the secret to fast code is \textbf{kernel fusion}. Keep data in SRAM as long as possible, doing as much math as you can on it, before writing it back to HBM.
+
+\section{Arithmetic Intensity}
+
+To quantify the balance between compute and memory, we define \textbf{Arithmetic Intensity} ($I$):
+\begin{equation}
+I = \frac{\text{FLOPs performed}}{\text{Bytes accessed from HBM}}
+\end{equation}
+
+Vector addition has $I \approx 1/12$. 
+Matrix multiplication $\mathbf{A}_{N \times N} \times \mathbf{B}_{N \times N}$ requires $N^3$ operations, but only $2N^2$ bytes of data. Therefore, $I \approx \frac{N}{2}$. As matrices get large, $I$ passes the threshold where the GPU spends all its time doing math rather than waiting for memory. This is called being \textbf{compute-bound}.
+
+We want our neural network layers to be compute-bound. 
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Kernel Overhead}
 \label{ch:04:sec:example}
 
-TODO: Complete worked example.
+When you write this in PyTorch:
+\begin{lstlisting}[language=Python]
+y = x * 2.0
+z = y + 1.0
+\end{lstlisting}
+
+What actually happens on the GPU?
+1. PyTorch launches the `multiply` kernel.
+2. The GPU reads `x` from HBM, multiplies by 2, and writes intermediate `y` to HBM.
+3. PyTorch launches the `add` kernel.
+4. The GPU reads `y` from HBM, adds 1.0, and writes `z` to HBM.
+
+Total HBM accesses: 1 read of `x`, 1 write of `y`, 1 read of `y`, 1 write of `z`. 
+
+If we fused this into a single kernel (`z = x * 2.0 + 1.0`), the GPU would read `x` \emph{once}, do both math operations in registers, and write `z` \emph{once}. Kernel fusion cuts the memory traffic in half. This principle is what drives technologies like `torch.compile` and FlashAttention.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:04:sec:systems}
 
-TODO: Implementation and performance implications.
+Because of the blocking architecture, data shapes dramatically impact performance. 
+If your matrix has a dimension of 17, and the hardware optimally processes blocks of 16, the GPU must fire up a whole new block just to handle that 1 remaining row. The other 15 threads in that block will mask out their computation (do nothing), wasting power and compute.
+
+Always pad your sequence lengths, vocabulary sizes, and hidden dimensions to be powers of 2, or at the very least, multiples of 8 or 16. A dimension of 512 trains drastically faster and smoother than a dimension of 511.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Grey Matter vs. White Matter}
   \paragraph{Where the analogy helps.}
-  TODO
+  In the central nervous system, grey matter consists of neuronal cell bodies and processing hubs (analogous to SRAM and SMs doing compute). White matter consists of myelinated axons acting as long-range communication highways (analogous to HBM fetching and PCIE bandwidth). 
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  The brain physically intertwines memory and compute—the synapse stores the weight \emph{and} performs the multiplication simultaneously. A GPU physically separates the storage (HBM) from the math core (ALU), introducing the "von Neumann bottleneck" that forces data to commute.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Just as an organism is severely limited if its neural tracts (white matter) are too narrow to feed information to the cortex quickly enough, a GPU is useless if its memory bandwidth cannot feed its teraflop compute cores. Data movement is the ultimate bottleneck.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:04:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``GPU programming is just C++ with weird syntax.''} The syntax is trivial. The difficulty is engineering the hierarchy so that threads cooperate, avoid bank conflicts in SRAM, hide latency via asynchronous fetching, and maximize arithmetic intensity.
+  \item \textbf{``Doing more math slows the model down.''} Because models are frequently memory-bound, you can often compute complex polynomial approximations (like GELU) in registers ``for free'' because the latency is entirely hidden underneath the time it takes to fetch the next block of memory. Math is cheap; memory is expensive.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,22 +144,22 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item Explain why the Softmax function requires two massive sweeps over the input vector, and why this makes it an extremely memory-bound operation.
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Define the \textbf{ridge point} of a GPU as the arithmetic intensity where the hardware transitions from memory-bound to compute-bound. If a GPU has $C$ TFLOPs of compute and $B$ TB/s of bandwidth, derive a formula for the ridge point.
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A2]} Open a Python environment with PyTorch. Write a script that compares the execution time of \texttt{y = torch.exp(x) + torch.sin(x)} against a compiled version generated by \texttt{torch.compile}.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item In 2020, Apple introduced "Unified Memory" where the CPU and GPU physically share the same pool of RAM. Given what you know about High Bandwidth Memory vs. System RAM latency, what are the advantages and drawbacks for training LLMs on an architecture without discrete VRAM?
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +167,6 @@ TODO: Implementation and performance implications.
 \label{ch:04:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textit{CUDA C++ Programming Guide} (NVIDIA). The definitive documentation on grids, blocks, and memory hierarchy.
+  \item \textit{Making Deep Learning Go Brrrr From First Principles} (Horace He). An essential, accessible blog post on arithmetic intensity and the difference between memory-bound and compute-bound kernels in PyTorch.
 \end{itemize}
