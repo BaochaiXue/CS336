@@ -5,9 +5,11 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Perform block matrix multiplication and interpret matrices as collections of vectors.
+  \item Understand Einstein summation notation (einsum) as a universal language for tensor contractions.
+  \item Compute the gradients of scalar-valued functions with respect to vectors and matrices.
+  \item Derive the backdrop equations for a linear layer and a simple MLP.
+  \item Understand the dimensional transformations induced by the self-attention mechanism.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +17,147 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:02:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Language models are essentially massive sequences of matrix multiplications punctuated by non-linearities. Consequently, fluency in linear algebra is non-negotiable. 
+
+However, the kind of linear algebra used in machine learning is heavily skewed. You will rarely need to compute a determinant, find a matrix inverse, or diagnose linear independence. Instead, ML linear algebra focuses almost entirely on \textbf{tensor reshaping}, \textbf{block multiplication}, and \textbf{matrix calculus} for backpropagation. 
+
+If probability theory (Chapter~1) tells us \emph{what} to compute (likelihood), linear algebra tells us \emph{how} we represent and transform the data, and matrix calculus tells us \emph{how} to optimize the parameters to get there.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:02:sec:setup}
 
-TODO: Define notation and state assumptions.
+We work over the field of real numbers, $\R$.
+\begin{itemize}
+    \item A \textbf{scalar} is a single number $x \in \R$.
+    \item A \textbf{vector} is a 1D array of numbers $\vx \in \R^n$. By convention, all vectors are \textbf{column vectors}. A row vector is denoted as $\vx^\T \in \R^{1 \times n}$.
+    \item A \textbf{matrix} is a 2D array $\vW \in \R^{m \times n}$ with $m$ rows and $n$ columns. 
+    \item A \textbf{tensor} is a generalization to arbitrary dimensions. An $N$-dimensional tensor is $\mathbf{T} \in \R^{d_1 \times d_2 \times \dots \times d_N}$.
+\end{itemize}
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{Matrix Multiplication Views}
 \label{ch:02:sec:main}
 
-TODO: Core technical content.
+Given $\vW \in \R^{m \times n}$ and $\vx \in \R^n$, the product $\vy = \vW\vx$ is a vector in $\R^m$. 
+Instead of computing cell-by-cell ($y_i = \sum_j W_{ij} x_j$), you should cultivate three geometric views:
+
+\paragraph{1. The Column Space View.} $\vy$ is a linear combination of the columns of $\vW$, weighted by the elements of $\vx$. If $\vW = [\mathbf{c}_1 \mid \mathbf{c}_2 \mid \dots \mid \mathbf{c}_n]$, then $\vy = x_1\mathbf{c}_1 + x_2\mathbf{c}_2 + \dots + x_n\mathbf{c}_n$.
+\paragraph{2. The Row Space View.} Every element $y_i$ is the dot product of the $i$-th row of $\vW$ with $\vx$.
+\paragraph{3. The Dimensionality Transformation.} $\vW$ acts as a function mapping an $n$-dimensional space to an $m$-dimensional space.
+
+\subsection{Block Matrix Multiplication}
+In language models, we process sequences of length $T$, where each token is a vector of dimension $d$. We stack the $T$ column vectors \emph{horizontally} (Wait, no! In ML libraries, we stack them vertically. We will use the standard ML convention: the data matrix $\mathbf{X}$ has shape $T \times d$, so each \emph{row} is a token).
+
+If $\mathbf{X} \in \R^{T \times d}$ is our sequence, and we want to project it to a new dimension $k$ using weights $\vW \in \R^{d \times k}$, we compute:
+\begin{equation}
+\mathbf{Y} = \mathbf{X} \vW \in \R^{T \times k}.
+\end{equation}
+Because matrix multiplication distributes over rows, the $t$-th row of $\mathbf{Y}$ depends \emph{only} on the $t$-th row of $\mathbf{X}$. This means $\mathbf{X} \vW$ applies the exact same linear transformation to every token in the sequence independently and in parallel.
+
+\section{Einstein Summation Notation (Einsum)}
+
+Standard matrix notation ($\mathbf{A} \mathbf{B}^\T$) completely collapses when dealing with 3D or 4D tensors (like a batch of sequences of multi-head attention components). We rely on \textbf{Einstein summation notation} to write unambiguous tensor contractions.
+
+The rule of Einsum is simple: \textbf{repeated indices are summed over.}
+\begin{itemize}
+    \item Dot product of two vectors $\vx, \vy \in \R^n$: \texttt{i, i ->} $\implies c = \sum_i x_i y_i$
+    \item Matrix-vector multiplication $\mathbf{A} \vx$: \texttt{ij, j -> i} $\implies y_i = \sum_j A_{ij} x_j$
+    \item Matrix multiplication $\mathbf{A} \mathbf{B}$: \texttt{ij, jk -> ik} $\implies C_{ik} = \sum_j A_{ij} B_{jk}$
+    \item Batched matrix multiplication: \texttt{bij, bjk -> bik} $\implies C_{bik} = \sum_j A_{bij} B_{bjk}$
+    \item Attention scores: $\mathbf{Q} \in \R^{B \times h \times T \times d_k}, \mathbf{K} \in \R^{B \times h \times T \times d_k}$. 
+          We want the dot product of queries and keys over $d_k$, leaving a $T \times T$ matrix per batch per head.
+          \texttt{b h t d, b h s d -> b h t s}
+\end{itemize}
+
+Every complex reshape/transpose/bmm in PyTorch can be replaced with a single \texttt{torch.einsum}.
+
+\section{Matrix Calculus Basics}
+
+We train neural networks by optimizing a scalar loss function $\mathcal{L} \in \R$ with respect to millions of parameters $\vtheta$. We need to compute gradients of scalars with respect to vectors and matrices.
+
+\subsection{The Gradient of a Scalar w.r.t a Vector}
+The gradient of a scalar $\mathcal{L}$ with respect to a vector $\vx \in \R^n$ is a vector of the same shape $\R^n$:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vx} = \begin{bmatrix}
+\frac{\partial \mathcal{L}}{\partial x_1} \\
+\vdots \\
+\frac{\partial \mathcal{L}}{\partial x_n}
+\end{bmatrix}
+\end{equation}
+
+\subsection{The Chain Rule via Jacobians}
+Suppose we have a composition $\vx \xrightarrow{f} \vy \xrightarrow{g} \mathcal{L}$, where $\vx \in \R^n$, $\vy \in \R^m$, and $\mathcal{L} \in \R$.
+By the multivariate chain rule:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vx} = \left( \frac{\partial \vy}{\partial \vx} \right)^\T \frac{\partial \mathcal{L}}{\partial \vy}
+\end{equation}
+where $\frac{\partial \vy}{\partial \vx} \in \R^{m \times n}$ is the \textbf{Jacobian matrix} containing partial derivatives $\frac{\partial y_i}{\partial x_j}$.
+
+\subsection{Key Matrix Calculus Rules}
+You must memorize these two rules for linear layers:
+1. If $\vy = \vW \vx$, then the gradient w.r.t $\vx$ is:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vx} = \vW^\T \frac{\partial \mathcal{L}}{\partial \vy}
+\end{equation}
+2. The gradient w.r.t to the weight matrix $\vW$ is the outer product of the incoming gradient and the input:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vW} = \frac{\partial \mathcal{L}}{\partial \vy} \vx^\T
+\end{equation}
+
+For batched inputs $\mathbf{Y} = \mathbf{X} \vW^\T$ (where $\mathbf{X} \in \R^{B \times d}$, $\vW \in \R^{h \times d}$), the gradient w.r.t weights averages over the batch:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vW} = \left(\frac{\partial \mathcal{L}}{\partial \mathbf{Y}}\right)^\T \mathbf{X}
+\end{equation}
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Backprop through a Linear Layer}
 \label{ch:02:sec:example}
 
-TODO: Complete worked example.
+Let $\vx \in \R^d$ be an input token. We project it through a linear layer with no bias: $\vz = \vW \vx$ where $\vW \in \R^{k \times d}$, then apply a scalar loss $\mathcal{L} = ||\vz||_2^2 = \vz^\T \vz$.
+
+We want to find the gradient $\frac{\partial \mathcal{L}}{\partial \vW}$.
+
+1. First, find $\frac{\partial \mathcal{L}}{\partial \vz}$. Since $\mathcal{L} = \sum_i z_i^2$, the derivative w.r.t $z_i$ is $2z_i$. Thus $\frac{\partial \mathcal{L}}{\partial \vz} = 2\vz$.
+2. Next, apply the matrix calculus rule for weights:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vW} = \frac{\partial \mathcal{L}}{\partial \vz} \vx^\T = 2\vz \vx^\T \in \R^{k \times d}
+\end{equation}
+
+\paragraph{Sanity check:} Does the shape of the gradient match the shape of the parameter? $\vW$ is $k \times d$. $\vz$ is $k \times 1$, $\vx^\T$ is $1 \times d$. Their outer product is $k \times d$. The shapes match exactly. Always check gradient shapes!
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:02:sec:systems}
 
-TODO: Implementation and performance implications.
+Why not just write `for` loops instead of using matrices? 
+Modern hardware (GPUs, TPUs) contains specialized silicon (Tensor Cores / Matrix Multiply Units) designed explicitly to perform $D = A \times B + C$ on small blocks of data simultaneously. 
+
+A single matrix multiplication $\mathbf{A}_{M \times K} \times \mathbf{B}_{K \times N}$ requires $2 \cdot M \cdot N \cdot K$ floating point operations (FLOPs). A modern NVIDIA H100 can execute nearly a \textit{quadrillion} FLOPs per second, provided the matrices are large enough to keep thousands of streaming multiprocessors fed. If your matrices are too small, or you try to loop over vectors sequentially, bandwidth outpaces compute, and you utilize a fraction of a percent of the GPU.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Synaptic Weights vs. Matrix Multiplication}
   \paragraph{Where the analogy helps.}
-  TODO
+  If a population of neurons $\vx$ sends signals to a downstream population $\vy$, the synaptic connections form a matrix $\vW$. The activity of a downstream neuron $y_i$ is literally the weighted sum (dot product) of the incoming activities $x_j$, exactly modeling $y_i = \sum_j W_{ij} x_j$.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Biological synapses cannot easily support the "transpose" operation $\vW^\T$ required for backpropagation. Furthermore, dense matrix multiplication implies every neuron is connected to every other neuron, whereas biological networks are extremely sparse (often $<1\%$ connectivity).
 
   \paragraph{What intuition to keep.}
-  TODO
+  Matrix multiplication maps one distributed concept representation into another via a dense web of overlapping connections, allowing for massively parallel computation.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:02:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``I need to compute the inverse of the matrix to go backward.''} Matrix inversion is virtually never used in deep learning. Gradients use the transpose $\vW^\T$, not the inverse $\vW^{-1}$.
+  \item \textbf{``Backpropagation is a mysterious calculus trick.''} It is literally just the multivariable chain rule applied to sequences of matrix multiplications, caching intermediate results (activations) to avoid redundant computation.
+  \item \textbf{``Einsum is slower than dedicated PyTorch functions.''} Historically true, but modern compiler stacks (like \texttt{torch.compile}) optimize \texttt{einsum} expressions into highly efficient kernel calls perfectly equivalent to dedicated \texttt{bmm} operations.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,22 +165,23 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item Write the Einstein summation string for extracting the diagonal of a matrix $\mathbf{A} \in \R^{N \times N}$.
+  \item Let $\mathbf{A}$ be a $4 \times 3$ matrix and $\mathbf{B}$ be a $3 \times 5$ matrix. What is the shape of $(\mathbf{AB})^\T$? 
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Derive the gradient of the scalar function $f(\vx) = \vx^\T \mathbf{A} \vx$ with respect to $\vx$. (Assume $\mathbf{A}$ is a symmetric matrix).
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Open a Python REPL. Create two random 3D PyTorch tensors $\mathbf{A}$ of shape $(B, N, d)$ and $\mathbf{B}$ of shape $(B, M, d)$. Write a single \texttt{torch.einsum} command that computes the dot product of every $d$-dimensional vector in $\mathbf{A}$ with every $d$-dimensional vector in $\mathbf{B}$, resulting in a tensor of shape $(B, N, M)$.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item Why do you think deep learning frameworks universally represent gradients as having the exact same shape as the parameter tensor, even though mathematically the derivative of a loss scalar w.r.t a matrix should technically be a covector (or 1-form)? What practical engineering benefit does this equality of shapes provide?
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +189,6 @@ TODO: Implementation and performance implications.
 \label{ch:02:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textit{The Matrix Calculus You Need For Deep Learning} (Terence Parr and Jeremy Howard). An excellent, approachable paper that demystifies derivatives with respect to vectors and matrices without resorting to tedious index hunting.
+  \item \textit{Linear Algebra Done Right} (Sheldon Axler). For a rigorous foundation building up to vector spaces and linear maps, focusing on geometric intuition rather than rote determinants calculation.
 \end{itemize}

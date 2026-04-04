@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Explain how PyTorch represents tensors in memory, distinguishing between contiguous and strided layouts.
+  \item Understand broadcasting semantics and use them to avoid unnecessary memory allocation.
+  \item Trace the computational graph in PyTorch's autograd engine.
+  \item Correctly detach tensors, use \texttt{torch.no\_grad()}, and manage memory effectively.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,42 +16,112 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:03:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Mathematical formulas in papers must eventually hit silicon. PyTorch is the dominant framework in modern AI research because it strikes an elegant balance between pythonic imperativity and high-performance compiled execution. 
+
+However, writing \emph{correct} PyTorch code is not the same as writing \emph{fast} PyTorch code. To build language models from scratch, you cannot just memorize API calls (`self.linear = nn.Linear(...)`). You must understand what happens underneath the hood: how numbers are sequenced linearly in RAM, how strides allow constant-time reshaping, how broadcasting avoids massive copying, and how the autograd engine secretly builds a directed acyclic graph behind your back.
+
+This chapter bridges the gap between the matrix math of Chapter 2 and the hardware realities we will face in Chapter 14.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:03:sec:setup}
 
-TODO: Define notation and state assumptions.
+A \textbf{tensor} conceptually is an $n$-dimensional array. In hardware memory, there are no dimensions---memory is a strict 1D sequence of bytes. 
+
+PyTorch maps an $n$-dimensional tensor indices $(i_0, i_1, \ldots, i_{n-1})$ to a flat 1D memory index $k$ using a \textbf{shape} array $S = (s_0, \ldots, s_{n-1})$ and a \textbf{stride} array $D = (d_0, \ldots, d_{n-1})$:
+\begin{equation}
+k = \text{offset} + \sum_{j=0}^{n-1} i_j \cdot d_j
+\end{equation}
+
+A tensor is \textbf{contiguous} if its items are laid out back-to-back in memory in a strict row-major order (similar to C arrays). Mathematically, a contiguous tensor satisfies $d_j = \prod_{k=j+1}^{n-1} s_k$, with $d_{n-1} = 1$.
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{Strides, Views, and Contiguity}
 \label{ch:03:sec:main}
 
-TODO: Core technical content.
+Operations like \texttt{.view()}, \texttt{.transpose()}, and \texttt{.squeeze()} do \emph{not} move data in memory. They simply create a new tensor object that points to the same underlying storage, but with modified \emph{shape} and \emph{stride} metadata. This makes them $O(1)$ operations, completely free in terms of compute.
+
+For instance, if you have a matrix $\mathbf{X}$ of shape $(100, 20)$ that is contiguous, its strides are $(20, 1)$. If you call $\mathbf{Y} = \mathbf{X.transpose(0, 1)}$, $\mathbf{Y}$ has shape $(20, 100)$ and strides $(1, 20)$. 
+
+Because $\mathbf{Y}$'s strides jump around in memory, $\mathbf{Y}$ is no longer contiguous. Certain low-level CUDA kernels (like some matrix multiplications or flattening layers) require inputs to be contiguous. If you call \texttt{.contiguous()} on $\mathbf{Y}$, PyTorch will be forced to allocate new memory and physically copy the data row-by-row into a tight, back-to-back memory layout, which is expensive.
+
+\section{Broadcasting}
+Broadcasting is a mechanism that allows PyTorch to perform element-wise arithmetic between tensors of different shapes, without physically replicating the smaller tensor.
+
+\textbf{The Broadcasting Rule:} Two dimensions are compatible if they are equal, or if one of them is 1. PyTorch aligns shapes from the trailing (right-most) dimension to the left. 
+
+Suppose you have an activation tensor $\mathbf{A}$ of shape $(B, T, d)$ and a bias vector $\mathbf{b}$ of shape $(d)$.
+\begin{itemize}
+    \item Align right: \texttt{A}: $(B, T, d)$
+    \item Align right: \texttt{b}: $(\text{None}, \text{None}, d)$
+\end{itemize}
+Since $d$ matches $d$, and the leading dimensions are missing in $\mathbf{b}$, PyTorch treats $\mathbf{b}$ as having shape $(1, 1, d)$ and virtually expands it to $(B, T, d)$ with a stride of 0 along the expanded dimensions. $\mathbf{A} + \mathbf{b}$ computes seamlessly without using extra memory.
+
+\section{Autograd: Automatic Differentiation}
+
+Every time you perform an operation on tensors that have \texttt{requires\_grad=True}, PyTorch constructs a dynamic Directed Acyclic Graph (DAG). 
+\begin{itemize}
+    \item \textbf{Leaves}: Your raw parameters ($\vW, \mathbf{b}$).
+    \item \textbf{Edges}: The mathematical operations (\texttt{AddBackward}, \texttt{MmBackward}).
+    \item \textbf{Root}: The scalar loss $\mathcal{L}$.
+\end{itemize}
+
+When you call \texttt{loss.backward()}, PyTorch traverses the DAG from the root down to the leaves, applying the chain rule (Chapter 2) at every node. It accumulates the gradients into the \texttt{.grad} attribute of the leaf tensors.
+
+Because the graph consumes memory to store intermediate activations needed for the backward pass, tracking history when you only want to do inference will cause massive memory leaks. 
+
+\begin{warningbox}
+\textbf{Inference trap}: Always wrap evaluation code tightly in a \texttt{with torch.no\_grad():} context block. This completely disables the dynamic DAG construction, saving immense amounts of RAM and compute.
+\end{warningbox}
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: The Gradient Accumulation Pattern}
 \label{ch:03:sec:example}
 
-TODO: Complete worked example.
+When training an LLM, the batch size physically capable of fitting in GPU VRAM is often smaller than the batch size required for stable convergence. We solve this using gradient accumulation:
+
+\begin{lstlisting}[language=Python, title=Gradient Accumulation]
+model.zero_grad()  # 1. Clear old gradients
+desired_batch = 64
+micro_batch = 8
+accumulation_steps = desired_batch // micro_batch
+
+for step, (x, y) in enumerate(dataloader):
+    # Forward pass builds the DAG
+    logits = model(x)
+    loss = compute_loss(logits, y)
+    
+    # Scale loss because gradients sum over backward passes
+    loss = loss / accumulation_steps
+    
+    # Backward pass traverses the DAG, adds to .grad, frees the graph
+    loss.backward()
+    
+    # Only update parameters every N steps
+    if (step + 1) % accumulation_steps == 0:
+        optimizer.step()
+        model.zero_grad()
+\end{lstlisting}
+
+\paragraph{Sanity Check:} Why scale the loss by `accumulation_steps`? Because the loss function (like CrossEntropy) averages over the batch. If you process 8 micro-batches and add their gradients, you effectively summed the loss instead of averaged it over all 64 elements. Scaling by $\frac{1}{8}$ perfectly recreates the exact mathematics of processing a batch of 64 globally.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:03:sec:systems}
 
-TODO: Implementation and performance implications.
+A huge source of slow training is CPU-GPU sync.
+If you call \texttt{loss.item()} or \texttt{print(tensor)}, the CPU must immediately halt and wait for the GPU to finish all queued computation just to fetch that single number. This breaks the asynchronous execution pipeline. Keep printing and `.item()` fetching strictly to boundaries, such as once every 100 log steps.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Synaptic Plasticity vs. Autograd}
   \paragraph{Where the analogy helps.}
-  TODO
+  Both frameworks involve a "forward" pass (sensory perception / action) followed by an evaluation (reward/error), which triggers a weight update. 
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Autograd requires a perfect global memory of exact neural activations from the forward pass to compute gradients (stored in the DAG). Brains lack this unphysical mechanism; biological synapses update using strictly local information (like spike timing between two adjacent neurons) and diffuse global neuromodulators (like dopamine), lacking coordinate-perfect retrograde tracking.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Autograd is an engineering hack—a brilliant accounting system—that forces the network to learn. It guarantees exact optimization mathematics, at the cost of requiring immense amounts of memory to store the past.
 \end{analogybox}
 
 % ─── Misconceptions ───
@@ -58,10 +129,10 @@ TODO: Implementation and performance implications.
 \label{ch:03:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``\texttt{.reshape()} and \texttt{.view()} are exactly the same thing.''} \texttt{.view()} is strict: it will crash if the tensor is not contiguous because it promises not to copy data. \texttt{.reshape()} acts like \texttt{.view()} if possible, but will secretly copy the data and make it contiguous if it has to. Know which one you are using!
+  \item \textbf{``Gradients are overwritten on \texttt{loss.backward()}.''} False! Gradients are \emph{accumulated} (added) into the \texttt{.grad} attribute. If you don't call \texttt{optimizer.zero\_grad()}, your next step will add the new gradients to the old ones, destroying your optimization trajectory.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,22 +140,23 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item You have a tensor $\mathbf{X}$ of shape $(10, 50)$ with strides $(50, 1)$. You slice it: $\mathbf{X}[:, 0]$. What is the shape and stride of the new 1D tensor?
+  \item Why does \texttt{loss.backward()} throw a runtime error if you call it twice in a row without running a new forward pass?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item If a contiguous tensor has shape $(B, T, d)$, state the complete stride array in terms of $B$, $T$, and $d$. 
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Write a function `rope(x)` that takes a tensor `x` of shape `(B, T, d)` and correctly applies broadcasting to add a learned positional encoding `bias` of shape `(T, d)` to it without using loops or `.expand()`.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item Given how Autograd retains the computation graph, hypothesize why Transformer architectures require so much GPU memory during training compared to inference, even for tiny batch sizes. What exactly is taking up that space?
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +164,6 @@ TODO: Implementation and performance implications.
 \label{ch:03:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textit{PyTorch Autograd Mechanics} (PyTorch Docs): The canonical, definitive guide on how autograd interacts with memory and backpropagation.
+  \item \textit{ezyang's blog on PyTorch Internals}: Deep dives into the $\text{Tensor} \to \text{Storage}$ offset mechanism by a core PyTorch developer.
 \end{itemize}
