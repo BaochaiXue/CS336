@@ -33,8 +33,8 @@
       \endverb
     \endentry
     \entry{bengio2003}{article}{}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labeltitlesource}{title}
       \field{note}{Used a feedforward neural network over last n words to predict the next word in a sequence}
       \field{title}{A Neural Probabilistic Language Model}
@@ -60,8 +60,8 @@
       \strng{authornamehash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhash}{0523b13262b12c215d8009938f5c14f1}
       \strng{authorfullhashraw}{0523b13262b12c215d8009938f5c14f1}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{1.5B parameters | Pioneered stage release}
@@ -75,8 +75,8 @@
       \endverb
     \endentry
     \entry{sennrich_2016}{article}{}{}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{eprinttype}{arXiv}
       \field{title}{Sennrich}
@@ -91,10 +91,14 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{bahdanau2014}
   \missing{blt_2024}
   \missing{byt5_2021}
+  \missing{he2016}
   \missing{megabyte_2023}
   \missing{mikolov2013}
+  \missing{vaswani2017}
+  \missing{xiong2020}
 \endrefsection
 \endinput
 

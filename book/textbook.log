@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  3 APR 2026 21:17
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  3 APR 2026 21:20
  restricted system commands enabled.
 **textbook.tex
 (./textbook.tex
@@ -1490,7 +1490,22 @@ Package cleveref Info: no abbreviation of names on input line 7852.
 
 (./textbook.aux (./chapters/ch00_how_to_use.aux)
 (./chapters/ch01_probability_entropy.aux) (./chapters/ch02_linalg_matcalc.aux)
-(./chapters/ch03_pytorch.aux))
+(./chapters/ch03_pytorch.aux) (./chapters/ch04_cuda_gpu.aux)
+(./chapters/ch05_linguistics.aux) (./chapters/ch06_lm_problem.aux)
+(./chapters/ch07_tokenization.aux) (./chapters/ch08_ngram_to_neural.aux)
+(./chapters/ch09_attention.aux) (./chapters/ch10_transformer_blocks.aux)
+(./chapters/ch11_norms_position.aux) (./chapters/ch12_hyperparameters.aux)
+(./chapters/ch13_variants.aux) (./chapters/ch14_resource_accounting.aux)
+(./chapters/ch15_gpus_tpus.aux) (./chapters/ch16_kernels_triton.aux)
+(./chapters/ch17_parallelism.aux) (./chapters/ch18_inference.aux)
+(./chapters/ch19_scaling_laws.aux) (./chapters/ch20_model_recipes.aux)
+(./chapters/ch21_evaluation.aux) (./chapters/ch22_data_sources.aux)
+(./chapters/ch23_filtering_dedup.aux) (./chapters/ch24_instruction_tuning.aux)
+(./chapters/ch25_rlhf_dpo_grpo.aux) (./chapters/ch26_safety.aux)
+(./appendices/appendix_a_proofs.aux) (./appendices/appendix_b_cuda_triton.aux)
+(./appendices/appendix_c_linguistics.aux)
+(./appendices/appendix_d_neuro_index.aux)
+(./appendices/appendix_e_reproducibility.aux))
 \openout1 = textbook.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 258.
@@ -1697,6 +1712,13 @@ Package biblatex Info: ... file 'textbook.bbl' found.
 
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
+(biblatex)                bahdanau2014
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
 (biblatex)                blt_2024
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
@@ -1711,6 +1733,13 @@ Package biblatex Warning: The following entry could not be found
 
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
+(biblatex)                he2016
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
 (biblatex)                megabyte_2023
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
@@ -1719,6 +1748,20 @@ Package biblatex Warning: The following entry could not be found
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
 (biblatex)                mikolov2013
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                vaswani2017
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                xiong2020
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
 
@@ -1766,17 +1809,33 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 
 [3])
 
-[4] (./textbook.toc)
-\tf@toc=\write6
-
-\openout6 = textbook.toc
-
+[4] (./textbook.toc
 
 [5
 
 ]
 
-[6
+[6]
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+
+[12])
+\tf@toc=\write6
+
+\openout6 = textbook.toc
+
+
+[13]
+
+[14
 
 ] (./textbook.lof)
 \tf@lof=\write7
@@ -1784,9 +1843,9 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 \openout7 = textbook.lof
 
 
-[7]
+[15]
 
-[8
+[16
 
 ] (./textbook.lot)
 \tf@lot=\write8
@@ -1794,9 +1853,9 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 \openout8 = textbook.lot
 
 
-[9]
+[17]
 
-[10
+[18
 
 ]
 
@@ -2003,11 +2062,6 @@ Chapter 7.
 
 [44]
 
-LaTeX Warning: Reference `eq:06:product_form' on page 1 undefined on input line
- 112.
-
-
-
 [45]
 
 [46])
@@ -2124,17 +2178,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 
-LaTeX Warning: Reference `eq:09:attention' on page 1 undefined on input line 58
-.
-
-
-
 [64]
-
-LaTeX Warning: Reference `eq:09:causal_attn' on page 1 undefined on input line 
-82.
-
-
 
 [65]
 Underfull \vbox (badness 1325) has occurred while \output is active []
@@ -2142,23 +2186,437 @@ Underfull \vbox (badness 1325) has occurred while \output is active []
 
 
 [66]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.157 ...1]} Implement a PyTorch function `causal_
-                                                  attention(q, k, v)` using ...
+
+LaTeX Warning: Citation 'vaswani2017' on page 67 undefined on input line 170.
+
+
+LaTeX Warning: Citation 'bahdanau2014' on page 67 undefined on input line 171.
+
+)
+
+[67]
+\openout2 = chapters/ch10_transformer_blocks.aux
+ (./chapters/ch10_transformer_blocks.tex
+
+[68
+
+
+
+
+]
+Chapter 11.
+
+Underfull \vbox (badness 3128) has occurred while \output is active []
+
+
+
+[69]
+
+[70]
+
+[71]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[72]
+
+[73]
+
+LaTeX Warning: Citation 'he2016' on page 74 undefined on input line 184.
+
+
+LaTeX Warning: Citation 'xiong2020' on page 74 undefined on input line 185.
+
+)
+
+[74]
+\openout2 = chapters/ch11_norms_position.aux
+ (./chapters/ch11_norms_position.tex
+Chapter 12.
+
+
+[75
+
+
+
+
+])
+
+[76]
+\openout2 = chapters/ch12_hyperparameters.aux
+ (./chapters/ch12_hyperparameters.tex
+Chapter 13.
+
+
+[77
+
+
+
+
+])
+
+[78]
+\openout2 = chapters/ch13_variants.aux
+ (./chapters/ch13_variants.tex
+Chapter 14.
+
+
+[79
+
+
+
+
+])
+
+[80]
+
+[81
+
+
+
+]
+
+[82]
+\openout2 = chapters/ch14_resource_accounting.aux
+ (./chapters/ch14_resource_accounting.tex
+Chapter 15.
+
+
+[83
+
+
+])
+
+[84]
+\openout2 = chapters/ch15_gpus_tpus.aux
+ (./chapters/ch15_gpus_tpus.tex
+Chapter 16.
+
+
+[85
+
+
+
+
+])
+
+[86]
+\openout2 = chapters/ch16_kernels_triton.aux
+ (./chapters/ch16_kernels_triton.tex
+Chapter 17.
+
+
+[87
+
+
+
+
+])
+
+[88]
+\openout2 = chapters/ch17_parallelism.aux
+ (./chapters/ch17_parallelism.tex
+Chapter 18.
+
+
+[89
+
+
+
+
+])
+
+[90]
+\openout2 = chapters/ch18_inference.aux
+ (./chapters/ch18_inference.tex
+Chapter 19.
+
+
+[91
+
+
+
+
+])
+
+[92]
+
+[93
+
+
+
+]
+
+[94]
+\openout2 = chapters/ch19_scaling_laws.aux
+ (./chapters/ch19_scaling_laws.tex
+Chapter 20.
+
+
+[95
+
+
+])
+
+[96]
+\openout2 = chapters/ch20_model_recipes.aux
+ (./chapters/ch20_model_recipes.tex
+Chapter 21.
+
+
+[97
+
+
+
+
+])
+
+[98]
+\openout2 = chapters/ch21_evaluation.aux
+ (./chapters/ch21_evaluation.tex
+Chapter 22.
+
+
+[99
+
+
+
+
+])
+
+[100]
+
+[101
+
+
+
+]
+
+[102]
+\openout2 = chapters/ch22_data_sources.aux
+ (./chapters/ch22_data_sources.tex
+Chapter 23.
+
+
+[103
+
+
+])
+
+[104]
+\openout2 = chapters/ch23_filtering_dedup.aux
+ (./chapters/ch23_filtering_dedup.tex
+Chapter 24.
+
+
+[105
+
+
+
+
+])
+
+[106]
+
+[107
+
+
+
+]
+
+[108]
+\openout2 = chapters/ch24_instruction_tuning.aux
+ (./chapters/ch24_instruction_tuning.tex
+Chapter 25.
+
+
+[109
+
+
+])
+
+[110]
+\openout2 = chapters/ch25_rlhf_dpo_grpo.aux
+ (./chapters/ch25_rlhf_dpo_grpo.tex
+Chapter 26.
+
+
+[111
+
+
+
+
+])
+
+[112]
+\openout2 = chapters/ch26_safety.aux
+ (./chapters/ch26_safety.tex
+Chapter 27.
+
+
+[113
+
+
+
+
+])
+
+[114]
+
+[115
+
+
+
+]
+
+[116]
+\openout2 = appendices/appendix_a_proofs.aux
+ (./appendices/appendix_a_proofs.tex
+Appendix A.
+)
+
+[117
+
+
+]
+\openout2 = appendices/appendix_b_cuda_triton.aux
+ (./appendices/appendix_b_cuda_triton.tex
+
+[118
+
+
+
+
+]
+Appendix B.
+)
+
+[119]
+\openout2 = appendices/appendix_c_linguistics.aux
+ (./appendices/appendix_c_linguistics.tex
+
+[120
+
+
+
+
+]
+Appendix C.
+)
+
+[121]
+\openout2 = appendices/appendix_d_neuro_index.aux
+ (./appendices/appendix_d_neuro_index.tex
+
+[122
+
+
+
+
+]
+Appendix D.
+)
+
+[123]
+\openout2 = appendices/appendix_e_reproducibility.aux
+ (./appendices/appendix_e_reproducibility.tex
+
+[124
+
+
+
+
+]
+Appendix E.
+)
+
+[125]
+
+[126
+
+
+
+]
+
+[127
+
+] (./textbook.aux (./chapters/ch00_how_to_use.aux)
+(./chapters/ch01_probability_entropy.aux) (./chapters/ch02_linalg_matcalc.aux)
+(./chapters/ch03_pytorch.aux) (./chapters/ch04_cuda_gpu.aux)
+(./chapters/ch05_linguistics.aux) (./chapters/ch06_lm_problem.aux)
+(./chapters/ch07_tokenization.aux) (./chapters/ch08_ngram_to_neural.aux)
+(./chapters/ch09_attention.aux) (./chapters/ch10_transformer_blocks.aux)
+(./chapters/ch11_norms_position.aux) (./chapters/ch12_hyperparameters.aux)
+(./chapters/ch13_variants.aux) (./chapters/ch14_resource_accounting.aux)
+(./chapters/ch15_gpus_tpus.aux) (./chapters/ch16_kernels_triton.aux)
+(./chapters/ch17_parallelism.aux) (./chapters/ch18_inference.aux)
+(./chapters/ch19_scaling_laws.aux) (./chapters/ch20_model_recipes.aux)
+(./chapters/ch21_evaluation.aux) (./chapters/ch22_data_sources.aux)
+(./chapters/ch23_filtering_dedup.aux) (./chapters/ch24_instruction_tuning.aux)
+(./chapters/ch25_rlhf_dpo_grpo.aux) (./chapters/ch26_safety.aux)
+(./appendices/appendix_a_proofs.aux) (./appendices/appendix_b_cuda_triton.aux)
+(./appendices/appendix_c_linguistics.aux)
+(./appendices/appendix_d_neuro_index.aux)
+(./appendices/appendix_e_reproducibility.aux))
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+Package rerunfilecheck Info: File `textbook.out' has not changed.
+(rerunfilecheck)             Checksum: FAC426808606E6B861A88110CC64A684;51395.
+Package logreq Info: Writing requests to 'textbook.run.xml'.
+
+\openout1 = textbook.run.xml
+)
 
 Here is how much of LuaTeX's memory you used:
- 49383 strings out of 475506
+ 51661 strings out of 475506
  156465,2373549 words of node,token memory allocated
- 7082 words of node memory still in use:
-   74 hlist, 2 vlist, 15 rule, 3 mark, 23 disc, 10 local_par, 1 dir, 13 math, 16
-3 glue, 31 kern, 42 penalty, 6 margin_kern, 351 glyph, 261 attribute, 107 glue_s
-pec, 261 attribute_list, 1 temp, 3 if_stack, 1 shape, 4 write, 24 pdf_literal, 8
- pdf_dest, 32 pdf_colorstack nodes
-   avail lists: 1:4,2:1603,3:381,4:3106,5:2613,6:61,7:6156,8:91,9:6133,10:26,11:
-559
- 70656 multiletter control sequences out of 65536+600000
+ 1914 words of node memory still in use:
+   32 hlist, 2 vlist, 14 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_
+kern, 4 glyph, 165 attribute, 95 glue_spec, 165 attribute_list, 2 write, 24 pdf_
+literal, 3 pdf_action, 24 pdf_colorstack nodes
+   avail lists: 1:2,2:1802,3:429,4:3122,5:2777,6:122,7:6675,8:101,9:6184,10:26,1
+1:591
+ 71822 multiletter control sequences out of 65536+600000
  139 fonts using 12611575 bytes
  98i,13n,97p,1004b,1495s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-italic.otf
+></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.o
+tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.ot
+f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.o
+tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.
+otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regula
+r.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold
+.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-regul
+ar.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bo
+ld.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-it
+alic.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-
+regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman
+12-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmro
+man12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cme
+xtra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
+.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.
+pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmi
+b8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
+pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
+r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
+local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loc
+al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on textbook.pdf (145 pages, 528864 bytes).
+
+PDF statistics: 3002 PDF objects out of 3580 (max. 8388607)
+ 2750 compressed objects within 28 object streams
+ 1061 named destinations out of 1200 (max. 131072)
+ 2624 words of extra memory for PDF output out of 10000 (max. 100000000)
+

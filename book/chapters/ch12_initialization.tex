@@ -1,0 +1,172 @@
+\chapter{Initialization and Pre-training Setup}
+\label{ch:12}
+
+% ─── Learning Goals ───
+\begin{keyinsight}
+After reading this chapter, you will be able to:
+\begin{enumerate}
+  \item Initialize weight matrices properly to ensure gradients don't explode or vanish before training even begins.
+  \item Understand the derivation of Xavier and Kaiming initialization.
+  \item Explain standard scaling trick associated with the residual connections in deep networks ($1/\sqrt{2N}$).
+  \item Structure a standard Transformer pre-training loop.
+\end{enumerate}
+\end{keyinsight}
+
+% ─── Big Picture ───
+\section{Big Picture}
+\label{ch:12:sec:big_picture}
+
+Imagine putting a sports car engine in a chassis, locking the steering wheel hard right, and pressing the gas. Even if to the components are mathematically perfect, the car will immediately crash.
+
+This is what happens when you instantiate a neural network with improper weights. If weights are too large, activations explode to infinity and gradients become $NaN$ (Not a Number) within the first five steps. If weights are too small, activations shrink to zero, and the model never learns. 
+
+Building a Transformer requires intense care in \emph{how} the numbers begin. A properly initialized model will drop its loss significantly in the very first step. This chapter outlines the exact rigorous statistical standards required to initialize and assemble an LLM.
+
+% ─── Formal Setup ───
+\section{Formal Setup and Notation}
+\label{ch:12:sec:setup}
+
+Consider a simple linear layer $\vy = \vW \vx$, where:
+\begin{itemize}
+    \item Input $\vx \in \R^{n_{\text{in}}}$, whose elements have variance $\text{Var}(x)$.
+    \item Output $\vy \in \R^{n_{\text{out}}}$, whose elements have variance $\text{Var}(y)$.
+    \item Weights $\vW \in \R^{n_{\text{out}} \times n_{\text{in}}}$, initialized from a distribution with variance $\text{Var}(w)$.
+\end{itemize}
+
+Assuming $x_i$ and $W_{ij}$ are independent and have a mean of 0, the variance of an output element $y_i = \sum_{j=1}^{n_{\text{in}}} W_{ij} x_j$ is:
+\begin{equation}
+\label{eq:12:variance}
+\text{Var}(y_i) = n_{\text{in}} \cdot \text{Var}(w) \cdot \text{Var}(x)
+\end{equation}
+
+% ─── Main Ideas ───
+\section{Variance Preservation}
+\label{ch:12:sec:main}
+
+To ensure signal flows cleanly, we want the variance of the output to equal the variance of the input: $\text{Var}(y) = \text{Var}(x)$. 
+
+Plugging this into Equation \cref{eq:12:variance}:
+\begin{equation}
+1 = n_{\text{in}} \cdot \text{Var}(w) \implies \text{Var}(w) = \frac{1}{n_{\text{in}}}
+\end{equation}
+
+If we draw our weights from a Normal distribution $\mathcal{N}(0, \sigma^2)$, we must set the standard deviation to:
+\begin{equation}
+\sigma = \frac{1}{\sqrt{n_{\text{in}}}}
+\end{equation}
+This is the foundational math behind **Xavier (Glorot) Initialization**. 
+
+If we place a ReLU non-linearity after the linear layer, the ReLU zeroes out exactly half of the distribution. This cuts the variance in half. To compensate, we must double the variance of the weights:
+\begin{equation}
+\sigma = \sqrt{\frac{2}{n_{\text{in}}}}
+\end{equation}
+This is **Kaiming (He) Initialization**, standard for deep CNNs with ReLU.
+
+\section{Transformer-Specific Initialization}
+
+Transformers have several unique architectural properties that require specialized scaling:
+
+\subsection{Standard Deviation}
+Most weights in the Transformer (Query, Key, Value matrices, FFN matrices) are initialized from a normal distribution $\mathcal{N}(0, \sigma^2)$ with $\sigma = 0.02$. Why 0.02? For a model dimension $d_m = 4096$, $1/\sqrt{4096} \approx 0.015$. A value of $0.02$ is a robust, empirical approximation for the Xavier bounds that stuck in the literature (e.g., GPT-2).
+
+\subsection{Residual Deep Scaling}
+In a pre-norm architecture, the residual stream $\vx$ receives an addition from every sublayer. If there are $N$ blocks, there are $2N$ additions (one for MHA, one for FFN).
+
+Because variances sum ($\text{Var}(A+B) = \text{Var}(A) + \text{Var}(B)$ for independent variables), the variance of the residual stream grows substantially as it passes through the network. To prevent deep network collapse, we scale the initialization standard deviation of the final projection matrices (the $W_O$ in attention, and the final combined matrix in the FFN) by a factor inversely proportional to the depth:
+\begin{equation}
+\sigma = \frac{0.02}{\sqrt{2N}}
+\end{equation}
+
+\section{The Training Loop Setup}
+
+Building a robust training script requires carefully orchestrating the dataloader and optimizer. A standard pre-training step functions as follows:
+\begin{enumerate}
+    \item Sample a batch $\mathbf{X}$ of shape $(B, T)$ and a target $\mathbf{Y}$ shifted by one.
+    \item Pass $\mathbf{X}$ through the embedding layer, applying RoPE incrementally at each of the $N$ layers, resolving the logits matrix of shape $(B, T, V)$.
+    \item Reshape logits to $(B \times T, V)$ and targets to $(B \times T)$ to compute the Cross-Entropy loss.
+    \item Trigger \texttt{loss.backward()} to compute gradients.
+    \item \textbf{Gradient Clipping}: Clamp all gradients to a maximum $L2$ norm (typically 1.0) to prevent rogue data patches from creating massive gradients that destroy the weights.
+    \item Call \texttt{optimizer.step()} using AdamW, usually paired with a learning rate scheduler featuring a linear warmup and a cosine decay.
+\end{enumerate}
+
+% ─── Worked Example ───
+\section{Worked Example: Checking Initialization in PyTorch}
+\label{ch:12:sec:example}
+
+If you build an LLM cleanly, you should manually initialize weights rather than trusting PyTorch defaults (which use an atypical Kaiming Uniform derived from a specific heuristic).
+
+\begin{lstlisting}[language=Python]
+def init_weights(module):
+    if isinstance(module, nn.Linear):
+        # Base init for dense weights
+        torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
+        if module.bias is not None:
+            torch.nn.init.zeros_(module.bias)
+    elif isinstance(module, nn.Embedding):
+        # Embeddings need slightly higher variance to cover space
+        torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
+
+# Specific override for residual projections
+# Suppose model has config.n_layers
+std_res = 0.02 / math.sqrt(2 * config.n_layers)
+for name, p in model.named_parameters():
+    if name.endswith('c_proj.weight') or name.endswith('w2.weight'):
+        torch.nn.init.normal_(p, mean=0.0, std=std_res)
+\end{lstlisting}
+
+% ─── Systems Consequences ───
+\section{Systems and Implementation Consequences}
+\label{ch:12:sec:systems}
+
+Precision is disastrously tight at initialization if using half-precision (FP16). Gradients are extremely small and can easily underflow to exactly $0.0$ in FP16. We mitigate this using a **Gradient Scaler** (multiplying the loss by a massive number like $2^{16}$ before backprop, so gradients are large enough to be represented in FP16, then dividing the gradients down when applying the optimizer). In modern setups, BFloat16 natively solves this underflow issue, which is why it is strictly preferred over FP16.
+
+% ─── Neuroscience Analogy ───
+\begin{analogybox}{Critical Periods and Wiring Diagram Initialization}
+  \paragraph{Where the analogy helps.}
+  At birth, the mammalian brain does not start with completely random synapses. Genetic encoding ensures a tightly constrained initial "wiring diagram" with specific connection probabilities and variances. If this initialization is biologically derailed, the network fails to learn properly (as seen in neurodevelopmental disorders). In ML, statistical variance rules provide this necessary starting template.
+
+  \paragraph{Where the analogy breaks.}
+  Biological brains dynamically prune redundant connections over time (synaptic pruning). An LLM's architecture is completely static; the matrix dimensions never shrink. 
+
+  \paragraph{What intuition to keep.}
+  A model's ability to learn is overwhelmingly dependent on its state at time $t=0$. Good initialization provides a smooth fitness landscape; bad initialization guarantees failure regardless of how much compute you have.
+\end{analogybox}
+
+
+% ─── Misconceptions ───
+\section{Common Misconceptions}
+\label{ch:12:sec:misconceptions}
+
+\begin{enumerate}
+  \item \textbf{``PyTorch handles initialization automatically.''} PyTorch's default `nn.Linear` initialization uses a Kaiming uniform bound $U(-\sqrt{k}, \sqrt{k})$. It does not match the Gaussian $\mathcal{N}(0, 0.02)$ initialization universally used in LLM papers (like LLaMA). 
+  \item \textbf{``Biases should be initialized randomly.''} Biases should almost always be initialized precisely to $0.0$.
+\end{enumerate}
+
+
+% ─── Exercises ───
+\section{Exercises}
+\label{ch:12:sec:exercises}
+
+\subsection*{Warmup}
+\begin{enumerate}
+  \item If $N=18$, what is the scaling factor $\frac{1}{\sqrt{2N}}$? How does this change the standard deviation of the final layer?
+\end{enumerate}
+
+\subsection*{Derivation}
+\begin{enumerate}
+  \item Show that if $X$ and $Y$ are independent random variables with zero mean, $\text{Var}(XY) = \text{Var}(X)\text{Var}(Y)$. Use this to rigorously prove Equation \cref{eq:12:variance}.
+\end{enumerate}
+
+\subsection*{Implementation}
+\begin{enumerate}
+  \item \textbf{[Prepares for CS336 A1]} Implement the \texttt{init\_weights} hook on your \texttt{TransformerBlock} module. Print the standard deviation of your \texttt{c\_proj.weight} tensor before and after your hook runs to prove it worked.
+\end{enumerate}
+
+% ─── Further Reading ───
+\section{Further Reading}
+\label{ch:12:sec:further}
+
+\begin{itemize}
+  \item \textcite{glorot2010}: Understanding the difficulty of training deep feedforward neural networks (The Xavier Paper).
+  \item \textcite{radford2019}: Language Models are Unsupervised Multitask Learners (GPT-2). Specifically for the $\frac{1}{\sqrt{2N}}$ residual scaling trick notation.
+\end{itemize}

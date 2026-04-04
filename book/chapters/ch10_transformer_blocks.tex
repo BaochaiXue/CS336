@@ -42,12 +42,12 @@ Deep neural networks suffer from optimization collapse: as the network gets deep
 
 Instead of a layer computing the \emph{new} representation directly ($f(\vx) = \vx_{\text{new}}$), the layer only computes the \emph{change} or \emph{residual} ($\Delta \vx$). The operation becomes:
 \begin{equation}
-\vx_{\text{new}} = \vx + \sublayer(\vx)
+\vx_{\text{new}} = \vx + \text{Sublayer}(\vx)
 \end{equation}
 
 Mathematically, when you take the derivative of the loss with respect to $\vx$, you get:
 \begin{equation}
-\frac{\partial \mathcal{L}}{\partial \vx} = \frac{\partial \mathcal{L}}{\partial \vx_{\text{new}}} \left( \vI + \frac{\partial \sublayer(\vx)}{\partial \vx} \right)
+\frac{\partial \mathcal{L}}{\partial \vx} = \frac{\partial \mathcal{L}}{\partial \vx_{\text{new}}} \left( \vI + \frac{\partial \text{Sublayer}(\vx)}{\partial \vx} \right)
 \end{equation}
 The identity matrix $\vI$ guarantees that the gradient can always flow backward cleanly, completely bypassing the complex derivatives of the sublayer if necessary. 
 
@@ -60,10 +60,10 @@ To keep activations from exploding as we sum hundreds of residuals, we apply Lay
 (We will cover RMSNorm, a modern optimization, in Chapter 11).
 
 The original 2017 Transformer used \textbf{Post-Norm}:
-$\vx = \text{LN}(\vx + \sublayer(\vx))$
+$\vx = \text{LN}(\vx + \text{Sublayer}(\vx))$
 
 This proved highly unstable to train from scratch for very deep models. The gradients through the massive sequence of LayerNorms degraded. Currently, all major LLMs use \textbf{Pre-Norm}:
-$\vx = \vx + \sublayer(\text{LN}(\vx))$
+$\vx = \vx + \text{Sublayer}(\text{LN}(\vx))$
 
 In Pre-Norm, the residual pathway $\vx_{\text{in}} \rightarrow \vx_{\text{out}}$ never passes through \emph{any} non-linearities or normalizations. The entire LLM backbone is just one uninterrupted addition highway from layer 1 to layer $N$.
 
@@ -168,7 +168,7 @@ For a batch size of $B$, sequence length $T$, and model dimension $d$, caching $
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item \textbf{[Prepares for CS336 A1]} Implement a PyTorch `nn.Module` named `TransformerBlock`. It should take `x` (shape $B, T, d_m$), pass it through your simulated MHA and FFN modules using standard PyTorch `nn.LayerNorm`, and output the residual-summed tensor. Use no biases in the linear layers.
+  \item \textbf{[Prepares for CS336 A1]} Implement a PyTorch \texttt{nn.Module} named \texttt{TransformerBlock}. It should take \texttt{x} (shape $B, T, d_m$), pass it through your simulated MHA and FFN modules using standard PyTorch \texttt{nn.LayerNorm}, and output the residual-summed tensor. Use no biases in the linear layers.
 \end{enumerate}
 
 \subsection*{Open-Ended}

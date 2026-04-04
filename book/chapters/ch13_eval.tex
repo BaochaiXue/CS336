@@ -1,0 +1,147 @@
+\chapter{Evaluation and Metrics}
+\label{ch:13}
+
+% ─── Learning Goals ───
+\begin{keyinsight}
+After reading this chapter, you will be able to:
+\begin{enumerate}
+  \item Bridge the gap between theoretical cross-entropy and Bits Per-Byte (BPB).
+  \item Identify validation dataset leakage and compute true held-out performance.
+  \item Understand the mechanics and flaws of zero-shot downstream evaluation (e.g., MMLU, HellaSwag).
+  \item Explain why perplexity metrics cannot be compared across different tokenizers.
+\end{enumerate}
+\end{keyinsight}
+
+% ─── Big Picture ───
+\section{Big Picture}
+\label{ch:13:sec:big_picture}
+
+Building the model architecture (Part II) only gives you a raw engine. How do we know if it is actually learning language, or just memorizing the exact layout of the textbooks we fed it? 
+
+Evaluating LLMs is currently one of the most contentious subjects in AI research. As models become hyper-capable, distinguishing between true abstract reasoning and rote data memorization requires rigorous statistical hygiene. 
+
+We break evaluation into two distinct phases:
+1. \textbf{Intrinsic Evaluation} (Training dynamics): Measuring loss and perplexity on strict held-out text. This tells us if the probability engine is mathematically sound.
+2. \textbf{Extrinsic Evaluation} (Zero-shot tasks): Forcing the model to take multiple-choice tests or write code without further training. This tells us if the engine has successfully acquired human-interpretable knowledge.
+
+% ─── Formal Setup ───
+\section{Formal Setup and Notation}
+\label{ch:13:sec:setup}
+
+Recall the cross-entropy loss over a sequence $\vx$ of length $T$:
+\begin{equation}
+\mathcal{L} = -\frac{1}{T}\sum_{t=1}^T \log p_{\vtheta}(x_t \mid x_{<t})
+\end{equation}
+This loss is measured in **nats** (because the logarithm is base $e$).
+In information theory, we often measure in **bits** (base 2). To convert from nats to bits, multiply by $\log_2(e) \approx 1.442$.
+
+% ─── Main Ideas ───
+\section{Comparing Models: Bits-Per-Byte (BPB)}
+\label{ch:13:sec:main}
+
+As stated in Chapter 1, you can never compare the Loss (or Perplexity) of two models if they use different tokenizers. Model A might use $T=100$ tokens to represent a sentence, and Model B might use $T=50$ tokens. Model B has an advantage because it computes the average over fewer sequence steps.
+
+To create a fair comparison between any two models, we normalize by the physical number of bytes in the raw UTF-8 text string, rather than the number of tokens. This is called **Bits Per-Byte (BPB)**.
+
+Let $N_{\text{bytes}}$ be the length of the string in bytes. 
+\begin{equation}
+\label{eq:13:bpb}
+\text{BPB} = \left(\frac{T}{N_{\text{bytes}}}\right) \frac{\mathcal{L}}{\ln(2)}
+\end{equation}
+
+A BPB of $1.0$ means the model requires exactly 1 bit to predict the next byte of text perfectly. Lower is better. Shannon estimated human BPB at around $0.6$ to $1.3$.
+
+\section{Extrinsic Evaluation: Downstream Benchmarks}
+
+Once the model has a low BPB, we want to see if it can solve tasks. We use zero-shot prompting. If we want it to solve a math problem, we format it as an incomplete string and score the probabilities of the completions.
+
+For multiple-choice datasets (like HellaSwag or MMLU), we have a context prefix ($c$) and several options ($o_1, o_2, o_3$).
+We compute the log-likelihood of each option:
+\begin{equation}
+P(o_i) = \sum_{t=1}^{|o_i|} \log p_{\vtheta}(o_{i,t} \mid c, o_{i, <t})
+\end{equation}
+
+The model's "answer" is the option $o^*$ that maximizes $P(o_i)$.
+\textbf{The Flaw:} What if $o_1$ is a very short string and $o_2$ is a very long string? The long string involves summing more negative log probabilities, so it artificially receives a lower score. To fix this, we often apply **length normalization**, dividing $P(o_i)$ by the length of the option $|o_i|$.
+
+\section{Data Contamination and Leakage}
+
+If a model scores 90\% on a benchmark, but that benchmark was accidentally included in the model's multi-terabyte training corpus, the test is invalid. This is called **Data Contamination**.
+
+Detecting contamination requires rigorous $n$-gram overlap checking. Before training, we map out the $n$-grams (e.g., 13-grams) in the evaluation dataset, and scan the training data. Any training document containing high overlap with the test set is aggressively purged (de-duplicated). 
+
+In 2026, many open-weights models suffer from severe, silent contamination which artificially inflates their leaderboards. 
+
+% ─── Worked Example ───
+\section{Worked Example: BPB Calculation}
+\label{ch:13:sec:example}
+
+String: "Hello world"
+$N_{\text{bytes}} = 11$.
+
+Model A uses characters. Token sequence: `['H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']`.
+$T=11$. 
+Loss = $2.5$ nats.
+BPB = $(11 / 11) \times (2.5 / 0.693) = 3.61$ bits/byte.
+
+Model B uses subwords. Token sequence: `['Hello', ' ', 'world']`.
+$T=3$. 
+Loss = $8.0$ nats. (Higher loss because vocabulary is larger, predicting exact subword is "harder" locally).
+BPB = $(3 / 11) \times (8.0 / 0.693) = 3.15$ bits/byte.
+
+Even though Model B had a "higher" loss of 8.0 compared to Model A's 2.5, Model B is actually a substantially superior compressor of the text (3.15 vs 3.61 BPB). This explicitly demonstrates why raw cross-entropy is un-comparable across tokenizers.
+
+% ─── Systems Consequences ───
+\section{Systems and Implementation Consequences}
+\label{ch:13:sec:systems}
+
+Evaluating on benchmarks like MMLU requires passing tens of thousands of strings through the model. If you do this with a \texttt{batch\_size=1} loop, it will take days. Modern evaluation harnesses (like generic \texttt{lm-evaluation-harness}) heavily pack sequences, pad them cleverly to powers of 8, and use massive batched forward passes overlaid using \texttt{torch.no\_grad()}. 
+
+% ─── Neuroscience Analogy ───
+\begin{analogybox}{IQ Tests and Extrinsic Evaluation}
+  \paragraph{Where the analogy helps.}
+  Just as human intelligence is hard to measure directly via brain activity (intrinsic), we rely on standardized written tests like the SAT or WAIS block-design tests (extrinsic) to extrapolate reasoning capabilities.
+
+  \paragraph{Where the analogy breaks.}
+  Human tests assume the subject has not seen the exact test answers before. Because LLMs scrape the entire internet, ensuring the model hasn't "memorized the answer key" is computationally monumental compared to sealing an SAT exam envelope.
+
+  \paragraph{What intuition to keep.}
+  A high score on a benchmark only implies generalization if the dataset hygiene is mathematically pure.
+\end{analogybox}
+
+
+% ─── Misconceptions ───
+\section{Common Misconceptions}
+\label{ch:13:sec:misconceptions}
+
+\begin{enumerate}
+  \item \textbf{``Perplexity scales linearly with intelligence.''} Perplexity is highly non-linear. A drop from 20 to 18 might be a minor syntax improvement, while a drop from 12 to 10 might unlock deep complex logical reasoning. This is because the cross-entropy curve represents exponentially compounding probabilities.
+\end{enumerate}
+
+
+% ─── Exercises ───
+\section{Exercises}
+\label{ch:13:sec:exercises}
+
+\subsection*{Warmup}
+\begin{enumerate}
+  \item Why do we divide by $\ln(2)$ when computing Bits Per-Byte from nats?
+\end{enumerate}
+
+\subsection*{Derivation}
+\begin{enumerate}
+  \item Prove mathematically that standard length normalization $\frac{1}{|o_i|}\sum \log P$ computes the geometric mean of the token probabilities.
+\end{enumerate}
+
+\subsection*{Implementation}
+\begin{enumerate}
+  \item \textbf{[Prepares for CS336 A1]} Write a python function \texttt{compute\_bpb(loss\_nats, num\_tokens, num\_bytes)} that performs the exact conversion.
+\end{enumerate}
+
+% ─── Further Reading ───
+\section{Further Reading}
+\label{ch:13:sec:further}
+
+\begin{itemize}
+  \item \textcite{gao2021}: A framework for few-shot language model evaluation (lm-evaluation-harness repository).
+\end{itemize}

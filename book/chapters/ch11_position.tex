@@ -1,0 +1,173 @@
+\chapter{Position Embeddings: RoPE and ALiBi}
+\label{ch:11}
+
+% ─── Learning Goals ───
+\begin{keyinsight}
+After reading this chapter, you will be able to:
+\begin{enumerate}
+  \item Explain why the vanilla self-attention mechanism is inherently permutation equivariant.
+  \item Differentiate between absolute positioning (sinusoidal, learned) and relative positioning.
+  \item Mathematically derive Rotary Position Embeddings (RoPE) and explain how they inject relative positioning via phase shifts.
+  \item Describe ALiBi and how it enables length extrapolation without positional parameters.
+\end{enumerate}
+\end{keyinsight}
+
+% ─── Big Picture ───
+\section{Big Picture}
+\label{ch:11:sec:big_picture}
+
+Self-attention computes the interaction between tokens by taking the dot product of their Queries and Keys ($\frac{\vQ \vK^\T}{\sqrt{d_k}}$). However, a dot product between two vectors is purely a function of the content of the vectors. It has zero knowledge of \emph{where} the vectors came from in the sequence.
+
+If you scramble the words in a sentence, the attention mechanism will compute the exact same similarity scores, just in a scrambled order. Self-attention treats language not as a sequence, but as an unordered bag of words. This is fatal: "The dog bit the man" and "The man bit the dog" mean highly different things.
+
+To fix this, we must inject positional information into the vectors so the model can distinguish between "the" at position 1 and "the" at position 4. How we inject this information has evolved remarkably since 2017.
+
+% ─── Formal Setup ───
+\section{Formal Setup and Notation}
+\label{ch:11:sec:setup}
+
+Let $\vx_m \in \R^d$ be the embedding of the token at position $m$, where $m \in \{1, \ldots, T\}$.
+Let $f_q(\vx_m, m)$ and $f_k(\vx_n, n)$ be functions that incorporate positional information into the queries and keys.
+
+We want the attention score between position $m$ and position $n$ to be a function of both the word embeddings ($\vx_m, \vx_n$) and their relative distance $m-n$:
+\begin{equation}
+\langle f_q(\vx_m, m), f_k(\vx_n, n) \rangle = g(\vx_m, \vx_n, m-n)
+\end{equation}
+
+% ─── Main Ideas ───
+\section{Absolute Position Embeddings}
+\label{ch:11:sec:main}
+
+The original Transformer simply added a position vector to the token embedding at the very input of the model:
+\begin{equation}
+\vx_m' = \vx_m + \vp_m
+\end{equation}
+where $\vp_m \in \R^d$ is the position embedding for position $m$.
+
+\subsection{Sinusoidal Vectors}
+Vaswani et al. hand-crafted $\vp_m$ using sine and cosine waves of varying frequencies.
+\begin{align}
+p_{m, 2i} &= \sin(m / 10000^{2i/d}) \\
+p_{m, 2i+1} &= \cos(m / 10000^{2i/d})
+\end{align}
+Because trigonometric identities allow $\sin(m+k)$ to be expressed as a linear combination of $\sin(m)$ and $\cos(m)$, the hope was the model could easily learn relative differences. 
+
+\subsection{Learned Absolute Vectors}
+Later models like GPT-2 and GPT-3 abandoned the fixed sinusoids. They simply initialized $\vp_m$ as a trainable parameter matrix of shape $(T_{\text{max}}, d)$. The model learns what position $1$ "means" during training.
+\textbf{The Flaw:} The model can never process a sequence longer than $T_{\text{max}}$ because it has no vector for position $T_{\text{max}}+1$.
+
+\section{Rotary Position Embeddings (RoPE)}
+
+RoPE (Su et al., 2021) is the standard in modern LLMs (LLaMA, DeepSeek, Mistral). It is mathematically elegant because it acts multiplicatively rather than additively, and applies directly to the Queries and Keys at every layer.
+
+Instead of adding a vector, RoPE \emph{rotates} the vector by an angle proportional to its position $m$. 
+To rotate a 2D vector $(x_1, x_2)$ by angle $m\theta$, we apply the 2D rotation matrix:
+\begin{equation}
+\mathbf{R}_{m\theta} = \begin{bmatrix} 
+\cos(m\theta) & -\sin(m\theta) \\ 
+\sin(m\theta) & \cos(m\theta) 
+\end{bmatrix}
+\end{equation}
+
+For a $d$-dimensional vector, we group the dimensions into $d/2$ pairs and apply a separate 2D rotation to each pair, with frequencies $\theta_i = 10000^{-2i/d}$.
+Let $\vR \Theta, m \in \R^{d \times d}$ be the block-diagonal rotation matrix for position $m$. 
+\begin{equation}
+f_q(\vx_m, m) = \vR_{\Theta, m} \vW_Q \vx_m, \quad f_k(\vx_n, n) = \vR_{\Theta, n} \vW_K \vx_n
+\end{equation}
+
+\textbf{Why does this work?} Rotation matrices are orthogonal ($\vR^\T = \vR^{-1}$). The dot product between a rotated query at $m$ and a rotated key at $n$ simplifies beautifully:
+\begin{align}
+\langle \vR_m \vq_m, \vR_n \vk_n \rangle &= (\vR_m \vq_m)^\T (\vR_n \vk_n) \\
+&= \vq_m^\T \vR_m^\T \vR_n \vk_n \\
+&= \vq_m^\T \vR_{n-m} \vk_n
+\end{align}
+The attention score relies \emph{only} on the relative distance $n-m$. We achieved perfect relative positioning through absolute rotations!
+
+\section{ALiBi: Attention with Linear Biases}
+
+What if we don't modify the vectors at all, but modify the attention score directly?
+ALiBi (Press et al., 2021) directly subtracts a linear penalty based on the distance between the query and key:
+\begin{equation}
+\Attn(\vQ, \vK, \vV) = \softmax\left(\frac{\vQ \vK^\T}{\sqrt{d_k}} - \gamma |m-n| \right) \vV
+\end{equation}
+Here, $\gamma$ is a fixed scalar that differs for each attention head. The further apart two tokens are, the more heavily their attention score is penalized.
+
+\textbf{Length Extrapolation:} ALiBi allows models trained on 1,024 tokens to evaluate flawlessly on 2,048 tokens without fine-tuning, because there are no positional parameters bounding the sequence.
+
+% ─── Worked Example ───
+\section{Worked Example: Implementing RoPE efficiently}
+\label{ch:11:sec:example}
+
+Materializing the full $d \times d$ block-diagonal matrix $\vR_m$ in memory is a catastrophic waste of VRAM, because it consists almost entirely of zeroes.
+
+In PyTorch, we implement RoPE using complex numbers or interleaved vector multiplication. 
+Given vector $\vq = [q_0, q_1, q_2, q_3]$, we split it: $\vq_1 = [q_0, q_2]$, $\vq_2 = [q_1, q_3]$.
+The rotated vector is computed physically as:
+\begin{equation}
+\vq_{\text{rotated}} = \begin{bmatrix} q_0 \cos(m\theta_0) - q_1 \sin(m\theta_0) \\ q_1 \cos(m\theta_0) + q_0 \sin(m\theta_0) \\ \vdots \end{bmatrix}
+\end{equation}
+This uses element-wise multiplication ($\odot$) and takes $O(d)$ speed rather than $O(d^2)$ matrix multiplication.
+
+% ─── Systems Consequences ───
+\section{Systems and Implementation Consequences}
+\label{ch:11:sec:systems}
+
+Because RoPE is applied inside every attention layer \emph{after} the $\vQ, \vK$ projections, it fundamentally ties the sequence length $T$ into the heart of the inner loop. 
+When doing autoregressive generation (inference), we process just one new token at position $T+1$. We must rotate it by $(T+1)\theta$. We do not need to re-rotate the history in the KV-cache, because RoPE is computed once per token and cached.
+
+% ─── Neuroscience Analogy ───
+\begin{analogybox}{Grid Cells and Spatial Frequencies}
+  \paragraph{Where the analogy helps.}
+  RoPE uses varying frequencies $\theta_i$ to encode position. High frequencies rotate quickly and provide fine-grained local position. Low frequencies rotate slowly and provide global context. This is fundamentally identical to "Grid Cells" in the mammalian entorhinal cortex, which fire in hexagonal patterns of varying spatial frequencies to give an animal a cognitive map of its environment. 
+
+  \paragraph{Where the analogy breaks.}
+  Animals constantly update their position integration in a true recurrent loop over time using velocity. A Transformer has simultaneous access to all spatial coordinates through an instantaneous array lookup.
+
+  \paragraph{What intuition to keep.}
+  Position is not a single number (like index 4), but a high-dimensional vector combining multiple repeating oscillations that allow precise localization at multiple scales.
+\end{analogybox}
+
+
+% ─── Misconceptions ───
+\section{Common Misconceptions}
+\label{ch:11:sec:misconceptions}
+
+\begin{enumerate}
+  \item \textbf{``RoPE models can extrapolate to infinite lengths.''} While RoPE represents relative distances flawlessly in theory, the model never saw distances $> T_{\text{train}}$ during training. If confronted with a distance of 8,000, the attention weights will likely go uncalibrated. Length extrapolation with RoPE requires tricks like YaRN or Position Interpolation.
+  \item \textbf{``Position embeddings are added at every layer.''} Absolute position embeddings are added only once, directly to the lowest input tokens. RoPE, however, is applied at every single attention layer specifically to the Q and K vectors.
+\end{enumerate}
+
+
+% ─── Exercises ───
+\section{Exercises}
+\label{ch:11:sec:exercises}
+
+\subsection*{Warmup}
+\begin{enumerate}
+  \item Why do we not apply RoPE to the Value ($\vV$) vectors?
+  \item In ALiBi, if $m=n$ (a token attends to itself), what is the penalty applied to the score?
+\end{enumerate}
+
+\subsection*{Derivation}
+\begin{enumerate}
+  \item Using the sum/difference trigonometric identities ($\cos(A-B) = \cos A \cos B + \sin A \sin B$), explicitly derive $\vq_m^\T \vk_n$ for a 2D space under RoPE. Prove that the result is independent of absolute $m$ or $n$ and only depends on $m-n$.
+\end{enumerate}
+
+\subsection*{Implementation}
+\begin{enumerate}
+  \item \textbf{[Prepares for CS336 A1]} Implement a PyTorch function \texttt{apply\_rope(q, freqs)} that takes queries of shape $(B, T, h, d_k)$ and pre-computed cosine/sine frequencies of shape $(T, d_k)$, and applies the rotation efficiently.
+\end{enumerate}
+
+\subsection*{Open-Ended}
+\begin{enumerate}
+  \item If RoPE explicitly embeds sequence distances $m-n$, how does this complicate efforts to use a 1D language model structure to process 2D images (like in Vision Transformers)? How might you adapt RoPE for a 2D grid?
+\end{enumerate}
+
+% ─── Further Reading ───
+\section{Further Reading}
+\label{ch:11:sec:further}
+
+\begin{itemize}
+  \item \textcite{su2021}: RoFormer: Enhanced Transformer with Rotary Position Embedding.
+  \item \textcite{press2021}: Train Short, Test Long: Attention with Linear Biases (ALiBi).
+\end{itemize}
