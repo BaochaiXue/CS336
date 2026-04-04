@@ -9,9 +9,16 @@
     "organization": "Minimax",
     "date": "2026",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "[MiniMax M2.5]",
+    "legal_folder_name": "[minimax_m2.5]",
+    "local_folder": "papers/normalized/[minimax_m2.5]",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "[Xiaomi MIMO v2]",
@@ -23,9 +30,16 @@
     "organization": "Xiaomi",
     "date": "2026",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "[Xiaomi MIMO v2]",
+    "legal_folder_name": "[xiaomi_mimo_v2]",
+    "local_folder": "papers/normalized/[xiaomi_mimo_v2]",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Alpaca",
@@ -37,9 +51,16 @@
     "organization": "",
     "date": "2023-03-13",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Alpaca",
+    "legal_folder_name": "alpaca",
+    "local_folder": "papers/normalized/alpaca",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Arcee Trinity",
@@ -51,9 +72,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Arcee Trinity",
+    "legal_folder_name": "arcee_trinity",
+    "local_folder": "papers/normalized/arcee_trinity",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/arcee_trinity.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek Math",
@@ -65,9 +93,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Deepseek Math",
+    "legal_folder_name": "deepseek_math",
+    "local_folder": "papers/normalized/deepseek_math",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_math.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek R1",
@@ -79,9 +114,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Deepseek R1",
+    "legal_folder_name": "deepseek_r1",
+    "local_folder": "papers/normalized/deepseek_r1",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_r1.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "DPO",
@@ -93,9 +135,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "DPO",
+    "legal_folder_name": "dpo",
+    "local_folder": "papers/normalized/dpo",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/dpo.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GLM 4 5",
@@ -107,9 +156,16 @@
     "organization": "Z.ai",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "GLM 4 5",
+    "legal_folder_name": "glm_4_5",
+    "local_folder": "papers/normalized/glm_4_5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/glm_4_5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GLM 5",
@@ -121,9 +177,16 @@
     "organization": "Z.ai",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "GLM 5",
+    "legal_folder_name": "glm_5",
+    "local_folder": "papers/normalized/glm_5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/glm_5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Hnet",
@@ -135,9 +198,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Hnet",
+    "legal_folder_name": "hnet",
+    "local_folder": "papers/normalized/hnet",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/hnet.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Instruct GPT",
@@ -149,9 +219,16 @@
     "organization": "OpenAI",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Training language models to follow instructions with human feedback"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Training language models to follow instructions with human feedback",
+    "canonical_title": "Instruct GPT",
+    "legal_folder_name": "instruct_gpt",
+    "local_folder": "papers/normalized/instruct_gpt",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/instruct_gpt.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Kimi 1 5",
@@ -163,9 +240,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Kimi 1 5",
+    "legal_folder_name": "kimi_1_5",
+    "local_folder": "papers/normalized/kimi_1_5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/kimi_1_5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Kimi K2 5",
@@ -177,9 +261,16 @@
     "organization": "Moonshot",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Kimi K2 5",
+    "legal_folder_name": "kimi_k2_5",
+    "local_folder": "papers/normalized/kimi_k2_5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/kimi_k2_5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Ling 2",
@@ -191,9 +282,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Ling 2",
+    "legal_folder_name": "ling_2",
+    "local_folder": "papers/normalized/ling_2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/ling_2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "PPO2017",
@@ -205,9 +303,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced PPO (for RL)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced PPO (for RL)",
+    "canonical_title": "PPO2017",
+    "legal_folder_name": "ppo2017",
+    "local_folder": "papers/normalized/ppo2017",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/ppo2017.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "QWEN 3 5",
@@ -219,9 +324,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "QWEN 3 5",
+    "legal_folder_name": "qwen_3_5",
+    "local_folder": "papers/normalized/qwen_3_5",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "QWEN3",
@@ -233,9 +345,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "alignment-reasoning-rl",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "QWEN3",
+    "legal_folder_name": "qwen3",
+    "local_folder": "papers/normalized/qwen3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/qwen3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Auxfree",
@@ -247,9 +366,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Auxfree",
+    "legal_folder_name": "auxfree",
+    "local_folder": "papers/normalized/auxfree",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/auxfree.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "BAHDANAU2015 Attention",
@@ -261,9 +387,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced attention mechanism (for machine translation)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced attention mechanism (for machine translation)",
+    "canonical_title": "BAHDANAU2015 Attention",
+    "legal_folder_name": "bahdanau2015_attention",
+    "local_folder": "papers/normalized/bahdanau2015_attention",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/bahdanau2015_attention.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek V2",
@@ -275,9 +408,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Deepseek V2",
+    "legal_folder_name": "deepseek_v2",
+    "local_folder": "papers/normalized/deepseek_v2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_v2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GQA",
@@ -289,9 +429,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Multi-query attention (MQA) speeds up, but less expressive | GQA: use an intermediate (more than one, less than number of heads) number of key-value heads | Experiments on T5"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Multi-query attention (MQA) speeds up, but less expressive | GQA: use an intermediate (more than one, less than number of heads) number of key-value heads | Experiments on T5",
+    "canonical_title": "GQA",
+    "legal_folder_name": "gqa",
+    "local_folder": "papers/normalized/gqa",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gqa.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Layernorm",
@@ -303,9 +450,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced LayerNorm"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced LayerNorm",
+    "canonical_title": "Layernorm",
+    "legal_folder_name": "layernorm",
+    "local_folder": "papers/normalized/layernorm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/layernorm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Linear Attention",
@@ -317,9 +471,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Linear Attention",
+    "legal_folder_name": "linear_attention",
+    "local_folder": "papers/normalized/linear_attention",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/linear_attention.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Long Short-Term Memory",
@@ -331,9 +492,16 @@
     "organization": "",
     "date": "1997",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Long Short-Term Memory",
+    "legal_folder_name": "long_short_term_memory",
+    "local_folder": "papers/normalized/long_short_term_memory",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Longformer",
@@ -345,9 +513,16 @@
     "organization": "AllenAI",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Sliding window (local) attention | Global attention to capture task-specific information"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Sliding window (local) attention | Global attention to capture task-specific information",
+    "canonical_title": "Longformer",
+    "legal_folder_name": "longformer",
+    "local_folder": "papers/normalized/longformer",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/longformer.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Mamba 2",
@@ -359,9 +534,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Mamba 2",
+    "legal_folder_name": "mamba_2",
+    "local_folder": "papers/normalized/mamba_2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mamba_2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Mamba 3",
@@ -373,9 +555,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Mamba 3",
+    "legal_folder_name": "mamba_3",
+    "local_folder": "papers/normalized/mamba_3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mamba_3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Mistral 7B",
@@ -387,9 +576,16 @@
     "organization": "Mistral",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "GQA, sliding window attention"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "GQA, sliding window attention",
+    "canonical_title": "Mistral 7B",
+    "legal_folder_name": "mistral_7b",
+    "local_folder": "papers/normalized/mistral_7b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mistral_7b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Mixtral",
@@ -401,9 +597,16 @@
     "organization": "Mistral",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Mixtral",
+    "legal_folder_name": "mixtral",
+    "local_folder": "papers/normalized/mixtral",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mixtral.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Moe",
@@ -415,9 +618,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Moe",
+    "legal_folder_name": "moe",
+    "local_folder": "papers/normalized/moe",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/moe.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Qk Norm",
@@ -429,9 +639,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Qk Norm",
+    "legal_folder_name": "qk_norm",
+    "local_folder": "papers/normalized/qk_norm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/qk_norm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Rms Norm",
@@ -443,9 +660,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Rms Norm",
+    "legal_folder_name": "rms_norm",
+    "local_folder": "papers/normalized/rms_norm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/rms_norm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "ROPE",
@@ -457,9 +681,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Encodes absolute position with rotation matrix, incorporate relative position dependency in self-attention | Key: R W x, where R is a block-diagonal sequence of d/2 rotation matrices (equation 13) | Extrapolates to longer sequences"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Encodes absolute position with rotation matrix, incorporate relative position dependency in self-attention | Key: R W x, where R is a block-diagonal sequence of d/2 rotation matrices (equation 13) | Extrapolates to longer sequences",
+    "canonical_title": "ROPE",
+    "legal_folder_name": "rope",
+    "local_folder": "papers/normalized/rope",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/rope.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Sparse Transformer",
@@ -471,9 +702,16 @@
     "organization": "OpenAI",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Local attention"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Local attention",
+    "canonical_title": "Sparse Transformer",
+    "legal_folder_name": "sparse_transformer",
+    "local_folder": "papers/normalized/sparse_transformer",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/sparse_transformer.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "SUSKETVER2014",
@@ -485,9 +723,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced seq2seq (encode entire sentence into one vector, decode translation)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced seq2seq (encode entire sentence into one vector, decode translation)",
+    "canonical_title": "SUSKETVER2014",
+    "legal_folder_name": "susketver2014",
+    "local_folder": "papers/normalized/susketver2014",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/susketver2014.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Switch Transformers",
@@ -499,9 +744,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Switch Transformers",
+    "legal_folder_name": "switch_transformers",
+    "local_folder": "papers/normalized/switch_transformers",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/switch_transformers.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "The FLOPs Calculus of Language Model Training",
@@ -513,9 +765,16 @@
     "organization": "",
     "date": "2022-01-09",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "The FLOPs Calculus of Language Model Training",
+    "legal_folder_name": "the_flops_calculus_of_language_model_training",
+    "local_folder": "papers/normalized/the_flops_calculus_of_language_model_training",
+    "source_status": "source_unavailable",
+    "merged_tex_path": "",
+    "source_type": "source_unavailable",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Transformer",
@@ -527,9 +786,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced Transformer (for machine translation)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced Transformer (for machine translation)",
+    "canonical_title": "Transformer",
+    "legal_folder_name": "transformer",
+    "local_folder": "papers/normalized/transformer",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/transformer.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Transformer Math 101",
@@ -541,9 +807,16 @@
     "organization": "EleutherAI",
     "date": "2023-04-03",
     "topic_hint": "architectures-attention",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Transformer Math 101",
+    "legal_folder_name": "transformer_math_101",
+    "local_folder": "papers/normalized/transformer_math_101",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Gopher",
@@ -555,9 +828,16 @@
     "organization": "DeepMind",
     "date": "",
     "topic_hint": "evaluation",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "280B parameters | Data: 300B tokens"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "280B parameters | Data: 300B tokens",
+    "canonical_title": "Gopher",
+    "legal_folder_name": "gopher",
+    "local_folder": "papers/normalized/gopher",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gopher.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GPT4",
@@ -569,9 +849,16 @@
     "organization": "OpenAI",
     "date": "",
     "topic_hint": "evaluation",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "No details on the data or model architecture."
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "No details on the data or model architecture.",
+    "canonical_title": "GPT4",
+    "legal_folder_name": "gpt4",
+    "local_folder": "papers/normalized/gpt4",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gpt4.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Lima",
@@ -583,9 +870,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "evaluation",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Lima",
+    "legal_folder_name": "lima",
+    "local_folder": "papers/normalized/lima",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/lima.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Mmlu",
@@ -597,9 +891,16 @@
     "organization": "Berkeley",
     "date": "",
     "topic_hint": "evaluation",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "57 subjects, multiple-choice"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "57 subjects, multiple-choice",
+    "canonical_title": "Mmlu",
+    "legal_folder_name": "mmlu",
+    "local_folder": "papers/normalized/mmlu",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mmlu.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "A Neural Probabilistic Language Model",
@@ -611,9 +912,16 @@
     "organization": "",
     "date": "2003-02-01",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Used a feedforward neural network over last n words to predict the next word in a sequence"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Used a feedforward neural network over last n words to predict the next word in a sequence",
+    "canonical_title": "A Neural Probabilistic Language Model",
+    "legal_folder_name": "a_neural_probabilistic_language_model",
+    "local_folder": "papers/normalized/a_neural_probabilistic_language_model",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Bert",
@@ -625,9 +933,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Bert",
+    "legal_folder_name": "bert",
+    "local_folder": "papers/normalized/bert",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/bert.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Elmo",
@@ -639,9 +954,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Elmo",
+    "legal_folder_name": "elmo",
+    "local_folder": "papers/normalized/elmo",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/elmo.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Gdn",
@@ -653,9 +975,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Gdn",
+    "legal_folder_name": "gdn",
+    "local_folder": "papers/normalized/gdn",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gdn.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Language Models in Machine Translation",
@@ -667,9 +996,16 @@
     "organization": "Google",
     "date": "2007",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Trained 5-gram model on 2T tokens"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Trained 5-gram model on 2T tokens",
+    "canonical_title": "Language Models in Machine Translation",
+    "legal_folder_name": "language_models_in_machine_translation",
+    "local_folder": "papers/normalized/language_models_in_machine_translation",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "MTP",
@@ -681,9 +1017,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "MTP",
+    "legal_folder_name": "mtp",
+    "local_folder": "papers/normalized/mtp",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mtp.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Olmix",
@@ -695,9 +1038,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Olmix",
+    "legal_folder_name": "olmix",
+    "local_folder": "papers/normalized/olmix",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/olmix.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Pre Post Norm",
@@ -709,9 +1059,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Pre Post Norm",
+    "legal_folder_name": "pre_post_norm",
+    "local_folder": "papers/normalized/pre_post_norm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/pre_post_norm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Shazeer",
@@ -723,9 +1080,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Experiments with different activation functions | Activation functions: ReLU, GeLU, Swish | Apply idea of gated units (GLU): ReGLU, GeGLU, SwiGLU | FFN-SwiGLU = Swish(x W1) * xV W2 | Have 3 matrices now, so make hidden dimension 2/3 of the 2 matrix version"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Experiments with different activation functions | Activation functions: ReLU, GeLU, Swish | Apply idea of gated units (GLU): ReGLU, GeGLU, SwiGLU | FFN-SwiGLU = Swish(x W1) * xV W2 | Have 3 matrices now, so make hidden dimension 2/3 of the 2 matrix version",
+    "canonical_title": "Shazeer",
+    "legal_folder_name": "shazeer",
+    "local_folder": "papers/normalized/shazeer",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/shazeer.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "SMOLLM2",
@@ -737,9 +1101,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "1.7B parameter modelIntroduces FineMath, StackEdu"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "1.7B parameter modelIntroduces FineMath, StackEdu",
+    "canonical_title": "SMOLLM2",
+    "legal_folder_name": "smollm2",
+    "local_folder": "papers/normalized/smollm2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/smollm2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Tfree",
@@ -751,9 +1122,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "general",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Tfree",
+    "legal_folder_name": "tfree",
+    "local_folder": "papers/normalized/tfree",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/tfree.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "[Marin 32B retro]",
@@ -765,9 +1143,16 @@
     "organization": "Marin",
     "date": "2025",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "[Marin 32B retro]",
+    "legal_folder_name": "[marin_32b_retro]",
+    "local_folder": "papers/normalized/[marin_32b_retro]",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "[Marin 8B retro]",
@@ -779,9 +1164,16 @@
     "organization": "Marin",
     "date": "2025",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "[Marin 8B retro]",
+    "legal_folder_name": "[marin_8b_retro]",
+    "local_folder": "papers/normalized/[marin_8b_retro]",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek 67B",
@@ -793,9 +1185,16 @@
     "organization": "DeepSeek",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: DeepSeek, The Stack, Reddit, etc. (2T tokens) | Architecture: LLaMA, but: for GQA increased depth, 67B parameters | Scaling laws: used non-embedding FLOPs with IsoFLOP"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: DeepSeek, The Stack, Reddit, etc. (2T tokens) | Architecture: LLaMA, but: for GQA increased depth, 67B parameters | Scaling laws: used non-embedding FLOPs with IsoFLOP",
+    "canonical_title": "Deepseek 67B",
+    "legal_folder_name": "deepseek_67b",
+    "local_folder": "papers/normalized/deepseek_67b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_67b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek V3",
@@ -807,9 +1206,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Deepseek V3",
+    "legal_folder_name": "deepseek_v3",
+    "local_folder": "papers/normalized/deepseek_v3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_v3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Deepseek V3 2",
@@ -821,9 +1227,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Deepseek V3 2",
+    "legal_folder_name": "deepseek_v3_2",
+    "local_folder": "papers/normalized/deepseek_v3_2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/deepseek_v3_2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Gemma",
@@ -835,9 +1248,16 @@
     "organization": "Google DeepMind",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "6T tokens | MQA, RoPE, GeGLU, RMSNorm | Training: 4096 v4 TPUs, Use ZeRO-3 like techniques"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "6T tokens | MQA, RoPE, GeGLU, RMSNorm | Training: 4096 v4 TPUs, Use ZeRO-3 like techniques",
+    "canonical_title": "Gemma",
+    "legal_folder_name": "gemma",
+    "local_folder": "papers/normalized/gemma",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gemma.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GPT 3",
@@ -849,9 +1269,16 @@
     "organization": "OpenAI",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduces GPT-3 | Same as GPT-2, but alternating sparse and dense attention layers | 175B parameters | Data: 300B tokens"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduces GPT-3 | Same as GPT-2, but alternating sparse and dense attention layers | 175B parameters | Data: 300B tokens",
+    "canonical_title": "GPT 3",
+    "legal_folder_name": "gpt_3",
+    "local_folder": "papers/normalized/gpt_3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gpt_3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GPT Neox",
@@ -863,9 +1290,16 @@
     "organization": "EleutherAI",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: The Pile | 20B parameters | Use RoPE, parallel attention and feedforward layers (15% throughput increase) | hardware: 12x8 A100s"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: The Pile | 20B parameters | Use RoPE, parallel attention and feedforward layers (15% throughput increase) | hardware: 12x8 A100s",
+    "canonical_title": "GPT Neox",
+    "legal_folder_name": "gpt_neox",
+    "local_folder": "papers/normalized/gpt_neox",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gpt_neox.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "GPT-J",
@@ -877,9 +1311,16 @@
     "organization": "EleutherAI",
     "date": "2021-06-04",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "6.7B parameters | Attention and feedforward layers put in parallel | v3 256 TPUs (5.4 PFLOPs) for 5 weeks"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "6.7B parameters | Attention and feedforward layers put in parallel | v3 256 TPUs (5.4 PFLOPs) for 5 weeks",
+    "canonical_title": "GPT-J",
+    "legal_folder_name": "gpt_j",
+    "local_folder": "papers/normalized/gpt_j",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Huanyuan Large",
@@ -891,9 +1332,16 @@
     "organization": "Tencent",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Huanyuan Large",
+    "legal_folder_name": "huanyuan_large",
+    "local_folder": "papers/normalized/huanyuan_large",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/huanyuan_large.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Language Models are Unsupervised Multitask Learners",
@@ -905,9 +1353,16 @@
     "organization": "OpenAI",
     "date": "2019-02-14",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "1.5B parameters | Pioneered stage release"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "1.5B parameters | Pioneered stage release",
+    "canonical_title": "Language Models are Unsupervised Multitask Learners",
+    "legal_folder_name": "language_models_are_unsupervised_multitask_learners",
+    "local_folder": "papers/normalized/language_models_are_unsupervised_multitask_learners",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "LLAMA",
@@ -919,9 +1374,16 @@
     "organization": "Meta",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Train only on open data (detailed recipe that is replicated by RedPajama) | Optimize for fast inference at 7B | Data: CommonCrawl, C4, GitHub, Wikipedia, Books, ArXiv, StackExchange | Architecture: Pre-norm, SwiGLU, RoPE | Training: 2048 A100 80GB for 21 days"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Train only on open data (detailed recipe that is replicated by RedPajama) | Optimize for fast inference at 7B | Data: CommonCrawl, C4, GitHub, Wikipedia, Books, ArXiv, StackExchange | Architecture: Pre-norm, SwiGLU, RoPE | Training: 2048 A100 80GB for 21 days",
+    "canonical_title": "LLAMA",
+    "legal_folder_name": "llama",
+    "local_folder": "papers/normalized/llama",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/llama.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Llama 4",
@@ -933,9 +1395,16 @@
     "organization": "Meta",
     "date": "2025-04-05",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Llama 4",
+    "legal_folder_name": "llama_4",
+    "local_folder": "papers/normalized/llama_4",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "LLAMA2",
@@ -947,9 +1416,16 @@
     "organization": "Meta",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "2T tokens70B parameters"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "2T tokens70B parameters",
+    "canonical_title": "LLAMA2",
+    "legal_folder_name": "llama2",
+    "local_folder": "papers/normalized/llama2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/llama2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "LLAMA3",
@@ -961,9 +1437,16 @@
     "organization": "Meta",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "15T tokens | 405B parameters"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "15T tokens | 405B parameters",
+    "canonical_title": "LLAMA3",
+    "legal_folder_name": "llama3",
+    "local_folder": "papers/normalized/llama3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/llama3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Minicpm",
@@ -975,9 +1458,16 @@
     "organization": "Tsinghua",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Minicpm",
+    "legal_folder_name": "minicpm",
+    "local_folder": "papers/normalized/minicpm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/minicpm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "OLMo 2 (32B)",
@@ -989,9 +1479,16 @@
     "organization": "AI2",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "OLMo 2 (32B)",
+    "legal_folder_name": "olmo_2_(32b)",
+    "local_folder": "papers/normalized/olmo_2_(32b)",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "OLMO 3",
@@ -1003,9 +1500,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "OLMO 3",
+    "legal_folder_name": "olmo_3",
+    "local_folder": "papers/normalized/olmo_3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/olmo_3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "OLMO 7B",
@@ -1017,9 +1521,16 @@
     "organization": "AI2",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: subset of Dolma (2.46T tokens, CommonCrawl, The Stack, Reddit, etc.) | Architecture: no biases, non-parametric layer norm, SwiGLU (8/3 d increased to closest multiple of 128) | Training: 256x4 AMD MI250X on LUMI supercomputer, 27x8 A100s, 800Gbps interconnect"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: subset of Dolma (2.46T tokens, CommonCrawl, The Stack, Reddit, etc.) | Architecture: no biases, non-parametric layer norm, SwiGLU (8/3 d increased to closest multiple of 128) | Training: 256x4 AMD MI250X on LUMI supercomputer, 27x8 A100s, 800Gbps interconnect",
+    "canonical_title": "OLMO 7B",
+    "legal_folder_name": "olmo_7b",
+    "local_folder": "papers/normalized/olmo_7b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/olmo_7b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "OLMO2",
@@ -1031,9 +1542,16 @@
     "organization": "AI2",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "OLMO2",
+    "legal_folder_name": "olmo2",
+    "local_folder": "papers/normalized/olmo2",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/olmo2.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "QWEN 2 5",
@@ -1045,9 +1563,16 @@
     "organization": "Alibaba",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "QWEN 2 5",
+    "legal_folder_name": "qwen_2_5",
+    "local_folder": "papers/normalized/qwen_2_5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/qwen_2_5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Yi 34B",
@@ -1059,9 +1584,16 @@
     "organization": "01.AI",
     "date": "",
     "topic_hint": "model-recipes-open-models",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Yi 34B",
+    "legal_folder_name": "yi_34b",
+    "local_folder": "papers/normalized/yi_34b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/yi_34b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Adagrad",
@@ -1073,9 +1605,16 @@
     "organization": "",
     "date": "2011",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Adagrad",
+    "legal_folder_name": "adagrad",
+    "local_folder": "papers/normalized/adagrad",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "ADAM2014",
@@ -1087,9 +1626,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced Adam optimizer based on RMSProp and momentum"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced Adam optimizer based on RMSProp and momentum",
+    "canonical_title": "ADAM2014",
+    "legal_folder_name": "adam2014",
+    "local_folder": "papers/normalized/adam2014",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/adam2014.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "ADAMW2017",
@@ -1101,9 +1647,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Improves Adam by decoupling weight decay"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Improves Adam by decoupling weight decay",
+    "canonical_title": "ADAMW2017",
+    "legal_folder_name": "adamw2017",
+    "local_folder": "papers/normalized/adamw2017",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/adamw2017.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Chinchilla",
@@ -1115,9 +1668,16 @@
     "organization": "DeepMind",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced the rigorous analysis scaling laws for language models | Key improvement over Kaplan: tune learning rate for the compute budget | Approach 1: for each model size, train with 4 learning rates, vary number of training tokens, fit lower envelope | Approach 2 (IsoFLOP): for each model size, train with 9 training budgets, take last point | Approach 3: fit parametric function L(N, D) = E + A/N^alpha + B/D^beta to data collected from approaches 1 and 2 | Conclusion: model and data should scale up at same rate | Table 3: extrapolate to 10 trillion parameters | MassiveText, different data distribution (1.5 trillion tokens) | 70B parameters"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced the rigorous analysis scaling laws for language models | Key improvement over Kaplan: tune learning rate for the compute budget | Approach 1: for each model size, train with 4 learning rates, vary number of training tokens, fit lower envelope | Approach 2 (IsoFLOP): for each model size, train with 9 training budgets, take last point | Approach 3: fit parametric function L(N, D) = E + A/N^alpha + B/D^beta to data collected from approaches 1 and 2 | Conclusion: model and data should scale up at same rate | Table 3: extrapolate to 10 trillion parameters | MassiveText, different data distribution (1.5 trillion tokens) | 70B parameters",
+    "canonical_title": "Chinchilla",
+    "legal_folder_name": "chinchilla",
+    "local_folder": "papers/normalized/chinchilla",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/chinchilla.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Cosine Learning Rate",
@@ -1129,9 +1689,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Cosine Learning Rate",
+    "legal_folder_name": "cosine_learning_rate",
+    "local_folder": "papers/normalized/cosine_learning_rate",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/cosine_learning_rate.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Kaplan Scaling Laws",
@@ -1143,9 +1710,16 @@
     "organization": "OpenAI",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Vary model size, dataset size, compute; get power laws | Larger models require fewer tokens"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Vary model size, dataset size, compute; get power laws | Larger models require fewer tokens",
+    "canonical_title": "Kaplan Scaling Laws",
+    "legal_folder_name": "kaplan_scaling_laws",
+    "local_folder": "papers/normalized/kaplan_scaling_laws",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/kaplan_scaling_laws.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Large Batch Training",
@@ -1157,9 +1731,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced critical batch size"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced critical batch size",
+    "canonical_title": "Large Batch Training",
+    "legal_folder_name": "large_batch_training",
+    "local_folder": "papers/normalized/large_batch_training",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/large_batch_training.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Muon: An optimizer for hidden layers in neural networks",
@@ -1171,9 +1752,16 @@
     "organization": "",
     "date": "2024-12-08",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Muon: An optimizer for hidden layers in neural networks",
+    "legal_folder_name": "muon_an_optimizer_for_hidden_layers_in_neural_networks",
+    "local_folder": "papers/normalized/muon_an_optimizer_for_hidden_layers_in_neural_networks",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "MUP",
@@ -1185,9 +1773,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "MUP",
+    "legal_folder_name": "mup",
+    "local_folder": "papers/normalized/mup",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/mup.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Overtrained Scaling Laws",
@@ -1199,9 +1794,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Chinchilla scaling laws focus on loss of the trained model, ignoring inference costs. | Constant ratio of training tokens to parameters | Extrapolate over 300x training compute to 1.4B model on 900B tokens | Look at task performance rather than validation loss"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Chinchilla scaling laws focus on loss of the trained model, ignoring inference costs. | Constant ratio of training tokens to parameters | Extrapolate over 300x training compute to 1.4B model on 900B tokens | Look at task performance rather than validation loss",
+    "canonical_title": "Overtrained Scaling Laws",
+    "legal_folder_name": "overtrained_scaling_laws",
+    "local_folder": "papers/normalized/overtrained_scaling_laws",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/overtrained_scaling_laws.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Soap",
@@ -1213,9 +1815,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Soap",
+    "legal_folder_name": "soap",
+    "local_folder": "papers/normalized/soap",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/soap.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Understanding the difficulty of training deep feedforward neural networks",
@@ -1227,9 +1836,16 @@
     "organization": "",
     "date": "2010-03-01",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Understanding the difficulty of training deep feedforward neural networks",
+    "legal_folder_name": "understanding_the_difficulty_of_training_deep_feedforward_neural_networks",
+    "local_folder": "papers/normalized/understanding_the_difficulty_of_training_deep_feedforward_neural_networks",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Wrap",
@@ -1241,9 +1857,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "optimization-scaling",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Wrap",
+    "legal_folder_name": "wrap",
+    "local_folder": "papers/normalized/wrap",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/wrap.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Bloom",
@@ -1255,9 +1878,16 @@
     "organization": "BigScience",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Model: BLOOM (176B parameters) | Data: ROOTS | Hardware: 48x8 A100s on Jean Zay supercomputer for 3.5 months | ZeRO stage 1"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Model: BLOOM (176B parameters) | Data: ROOTS | Hardware: 48x8 A100s on Jean Zay supercomputer for 3.5 months | ZeRO stage 1",
+    "canonical_title": "Bloom",
+    "legal_folder_name": "bloom",
+    "local_folder": "papers/normalized/bloom",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/bloom.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
@@ -1269,9 +1899,16 @@
     "organization": "",
     "date": "2023",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Strongly recommended extra because CS336 Assignment 2 explicitly asks students to optimize attention with their own Triton implementation of FlashAttention2."
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Strongly recommended extra because CS336 Assignment 2 explicitly asks students to optimize attention with their own Triton implementation of FlashAttention2.",
+    "canonical_title": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning",
+    "legal_folder_name": "flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning",
+    "local_folder": "papers/normalized/flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
@@ -1283,9 +1920,16 @@
     "organization": "",
     "date": "2022",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Strongly recommended extra because CS336 Assignment 2 explicitly asks students to optimize attention with their own Triton implementation of FlashAttention2."
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Strongly recommended extra because CS336 Assignment 2 explicitly asks students to optimize attention with their own Triton implementation of FlashAttention2.",
+    "canonical_title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "legal_folder_name": "flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness",
+    "local_folder": "papers/normalized/flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Gpipe",
@@ -1297,9 +1941,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Gpipe",
+    "legal_folder_name": "gpipe",
+    "local_folder": "papers/normalized/gpipe",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/gpipe.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Longcat Flash",
@@ -1311,9 +1962,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Longcat Flash",
+    "legal_folder_name": "longcat_flash",
+    "local_folder": "papers/normalized/longcat_flash",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/longcat_flash.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Megascale",
@@ -1325,9 +1983,16 @@
     "organization": "Bytedance",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "55.2% MFU for 175B parameter model over 12,288 GPUs | Combine data, tensor, pipeline, sequence parallelism | Parallelize attention and feedforward layers, sliding window attention, LAMB optimizer"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "55.2% MFU for 175B parameter model over 12,288 GPUs | Combine data, tensor, pipeline, sequence parallelism | Parallelize attention and feedforward layers, sliding window attention, LAMB optimizer",
+    "canonical_title": "Megascale",
+    "legal_folder_name": "megascale",
+    "local_folder": "papers/normalized/megascale",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/megascale.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Megatron Lm",
@@ -1339,9 +2004,16 @@
     "organization": "NVIDIA",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Megatron Lm",
+    "legal_folder_name": "megatron_lm",
+    "local_folder": "papers/normalized/megatron_lm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/megatron_lm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Megatron Parallelism",
@@ -1353,9 +2025,16 @@
     "organization": "NVIDIA",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Compose tensor, pipeline, data parallelism | Achieve 52% MFU on 1T parameter model on 3072 GPUs"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Compose tensor, pipeline, data parallelism | Achieve 52% MFU on 1T parameter model on 3072 GPUs",
+    "canonical_title": "Megatron Parallelism",
+    "legal_folder_name": "megatron_parallelism",
+    "local_folder": "papers/normalized/megatron_parallelism",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/megatron_parallelism.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Nemotron 15B",
@@ -1367,9 +2046,16 @@
     "organization": "NVIDIA",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: 8T tokens, 70% English, 15% multilingual, 15% code | Architecture: RoPE, squared ReLU activations, no bias, no dropout, GQA (15B parameters) | Training: 384x8 H100s, After 8T tokens, train on higher quality sources + benchmark tasks"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: 8T tokens, 70% English, 15% multilingual, 15% code | Architecture: RoPE, squared ReLU activations, no bias, no dropout, GQA (15B parameters) | Training: 384x8 H100s, After 8T tokens, train on higher quality sources + benchmark tasks",
+    "canonical_title": "Nemotron 15B",
+    "legal_folder_name": "nemotron_15b",
+    "local_folder": "papers/normalized/nemotron_15b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/nemotron_15b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Nemotron 3",
@@ -1381,9 +2067,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Nemotron 3",
+    "legal_folder_name": "nemotron_3",
+    "local_folder": "papers/normalized/nemotron_3",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/nemotron_3.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
@@ -1395,9 +2088,16 @@
     "organization": "NVIDIA",
     "date": "2026-03-11",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning",
+    "legal_folder_name": "nemotron_3_super_open,_efficient_mixture_of_experts_hybrid_mamba_transformer_model_for_agentic_reasoning",
+    "local_folder": "papers/normalized/nemotron_3_super_open,_efficient_mixture_of_experts_hybrid_mamba_transformer_model_for_agentic_reasoning",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Nemotron Cc",
@@ -1409,9 +2109,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Nemotron Cc",
+    "legal_folder_name": "nemotron_cc",
+    "local_folder": "papers/normalized/nemotron_cc",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/nemotron_cc.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Opt 175B",
@@ -1423,9 +2130,16 @@
     "organization": "Meta",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: The Pile, PushShift.io Reddit, deduplication | 175B parameters | hardware: 992 A100 80GB for 2 months, lots of hardware failures | FSDP with Megatron-LM, fp16 with loss scaling"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: The Pile, PushShift.io Reddit, deduplication | 175B parameters | hardware: 992 A100 80GB for 2 months, lots of hardware failures | FSDP with Megatron-LM, fp16 with loss scaling",
+    "canonical_title": "Opt 175B",
+    "legal_folder_name": "opt_175b",
+    "local_folder": "papers/normalized/opt_175b",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/opt_175b.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Palm",
@@ -1437,9 +2151,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Data: Social media conversations, webpages, books, GitHub, Wikipedia, news | 540B parameters | SwiGLU, parallelize attention and feedforward layers, multi-query attention, RoPE, remove biases | hardware: 6144 TPUv4, 46.2% MFU | optimizer: Adafactor without factorization | Introduced the term model FLOPs utilization (MFU) metric (observed tokens/sec / theoretical max tokens/sec)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Data: Social media conversations, webpages, books, GitHub, Wikipedia, news | 540B parameters | SwiGLU, parallelize attention and feedforward layers, multi-query attention, RoPE, remove biases | hardware: 6144 TPUv4, 46.2% MFU | optimizer: Adafactor without factorization | Introduced the term model FLOPs utilization (MFU) metric (observed tokens/sec / theoretical max tokens/sec)",
+    "canonical_title": "Palm",
+    "legal_folder_name": "palm",
+    "local_folder": "papers/normalized/palm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/palm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations",
@@ -1451,9 +2172,16 @@
     "organization": "",
     "date": "2019",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Recommended extra for the kernels/Triton lecture block."
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Recommended extra for the kernels/Triton lecture block.",
+    "canonical_title": "Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations",
+    "legal_folder_name": "triton_an_intermediate_language_and_compiler_for_tiled_neural_network_computations",
+    "local_folder": "papers/normalized/triton_an_intermediate_language_and_compiler_for_tiled_neural_network_computations",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Zero",
@@ -1465,9 +2193,16 @@
     "organization": "Microsoft",
     "date": "",
     "topic_hint": "systems-parallelism",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Introduced ZeRO optimizer, can train 100B parameter model over 400 GPUs"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Introduced ZeRO optimizer, can train 100B parameter model over 400 GPUs",
+    "canonical_title": "Zero",
+    "legal_folder_name": "zero",
+    "local_folder": "papers/normalized/zero",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/zero.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "BLT",
@@ -1479,9 +2214,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "BLT",
+    "legal_folder_name": "blt",
+    "local_folder": "papers/normalized/blt",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/blt.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "BYT5",
@@ -1493,9 +2235,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "BYT5",
+    "legal_folder_name": "byt5",
+    "local_folder": "papers/normalized/byt5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/byt5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "DCLM",
@@ -1507,9 +2256,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "DCLM",
+    "legal_folder_name": "dclm",
+    "local_folder": "papers/normalized/dclm",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/dclm.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Dolma",
@@ -1521,9 +2277,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Dolma",
+    "legal_folder_name": "dolma",
+    "local_folder": "papers/normalized/dolma",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/dolma.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Megabyte",
@@ -1535,9 +2298,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Megabyte",
+    "legal_folder_name": "megabyte",
+    "local_folder": "papers/normalized/megabyte",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/megabyte.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "OpenWebText",
@@ -1549,9 +2319,16 @@
     "organization": "",
     "date": "2019",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "OpenWebText",
+    "legal_folder_name": "openwebtext",
+    "local_folder": "papers/normalized/openwebtext",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Prediction and Entropy of Printed English",
@@ -1563,9 +2340,16 @@
     "organization": "",
     "date": "1950-09-15",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Prediction and Entropy of Printed English",
+    "legal_folder_name": "prediction_and_entropy_of_printed_english",
+    "local_folder": "papers/normalized/prediction_and_entropy_of_printed_english",
+    "source_status": "pdf_only",
+    "merged_tex_path": "",
+    "source_type": "pdf_only",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Regmix",
@@ -1577,9 +2361,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": false,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "False",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Regmix",
+    "legal_folder_name": "regmix",
+    "local_folder": "papers/normalized/regmix",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/regmix.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "Sennrich",
@@ -1591,9 +2382,16 @@
     "organization": "",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": ""
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "",
+    "canonical_title": "Sennrich",
+    "legal_folder_name": "sennrich",
+    "local_folder": "papers/normalized/sennrich",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/sennrich.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "T5",
@@ -1605,9 +2403,16 @@
     "organization": "Google",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "Encoder-decoder, frames tasks as text-to-text | Introduced Colossal Cleaned Common Crawl (C4) | Filtering (Section 2.2) | 11B parameters | Remove bias from feedforward layers"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "Encoder-decoder, frames tasks as text-to-text | Introduced Colossal Cleaned Common Crawl (C4) | Filtering (Section 2.2) | 11B parameters | Remove bias from feedforward layers",
+    "canonical_title": "T5",
+    "legal_folder_name": "t5",
+    "local_folder": "papers/normalized/t5",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/t5.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   },
   {
     "display_title": "The Pile",
@@ -1619,8 +2424,15 @@
     "organization": "EleutherAI",
     "date": "",
     "topic_hint": "tokenization-data",
-    "in_cs336_2025": true,
-    "in_cs336_2026": true,
-    "notes": "825GB text, 22 diverse subsets (CommonCrawl, PubMed, ArXiv, GitHub, StackExchange, USPTO, OpenWebText2, Books3, etc.)"
+    "in_cs336_2025": "True",
+    "in_cs336_2026": "True",
+    "notes": "825GB text, 22 diverse subsets (CommonCrawl, PubMed, ArXiv, GitHub, StackExchange, USPTO, OpenWebText2, Books3, etc.)",
+    "canonical_title": "The Pile",
+    "legal_folder_name": "the_pile",
+    "local_folder": "papers/normalized/the_pile",
+    "source_status": "success",
+    "merged_tex_path": "papers/merged_tex/the_pile.tex",
+    "source_type": "tex_source",
+    "used_local_archive": "false"
   }
 ]

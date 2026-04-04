@@ -1,0 +1,556 @@
+{
+  "llama3": {
+    "status": "success",
+    "main_tex": "papers/normalized/llama3/paper.tex",
+    "merged_path": "papers/merged_tex/llama3.tex"
+  },
+  "lima": {
+    "status": "success",
+    "main_tex": "papers/normalized/lima/main.tex",
+    "merged_path": "papers/merged_tex/lima.tex"
+  },
+  "kimi_1_5": {
+    "status": "success",
+    "main_tex": "papers/normalized/kimi_1_5/template.tex",
+    "merged_path": "papers/merged_tex/kimi_1_5.tex"
+  },
+  "glm_5": {
+    "status": "success",
+    "main_tex": "papers/normalized/glm_5/0_main.tex",
+    "merged_path": "papers/merged_tex/glm_5.tex"
+  },
+  "deepseek_v3_2": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_v3_2/main.tex",
+    "merged_path": "papers/merged_tex/deepseek_v3_2.tex"
+  },
+  "olmo_2_(32b)": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/olmo_2_(32b)/olmo_2_32b.pdf"
+  },
+  "chinchilla": {
+    "status": "success",
+    "main_tex": "papers/normalized/chinchilla/main.tex",
+    "merged_path": "papers/merged_tex/chinchilla.tex"
+  },
+  "llama2": {
+    "status": "success",
+    "main_tex": "papers/normalized/llama2/templateArxiv.tex",
+    "merged_path": "papers/merged_tex/llama2.tex"
+  },
+  "gemma": {
+    "status": "success",
+    "main_tex": "papers/normalized/gemma/main.tex",
+    "merged_path": "papers/merged_tex/gemma.tex"
+  },
+  "qk_norm": {
+    "status": "success",
+    "main_tex": "papers/normalized/qk_norm/main.tex",
+    "merged_path": "papers/merged_tex/qk_norm.tex"
+  },
+  "nemotron_3_super_open,_efficient_mixture_of_experts_hybrid_mamba_transformer_model_for_agentic_reasoning": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/nemotron_3_super_open,_efficient_mixture_of_experts_hybrid_mamba_transformer_model_for_agentic_reasoning/nemotron_3_super_open_efficient_mixture-of-experts_hybrid_mamba-transformer_mode.pdf"
+  },
+  "long_short_term_memory": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/long_short_term_memory/long_short-term_memory.pdf"
+  },
+  "olmo2": {
+    "status": "success",
+    "main_tex": "papers/normalized/olmo2/neurips_2023.tex",
+    "merged_path": "papers/merged_tex/olmo2.tex"
+  },
+  "nemotron_cc": {
+    "status": "success",
+    "main_tex": "papers/normalized/nemotron_cc/main.tex",
+    "merged_path": "papers/merged_tex/nemotron_cc.tex"
+  },
+  "large_batch_training": {
+    "status": "success",
+    "main_tex": "papers/normalized/large_batch_training/main.tex",
+    "merged_path": "papers/merged_tex/large_batch_training.tex"
+  },
+  "gpt_neox": {
+    "status": "success",
+    "main_tex": "papers/normalized/gpt_neox/bs_workshop.tex",
+    "merged_path": "papers/merged_tex/gpt_neox.tex"
+  },
+  "megatron_parallelism": {
+    "status": "success",
+    "main_tex": "papers/normalized/megatron_parallelism/main.tex",
+    "merged_path": "papers/merged_tex/megatron_parallelism.tex"
+  },
+  "deepseek_math": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_math/main.tex",
+    "merged_path": "papers/merged_tex/deepseek_math.tex"
+  },
+  "mixtral": {
+    "status": "success",
+    "main_tex": "papers/normalized/mixtral/main.tex",
+    "merged_path": "papers/merged_tex/mixtral.tex"
+  },
+  "bahdanau2015_attention": {
+    "status": "success",
+    "main_tex": "papers/normalized/bahdanau2015_attention/search.tex",
+    "merged_path": "papers/merged_tex/bahdanau2015_attention.tex"
+  },
+  "megatron_lm": {
+    "status": "success",
+    "main_tex": "papers/normalized/megatron_lm/main.tex",
+    "merged_path": "papers/merged_tex/megatron_lm.tex"
+  },
+  "susketver2014": {
+    "status": "success",
+    "main_tex": "papers/normalized/susketver2014/nips2014.tex",
+    "merged_path": "papers/merged_tex/susketver2014.tex"
+  },
+  "[marin_8b_retro]": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/[marin_8b_retro]/marin_8b_retro.pdf"
+  },
+  "olmo_7b": {
+    "status": "success",
+    "main_tex": "papers/normalized/olmo_7b/acl2023.tex",
+    "merged_path": "papers/merged_tex/olmo_7b.tex"
+  },
+  "openwebtext": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/openwebtext/openwebtext.pdf"
+  },
+  "longcat_flash": {
+    "status": "success",
+    "main_tex": "papers/normalized/longcat_flash/longcat.tex",
+    "merged_path": "papers/merged_tex/longcat_flash.tex"
+  },
+  "mup": {
+    "status": "success",
+    "main_tex": "papers/normalized/mup/TP5.tex",
+    "merged_path": "papers/merged_tex/mup.tex"
+  },
+  "linear_attention": {
+    "status": "success",
+    "main_tex": "papers/normalized/linear_attention/arxiv.tex",
+    "merged_path": "papers/merged_tex/linear_attention.tex"
+  },
+  "prediction_and_entropy_of_printed_english": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/prediction_and_entropy_of_printed_english/prediction_and_entropy_of_printed_english.pdf"
+  },
+  "rms_norm": {
+    "status": "success",
+    "main_tex": "papers/normalized/rms_norm/paper.tex",
+    "merged_path": "papers/merged_tex/rms_norm.tex"
+  },
+  "transformer_math_101": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/transformer_math_101/transformer_math_101.pdf"
+  },
+  "instruct_gpt": {
+    "status": "success",
+    "main_tex": "papers/normalized/instruct_gpt/neurips_2021.tex",
+    "merged_path": "papers/merged_tex/instruct_gpt.tex"
+  },
+  "kaplan_scaling_laws": {
+    "status": "success",
+    "main_tex": "papers/normalized/kaplan_scaling_laws/main.tex",
+    "merged_path": "papers/merged_tex/kaplan_scaling_laws.tex"
+  },
+  "transformer": {
+    "status": "success",
+    "main_tex": "papers/normalized/transformer/ms.tex",
+    "merged_path": "papers/merged_tex/transformer.tex"
+  },
+  "muon_an_optimizer_for_hidden_layers_in_neural_networks": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/muon_an_optimizer_for_hidden_layers_in_neural_networks/muon_an_optimizer_for_hidden_layers_in_neural_networks.pdf"
+  },
+  "minicpm": {
+    "status": "success",
+    "main_tex": "papers/normalized/minicpm/colm2024_conference.tex",
+    "merged_path": "papers/merged_tex/minicpm.tex"
+  },
+  "language_models_are_unsupervised_multitask_learners": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/language_models_are_unsupervised_multitask_learners/language_models_are_unsupervised_multitask_learners.pdf"
+  },
+  "auxfree": {
+    "status": "success",
+    "main_tex": "papers/normalized/auxfree/iclr2024_conference.tex",
+    "merged_path": "papers/merged_tex/auxfree.tex"
+  },
+  "layernorm": {
+    "status": "success",
+    "main_tex": "papers/normalized/layernorm/ln_paper_arxiv.tex",
+    "merged_path": "papers/merged_tex/layernorm.tex"
+  },
+  "qwen3": {
+    "status": "success",
+    "main_tex": "papers/normalized/qwen3/colm2024_conference.tex",
+    "merged_path": "papers/merged_tex/qwen3.tex"
+  },
+  "llama_4": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/llama_4/llama_4.pdf"
+  },
+  "olmo_3": {
+    "status": "success",
+    "main_tex": "papers/normalized/olmo_3/neurips_2024.tex",
+    "merged_path": "papers/merged_tex/olmo_3.tex"
+  },
+  "huanyuan_large": {
+    "status": "success",
+    "main_tex": "papers/normalized/huanyuan_large/main.tex",
+    "merged_path": "papers/merged_tex/huanyuan_large.tex"
+  },
+  "alpaca": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/alpaca/alpaca.pdf"
+  },
+  "rope": {
+    "status": "success",
+    "main_tex": "papers/normalized/rope/roformer_arxiv.tex",
+    "merged_path": "papers/merged_tex/rope.tex"
+  },
+  "the_pile": {
+    "status": "success",
+    "main_tex": "papers/normalized/the_pile/the-pile.tex",
+    "merged_path": "papers/merged_tex/the_pile.tex"
+  },
+  "triton_an_intermediate_language_and_compiler_for_tiled_neural_network_computations": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/triton_an_intermediate_language_and_compiler_for_tiled_neural_network_computations/triton_an_intermediate_language_and_compiler_for_tiled_neural_network_computatio.pdf"
+  },
+  "t5": {
+    "status": "success",
+    "main_tex": "papers/normalized/t5/20-074.tex",
+    "merged_path": "papers/merged_tex/t5.tex"
+  },
+  "bloom": {
+    "status": "success",
+    "main_tex": "papers/normalized/bloom/main.tex",
+    "merged_path": "papers/merged_tex/bloom.tex"
+  },
+  "deepseek_r1": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_r1/sn-article.tex",
+    "merged_path": "papers/merged_tex/deepseek_r1.tex"
+  },
+  "soap": {
+    "status": "success",
+    "main_tex": "papers/normalized/soap/main.tex",
+    "merged_path": "papers/merged_tex/soap.tex"
+  },
+  "dpo": {
+    "status": "success",
+    "main_tex": "papers/normalized/dpo/main.tex",
+    "merged_path": "papers/merged_tex/dpo.tex"
+  },
+  "adagrad": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/adagrad/adagrad.pdf"
+  },
+  "[minimax_m2.5]": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/[minimax_m2.5]/minimax_m25.pdf"
+  },
+  "qwen_3_5": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/qwen_3_5/qwen_3_5.pdf"
+  },
+  "sparse_transformer": {
+    "status": "success",
+    "main_tex": "papers/normalized/sparse_transformer/sparse_transformers.tex",
+    "merged_path": "papers/merged_tex/sparse_transformer.tex"
+  },
+  "elmo": {
+    "status": "success",
+    "main_tex": "papers/normalized/elmo/deep_representations_bilm.tex",
+    "merged_path": "papers/merged_tex/elmo.tex"
+  },
+  "[marin_32b_retro]": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/[marin_32b_retro]/marin_32b_retro.pdf"
+  },
+  "gdn": {
+    "status": "success",
+    "main_tex": "papers/normalized/gdn/main.tex",
+    "merged_path": "papers/merged_tex/gdn.tex"
+  },
+  "dolma": {
+    "status": "success",
+    "main_tex": "papers/normalized/dolma/dolma.tex",
+    "merged_path": "papers/merged_tex/dolma.tex"
+  },
+  "understanding_the_difficulty_of_training_deep_feedforward_neural_networks": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/understanding_the_difficulty_of_training_deep_feedforward_neural_networks/understanding_the_difficulty_of_training_deep_feedforward_neural_networks.pdf"
+  },
+  "gpipe": {
+    "status": "success",
+    "main_tex": "papers/normalized/gpipe/main.tex",
+    "merged_path": "papers/merged_tex/gpipe.tex"
+  },
+  "deepseek_v2": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_v2/main.tex",
+    "merged_path": "papers/merged_tex/deepseek_v2.tex"
+  },
+  "switch_transformers": {
+    "status": "success",
+    "main_tex": "papers/normalized/switch_transformers/21-0998.tex",
+    "merged_path": "papers/merged_tex/switch_transformers.tex"
+  },
+  "adamw2017": {
+    "status": "success",
+    "main_tex": "papers/normalized/adamw2017/iclr2019_crc.tex",
+    "merged_path": "papers/merged_tex/adamw2017.tex"
+  },
+  "adam2014": {
+    "status": "success",
+    "main_tex": "papers/normalized/adam2014/arxiv.tex",
+    "merged_path": "papers/merged_tex/adam2014.tex"
+  },
+  "kimi_k2_5": {
+    "status": "success",
+    "main_tex": "papers/normalized/kimi_k2_5/template.tex",
+    "merged_path": "papers/merged_tex/kimi_k2_5.tex"
+  },
+  "wrap": {
+    "status": "success",
+    "main_tex": "papers/normalized/wrap/paper.tex",
+    "merged_path": "papers/merged_tex/wrap.tex"
+  },
+  "bert": {
+    "status": "success",
+    "main_tex": "papers/normalized/bert/main.tex",
+    "merged_path": "papers/merged_tex/bert.tex"
+  },
+  "regmix": {
+    "status": "success",
+    "main_tex": "papers/normalized/regmix/main.tex",
+    "merged_path": "papers/merged_tex/regmix.tex"
+  },
+  "olmix": {
+    "status": "success",
+    "main_tex": "papers/normalized/olmix/main.tex",
+    "merged_path": "papers/merged_tex/olmix.tex"
+  },
+  "zero": {
+    "status": "success",
+    "main_tex": "papers/normalized/zero/main.tex",
+    "merged_path": "papers/merged_tex/zero.tex"
+  },
+  "deepseek_v3": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_v3/main.tex",
+    "merged_path": "papers/merged_tex/deepseek_v3.tex"
+  },
+  "hnet": {
+    "status": "success",
+    "main_tex": "papers/normalized/hnet/main.tex",
+    "merged_path": "papers/merged_tex/hnet.tex"
+  },
+  "yi_34b": {
+    "status": "success",
+    "main_tex": "papers/normalized/yi_34b/techReport.tex",
+    "merged_path": "papers/merged_tex/yi_34b.tex"
+  },
+  "[xiaomi_mimo_v2]": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/[xiaomi_mimo_v2]/xiaomi_mimo_v2.pdf"
+  },
+  "mamba_2": {
+    "status": "success",
+    "main_tex": "papers/normalized/mamba_2/structure.tex",
+    "merged_path": "papers/merged_tex/mamba_2.tex"
+  },
+  "language_models_in_machine_translation": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/language_models_in_machine_translation/language_models_in_machine_translation.pdf"
+  },
+  "deepseek_67b": {
+    "status": "success",
+    "main_tex": "papers/normalized/deepseek_67b/main.tex",
+    "merged_path": "papers/merged_tex/deepseek_67b.tex"
+  },
+  "opt_175b": {
+    "status": "success",
+    "main_tex": "papers/normalized/opt_175b/main.tex",
+    "merged_path": "papers/merged_tex/opt_175b.tex"
+  },
+  "nemotron_3": {
+    "status": "success",
+    "main_tex": "papers/normalized/nemotron_3/main.tex",
+    "merged_path": "papers/merged_tex/nemotron_3.tex"
+  },
+  "glm_4_5": {
+    "status": "success",
+    "main_tex": "papers/normalized/glm_4_5/0_main.tex",
+    "merged_path": "papers/merged_tex/glm_4_5.tex"
+  },
+  "blt": {
+    "status": "success",
+    "main_tex": "papers/normalized/blt/paper.tex",
+    "merged_path": "papers/merged_tex/blt.tex"
+  },
+  "mamba_3": {
+    "status": "success",
+    "main_tex": "papers/normalized/mamba_3/structure.tex",
+    "merged_path": "papers/merged_tex/mamba_3.tex"
+  },
+  "byt5": {
+    "status": "success",
+    "main_tex": "papers/normalized/byt5/tacl2018v2.tex",
+    "merged_path": "papers/merged_tex/byt5.tex"
+  },
+  "qwen_2_5": {
+    "status": "success",
+    "main_tex": "papers/normalized/qwen_2_5/colm2024_conference.tex",
+    "merged_path": "papers/merged_tex/qwen_2_5.tex"
+  },
+  "longformer": {
+    "status": "success",
+    "main_tex": "papers/normalized/longformer/emnlp2020.tex",
+    "merged_path": "papers/merged_tex/longformer.tex"
+  },
+  "mmlu": {
+    "status": "success",
+    "main_tex": "papers/normalized/mmlu/main.tex",
+    "merged_path": "papers/merged_tex/mmlu.tex"
+  },
+  "a_neural_probabilistic_language_model": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/a_neural_probabilistic_language_model/a_neural_probabilistic_language_model.pdf"
+  },
+  "gqa": {
+    "status": "success",
+    "main_tex": "papers/normalized/gqa/main.tex",
+    "merged_path": "papers/merged_tex/gqa.tex"
+  },
+  "gpt4": {
+    "status": "success",
+    "main_tex": "papers/normalized/gpt4/main.tex",
+    "merged_path": "papers/merged_tex/gpt4.tex"
+  },
+  "mtp": {
+    "status": "success",
+    "main_tex": "papers/normalized/mtp/main.tex",
+    "merged_path": "papers/merged_tex/mtp.tex"
+  },
+  "megabyte": {
+    "status": "success",
+    "main_tex": "papers/normalized/megabyte/main.tex",
+    "merged_path": "papers/merged_tex/megabyte.tex"
+  },
+  "flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning": {
+    "status": "success",
+    "main_tex": "papers/normalized/flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning/_region_.tex",
+    "merged_path": "papers/merged_tex/flashattention_2_faster_attention_with_better_parallelism_and_work_partitioning.tex"
+  },
+  "nemotron_15b": {
+    "status": "success",
+    "main_tex": "papers/normalized/nemotron_15b/main.tex",
+    "merged_path": "papers/merged_tex/nemotron_15b.tex"
+  },
+  "tfree": {
+    "status": "success",
+    "main_tex": "papers/normalized/tfree/main.tex",
+    "merged_path": "papers/merged_tex/tfree.tex"
+  },
+  "shazeer": {
+    "status": "success",
+    "main_tex": "papers/normalized/shazeer/main.tex",
+    "merged_path": "papers/merged_tex/shazeer.tex"
+  },
+  "sennrich": {
+    "status": "success",
+    "main_tex": "papers/normalized/sennrich/subword.tex",
+    "merged_path": "papers/merged_tex/sennrich.tex"
+  },
+  "gopher": {
+    "status": "success",
+    "main_tex": "papers/normalized/gopher/main.tex",
+    "merged_path": "papers/merged_tex/gopher.tex"
+  },
+  "ling_2": {
+    "status": "success",
+    "main_tex": "papers/normalized/ling_2/main.tex",
+    "merged_path": "papers/merged_tex/ling_2.tex"
+  },
+  "gpt_j": {
+    "status": "pdf_only",
+    "pdf_file": "papers/normalized/gpt_j/gpt-j.pdf"
+  },
+  "megascale": {
+    "status": "success",
+    "main_tex": "papers/normalized/megascale/paper.tex",
+    "merged_path": "papers/merged_tex/megascale.tex"
+  },
+  "moe": {
+    "status": "success",
+    "main_tex": "papers/normalized/moe/main.tex",
+    "merged_path": "papers/merged_tex/moe.tex"
+  },
+  "gpt_3": {
+    "status": "success",
+    "main_tex": "papers/normalized/gpt_3/main.tex",
+    "merged_path": "papers/merged_tex/gpt_3.tex"
+  },
+  "overtrained_scaling_laws": {
+    "status": "success",
+    "main_tex": "papers/normalized/overtrained_scaling_laws/main.tex",
+    "merged_path": "papers/merged_tex/overtrained_scaling_laws.tex"
+  },
+  "ppo2017": {
+    "status": "success",
+    "main_tex": "papers/normalized/ppo2017/ppo-arxiv.tex",
+    "merged_path": "papers/merged_tex/ppo2017.tex"
+  },
+  "pre_post_norm": {
+    "status": "success",
+    "main_tex": "papers/normalized/pre_post_norm/example_paper.tex",
+    "merged_path": "papers/merged_tex/pre_post_norm.tex"
+  },
+  "mistral_7b": {
+    "status": "success",
+    "main_tex": "papers/normalized/mistral_7b/main.tex",
+    "merged_path": "papers/merged_tex/mistral_7b.tex"
+  },
+  "palm": {
+    "status": "success",
+    "main_tex": "papers/normalized/palm/main.tex",
+    "merged_path": "papers/merged_tex/palm.tex"
+  },
+  "llama": {
+    "status": "success",
+    "main_tex": "papers/normalized/llama/acl2023.tex",
+    "merged_path": "papers/merged_tex/llama.tex"
+  },
+  "smollm2": {
+    "status": "success",
+    "main_tex": "papers/normalized/smollm2/paper.tex",
+    "merged_path": "papers/merged_tex/smollm2.tex"
+  },
+  "flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness": {
+    "status": "success",
+    "main_tex": "papers/normalized/flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness/streaming_attention_neurips_2022.tex",
+    "merged_path": "papers/merged_tex/flashattention_fast_and_memory_efficient_exact_attention_with_io_awareness.tex"
+  },
+  "cosine_learning_rate": {
+    "status": "success",
+    "main_tex": "papers/normalized/cosine_learning_rate/iclr2017_conference.tex",
+    "merged_path": "papers/merged_tex/cosine_learning_rate.tex"
+  },
+  "dclm": {
+    "status": "success",
+    "main_tex": "papers/normalized/dclm/neurips_data_2024.tex",
+    "merged_path": "papers/merged_tex/dclm.tex"
+  },
+  "arcee_trinity": {
+    "status": "success",
+    "main_tex": "papers/normalized/arcee_trinity/main.tex",
+    "merged_path": "papers/merged_tex/arcee_trinity.tex"
+  }
+}

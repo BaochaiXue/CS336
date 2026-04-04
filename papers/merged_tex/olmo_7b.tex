@@ -1,0 +1,910 @@
+\pdfoutput=1
+
+\documentclass[11pt]{article}
+
+\usepackage[]{ACL2023}
+
+\usepackage{times}
+\usepackage{latexsym}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{microtype}
+
+\usepackage{inconsolata}
+
+\usepackage{xcolor}
+\usepackage{todonotes}
+\usepackage{xspace}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{cleveref}
+\usepackage{fdsymbol}
+\usepackage[normalem]{ulem}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{colortbl}
+\usepackage[inline]{enumitem}
+\usepackage{wrapfig}
+\usepackage{multirow}
+
+\usepackage{xcolor}
+\definecolor{olmocolor}{HTML}{60D2FB}
+
+\DeclareMathOperator{\sgn}{\mathrm{sgn}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\newcommand{\der}{\mathrm{d}}
+\newcommand{\dolma}{Dolma\xspace}
+\newcommand{\olmo}{OLMo\xspace}
+\newcommand{\model}{OLMo-7B\xspace}
+\newcommand{\modelsmall}{OLMo-1B\xspace}
+\newcommand{\tulu}{\textsc{T\"ulu}\xspace}
+\newcommand{\instructgpt}[1]{\text{Davinci}-{\text{#1}}}
+
+\newcommand{\huggingface}{\raisebox{-1.5pt}{\includegraphics[height=1.05em]{figures/hf-logo.pdf}}\xspace}
+\newcommand{\github}{\raisebox{-1.5pt}{\includegraphics[height=1.05em]{figures/github-logo.pdf}}\xspace}
+\newcommand{\wandb}{\raisebox{-1.5pt}{\includegraphics[height=1.05em]{figures/wandb-logo.png}}\xspace}
+\newcommand{\apache}{\raisebox{-1.5pt}{\includegraphics[height=1.05em]{figures/apache-logo.pdf}}\xspace}
+
+\newcommand{\olmoLogoWithText}{\raisebox{-.3em}{\rlap{\raisebox{.3em}{\hspace{1.4em}\scriptsize OLMo}}\includegraphics[height=1.5em]{figures/olmo_logo_bg.pdf}}\xspace}
+
+\newcommand{\note}[4][]{\todo[author=#2,color=#3,fancyline,caption={}]{#4}} 
+\newcommand{\petew}[2][]{\note[#1]{\texttt{petew}}{green!40}{#2}}
+\newcommand{\akshitab}[2][]{\note[#1]{\texttt{akshitab}}{orange!40}{#2}}
+\newcommand{\luca}[2][]{\note[#1]{\texttt{lucas}}{magenta!40}{#2}}
+\newcommand{\willm}[2][]{\note[#1]{\texttt{willm}}{blue!40}{#2}}
+\newcommand{\people}[2][]{\note[#1]{\texttt{assigning to}}{red!40}{#2}}
+\newcommand{\kyler}[2][]{\note[#1]{\texttt{kyler}}{green!40}{#2}}
+\newcommand{\kylel}[2][]{\note[#1]{\texttt{kylel}}{brown!40}{#2}}
+\newcommand{\jacobm}[2][]{\note[#1]{\texttt{jacobm}}{red!40}{#2}}
+\newcommand{\hanna}[2][]{\note[#1]{\texttt{Hanna}}{red!40}{#2}}
+\newcommand{\dirk}[2][]{\note[#1]{\texttt{Dirk}}{blue!40}{#2}}
+\newcommand{\iz}[2][]{\note[#1]{\texttt{Iz}}{teal!40}{#2}}
+\newcommand{\shanea}[2][]{\note[#1]{\texttt{shanea}}{green!40}{#2}}
+\newcommand{\jdcomment}[2][]{\note[#1]{\texttt{jesse}}{teal!40}{#2}}
+\newcommand{\jdinline}[1]{\textcolor{purple!40}{\textbf{Jesse: #1}}}
+\newcommand{\nascomment}[1]{\textcolor{blue!40}{\textbf{Noah: #1}}}
+\newcommand{\imcomment}[1]{\textcolor{orange!40}{\textbf{Ian: #1}}}
+\newcommand{\escomment}[1]{\textcolor{olive}{\textbf{Emma: #1}}}
+\newcommand{\izcomment}[1]{\textcolor{teal}{\textbf{Iz: #1}}}
+\newcommand{\ye}[1]{\textcolor{orange}{\textbf{Yanai: #1}}}
+\newcommand{\abhilasha}[1]{\textcolor{red}{\textbf{Abhilasha: #1}}}
+\newcommand{\hamishcomment}[1]{\textcolor{olive}{\textbf{Hamish: #1}}}
+\newcommand{\tkc}[1]{\textcolor{teal}{\textbf{Tushar: #1}}}
+\newcommand{\redd}[1]{\textcolor{red}{\textbf{#1}}}
+
+\definecolor{olmoDarkBlue}{HTML}{012e59}
+\definecolor{olmoBlue}{HTML}{265ed4}
+\definecolor{olmoLightBlue}{HTML}{012e59}
+\definecolor{olmoTeal}{HTML}{00d5ff}
+\definecolor{olmoYellow}{HTML}{ffbb00}
+\definecolor{olmoOrange}{HTML}{ff9100}
+
+\definecolor{tableGray}{HTML}{C0C0C0}
+\newcolumntype{g}{>{\columncolor{tableGray}}c}
+
+\newcommand{\balpha}{{\color{olmoBlue}\boldsymbol{\alpha}}}
+\newcommand{\bbeta}{{\color{olmoBlue}\boldsymbol{\beta}}}
+\newcommand{\bgamma}{{\color{olmoBlue}\boldsymbol{\gamma}}}
+\newcommand{\bdelta}{{\color{olmoBlue}\boldsymbol{\delta}}}
+\newcommand{\bmu}{{\color{olmoBlue}\boldsymbol{\mu}}}
+
+\setlength\titlebox{13cm}
+
+\title{\olmoLogoWithText~: Accelerating the Science of Language Models}
+
+\author{
+  {\bf
+    Dirk Groeneveld
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Iz Beltagy
+    \hspace{-0.5em}
+    $^{\balpha}$
+   \vspace{8pt}
+  } \\
+  {\bf
+    Pete Walsh
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Akshita Bhagia
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Rodney Kinney
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Oyvind Tafjord
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{8pt}
+  } \\
+  {\bf
+    Ananya Harsh Jha
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Hamish Ivison
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \enskip
+    Ian Magnusson
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Yizhong Wang
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \vspace{8pt}
+  } \\
+  {\bf
+    Shane Arora
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    David Atkinson
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Russell Authur
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Khyathi Raghavi Chandu
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    Arman Cohan
+    \hspace{-0.5em}
+    $^{\bgamma}$$^{\balpha}$
+    \enskip
+    Jennifer Dumas
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Yanai Elazar
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \enskip
+    Yuling Gu
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    Jack Hessel
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Tushar Khot
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    William Merrill
+    \hspace{-0.5em}
+    $^{\bdelta}$
+    \enskip
+    Jacob Morrison
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    \vspace{1.5pt}
+    Niklas Muennighoff
+    \hspace{-0.5em}
+    $ $
+    \enskip
+    Aakanksha Naik
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Crystal Nam
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Matthew E. Peters
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    Valentina Pyatkin
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \enskip
+    Abhilasha Ravichander
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Dustin Schwenk
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Saurabh Shah
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    Will Smith
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Emma Strubell
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bmu}$
+    \enskip
+    Nishant Subramani
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Mitchell Wortsman
+    \hspace{-0.5em}
+    $^{\bbeta}$
+    \vspace{8pt}   
+  } \\
+  {\bf
+    Pradeep Dasigi
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Nathan Lambert 
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Kyle Richardson 
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{1.5pt}
+  } \\
+  {\bf
+    Luke Zettlemoyer
+    \hspace{-0.5em}
+    $^{\bbeta}$
+    Jesse Dodge
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Kyle Lo
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \enskip
+    Luca Soldaini
+    \hspace{-0.5em}
+    $^{\balpha}$
+    \vspace{8pt}   
+  } \\
+  {\bf
+    Noah A. Smith
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \enskip
+    Hannaneh Hajishirzi
+    \hspace{-0.5em}
+    $^{\balpha}$$^{\bbeta}$
+    \vspace{8pt}
+  } \\
+  {
+    $^{\balpha}$Allen Institute for Artificial Intelligence
+   } \\
+   {
+    $^{\bbeta}$University of Washington \quad
+    $^{\bgamma}$Yale University
+  } \\
+  {
+    $^{\bdelta}$New York University \quad
+    $^{\bmu}$Carnegie Mellon University
+  }\vspace{8pt}\\
+  \texttt{olmo@allenai.org}
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Language models (LMs) have become ubiquitous in both NLP research and in commercial product offerings.
+As their commercial importance has surged, the most powerful models have become closed off, gated behind proprietary interfaces, with important details of their training data, architectures, and development undisclosed. 
+Given the importance of these details in scientifically studying these models, including their biases and potential risks, we believe it is essential for the research community to have access to powerful, truly open LMs.
+To this end, we have built  \olmo, a competitive, truly \textbf{O}pen \textbf{L}anguage \textbf{Mo}del, to enable the scientific study of language models.
+Unlike most prior efforts that have only released model weights and inference code, we release \olmo alongside open training data and training and evaluation code. We hope this release will empower
+the open research community and inspire a new wave of innovation.
+\end{abstract}
+
+\section{Introduction}
+
+Language models have been at the center of NLP technologies for many years \citep{rosenfeld2000two,Bengio2003ANP,Mikolov2013DistributedRO,Peters2018DeepCW,Brown2020LanguageMA}.
+Recently, due to large-scale pretraining and human annotation for alignment, they have become commercially valuable \citep{OpenAI2023GPT4TR}.
+However, as their commercial value has increased, the largest models have become gated behind proprietary interfaces, with important details left undisclosed.
+
+We believe that full access to open language models for the research community is critical to the scientific study of these models, their strengths and weaknesses, and their biases and risks.
+Accordingly, we introduce  \textbf{\olmo}, a powerful, truly open language model alongside open training data, training and evaluation code, intermediate model checkpoints, and training logs.  
+
+Recent LM releases have varied in their degree of openness. For example, Mixtral 8x7B provided model weights and a brief report~\citep{jiang2024mixtral},
+while LLaMA came with in-depth adaptation training instructions~\citep{touvron2023llama2}, and Mosaic Pretrained Transformer came with many details, including the dataset distribution, though not the data itself~\citep{MosaicML2023Introducing}.  Falcon's pretraining data was partially released~\citep{Falcon},
+and the most open models---the Pythia suite~\citep{pmlr-v202-biderman23a} and BLOOM~\citep{workshop2022bloom}---released training code, model checkpoints, 
+data, 
+and more.  
+
+\begin{table*}[t]
+    \centering
+    \begin{tabular}{c|cccc|ccccc}
+        \toprule
+        \textbf{Size} & \textbf{L} & \textbf{D} & \textbf{H} & \textbf{Tokens} & \textbf{Peak LR} & \textbf{Warmup} & \textbf{Weight Tying} & \textbf{Batch size} \\
+        \hline
+        1B & 16 & 2048 & 16 & 2T & \texttt{4.0E-4} & 2000 steps & yes & $\sim$4M \\
+        7B & 32 & 4086 & 32 & 2.46T & \texttt{3.0E-4} & 5000 steps & no & $\sim$4M \\
+        \bottomrule
+    \end{tabular}
+    \caption{\olmo model sizes, number of training tokens, and optimizer settings. In all runs, the optimizer was AdamW, with betas of $0.9$ and $0.95$, and an epsilon of \texttt{1.0E-5}.
+    \textbf{L} is number of layers, \textbf{D} is hidden dimension, \textbf{H} is number of attention heads, \textbf{WD} is weight decay. 
+    }
+    \label{tab:model_size_and_optimizer}
+\end{table*}
+
+With \olmo, we release the whole framework from data to training to evaluation tools: multiple training checkpoints across multiple hardware types, training logs, and exact datasets used, with a permissive license.
+We are not the only team to do this; recent work from LLM360 targets similar goals~\citep{liu2023llm360}.
+\olmo~narrows the gap from their models to state-of-the-art capabilities of models like Llama 2. This project has benefited from lessons learned from all of these previous efforts with their varying degrees of openness, and we believe that a large, diverse population of open models is the best hope for scientific progress on understanding language models and engineering progress on improving their utility.
+
+The \olmo framework encompasses the tools and resources required for building and researching language models. For training and modeling, it includes 
+full model weights, training code, 
+training logs, and inference code. The released model includes four variants of our language model at the 7B scale corresponding to different architectures, optimizers, and training hardware, and one model at the 1B scale, all trained on at least 2T tokens. We also release hundreds of intermediate checkpoints available as revisions on HuggingFace.
+For dataset building and analysis, the full training data used for these models is openly available (Dolma; \citealp{dolma}), including code that produces the training data, and tools for analyzing pretraining data  \citep{wimbd}. 
+For evaluation, we build on Catwalk~\citep{groeneveld2023catwalk} for downstream evaluation and Paloma~\citep{magnusson2023paloma} for perplexity-based evaluation.
+For adaptation, we use Open Instruct~\citep{ivison2023camels,wang2023far} to train with instruction and feedback data. 
+Finally, all code and weights are released under the Apache 2.0 License.\footnote{\url{https://allenai.org/olmo}}
+
+With this release, we hope to catalyze research into as-yet poorly understood aspects of these models, for example, the relationship between pretraining data and model capabilities, the impact of design and hyperparameter choices, and various optimization methods and their impact on model training. In addition, we report on the lessons learned and important details necessary to successfully train language models at this scale.
+
+\section{\olmo Framework}
+This section describes the \olmo~framework, consisting of the \olmo models (Section~\ref{sec:olmo-arch}), our pre-training dataset, \dolma (Section~\ref{sec:pretraining-data}), and our evaluation framework (Section~\ref{sec:evaluation}). 
+
+\subsection{\olmo~Model and Architecture}\label{sec:olmo-arch}
+
+We adopt a decoder-only transformer architecture based on \cite{vaswani2017attention},
+and deliver 1B and 7B variants as described in Table \ref{tab:model_size_and_optimizer}.
+Our specific architecture includes several improvements over the vanilla transformer from \cite{vaswani2017attention} following other recent large language models 
+like PaLM \citep{chowdhery2022palm}, the LLaMA family \citep{touvron2023llama1, touvron2023llama2}, OpenLM \citep{open_lm}, and Falcon \citep{Falcon}.
+See Table~\ref{tab:llm_arch_adamw} in Appendix~\ref{sec:training_details}  for a comprehensive comparison of our 7B architecture to the similarly-sized models from these other families.
+
+We generally select hyperparameters by optimizing  for training throughput on our hardware while minimizing the risk of loss spikes and slow divergence. We ablate choices through our in-loop evaluation setting, given available computational sources (Section~\ref{sec:ablation}).  
+Our main changes over the vanilla transformer architecture can be summarized as follows:
+
+\begin{enumerate}[itemsep=1mm,leftmargin=4.5mm]
+    \item \textbf{No biases.} Following LLaMA, PaLM, and others, we exclude all bias terms from our architecture in order to improve training stability.
+
+    \item \textbf{Non-parametric layer norm.} We use the non-parametric formulation of layer norm \citep{Ba2016LayerNorm} in which there is no affine transformation within the norm, i.e., no ``adaptive gain" (or bias). We believe this was the safest option and it was also the fastest compared to the other variants we considered: parametric layer norm and RMSNorm \citep{RMSNorm}.
+
+    \item \textbf{SwiGLU activation function.} Like LLaMA, PaLM, and others we use the SwiGLU activation function \citep{Shazeer2020GLUVI} instead of ReLU, and following LLaMA the activation hidden size is approximately $\frac{8}{3}d$, but increased to the closest multiple of 128 (e.g. 11,008 for our 7B model) to improve throughput.\footnote{Since SwiGLU is a ``gated" activation function, the output is half the size of the input. So technically our inputs to SwiGLU have a dimensionality of 2 $\times$ 11,008 = 22,016 for our 7B model.}
+
+    \item \textbf{Rotary positional embeddings (RoPE).} Like LLaMA, PaLM, and others we replace absolute positional embeddings with rotary positional embeddings (RoPE; \citealp{Su2021RoFormerET}).
+
+    \item \textbf{Vocabulary.} We use a modified version of the BPE-based tokenizer from GPT-NeoX-20B \citep{gpt-neox-20b} with additional tokens for masking personal identifiable information (PII). The final vocabulary size is 50,280.
+    However, to maximize training throughput we increase the size of the corresponding embedding matrix in our model to 50,304 
+    to be
+    a multiple of 128.
+\end{enumerate}
+
+\subsection{Pretraining Data: \dolma} \label{sec:pretraining-data}
+
+Despite progress in access to model parameters, pretraining datasets are still not as open. 
+Pretraining data are often not released alongside open models (let alone closed models) and documentation about such data is often lacking in detail that would be needed to reproduce or fully understand the work. 
+This has made it difficult to support certain threads of language model research, such as understanding how training data impacts model capabilities and limitations.
+To facilitate open research on language model pretraining, we built and released our pretraining dataset, \dolma---a diverse, multi-source corpus containing trillions of tokens across billions of documents acquired from different data sources that are (1) commonly seen in large-scale language model pretraining and (2) accessible to the general public \citep{dolma}. 
+Table~\ref{tab:statistics} provides a high-level overview of the amount of data from each source.
+
+\dolma is built using a pipeline of 
+(1) language filtering,
+(2) quality filtering,
+(3) content filtering,
+(4) deduplication,
+(5) multi-source mixing, and 
+(6) tokenization.
+We refer the reader to the \dolma report~\citep{dolma} for more details about its design principles, details about its construction, and a more detailed summary of its contents.
+The report provides additional analyses and experimental results from training language models on intermediate states of \dolma to share what we learned about important data curation practices, including the role of content or quality filters, deduplication, and mixing data from multiple sources.
+We keep documents from each source separate, both during curation as well as in the final release.
+We open-sourced our high-performance data curation tools;
+this toolkit can be used to further experiment on Dolma, reproduce our work, and enable fast and easy curation of pretraining corpora.
+Finally, we also open-sourced our WIMBD tool~\citep{wimbd} to help with dataset analysis. 
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{l@{}c@{}c@{}c@{}c@{}}
+\toprule
+\textbf{ Source } & \textbf{ Type } & {\begin{tabular}[c]{@{}c@{}}\textbf{ UTF-8}\\\textbf{bytes}\\\textit{(GB)}\vspace{.4em}\end{tabular}} & {\begin{tabular}[c]{@{}c@{}}\textbf{ Docs }\\\textit{(millions) }\vspace{.4em}\end{tabular}} & {\begin{tabular}[c]{@{}c@{}}\textbf{Tokens}\\\textit{(billions) }\vspace{.4em}\end{tabular}}  \\
+\midrule
+Common Crawl & web pages & 9,812 & 3,734 & 2,180  \\
+GitHub & code & 1,043 & 210 & 342  \\
+Reddit & social media & 339 & 377 & 80  \\
+Semantic Scholar & papers & 268 & 38.8 & 57  \\
+Project Gutenberg & books & 20.4 & 0.056 & 5.2 \\
+Wikipedia & encyclopedic & 16.2 & 6.2 & 3.7 \\
+\midrule
+\multicolumn{2}{c}{\textbf{Total}} & \textbf{11,519} & \textbf{4,367} & \textbf{2,668}  \\
+\bottomrule
+\end{tabular}
+\caption{Composition of \dolma. Tokens counts are based on the GPT-NeoX tokenizer.}
+\label{tab:statistics}
+\end{table}
+
+\subsection{Adaptation}
+\label{sec:adaptation}
+
+Pretrained models are not always used as-is, but rather further finetuned to improve their performance, safety, and usability. Often models are first trained to follow instructions~\citep{mishra-etal-2022-cross, wei2022finetuned, sanh2022multitask}, and then further trained on human preferences~\citep{NEURIPS2022_b1efde53} to improve the quality of their generations. We showcase the efficacy of using \olmo as a base model for further fine-tuning by training \olmo to be a general chat assistant following the \tulu data and training setup~\citep{ivison2023camels}. This involves first performing instruction finetuning with a mixture of distilled and human-written instruction data and then further aligning the model with distilled preference data using Direct Preference Optimization (DPO)~\citep{rafailov2023direct}.
+
+\subsection{Evaluation}
+\label{sec:evaluation}
+We perform base model evaluation at two stages: \emph{online} evaluation to make decisions for model design and \emph{offline} evaluation to evaluate model checkpoints. 
+For the offline stage, we use the Catwalk framework \citep{groeneveld2023catwalk}, a publicly available evaluation tool with access to a wide range of datasets and task formats, 
+to perform downstream evaluation as well as intrinsic language modeling evaluation on the perplexity benchmark Paloma \citep{magnusson2023paloma}.
+
+For both downstream and perplexity evaluation, we use our fixed evaluation pipeline
+to compare results against publicly available models. We also report a separate evaluation of our adapted model.  
+
+\paragraph{In-Loop Training Ablations}
+\label{sec:ablation}
+
+Throughout model training, we perform downstream evaluations to make decisions around model architecture, initialization, optimizers, learning rate schedule, and data mixtures. We call this our \emph{online} evaluation as it runs in-loop every 1000 training steps (or $\sim$4B training tokens) and provides an early and continuous signal on the quality of the model being trained. These evaluations rely on many of the core tasks and experiment settings used for our \emph{offline} evaluation detailed in Section~\ref{sec:downstream_evaluation}, which also mirrors the task and evaluation structure of the EleutherAI eval harness~\citep{eval-harness}.
+
+\paragraph{Downstream Evaluation}
+\label{sec:evaluation-downstream}
+Following much previous work \citep[][\emph{inter alia}]{Brown2020LanguageMA,gpt-neox-20b,touvron2023llama1,touvron2023llama2}, we report zero-shot performance on a set of downstream tasks. Our evaluation suite consists of 8 core tasks corresponding closely to the commonsense reasoning task set reported by \citet{touvron2023llama1} and \citet{touvron2023llama2} (see Table~\ref{table:results-end-task} for a list of tasks). Given the scale of the models being evaluated, such tasks were selected at the beginning of model development due to their naturalness (e.g., all can formulated as text completion scoring tasks) and ability to provide meaningful signals throughout training (see Figure~\ref{fig:core-tasks-progression}). 
+
+\paragraph{Intrinsic Language Modeling Evaluation}
+
+To measure how OLMo fits distributions of language beyond held-out training data, we use Paloma \citep{magnusson2023paloma}, a new perplexity benchmark that includes 585 different domains of text. Domains range from nytimes.com to r/depression on Reddit and are drawn from 18 separate data sources, such as C4 \citep{raffel2020exploring}, in stratified samples. This allows for more equal inclusion of text domains that are under-represented in their source corpora. 
+
+We aim not just to compare \olmo against other models for best performance, but also to demonstrate how it enables fuller and more controlled scientific evaluations. \model is the largest LM with explicit decontamination for perplexity evaluation. Following the approach described in Paloma, we remove any pretraining document with paragraphs leaked from Paloma evaluation data. Without decontamination, other models risk underestimating perplexity (i.e., overestimating the model's out-of-sample fit).  We also release intermediate checkpoints, allowing richer comparisons with two other models that release checkpoints, Pythia-6.9B \citep{pmlr-v202-biderman23a} and RPJ-INCITE-7B \citep{together2023redpajama} (see Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_clean}). 
+
+\paragraph{Adaptation Evaluation} We also evaluate \olmo after instruction fine-tuning and DPO training using the \tulu evaluation suite proposed in \citet{wang2023far, ivison2023camels}.
+We focus on evaluations around model chat capabilities and safety in order to showcase the efficacy of using \olmo as a base for further fine-tuning.
+
+\section{Training \olmo}
+
+This section describes our pretraining setup, including our distributed training framework (Section~\ref{sec:training-distributed}), optimizer  (Section~\ref{sec:training-optimizer}), data preparation (Section~\ref{sec:training-data}), and hardware (Section~\ref{sec:hardware}).
+
+\subsection{Distributed Training Framework}
+\label{sec:training-distributed}
+
+We train our models using the \emph{ZeRO} optimizer strategy \citep{Rajbhandari2019ZeRO} via PyTorch's \texttt{FSDP} framework \citep{Zhao2023PyTorchFSDP}, which reduces memory consumption by sharding the model weights and their corresponding optimizer state across GPUs.
+At the 7B scale, this enables training with a micro-batch size of 4096 tokens per GPU on our hardware (see Section \ref{sec:hardware}).
+For \olmo-1B and -7B models, we use a constant global batch size of approximately 4M tokens (2048 instances, each with a sequence length of 2048 tokens).
+
+To improve throughput, we employ mixed-precision training \citep{Micikevicius2017MixedPT} through \texttt{FSDP}'s built-in settings and PyTorch's \texttt{amp} module.
+The latter ensures that certain operations like the softmax always run in full precision to improve stability, while all other operations run in half-precision with the \texttt{bfloat16} format. 
+Under our specific settings, the sharded model weights and optimizer state local to each GPU are kept in full precision.
+The weights within each transformer block are only cast to \texttt{bfloat16} when the full-sized parameters are materialized on each GPU during the forward and backward passes.
+Gradients are reduced across GPUs in full precision.
+
+\subsection{Optimizer}
+\label{sec:training-optimizer}
+
+We use the AdamW optimizer \citep{loshchilov2018decoupled} with the hyperparameters shown in Table \ref{tab:model_size_and_optimizer}.
+For all model sizes, we warm up the learning rate over 5000 steps ($\sim$21B tokens) and then decay it linearly from there down to a tenth of the peak learning rate over the remainder of training.
+After the warm-up period, we clip gradients such that the total $l^2$-norm of the parameter gradients\footnote{During gradient clipping all of the model's parameters are treated as a single big vector (as if all parameters were flattened and concatenated together), and we take the $\ell_2$-norm over the corresponding single gradient vector. This is the standard way to clip gradients in PyTorch.} does not exceed $1.0$. Table \ref{tab:llm_arch_adamw} gives a comparison of our optimizer settings at the 7B scale to those of other recent LMs that also used AdamW.
+
+\subsection{Data}
+\label{sec:training-data}
+
+We built our training dataset out of a 2T-token sample from our open dataset, Dolma \citep{dolma}, which we describe in Section \ref{sec:pretraining-data}.
+The tokens from every document are concatenated together after appending a special \texttt{EOS} token to the end of each document, and then we group consecutive chunks of 2048 tokens to form training instances.
+The training instances are shuffled in the exact same way for each training run.
+The data order and exact composition of each training batch can be reconstructed from the artifacts we release.
+
+All of our released models have been trained to at least 2T tokens (a single epoch over our training data), and some have been trained beyond that by starting a second epoch over the data with a different shuffling order. The impact of repeating this small amount of data should be negligible according to prior work~\citep{muennighoff2023scaling}.
+
+\subsection{Hardware} \label{sec:hardware}
+In order to verify that our codebase could be used on both NVIDIA and AMD GPUs without any loss in performance, we trained models on two different clusters:
+\begin{itemize}[noitemsep,leftmargin=4.5mm]
+    \item \textbf{LUMI:} Provided by the LUMI supercomputer,\footnote{\url{https://www.lumi-supercomputer.eu}} we used up to 256 nodes on this cluster, 
+where each node consists of 4x AMD MI250X GPUs with 128GB of memory\footnote{The MI250X is a dual-chip module, meaning in practice that each physical device consists of two logical devices, so each node has 8 logical GPU devices with 64GB of memory each.} and 800Gbps of interconnect.
+    \item \textbf{MosaicML:} Provided by MosaicML\footnote{\url{https://www.mosaicml.com}} (Databricks), we used 27 nodes on this cluster, where each node consists of 8x NVIDIA A100 GPUs with 40GB of memory and 800Gbps interconnect.
+\end{itemize}
+Despite minor differences in batch size to optimize for training throughput, both runs resulted in nearly identical performance on our evaluation suite by 2T tokens.
+
+\section{Results}
+\label{sec:results}
+The checkpoint used for evaluating \model is trained until 2.46T
+tokens on the Dolma~\citep{dolma} dataset with a linear learning rate decay schedule mentioned in Section~\ref{sec:training-optimizer}. In our experiments, we find that tuning this checkpoint further on the Dolma dataset for 1000 steps with the learning rate linearly decayed to 0 boosts model performance on perplexity and end-task evaluation suites described in Section~\ref{sec:evaluation}.  We compare \olmo with other publicly available models including LLaMA-7B \citep{touvron2023llama1}, Llama-2-7B \citep{touvron2023llama2}, MPT-7B \citep{MosaicML2023Introducing}, Pythia-6.9B \citep{pmlr-v202-biderman23a}, Falcon-7B \citep{Falcon} and RPJ-INCITE-7B \citep{together2023redpajama}.
+
+\begin{table*}[t]
+\centering 
+\begin{tabular}{@{}l|cccccccc|c
+}
+\toprule
+{\bf Models} & {\renewcommand{\arraystretch}{1}\begin{tabular}[c]{@{}c@{}}{arc}\\{challenge}\\\end{tabular}} & {\renewcommand{\arraystretch}{1}\begin{tabular}[c]{@{}c@{}}{arc}\\{easy}\\\end{tabular}} &  boolq & {\renewcommand{\arraystretch}{1}\begin{tabular}[c]{@{}c@{}}{hella-}\\{swag}\\\end{tabular}} & {\renewcommand{\arraystretch}{1}\begin{tabular}[c]{@{}c@{}}{open}\\{bookqa}\\\end{tabular}} & piqa & sciq & {\renewcommand{\arraystretch}{1}\begin{tabular}[c]{@{}c@{}}{wino-}\\{grande}\\\end{tabular}} & avg. \\
+\hline
+\textbf{StableLM 1.6B}      & 43.8 & 63.7 & 76.6 & 68.2 & 45.8 & 74.0 & 94.7 & 64.9 & 66.5 \\
+\textbf{Pythia 1B}      & 33.1 & 50.2 & 61.8 & 44.7 & 37.8 & 69.1 & 86.0 & 53.3 & 54.5 \\
+\textbf{TinyLlama 1.1B}      & 34.8 & 53.2 & 64.6 & 58.7 & 43.6 & 71.1 & 90.5 & 58.9 & 59.4 \\
+\rowcolor{olmocolor!50}[\dimexpr\tabcolsep+0.1pt\relax] \textbf{\modelsmall}         & 34.5 & 58.1 & 60.7 & 62.5 & 46.4 & 73.7 & 88.1 & 58.9 & 60.4 \\
+\hline
+\textbf{Falcon-7B}      & 47.5 & 70.4 & 74.6 & 75.9 & 53.0 & 78.5 & 93.9 & 68.9 & 70.3 \\
+\textbf{LLaMA 7B}       & 44.5 & 67.9 & 75.4 & 76.2 & 51.2 & 77.2 & 93.9 & 70.5 & 69.6 \\
+\textbf{Llama 2 7B}      & 48.5 & 69.5 & 80.2 & 76.8 & 48.4 & 76.7 & 94.5 & 69.4 & 70.5 \\
+\textbf{MPT-7B}         & 46.5 & 70.5 & 74.2 & 77.6 & 48.6 & 77.3 & 93.7 & 69.9 & 69.8 \\
+\textbf{Pythia 6.9B}      & 44.1 & 61.9 & 61.1 & 63.8 & 45.0 & 75.1 & 91.1 & 62.0 & 63.0 \\
+\textbf{RPJ-INCITE-7B}  & 42.8 & 68.4 & 68.6 & 70.3 & 49.4 & 76.0 & 92.9 & 64.7 & 66.6 \\
+\rowcolor{olmocolor!50}[\dimexpr\tabcolsep+0.1pt\relax] \textbf{\model}         & 48.5 & 65.4 & 73.4 & 76.4 & 50.4 & 78.4 & 93.8 & 67.9 & 69.3 \\
+
+\bottomrule
+\end{tabular}
+\caption{Zero-shot evaluation of \modelsmall and \model, with other publicly available comparable model checkpoints on 8 core tasks from the downstream evaluation suite described in Section~\ref{sec:evaluation-downstream}. For \model, we report results for the 2.46T token checkpoint.}
+\label{table:results-end-task}
+\end{table*}
+
+\subsection{Downstream evaluation} 
+\label{sec:downstream_evaluation}
+\paragraph{Setup} Our core \textbf{downstream evaluation suite}  (see Table~\ref{table:results-end-task}) consists of: arc (both \texttt{arc\_easy} and \texttt{arc\_challenge}) \citep{clark2018think}, \texttt{boolq} \citep{clark2019boolq}, \texttt{openbookqa} \citep{mihaylov2018can}, \texttt{sciq} \citep{welbl2017crowdsourcing}, \texttt{hellaswag} \citep{zellers2019hellaswag}, \texttt{piqa} \citep{bisk2020piqa}, 
+and \texttt{winogrande} \citep{sakaguchi2021winogrande}. In Appendix~\ref{sec:add_eval}, we also report results on an additional set of auxiliary tasks outside of our core evaluation set that we found to have less stable performance trends (see Figure~\ref{fig:additional-task-acc-progression}). 
+
+In all cases, we perform zero-shot evaluation using the rank classification approach popularized by \citet{Brown2020LanguageMA}. Under this approach, candidate text completions (e.g., different multiple-choice options) are ranked by likelihood (usually normalized by some normalization factor), and prediction accuracy is reported. While Catwalk implements several common likelihood normalization strategies, including normalizing by number of tokens (per-token normalization; \citealp{Brown2020LanguageMA,liang2022holistic}), by number of characters (per-character normalization; \citealp{eval-harness}), as well as incorporating an answer's unconditional likelihood \citep{Brown2020LanguageMA}, we selected the normalization strategies for each dataset separately. Specifically, we used unconditional normalization for \texttt{arc} and \texttt{openbookqa}, per-token normalization for \texttt{hellaswag}, \texttt{piqa}, and \texttt{winogrande} and no normalization for \texttt{boolq}, 
+and \texttt{sciq} (i.e., tasks formulated as single token prediction tasks). 
+
+\paragraph{Results} Table~\ref{table:results-end-task} summarizes the result of zero-shot evaluation of \olmo and compares against other publicly available models of comparable size. We report results on 8 core tasks from our evaluation suite described in Section~\ref{sec:evaluation-downstream}. On aggregate, \model is competitive against all the comparable models. 
+We include the comparison to StableLM 1.6B
+, but note that it is significantly larger, and was trained on unknown data.
+
+In Figure~\ref{fig:core-tasks-progression} we plot the accuracy score progression of 8 core end-tasks. All tasks, except OBQA, show an upward trend in accuracy numbers as \model is trained on more tokens. A sharp upward tick in accuracy of many tasks between the last and the second to last step shows us the benefit of linearly reducing the LR to 0 over the final 1000 training steps. See Table~\ref{table:additional-end-task} in Appendix~\ref{sec:add_eval} for additional evaluation results and discussion.
+
+\begin{figure*}[!t]
+\centering
+\makebox[\columnwidth][c]{
+\includegraphics[width=0.80\textwidth]{figures/core-tasks-progression.pdf}
+}
+\caption{Accuracy score progression of \model on 8 core end-tasks score from Catwalk evaluation suite described in Section~\ref{sec:evaluation-downstream}. We can see the benefit of decaying LR to 0 in the final 1000 steps of training on most tasks.}
+\label{fig:core-tasks-progression}
+\end{figure*}
+
+\subsection{Intrinsic language modeling evaluation} 
+\paragraph{Setup}
+For intrinsic evaluations, Paloma proposes a range of analyses, from inspection of performance in each domain separately to more summarized results over combinations of domains. We report results at two levels of granularity: the aggregate performance over 11 of the 18 sources in Paloma as in \cite{magnusson2023paloma}, as well as more fine-grained results over each of these sources individually. 
+This particular subset of 11 sources from Paloma excludes sources that are not publicly available, involve fringe or toxic text, or consist of code data not supported by Paloma's decontamination approach. 
+This leaves C4 \citep{raffel2020exploring}, mC4-en \citep{chung2023unimaxfa}, Wikitext 103 \citep{merity2016pointersm}, Penn Treebank \citep{marcusptb,nunesptb}, RedPajama \citep{together2023redpajama}, Falcon-RefinedWeb \citep{penedo2023therd}, Dolma \citep{dolma}, M2D2 S2ORC \citep{reid-etal-2022-m2d2}, M2D2 Wikipedia \citep{reid-etal-2022-m2d2}, C4 100 domains \citep{chronopoulou-etal-2022-efficient}, and Dolma 100 Subreddits \citep{dolma}. To allow for a fair comparison between models with different vocabularies, we report bits per byte as defined by \citet{gao2020pile} over the test sets of these sources.
+
+\paragraph{Results} In the \textit{Sources Combined} subplot of Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_clean}, we show the performance of \model against 6 comparably-sized language models on the combination of 11 data sources from Paloma. Overall we find \olmo to have a competitive fit, especially given its training data was explicitly decontaminated against Paloma. As seen through the comparison of final models (see shapes) as well intermediate checkpoints (see dashed lines),  the \olmo results follow similar scaling trends of other models. Note that the performance of intermediate checkpoints is influenced by where that checkpoint occurs in the learning rate schedule. So models trained for fewer steps will tend to have steeper training curves without necessarily being more sample efficient if training duration were fixed across all models. MPT-7B, nevertheless, stands out as improving ahead of the other models in this subplot. This could be due to a number of factors, including pretraining data composition and its match to the domains in Paloma (e.g., MPT trains on 27\%  non-Common Crawl data rather than 18\% for LLaMA, 12.2\% for RedPajama, and 11.2\% for \olmo) as well as various data preprocessing decisions (e.g., MPT's use of semantic deduplication by \citealp{abbas2023semdedup}, on C4).
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/paloma_bpb_over_tokens_seen_per_source_clean.pdf}
+    \caption{
+    Bits per byte on 11 evaluation data sources from Paloma and their combination \citep{magnusson2023paloma}, decontaminated from \olmo's pretraining data. While models follow a general data scaling trend, sample efficiency is most favorable on in-distribution data. For example, \model overtakes all other models on C4, perhaps from having 88.8\% Common Crawl pretraining data.
+    }
+    \label{fig:paloma_bpb_over_tokens_seen_per_source_clean}
+\end{figure*}
+
+The remaining subplots in Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_clean} provide more fine-grained analysis by reporting bits per byte separately for each of the 11 data sources that are combined in the aggregated Paloma metric. From this we see greater variation in sample efficiency, largely driven by the similarity of training and evaluation distributions. Notably, \model fares well on evaluations predominated by Common Crawl, such as C4, though different ways of postprocessing Common Crawl are best fit by models trained with that specific data, such as Falcon-7B on Falcon RefinedWeb.  Meanwhile, \model is less sample efficient compared to other models on sources less related to scraped web text, such as WikiText-103, M2D2 S2ORC, and M2D2 Wikipedia. The RedPajama evaluation shows a similar pattern, perhaps as only 2 of its 7 domains are from Common Crawl, and Paloma weights domains within each source equally. Since heterogeneous data from curated sources like Wikipedia and ArXiv papers is 
+scarcer
+than scraped web text, maintaining sample efficiency for fit to these distributions of language will be challenging as pretraining corpora are scaled.
+
+\subsection{Adaptation Evaluation}
+
+\begin{table}[t]
+\setlength{\tabcolsep}{1pt}
+\adjustbox{max width=\columnwidth}{
+\centering
+\begin{tabular}{@{}l|cccc
+}
+\toprule
+\textbf{Model} & \textbf{MMLU}  & \textbf{AlpacaEval} & \textbf{ToxiGen} & \textbf{TruthfulQA}    \\
+      & \textbf{0-shot} $\uparrow$ & \textbf{\%win} $\uparrow$ & \textbf{\% Toxic} $\downarrow$ & \textbf{\%Info+True} $\uparrow$ \\
+\hline
+ \textbf{\olmo (base)}        & 28.3 & - & 81.4 & 31.6 \\ \hline
+\textbf{MPT Chat} & 33.8 & 46.8 & 0.1 & 42.7 \\
+\textbf{Falcon Instruct} & 25.2 & 14.0 & 70.7 & 27.2 \\
+\textbf{RPJ-INCITE Chat} & 27.0 & 38.0 & 46.4 & 53.0 \\
+\textbf{Llama-2-Chat} & 46.8 & 87.3 & 0.0 & 26.3 \\ \hline
+\textbf{\tulu 2}      & 50.4 & 73.9 & 7.0 & 51.7 \\
+\textbf{\tulu 2+DPO}      & 50.7 & 85.1 & 0.5 & -\footnotemark \\
+\rowcolor{olmocolor!50}[\dimexpr\tabcolsep+0.1pt\relax] \textbf{OLMo+SFT}        & 47.3 & 57.0 & 14.4 & 41.2 \\
+\rowcolor{olmocolor!50}[\dimexpr\tabcolsep+0.1pt\relax] \textbf{OLMo+SFT+DPO}        & 46.2 & 69.3 & 1.7 & 52.0 \\
+\bottomrule
+\end{tabular}
+}
+\caption{Evaluation of various instruction-tuned 7B models, including \model and before and after adaptation training. Lower is better for ToxiGen and higher is better for other metrics. We provide a detailed description of models and metrics in Appendix.~\ref{app:adaptation-evals-description}.}
+\label{table:results-adaptation}
+\end{table}
+
+\paragraph{Setup} We evaluate \model before adaptation, and after both the supervised fine-tuning and DPO training stage, focusing on the safety and chat evaluations used by \citet{wang2023far}. We additionally compare to officially released instruction-tuned variants of the models from Table~\ref{table:results-end-task}. We finally also compare to \tulu 2 models to compare against models trained using the same post-training data mixes and procedures.
+
+\footnotetext{Following \citet{ivison2023camels}, we do not report \tulu 2 TruthfulQA scores due to test set contamination.}
+
+\paragraph{Results} We find that instruction tuning considerably improves the performance and safety of \model, increasing MMLU performance by a wide margin and improving ToxiGen and TruthfulQA scores - especially after DPO training. Additionally, we find that \model outperforms most other chat variants after both initial instruction tuning (OLMo+SFT) and additional preference alignment (OLMo+SFT+DPO), highlighting both the strength of \model as a base model and the strength of the \tulu mix used to perform adaptation training. However, we find there is still a gap with \tulu 2, which is trained by applying the \tulu mix on Llama 2. This gap may be due to test set contamination in Llama 2\footnote{\citet{touvron2023llama2} report that Llama 2 was pretrained on data contaminated with MMLU test data.} and because the \tulu mix was primarily designed for Llama models. Overall, we see that \model greatly benefits from additional tuning and serves as a strong base model for downstream applications.
+
+\section{Artifacts Released}
+\label{sec:release}
+By sharing artifacts from all pipeline stages, we aim to encourage open research and reduce duplicated, often costly efforts, by academics and practitioners. We release the following:
+
+\begin{itemize}[noitemsep,leftmargin=4.5mm,beginpenalty=10000]
+    \item \textbf{Pretraining (\S\ref{sec:olmo-arch})} 
+    \begin{enumerate}
+        \item The training and modeling code.
+        \item The trained model weights for the 7B model, 7B-twin-2T, and the 1B model. For all the models, we release not only the final model weights but also 500+ intermediate checkpoints at intervals of 1000 steps.
+        \item The complete set of metrics logged to Weights \& Biases during training.
+    \end{enumerate}
+    \item \textbf{Data (\S\ref{sec:pretraining-data})} 
+    \begin{enumerate}
+        \item Our full pretraining corpus Dolma~\citep{dolma}.
+        \item Tools to support reproduction of full training data order as well as inspection of which training data was seen at each step during training.
+        \item Tools for recreating our training data~\citep{dolma} and performing dataset analysis~\citep{wimbd}.
+    \end{enumerate}
+    \item \textbf{Adaptation (\S\ref{sec:adaptation})}
+    \begin{enumerate}
+        \item The training code and data for adaptation.
+        \item The model weights for OLMo+SFT and OLMo+SFT+DPO.
+    \end{enumerate}
+    \item \textbf{Evaluation (\S\ref{sec:evaluation})}
+    \begin{enumerate}
+        \item The code and data in our evaluation framework Catwalk~\citep{groeneveld2023catwalk} for offline evaluation on both downstream tasks and intrinsic language modeling~\citep{magnusson2023paloma}.
+        \item The evaluation suite~\citep{wang2023far,ivison2023camels} for adapted models.
+    \end{enumerate}
+\end{itemize}
+
+\section{Conclusion and Future Work}
+
+This paper presents our first release of  \olmo, a state-of-the-art, truly open language model and its framework to build and study the science of language modeling.
+Unlike most prior efforts that have only released model weights and inference code, we release \olmo and the whole framework, including training data, training and evaluation code, and detailed metrics collected during the training runs. 
+Additionally, we released adapted models, as well as all of our model adaptation code and data.
+
+We intend to continuously support and extend \olmo and its framework, and continue to push the boundaries of open LMs to empower the open research community.
+Since the original release of \olmo described here, we improved our data and training setup to significantly improve results. For example, MMLU scores have improved by 24 points to 52\%.\footnote{
+\href{https://blog.allenai.org/olmo-1-7-7b-a-24-point-improvement-on-mmlu-92b43f7d269d}{\nolinkurl{https://medium.com/p/92b43f7d269d}}}
+We look forward to bringing different model sizes, modalities, datasets, safety measures, and evaluations into the OLMo family.
+We hope this and future releases will empower and strengthen the open research community and inspire a new wave of innovation.
+
+\section*{Limitations}
+We recognize building a large language model has many limitations. In fact, each step of the process of creating a language model, from the data to training to adaptation to evaluation each have their own limitations, and so we've added sections for each below. Of course we recognize that AI systems today can have broad societal reach, and therefore there are significant limitations beyond what we are able to fit into this section.
+
+\paragraph{Data}
+Our work focuses on pretraining data in English. We hope that our open framework enables the development of future models in more languages as well as multilingual models.
+The data that models are trained on is what gives models their capabilities, and at the scale of training a large language model we recognize that the data likely contains problematic content like toxic language, personal information, and copyrighted text.
+We mitigated this to the best of our ability but recognize there are no perfect approaches today that can completely remove such content.
+
+\paragraph{Training}
+Training a large language model is currently a challenging endeavor which is missing significant support from the open source community. With our limited page count we did not provide extensive training logs documenting, for example, training runs that diverged or failed to learn.
+
+\paragraph{Adaptation}
+Our pretrained models face the same issues as existing pretrained LLMs, such as bias, toxicity and, hallucinations. Our adapted models are better at avoiding these generations, but they are not perfect.
+Additionally, we note that we largely adopt an existing data mixture designed for a different model family (\tulu, designed for Llama models), and \olmo may require different data mixing to adjust for its unique strengths and weaknesses. The \tulu mix itself also relies on data distilled from a variety of models, and we hope to reduce our reliance on such data in the future.
+
+\paragraph{Evaluation}
+While we've included comparisons on a variety of datasets to other current language models, many of the downstream tasks are not actually representative of how users interact with language models (i.e., as a chatbot). In addition, language model evaluations are currently very noisy; we aimed to include only evaluations on datasets that provided some signal as to which model performs best, but recognize that there is no perfect automatic evaluation, and thus comparisons should be taken with a grain of salt. 
+
+\section*{Ethics Statement}
+Through this work, we take the position that increased openness of language models is essential for scientific understanding of their abilities and limitations and for broad participation in the continued development of such models.  
+Training on open data further enhances these benefits. In addition, our open release enables practitioners to take our models and build on them instead of having to train their own from scratch, in which case they would be repeating our work while consuming more resources and leading to an increased environmental impact. 
+Of course, openness is not without risk; the possibility remains that these models will be used in unintended ways that cause harm.  
+We believe that research and development efforts to understand and mitigate those potential harms will also be accelerated by the openness of the models, allowing a diversity of approaches and analyses. 
+Over the past year there have been a number of comparable models released with very permissive licenses, so using a more strict license for our work would not remove the overall risk in the field. 
+We believe this trade-off on the side of being more open is the best option.
+
+\section*{Acknowledgments}
+ \label{sec:ack}
+ \olmo would not have been possible without the support of many individuals and institutions.
+ The experimental components of this work were made possible through a partnership with AMD and CSC, enabling use of the LUMI supercomputer, and Kempner Institute at Harvard University.
+ We thank Jonathan Frankle and the team at MosaicML (now Databricks) for sharing their experiences with FSDP, and building the code base that OLMo is based on.
+ We thank our teammates Taira Anderson, Michelle Benedict, Jon Borchardt, Evie Cheng, Arnavi Chheda, Johann Dahm, Matt Latzke, Kelsey MacMillan, Aaron Sarnat, Carissa Schoenick, Sam Skjonsberg, Michael Schmitz, Michael Wilson, Caitlin Wittlif, and the entire IT team, for their help with the website, design, internal and external communications, budgeting, and other activities that supported smooth progress on this project.
+ Finally, we also express gratitude for the helpful discussions and feedback from our teammates at AI2 and close collaborators, including Prithviraj (Raj) Ammanabrolu, Peter Clark, Nicole DeCario, Doug Downey, Ali Farhadi, Ian Ferreira, Väinö Hatanpää, Sham M. Kakade, Julien Launay, Sydney Levine, Pekka Manninen, Franzi Roessner, Maarten Sap, Ludwig Schmidt, Yulia Tsvetkov, and Daniel S. Weld.
+
+\bibliography{references,custom}
+\bibliographystyle{acl_natbib}
+
+\newpage
+\appendix
+
+\section{Training Settings}
+\label{sec:training_details}
+Table~\ref{tab:llm_arch_adamw} summarizes the model architecture and the optimizer parameters of \olmo-7B as well as recent similar-sized models. 
+
+\begin{table*}[t]
+    \centering
+    \small
+    \begin{tabular}{l|lllll}
+        \toprule
+        & \textbf{\olmo-7B} & \textbf{LLaMA2-7B} & \textbf{OpenLM-7B} & \textbf{Falcon-7B} & \textbf{PaLM-8B} \\
+        \hline
+       Dimension & 4096 & 4096 & 4096 & 4544 & 4096 \\
+        Num heads & 32 & 32 & 32 & 71 & 16 \\
+        Num layers & 32 & 32 & 32 & 32 & 32 \\
+        MLP ratio & $\sim$8/3 & $\sim$8/3 & $\sim$8/3 & 4 & 4 \\
+        Layer norm type & non-parametric & RMSNorm & parametric & parametric & parametric \\
+        Positional embeddings & RoPE & RoPE & RoPE & RoPE & RoPE \\
+        Attention variant & full & GQA & full & MQA & MQA \\
+        Biases & none & none & in LN only & in LN only & none \\
+        Block type & sequential & sequential & sequential & parallel & parallel \\
+        Activation & SwiGLU & SwiGLU & SwiGLU & GeLU & SwiGLU \\
+        Sequence length & 2048 & 4096 & 2048 & 2048 & 2048 \\
+        Batch size (instances) & 2160 & 1024 & 2048 & 2304 & 512 \\
+        Batch size (tokens) & $\sim$4M & $\sim$4M & $\sim$4M & $\sim$4M & $\sim$1M \\
+        Weight tying & no & no & no & no & yes \\
+        \hline
+        Warmup steps & 5000 & 2000 & 2000 & 1000 \\
+        Peak LR & \texttt{3.0E-04} & \texttt{3.0E-04} & \texttt{3.0E-04} & \texttt{6.0E-04} \\
+        Minimum LR & \texttt{3.0E-05} & \texttt{3.0E-05} & \texttt{3.0E-05} & \texttt{1.2E-05} \\
+        Weight decay & 0.1 & 0.1 & 0.1 & 0.1 \\
+        Beta1 & 0.9 & 0.9 & 0.9 & 0.99 \\
+        Beta2 & 0.95 & 0.95 & 0.95 & 0.999 \\
+        Epsilon & \texttt{1.0E-05} & \texttt{1.0E-05} & \texttt{1.0E-05} & \texttt{1.0E-05} \\
+        LR schedule & linear & cosine & cosine & cosine \\
+        Gradient clipping & global 1.0 & global 1.0 & global 1.0 & global 1.0 \\
+        Gradient reduce dtype & FP32 & FP32 & FP32 & BF16 \\
+        Optimizer state dtype & FP32 & most likely FP32 & FP32 & FP32 \\
+        \bottomrule
+    \end{tabular}
+    \caption{LM architecture and optimizer comparison at the 7--8B scale. In the ``layer norm type" row, ``parametric" and ``non-parametric" refer to the usual layer norm implementation with and without adaptive gain and bias, respectively. All models are trained using AdamW.}
+    \label{tab:llm_arch_adamw}
+\end{table*}
+
+\section{Power Consumption and Carbon Footprint}
+\label{sec:carbon}
+
+Following previous literature \citep{strubell-etal-2019-energy, patterson2021carbon, wu2022sustainable, dodge2022measuring}, we estimate the total energy consumed and carbon released while pretraining our models by calculating the total power consumption required for training, and then multiplying it by the carbon emission intensity of the power grid where the model was trained. While reporting these operational emissions is standard practice, it does not account for other sources of emissions such as the embodied emissions due to the manufacturing, transportation, and disposal of hardware and datacenter infrastructure, lifetime operational emissions due to use, rebound effects, or other environmental impacts such as water consumption or mining. Thus our estimates should be viewed as lower bounds.
+
+We calculate the total power consumption for our models by measuring the power consumption of a single node every 25ms, calculating an average across the entire training run, and multiplying by the total number of nodes. We then account for the energy efficiency of the data center by multiplying the previous total by a power usage effectiveness (PUE) factor, which we set to 1.1, representing a conservative 10\% energy consumption overhead typical of energy efficient datacenters.\footnote{\protect\url{https://www.nrel.gov/computational-science/measuring-efficiency-pue.html}}\footnote{\protect\url{https://www.google.com/about/datacenters/efficiency/}} We estimate that pretraining our 7B models consumed \textbf{239 MWh} of energy.
+
+To calculate carbon emissions, we multiply the total power consumption by a carbon intensity factor, measured in kg CO$_2$ emitted per KWh, based on the physical location of the data center where each model was trained. The model trained on A100-40GB GPUs was trained in Australia, so we assume a carbon intensity factor of 0.610, the national average for Australia in 2022.\footnote{\protect\url{https://www.cleanenergyregulator.gov.au/Infohub/Markets/Pages/qcmr/december-quarter-2022/Emissions-Reduction.aspx}} The model trained on MI250X GPUs was trained in the LUMI supercomputer, which runs on 100\% renewable, carbon-neutral energy, so we assume a carbon intensity factor of 0. LUMI is powered entirely by hydroelectric power and some sources \citep{Ubierna2022} measure the carbon intensity factor of hydroelectric power to be 0.024, which would imply total carbon emissions of 3.54 tCO$_2$eq.{\footnote{\url{https://www.lumi-supercomputer.eu}}} However, we rely on the official LUMI data for our calculations, and thus we estimate total pretraining emissions of \textbf{69.78 tCO$_2$eq}.\footnote{These metrics were in part collected using Carbonara's AI agent and monitoring platform. Learn more at: \url{https://trycarbonara.com}} In Table \ref{tab:co2-emissions} we compare our models with other previously released models based on publicly available information.
+
+We hope that openly releasing our models can reduce future emissions by allowing others to avoid the need to pretrain models from scratch, and give insights into the true cost of developing state of the art models. We also highlight that our estimates are lower bounds, because they do not include other critical pieces of development such as debugging, hyperparameter tuning, and downtime.
+
+\begin{table*}
+\begin{tabular}{l|cccccc}
+\toprule
+ & GPU Type & \begin{tabular}[c]{@{}c@{}}GPU Power\\ Consumption\\(MWh)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Power\\ Usage\\ Effectiveness\end{tabular} & \begin{tabular}[c]{@{}c@{}}Carbon\\ Intensity\\ (kg CO$_2$e/KWh)\end{tabular} & \begin{tabular}[c]{@{}c@{}}Carbon\\ Emissions\\ (tCO$_2$eq)\end{tabular} \\ \hline
+\textbf{Gopher-280B} & TPU v3 & 1,066 & 1.08 & 0.330 & 380 \\
+\textbf{BLOOM-176B} & A100-80GB & 433 & 1.2 & 0.057 & 30 \\
+\textbf{OPT-175B} & A100-80GB & 324 & 1.1 & 0.231 & 82 \\
+\textbf{T5-11B} & TPU v3 & 77 & 1.12 & 0.545 & 47 \\
+\textbf{LLaMA-7B} & A100-80GB & 33 & 1.1 & 0.385 & 14 \\
+\textbf{LLaMA2-7B} & A100-80GB & 74 & 1.1 & 0.385 & 31 \\
+\rowcolor{olmocolor}
+[\dimexpr\tabcolsep+0.1pt\relax] 
+\textbf{OLMo-7B} & MI250X & 135 & 1.1 & 0.000* & 0* \\
+\hline  
+\rowcolor{olmocolor}
+[\dimexpr\tabcolsep+0.1pt\relax]
+\textbf{OLMo-7B} & A100-40GB & 104 & 1.1 & 0.610 & 70 \\
+\arrayrulecolor{black}\bottomrule
+\end{tabular}
+\caption{CO$_2$ emissions during pretraining. We estimate the total carbon emissions for various models using publicly available data on PUE, carbon intensity of local power grid, and reported power consumption. Numbers for Gopher-280B \citep{rae2022scaling}, BLOOM-176B \citep{luccioni2022estimating}, OPT-175B \citep{zhang2022opt}, T5-11B \citep{patterson2021carbon}, LLaMA \citep{touvron2023llama1}, and LLaMA2 \citep{touvron2023llama2} are taken from their respective papers. See Section \ref{sec:carbon} for details on how tCO2eq was calculated.\\
+\addtocounter{footnote}{-1}* LUMI runs entirely on hydroelectric power\protect\footnotemark and some estimates \citep{Ubierna2022} measure the intensity factor of hydroelectric power to be 0.024, implying total emissions of 3.54 tCO$_2$eq.}
+\label{tab:co2-emissions}
+\end{table*}
+
+\section{Additional Evaluation}
+\label{sec:add_eval}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figures/paloma_bpb_over_tokens_seen_per_source_not_clean.pdf}
+    \caption{Bits per byte for each of the 7 remaining Paloma data sources not aggregated in Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_clean}.
+    }
+    \label{fig:paloma_bpb_over_tokens_seen_per_source_not_clean}
+\end{figure*}
+
+\paragraph{Additional perplexity results} In Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_not_clean} we provide results for each of the 7 data sources in Paloma \citep{magnusson2023paloma} that are excluded from the combined metric in Figure~\ref{fig:paloma_bpb_over_tokens_seen_per_source_clean}. Some of these sources such as Pile \citep{gao2020pile} and ICE \citep{GREENBAUM_1996} are not publicly available at this time. Dolma 100 Programming Languages \citep{dolma} consists of code data that is not supported by the decontamination approach used in Paloma. TwitterAAE \citep{blodgett-etal-2016-demographic}, along with ICE, are datasets for targeted analyses of disparities in performance between different dialects and as such should be evaluated separately. And finally, the Manosphere, Gab, and 4chan corpora \citep{Horta_Ribeiro_2021, zannettougab, papasavva_2020} are intended to examine model fit to language from fringe online communities that are studied for prevalent hate speech and toxicity. Thus minimizing perplexity on these fringe corpora is not always desirable.
+
+One notable result here is that \model is much farther ahead of the other models on Dolma 100 Programming Languages (100 PLs). Note that this effect may be due in part to underestimation from contamination, as decontaminating code data is beyond the scope of the method in Paloma. At the same time other models that are trained on code data from GitHub such as RPJ-INCITE-7B, that are just as likely to have contamination, fair much worse. Another factor then is that \model trains on code data with exactly the same post-processing as that in 100 PLs while the code data in other models will have been processed differently. Similarly, Pile evaluation demonstrates these in-distribution and potential contamination effects as Pythia-6.9B achieves top performance despite being trained on almost an order of magnitude fewer tokens than \model.
+
+The results on the remaining 5 targeted sources should be interpreted with care, as Paloma often finds that perplexity on these sources is dominated by superficial features such as low average document length rather than fit to that which would actually be salient to members of these speech communities. TwitterAAE and Gab have among the shortest documents in Paloma contributing to unusually high bits per byte in this figure. Other than these two, the models are notably very closely grouped in a data scaling trend in ICE, Manosphere, and 4chan.
+
+\paragraph{Additional end-task results} Next, in Table~\ref{table:additional-end-task}, we provide results from zero-shot evaluation of \model on 6 additional end-tasks apart from the 8 in our core evaluation suite. These tasks are \texttt{headqa\_en}~\citep{head-qa}, \texttt{logiqa}~\citep{logi-qa}, \texttt{mrpc}~\citep{mrpc}, \texttt{qnli}~\citep{glue}, \texttt{wic}~\citep{wic}, and \texttt{wnli}~\citep{glue}. 
+
+\begin{table*}[!t]
+\centering 
+\begin{tabular}{@{}c|cccccc|c
+}
+\toprule
+& headqa\_en & logiqa & mrpc & qnli & wic & wnli & avg. \\
+\hline
+\textbf{Falcon-7B}     & 38.6 & 23.7 & 62.8 & 49.8 & 49.5 & 47.9 & 45.4 \\
+\textbf{LLaMA-7B}      & 38.7 & 19.5 & 68.6 & 50.1 & 49.1 & 52.1 & 46.4 \\
+\textbf{LLaMA2-7B}     & 39.5 & 26.1 & 69.1 & 49.4 & 49.8 & 45.1 & 46.5 \\
+\textbf{MPT-7B}        & 37.4 & 22.9 & 67.7 & 52.1 & 48.1 & 47.9 & 46.0 \\
+\textbf{Pythia-6.9B}   & 40.1 & 21.5 & 65.4 & 53.8 & 55.0 & 38.0 & 45.6 \\
+\textbf{RPJ-INCITE-7B} & 36.9 & 27.8 & 58.8 & 53.8 & 48.9 & 57.8 & 47.3 \\
+\rowcolor{olmocolor}
+[\dimexpr\tabcolsep+0.1pt\relax]
+\textbf{OLMo-7B}       & 37.3 & 23.4 & 68.4 & 49.1 & 50.2 & 56.3 & 47.5 \\
+\bottomrule
+\end{tabular}
+\caption{Zero-shot evaluation of \model on 6 additional end-tasks apart from the 8 present in our core evaluation suite. Once again, we compare \model to 6 other model checkpoints which are publicly available. We find that \model outperforms the other models on aggregate taken over 6 additional end-tasks from this table, however these tasks were also found to provide limited signal during training (see Figure~\ref{fig:additional-task-acc-progression}).}
+\label{table:additional-end-task}
+\end{table*}
+
+We note, however, that in contrast to our core evaluation set described in Section~\ref{sec:downstream_evaluation}, we found these additional end-tasks to have less stable performance during model development, and to provide a limited signal.  This is illustrated in Figure~\ref{fig:additional-task-acc-progression}, where we see the progress of task performance throughout training to be more random (compare with the more stable upward trends in Figure~\ref{fig:core-tasks-progression}). While tasks such as \texttt{mrpc} and \texttt{wic} appear more stable, they offered additional difficulties related to performance being tied to random chance (e.g., \texttt{wic}) or the tendency of models to make spurious predictions (e.g., always predicting a single label) that either inflate or deflate performance due to dataset class imbalances (e.g., \texttt{mrpc}). We therefore caution against relying too heavily on these tasks when measuring model performance throughout training and comparing models. 
+
+\begin{figure*}[!t]
+\centering
+\makebox[\columnwidth][c]{
+\includegraphics[width=\textwidth]{figures/additional_tasks.pdf}
+}
+\caption{Accuracy score progression of \model on 6 additional end-tasks. The performance of these additional end-tasks was unstable and provided limited signal during model development.}
+\label{fig:additional-task-acc-progression}
+\end{figure*}
+
+\section{Adaptation Training Details}
+\label{app:adaptation_training_details}
+We use the following hyperparameters when instruction tuning \olmo. These were chosen through small pilot experiments.
+
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+    \item Learning rate: $2 \times 10^{-6}$
+    \item Epochs: 3
+    \item Warmup: Linear warmup for the first 3\% of total training time, and then linear cooldown to a learning rate of 0 over the remaining steps.
+    \item Weight decay: 0
+    \item Gradient clipping: 0
+    \item Maximum sequence length: 2048
+    \item Data: \tulu V2 SFT mix, resplit such that long conversations are split into 2048-token chunks and replacing the hardcoded split with data about \olmo. Data is publically available.\footnote{\url{https://huggingface.co/datasets/allenai/tulu-v2-sft-mixture-olmo-2048}}
+\end{itemize}
+
+After instruction finetuning, we then use the following hyperparameters for DPO training, following \citet{ivison2023camels}:
+
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+    \item Learning rate: $5 \times 10^{-7}$
+    \item $\beta$: 0.1
+    \item Epochs: 3
+    \item Warmup: Linear warmup for the first 10\% of total training time, and then linear cooldown to a learning rate of 0 over the remaining steps.
+    \item Weight decay: 0
+    \item Gradient clipping: 0
+    \item Maximum sequence length: 2048
+    \item Data: A modified form of UltraFeedback~\citep{cui2023ultrafeedback}, with TruthfulQA prompts removed. We used the `fixed' variant released by Argilla, which uses the average of GPT-generated aspect-based scores to determine chosen and rejected pairs.\footnote{\url{https://huggingface.co/datasets/argilla/ultrafeedback-binarized-preferences-cleaned}}
+\end{itemize}
+
+\section{Adaptation Evaluation and Model details}
+\label{app:adaptation-evals-description}
+We choose the models in Table~\ref{table:results-adaptation} by choosing the `canonical' best versions (that is, the best instruction-tuned or otherwise adapted models released by the same organisation) of the base models we compare against in Table~\ref{table:results-end-task}. We additionally compare to \tulu 2 to show the current best models trained using the \tulu mix used to finetune \olmo. We display evaluations on MMLU, AlpacaEval, ToxiGen, and Truthfulness to focus on displaying how instruction tuning can generally help capabilities (MMLU), how the models perform in an open-ended chat setting (AlpacaEval), and to test how instruction tuning aids in model safety and truthfulness (AlpacaEval, ToxiGen). We additionally report \olmo's performance over the entire \tulu evaluation suite in Table~\ref{table:results-adaptation-full}.
+
+\begin{table*}[t]
+\adjustbox{max width=2\columnwidth}{
+\begin{tabular}{@{}l|cccccccc
+}
+\toprule
+\textbf{Model} & \textbf{MMLU}   & \textbf{GSM8k}      & \textbf{BBH}        & \textbf{TydiQA} & \textbf{Codex-Eval} & \textbf{AlpacaEval} & \textbf{ToxiGen} & \textbf{TruthfulQA} \\
+& \textbf{0-shot} & \textbf{8-shot CoT} & \textbf{3-shot CoT} & \textbf{1-shot} & \textbf{Pass@10}    & \textbf{\%win}       & \textbf{\% Toxic} & \textbf{\% Info + True}  \\
+\hline
+\textbf{\model}        & 28.3 & 8.5 & 31.7 & 32.3 & 21.4 & - & 81.4 & 31.6 \\
+\textbf{+SFT}        & 47.3 & 15.5 & 36.9 & 35.2 & 28.6 & 57.0 & 14.4 & 41.2 \\
+\textbf{+SFT+DPO}        & 46.1 & 11.0 & 35.8 & 21.7 & 27.8 & 69.3  & 1.7 & 52.0 \\
+\bottomrule
+\end{tabular}
+}
+\vspace{1em}
+\caption{Evaluation of \model models before and after instruction finetuning and DPO training on the full \tulu evaluation suite. Lower is better for ToxiGen and higher is better for other metrics.}
+\label{table:results-adaptation-full}
+\end{table*}
+
+We provide a brief description of each model evaluated in Table~\ref{table:results-adaptation} below. For all models, we use the provided chat template for prompt formatting when available. 
+\begin{itemize}[leftmargin=*]
+    \item MPT Chat: A version of MPT 7B finetuned on the ShareGPT-Vicuna~\citep{vicuna2023}, HC3~\citep{guo-etal-2023-hc3}, Alpaca~\citep{alpaca}, HH-RLHF~\citep{bai2022training}, and Evol-Instruct~\citep{xu2024wizardlm} datasets. Retrieved from \url{https://huggingface.co/mosaicml/mpt-7b-chat}.
+    \item Falcon Instruct: A version of Falcon 7B finetuned on the Baize~\citep{xu2023baize}, GPT4All~\citep{gpt4all}, GPTeacher~\citep{gpteacher}, and Refined-Web English~\citep{penedo2023therd} datasets. Retrieved from \url{https://huggingface.co/tiiuae/falcon-7b-instruct}.
+    \item RPJ-INCITE Chat: A version of RPJ-INCITE 7B finetuned on the OASST1~\citep{kopf2023openassistant} and Dolly V2~\citep{DatabricksBlog2023DollyV2} datasets. Retrieved from \url{https://huggingface.co/togethercomputer/RedPajama-INCITE-7B-Chat}.
+    \item Llama-2 Chat: A version of Llama 2 7B finetuned on a mixture of instruction datasets and further trained with RLHF. We refer the reader to \citet{touvron2023llama2} for further details.
+    \item \tulu 2: A version of Llama 2 7B finetuned on a mixture of instruction datasets (the \tulu 2 mix). We refer the reader to \citet{ivison2023camels} for further details.
+    \item \tulu 2+DPO: \tulu 2 further trained with DPO on the UltraFeedback dataset~\citep{cui2023ultrafeedback}. We refer the reader to \citet{ivison2023camels} for further details.
+    \item OLMo+SFT: A version of \olmo 7B fintuned on the same data as \tulu 2.
+    \item OLMo+SFT+DPO: OLMo+SFT further trained with DPO on the UltraFeedback dataset~\citep{cui2023ultrafeedback}.
+\end{itemize}
+
+We additionally provide a brief description of each evaluation setting from Table~\ref{table:results-adaptation}:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{MMLU}: We use the official MMLU~\citep{hendryckstest2021} evaluation script and prompts available at \url{https://github.com/hendrycks/test}, with modifications to allow for batch processing. We evaluate using 0 few-shot examples, following the original setup of MMLU. We report average accuracy across test examples.
+    \item \textbf{ToxiGen}: We follow the setup in \citet{touvron2023llama2}, but use the original set of prompts from \citet{hartvigsen2022toxigen}, which are designed to elicit toxic generations for certain groups. We take only the prompts designed to produce toxic language (`hateful' prompts) and use 500 prompts per group to reduce evaluation costs. For base language models, we pass in the original ToxiGen prompts unchanged and greedily decode up to the first new line (or a maximum of 512 tokens). For instruction-tuned models, we place the prompt in the corresponding template, and ask the model to complete the prompt, until the model generates a stop token (or a maximum of 512 tokens). We pass the generated text into a roberta-large model trained to detect toxic content finetuned as part of \citet{hartvigsen2022toxigen}.\footnote{\url{https://huggingface.co/tomh/toxigen\_roberta}} We then report the percentage of generations deemed toxic by the classifier.
+    \item \textbf{TruthfulQA}: Following \citet{touvron2023llama2}, we mainly use the generation setting of TruthfulQA \citep{lin2022truthfulqa}. The TruthfulQA dataset contains 818 questions, which are used to prompt the tested model to generate answers. We use the default QA prompt format with 6 in-context QA examples. We follow the official script in their official implemention\footnote{\url{https://github.com/sylinrl/TruthfulQA/}} to do greedy decoding and answer postprocessing. We train two LLaMA 2-based classifiers for judging the truthfulness and informativeness of the model response, due to the deprecation of GPT-3 making exact replication of the original TruthfulQA evaluation infeasible. We find that the LLaMA 2 judges are generally able to match the performance of the original GPT-3-based judges used by \citet{lin2022truthfulqa}. We report the rate of the responses being truthful and informative (\% Informative and Truthful) following \citet{touvron2023llama2}. We only report the \% Informative and Truthful as our primary metric.
+    \item \textbf{AlpacaEval}: We use the package provided by \citet{alpaca_eval}, following the default setup which asks the evaluated model to generate responses for 805 prompts and employ GPT-4 to compare the response with \instructgpt{003}. We employ the ``alpaca\_eval\_gpt4'' annotator. We allow the evaluated model to generate up to 2048 tokens, without specifying special stop sequences. The reported win-rate is the percentage of model generations that GPT-4 reports as being preferred over the generations from \instructgpt{003}.
+\end{itemize}
+
+\end{document}

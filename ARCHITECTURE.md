@@ -47,14 +47,14 @@ CS336/
 │   └── bibliography.bib         # BibTeX database
 │
 └── scripts/                     # Build and validation tools
-    ├── fetch_papers.py           # Download paper sources
-    ├── normalize_sources.py      # Clean and rename extracted papers
-    ├── merge_tex.py              # Merge multi-file TeX papers
-    ├── build_book.sh             # Full build pipeline
-    ├── lint_tex.py               # Style linting
-    ├── check_references.py       # Citation completeness
-    ├── check_notation.py         # Notation consistency
-    └── check_cs336_coverage.py   # Coverage matrix validation
+    ├── fetch_papers.py           # Download paper sources (legacy/primitive)
+    ├── scan_local_archives.py    # Locates raw .tar.gz and .zip in repo
+    ├── normalize_papers.py       # Normalizes paper extraction folders
+    ├── merge_tex.py              # Merges and cleans TeX sources recursively
+    ├── build_index.py            # Generates link_index and updates manifest
+    ├── audit_repo.py             # Generates completion tracking metrics
+    └── build_book.sh             # Full build pipeline
+    [TODO: lint_tex.py, check_references.py, etc are planned but not yet implemented]
 ```
 
 ## Design Decisions

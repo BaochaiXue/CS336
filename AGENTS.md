@@ -16,7 +16,8 @@ LaTeX textbook covering Stanford CS336: Language Modeling from Scratch (2025 + 2
 | Book source | `book/textbook.tex` → `book/chapters/` |
 | Build | `scripts/build_book.sh` |
 | Coverage check | `scripts/check_cs336_coverage.py` |
-| Paper sources | `papers/extracted/` → `papers/merged_tex/` |
+| Paper sources | `papers/normalized/` → `papers/merged_tex/` |
+| Master Index | `papers/link_index.md` |
 | Chapter specs | `docs/chapter_specs/` |
 | Eval rubrics | `docs/evals/` |
 

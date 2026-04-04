@@ -1,0 +1,1319 @@
+\documentclass[dvipsnames,11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{parskip}
+
+\usepackage{fancyhdr}
+\usepackage[numbers,sort&compress]{natbib}
+\setcitestyle{numbers}
+
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}    
+\usepackage{url}            
+\usepackage{booktabs}       
+\usepackage{amsfonts}       
+\usepackage{nicefrac}       
+\usepackage{microtype}      
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{babel}
+\usepackage{subcaption}
+\usepackage{float}
+
+\hypersetup{
+  colorlinks   = true, 
+  urlcolor     = RoyalBlue, 
+  linkcolor    = RoyalBlue, 
+  citecolor   = RoyalBlue 
+}
+
+\definecolor{light-light-gray}{gray}{0.92} 
+
+\usepackage{rotating}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+
+\usepackage{colortbl}
+\usepackage{cellspace}
+
+\usepackage{caption}
+\captionsetup[table]{skip=2pt}
+
+\usepackage{marginnote}
+\renewcommand{\marginpar}{\marginnote}
+
+\usepackage[capitalize,noabbrev]{cleveref}
+\newcommand{\customfootnotetext}[2]{{
+  \renewcommand{\thefootnote}{#1}
+  \footnotetext[0]{#2}}}
+
+\usepackage{xpatch}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}                                     {1.35ex \@plus1ex \@minus.2ex}                                {-.5em}
+{\normalfont\normalsize\bfseries}}
+\makeatother
+
+\usepackage{xspace}
+
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\usepackage[textsize=tiny]{todonotes}
+
+\renewcommand{\floatpagefraction}{.9}
+\newcommand{\hquad}{\hspace{0.4em}} 
+
+\title{Language models scale reliably with over-training and on downstream tasks\vspace{2pt}} 
+
+\author{
+Samir Yitzhak Gadre$^{1,2}$\hquad
+Georgios Smyrnis$^{3}$\hquad
+Vaishaal Shankar$^{4}$\\
+Suchin Gururangan$^{5}$\hquad
+Mitchell Wortsman$^{5}$\hquad
+Rulin Shao$^{5}$\hquad
+Jean Mercat$^{2}$\\
+Alex Fang$^{5}$\hquad
+Jeffrey Li$^{5}$\hquad
+Sedrick Keh$^{2}$\hquad
+Rui Xin$^{5}$\hquad
+Marianna Nezhurina$^{6,7}$\\
+Igor Vasiljevic$^{2}$\hquad
+Jenia Jitsev$^{6,7}$\hquad
+Luca Soldaini$^{8}$\hquad
+Alexandros G. Dimakis$^{3}$\\
+Gabriel Ilharco$^{5}$\hquad
+Pang Wei Koh$^{5,8}$\hquad
+Shuran Song$^{9}$\hquad
+Thomas Kollar$^{2}$\\
+Yair Carmon$^{10*}$\hquad
+Achal Dave$^{2*}$\hquad
+Reinhard Heckel$^{11*}$\hquad
+Niklas Muennighoff$^{12*}$\hquad
+Ludwig Schmidt$^{5*}$
+}
+
+\begin{document}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+Scaling laws are useful guides for derisking expensive training runs, as they predict performance of large models using cheaper, small-scale experiments.
+However, there remain gaps between current scaling studies and how language models are ultimately trained and evaluated.
+For instance, scaling is usually studied in the compute-optimal training regime (i.e., ``Chinchilla optimal'' regime).
+In contrast, models are often over-trained to reduce inference costs.
+Moreover, scaling laws mostly predict loss on next-token prediction, but models are usually compared on downstream task performance.
+To address both shortcomings, we create a testbed of 104 models with 0.011B to 6.9B parameters trained with various numbers of tokens on three data distributions.
+First, we fit scaling laws that extrapolate in both the amount of over-training and the number of model parameters.
+This enables us to predict the validation loss of a 1.4B parameter, 900B token run (i.e., 32$\times$ over-trained) and a 6.9B parameter, 138B token run (i.e., a compute-optimal run)---each from experiments that take 300$\times$ less compute.
+Second, we relate the perplexity of a language model to its downstream task performance by proposing a power law.
+We use this law to predict top-1 error averaged over downstream tasks for the two aforementioned models, using experiments that take 20$\times$ less compute. 
+Our experiments are available at \url{https://github.com/mlfoundations/scaling}.
+\end{abstract}
+\customfootnotetext{${^*}$}{Equal advising, ordered alphabetically. Correspondence to \url{sy@cs.columbia.edu}.
+  $^{1}$Columbia~University
+  $^{2}$Toyota~Research~Insitute
+  $^{3}$UT~Austin
+  $^{4}$Apple
+  $^{5}$University~of~Washington
+  $^{6}$Juelich~Supercomputing~Center, Research~Center~Juelich
+  $^{7}$LAION
+  $^{8}$Allen~Institute~for~AI
+  $^{9}$Stanford~University
+  $^{10}$Tel~Aviv~University
+  $^{11}$TU~Munich
+  $^{12}$Contextual~AI
+}
+\section{Introduction}
+\label{sec:intro}
+\begin{figure}[t!]
+    \centering \includegraphics[width=\linewidth]{figs/figure1_rpj_c4_val.pdf}
+    \caption{
+    \textbf{Reliable scaling with over-training and on downstream error prediction.}
+    \emph{(left)}
+    We fit a scaling law for model validation loss, parameterized by (i) a token multiplier $M = N/D$, which is the ratio of training tokens $D$ to parameters $N$ and (ii) the compute $C$ in FLOPs used to train a model, approximated by $C=6ND$.
+    Larger values of $M$ specify more over-training.
+    We are able to extrapolate, in both $N$ and $M$, the validation performance of models requiring more than $300\times$ the training compute used to construct the scaling law.
+    \emph{(right)}
+    We also fit a scaling law to predict average downstream top-1 error as a function of validation loss.
+    We find that fitting scaling laws for downstream error benefits from using more expensive models when compared to fitting for loss prediction.
+    We predict the average error over 17 downstream tasks for models trained with over 20$\times$ the compute.
+    For this figure, we train all models on RedPajama~\cite{rpj}.
+    }
+    \label{fig:fig1}
+    \vspace*{-3mm}
+\end{figure}
+
+Training large language models is expensive.
+Furthermore, training high-quality models requires a complex recipe of algorithmic techniques and training data.
+To reduce the cost of finding successful training recipes, researchers first evaluate ideas with small experiments and then extrapolate their efficacy to larger model and data regimes via scaling laws.
+With reliable extrapolation, it is possible to quickly iterate at small scale and still pick the method that will perform best for the final large training run.
+Indeed, this workflow has become commonplace for training state-of-the-art language models like Chinchilla~70B~\cite{chinchilla}, PaLM~540B~\cite{Chowdhery2022PaLMSL}, GPT-4~\cite{gpt4}, and many others.
+
+Despite their importance for model development, published scaling laws differ from the goals of training state-of-the-art models in important ways.
+For instance, scaling studies usually focus on the compute-optimal training regime (``Chinchilla optimality''~\cite{chinchilla}), where model and dataset size are set to yield minimum loss for a given compute budget. However, this setting ignores inference costs. As larger models are more expensive at inference, it is now common practice to over-train smaller models~\cite{llama}. Another potential mismatch is that most scaling laws quantify model performance by perplexity in next-token prediction instead of accuracy on widely used benchmark datasets. However, practitioners usually turn to benchmark performance, not loss, to compare models.
+
+In this paper, we conduct an extensive set of experiments to address both scaling in the over-trained regime and benchmark performance prediction.
+
+Motivated by the practice of training beyond compute-optimality, we first investigate whether scaling follows reliable trends in the over-trained regime.
+We notice, as implied by~\citet{chinchilla}, for a set of models of different sizes trained with a constant ratio of tokens to parameters, models' reducible loss $L'$~\cite{og_scaling,chinchilla} follows a power law ($L' = \lambda \cdot C^{-\eta}$) in the amount of training compute $C$.
+We find that as one increases the ratio of tokens to parameters, corresponding to more over-training, the scaling exponent $\eta$ remains about the same, while the scalar $\lambda$ changes. We explain our observations by reparameterizing existing scaling laws in relation to the amount of over-training.
+
+To establish empirically that scaling \emph{extrapolates} in the over-trained regime, we further experiment with a testbed of 104 models, trained from scratch on three different datasets: C4~\cite{c4,c4_ai2}, RedPajama~\cite{rpj}, and RefinedWeb~\cite{refinedweb}. 
+We find that scaling laws fit to small models can accurately predict the performance of larger models that undergo more over-training.
+Figure~\ref{fig:fig1} \emph{(left)} illustrates our main over-training result, where we invest $2.4e19$ FLOPs to extrapolate the C4 validation performance of a 1.4B parameter model trained on 900B tokens, which requires $300\times$ more compute to train.
+
+In addition to over-training, we also investigate if scaling laws can predict the performance of a model on downstream tasks.
+We establish a power law relationship between language modeling perplexity and the average top-1 error on a suite of downstream tasks.
+While it can be difficult to predict the error on individual tasks, we find it possible to predict aggregate performance from a model's perplexity among models trained on the same training data.
+Figure~\ref{fig:fig1}~\emph{(right)} presents our main downstream error prediction result, where we invest $2.7e20$ FLOPs to predict the average top-1 error over a set of downstream tasks to within 1 percentage point for a 6.9B compute-optimal model, which requires $20\times$ more compute to train.
+
+Our results suggest that the proposed scaling laws are promising to derisk (i) the effects of over-training models and (ii) the downstream performance of scaling up training recipes.
+To facilitate further research on reliable scaling, we provide all results of our experiments at \url{https://github.com/mlfoundations/scaling}.
+\section{Developing scaling laws for over-training and downstream tasks}
+\label{sec:method}
+
+In this section, we develop scaling laws to predict over-trained and downstream performance. 
+First, we provide key definitions (Section~\ref{sec:def}).
+We next present a scaling law for over-training drawing on empirical observation and prior work (Section~\ref{sec:method_overtraining}).
+To connect loss scaling and downstream error prediction, we observe that average top-1 error decreases exponentially as a function of validation loss, which we formalize as a novel scaling law (Section~\ref{sec:method_downstream}).
+In later sections, we build an experimental setup (Section~\ref{sec:experiments}) to quantify the extent to which our scaling laws extrapolate reliably (Section~\ref{sec:results}).
+
+\subsection{Preliminaries}
+\label{sec:def}
+
+\paragraph{Scaling laws for loss.}
+Typically, scaling laws predict model loss $L$ as a function of the compute $C$ in FLOPs used for training.
+If one increases the number of parameters $N$ in a model or the number of tokens $D$ that a model is trained on, compute requirements naturally increase.
+Hence, we assume $C$ is a function of $N, D$.
+Following \citet{kaplan2020scaling}, we use the approximation $C=6ND$, which~\citet{chinchilla} independently verify.
+We consider,
+\begin{align}
+\label{eq:general}
+L(C) = E + L'(C),
+\end{align}
+where $E$ is an \emph{irreducible loss} and $L'$ is the \emph{reducible loss}.
+$E$ captures the Bayes error or minimum possible loss achievable on the validation domain.
+The $L'(C)$ term captures what can possibly be learned about the validation domain by training on a source domain.
+$L'(C)$ should approach zero with increased training data and model capacity.
+$L'(C)$ is often assumed to follow a power law: $L'(C) = \lambda \cdot C ^ {-\eta}$ (i.a., ~\citet{og_scaling,gpt4}).
+It is also often helpful to consider a power law in a $\log$-$\log$ plot, where it appears as a line with slope $-\eta$ and $y$-intercept $\log{(\lambda)}$.
+
+\paragraph{Token multipliers.} We define a token multiplier $M=D/N$ as the ratio of training tokens to model parameters for notational convenience. $M$ allows us to consider fixed relationships between $D$ and $N$ even as a model gets bigger (i.e., as $N$ becomes larger).
+
+\paragraph{Compute-optimal training.}
+\citet{chinchilla} establish compute-optimal training, where, for any compute budget $H$, the allocation of parameters and tokens is given by,
+\begin{align}
+\label{eq:opti}
+\arg\min_{N, D} L(N, D) \text{ s.t. } C(N,D) = H.
+\end{align}
+To solve for the optimal $N^*, D^*$, one can sweep $N,D$ for each compute budget, retaining the best configurations.
+\citet{chinchilla} find that as the compute budget increases, $N^*$ and $D^*$ scale roughly evenly.
+Assuming equal scaling, there is a fixed compute-optimal token multiplier $M^* = D^* / N^*$ per training distribution.
+
+\paragraph{Over-training.}
+We define over-training as the practice of allocating compute sub-optimally, so smaller models train on a disproportionately large number of tokens (i.e., $M > M^*$).
+While loss should be higher than in the compute-optimal allocation for a given training budget, the resulting models have fewer parameters and thus incur less inference cost.
+
+\begin{figure*}[tp]
+    \centering
+\includegraphics[width=0.98\linewidth]{figs/emperical.pdf}
+    \caption{\textbf{Scaling in the over-trained regime follows consistent power law exponents.} We notice parallel lines in the $\log$-$\log$ plots of reducible loss vs. training compute for a range of token multipliers $M$, which give the ratio of training tokens to model parameters. Larger $M$ corresponds to more over-training.
+    For a power law giving reducible loss as a function of compute: $L'(C) = \lambda \cdot C^{-\eta}$, the exponent $\eta$ remains relatively constant resulting in lines with approximately fixed slope (Figure~\ref{fig:slopes}).
+    The scalar $\lambda$ that determines the $y$-intercept, however, shifts with different token multipliers.
+    This suggests $\lambda$ is a function of the token multiplier, while $\eta$ is not.
+    }
+    \label{fig:emperical}
+\end{figure*}
+
+\subsection{Scaling laws for over-training}
+\label{sec:method_overtraining}
+
+To propose a scaling law for over-trained models, we first turn to empirical observation.
+We train four model configurations with parameter counts between 0.011B and 0.411B for token multipliers $M$ between 20 and 640, where $M=20$ points lie roughly on the compute-optimal frontier, and larger $M$ corresponds to more over-training.
+We defer experimental details to Section~\ref{sec:experiments} to focus on our observations first.
+In Figure~\ref{fig:emperical}, we show loss against compute in a $\log$-$\log$ plot for the models trained on three datasets and evaluated on the C4 eval set. 
+We notice parallel lines when fitting power laws to the reducible loss, which suggests a near-constant scaling exponent even with increased over-training. 
+This indicates that scaling behavior should be describable in the amount of over-training.
+
+In search of an analytic expression for the observations in Figure~\ref{fig:emperical}, we consider existing scaling literature.
+A common functional form for the risk of a model, as proposed in prior work~\cite{rosenfeld_ConstructivePredictionGeneralization_2020,chinchilla} is,
+\begin{align}
+\label{eq:riskform}
+L(N,D) = E + A N^{-\alpha} + B D^{-\beta}.
+\end{align}
+Recall from Section~\ref{sec:def}, $N$ is the number of parameters and $D$ the number of training tokens.
+The constants $E, A, \alpha, B, \beta$ are fit from data.
+By fitting this parametric form, \citet{chinchilla} find that scaling exponents $\alpha$ and $\beta$ are roughly equal, suggesting that one should scale $N$ and $D$ equally as compute increases. Hence, we assume $\alpha=\beta$. 
+With this assumption, we reparameterize Equation~\eqref{eq:riskform} in terms of compute $C = 6ND$ and a token multiplier $M = D/N$. 
+We get,
+\begin{align}
+\label{eq:lossCM}
+L(C,M)
+=
+E + \left(a M^{\eta} + b M^{-\eta} \right) C^{-\eta},
+\end{align}
+where $\eta = \alpha/2$, $a = A(1/6)^{-\eta}$, $b=B(1/6)^{-\eta}$ gives the relation to Equation~\eqref{eq:riskform}.
+For a complete derivation, see Appendix~\ref{appx:theory}.
+
+Equation~\eqref{eq:lossCM} has the following interpretation:
+(i) The scaling exponent $\eta$ is not dependent on $M$. Thus, we always expect lines with the same slope in the $\log$-$\log$ plot---as in Figure~\ref{fig:emperical}.  
+(ii) The term $a M^{\eta} + b M^{-\eta}$ determines the offsets between curves with different token multipliers. Hence, we expect non-overlapping, parallel lines in the $\log$-$\log$ plot for the range of $M$ we consider---also consistent with Figure~\ref{fig:emperical}.
+
+Recall that we make the assumption $\alpha=\beta$, which implies equal scaling of parameters and tokens as more compute is available. 
+However, as explained in Appendix~\ref{appx:theory}, even if $\alpha\neq \beta$, we get a parameterization that implies the power-law exponent remains constant with over-training.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/downstream_emperical.pdf}
+    \caption{\textbf{Average top-1 error scales as a function of loss.} We plot models trained on three datasets and notice an exponential decay of average top-1 error as C4 eval loss, on the x-axis, decreases.
+    We consider on the y-axes average error on 17 evaluations where performance is at least 10 points above random chance for at least one 0.154B scale model.
+    These observations suggest that average top-1 error should be predictable with reliable loss estimates.
+    }
+    \label{fig:downstream_corr}
+\end{figure}
+
+\subsection{Scaling laws for downstream error}
+\label{sec:method_downstream}
+
+Scaling is typically studied in the context of loss~\cite{kaplan2020scaling,chinchilla,muennighoff2023scaling}, which \citet{schaeffer2023emergent} note is smoother than metrics like accuracy.
+However, practitioners often use downstream benchmark accuracy as a proxy for model quality and not loss on perplexity evaluation sets.
+To better connect scaling laws and over-training to task prediction, we revisit the suite of models plotted in Figure~\ref{fig:emperical}.
+In Figure~\ref{fig:downstream_corr}, we plot average downstream top-1 errors over evaluations sourced from LLM-Foundry~\cite{mosaicml} against the C4 eval loss.
+We defer details of the setup to Section~\ref{sec:experiments} to focus here on a key observation: average error appears to follow exponential decay as loss decreases.
+
+Based on the exponential decay we observe in Figure~\ref{fig:downstream_corr}, we propose the following relationship between downstream average top-1 error \textsf{Err} and loss $L$,
+\begin{align}
+\label{eq:errL}
+\textsf{Err}(L) = \epsilon - k \cdot \exp{(-\gamma L)},
+\end{align}
+where $\epsilon, k, \gamma$ are fit from data.
+Equation~\eqref{eq:errL} also has an interpretation in terms of model perplexity $\textsf{PP}(L) = \exp{(L})$,
+\begin{align}
+\label{eq:errPP}
+\textsf{Err}(\textsf{PP}) = \epsilon - k \cdot \textsf{PP}^{-\gamma}.
+\end{align}
+Namely, \textsf{Err} follows a power law in $\textsf{PP}$ that is bounded from above by $\epsilon$ signifying arbitrarily high error and from below by $\epsilon - k \cdot 
+\exp(-\gamma E)$, where $E$ is the Bayes error from Equation~\eqref{eq:lossCM}.
+
+Equation~\eqref{eq:errL} in conjunction with Equation~\eqref{eq:lossCM} suggests a three-step method to predict $\textsf{Err}$ as a function of compute and the amount of over-training.
+For choices of training and validation distributions,
+(i) fit a scaling law to Equation~\eqref{eq:lossCM} using triplets of compute $C$, token multiplier $M$, and measured loss $L$ on a validation set to yield $(C, M) \mapsto L$.
+(ii) Fit a scaling law to Equation~\eqref{eq:errL}  using pairs of loss $L$ and downstream error $\textsf{Err}$ for models to get $L \mapsto \textsf{Err}$.
+(iii) Chain predictions to get $(C, M) \mapsto \textsf{Err}$.
+\section{Constructing a scaling testbed}
+\label{sec:experiments}
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/grid_full.pdf}
+    \caption{\textbf{Search, filter, fit:
+    A recipe for selecting configurations for scaling.}
+    \emph{(left)} To generate the final configurations presented in Table~\ref{tab:hparams}, we run a 435 model grid search over model width, hidden dimension, number of attention heads, batch size, and warmup steps.
+    All models are trained near compute-optimally.
+    \emph{(center)} We plot the efficient frontier of models, which appear to follow a trend, excluding models from $5.2 \times 10^{16}$ to $5.2 \times 10^{17}$, which fall below the trend.
+    \emph{(right)} We fit a power law with irreducible error to the remaining configurations, picking four configurations that closely track the full model suite (``Selected models'').
+    These models extrapolate the performance of 1.4B, 6.9B target models.
+    Shaded regions represent bootstrap 95\% confidence intervals.
+    }
+    \label{fig:grid}
+\end{figure}
+
+In this section, we discuss our experimental setup to test the predictions suggested by Equations~\eqref{eq:lossCM} and~\eqref{eq:errL}.
+We first present our general language modeling setup (Section~\ref{sec:training}).
+Next, we discuss our strategy for determining model configurations for our scaling investigation (Section~\ref{sec:searching}) and fitting scaling laws (Section~\ref{sec:fitting}).
+We then present metrics to validate how well scaling laws predict loss and downstream performance (Section~\ref{sec:evaluation}).
+
+\subsection{Training setup}
+\label{sec:training}
+
+We train transformers~\cite{transformer} for next token prediction, based on architectures like GPT-2~\cite{Radford2019LanguageMA} and LLaMA~\cite{llama}.
+We employ GPT-NeoX~\cite{neox} as a standardized tokenizer for all data.
+See Appendix~\ref{appx:additional_training_main} for architecture, optimization, and hyperparameter details.
+
+\subsection{Model configurations}
+\label{sec:searching}
+
+To get final configurations for the 0.011B to 0.411B parameter models plotted in Figures~\ref{fig:emperical} and~\ref{fig:downstream_corr}, we first conduct a wide grid search over a total of 435 models, trained from scratch, from 0.01B to 0.5B parameters (Figure~\ref{fig:grid}~\emph{(left)}).
+We train on the original OpenLM data mix~\cite{open_lm}, which largely consists of RedPajama~\cite{rpj} and The Pile~\cite{pile}.
+While we eventually plan to over-train models, at this step we search for \emph{base configurations} near compute-optimality.
+We train on 20 tokens per parameter ($M=20$), which, in early experiments, gives models near the compute-optimal frontier.
+This is similar to findings in \citet{chinchilla}'s Table 3, which suggests that $M=20$ is near-optimal for the Chinchilla experimental setup.
+
+To find maximally performant small-scale models on validation data, we tune model width, number of layers, number of attention heads, warmup steps, and batch size.
+Our validation set, OpenLM eval, contains tokens from recent arXiv papers, the OpenLM codebase itself, and news articles.
+We find in early experiments that qk-LayerNorm makes models less sensitive to learning rate, which is a phenomenon \citet{wortsman2023small} report in their Figure 1.
+Hence, we fix the learning rate (3$e$-3) for our sweeps.
+We also perform smaller grid searches over 1.4B and 6.9B parameter model configurations at $M=20$, retaining the best configurations.
+
+At this point, we have many models, several of which give poor performance; following prior work~\cite{kaplan2020scaling,chinchilla}, we want to keep only models that give best performance.
+Hence, in Figure~\ref{fig:grid}~\emph{(center)}, we filter out models that do not lie on the Pareto frontier.
+While there appears to be a general trend, configurations between $5.2 \times 10^{16}$ and $5.2 \times 10^{17}$ FLOPs lie below the frontier established by other models.
+We hypothesize these models over-perform as they are trained for more optimization steps than their neighbors based on our power-of-two batch sizes.
+We provide support for this hypothesis in Appendix~\ref{appx:more_results}, but opt to remove these models from our investigation.
+
+To ensure tractable compute requirements for our scaling experiments, we require a subset of models that follows the trend of the entire Pareto frontier.
+In Figure~\ref{fig:grid}~\emph{(right)}, we fit trends to the Pareto models and to a subset of four models.
+We notice that the trends closely predict both the performance of the 1.4B and 6.9B models, suggesting that our small-scale configurations reliably extrapolate in the compute-optimal setting.
+
+Moving forward, we do not tune hyperparameters for other token multipliers (i.e., $M \neq 20$), on other training or evaluation distributions, or on validation sets for downstream tasks.
+For more details including specific hyperparameters, see Appendix~\ref{appx:additional_training}.
+
+To create our scaling testbed, we start with the four small-scale, base configurations from our grid search: $N\in \{0.011\text{B}, 0.079\text{B}, 0.154\text{B}, 0.411\text{B}\}$.
+To ensure our conclusions are not particular to a single training distribution, we train models on each of C4~\cite{c4,c4_ai2}, RedPajama~\cite{rpj}, and RefinedWeb~\cite{refinedweb}, which have 138B, 1.15T, and 600B tokens, respectively, for different token multipliers $M \in \{5, 10, 20, 40, 80, 160, 320, 640\}$.
+We omit runs that require more tokens than are present in a dataset (i.e., $N=0.411\text{B}, M=640$ for C4).
+We additionally train $N=1.4$B models at $M=20$ and at the largest token multiplier possible without repeating tokens (i.e., 80 for C4, 640 for RedPajama, and 320 for RefinedWeb).
+We train $N=6.9\text{B}, M=20$ models on each dataset given the relevance of 7B parameter models~\citep{llama,jiang2023mistral}.
+In total this results in a testbed of 104 models.
+
+\subsection{Fitting scaling laws}
+\label{sec:fitting}
+
+\begin{table}[tp]
+    \centering
+    \small
+    \caption{\textbf{Default number of parameters $N$ and token multiplier $M$ to fit our scaling laws.}
+    We invest $\sim$100 A100 hours to fit Equation~\eqref{eq:lossCM} and $\sim$1,000 A100 hours to fit Equation~\eqref{eq:errL}.} 
+    \begin{tabular}{lccc}
+        \toprule
+        $N$ & $M$ & Used to fit Equation~\eqref{eq:lossCM} & Used to fit Equation~\eqref{eq:errL} \\\midrule
+        0.011B & 20 & \ding{51} & \ding{51}\\
+        0.079B & 20 & \ding{51} & \ding{51}\\
+        0.154B & 20 & \ding{51} & \ding{51}\\
+        0.411B & 20 & \ding{51} & \ding{51}\\
+        0.011B & 320 & \ding{51} & \ding{51}\\
+        1.4B & 20 & \ding{55} & \ding{51}\\\midrule
+        \multicolumn{2}{c}{Total compute $C$ [FLOPs]} & 2.4$e$19 & 2.7$e$20 \\\bottomrule
+    \end{tabular}
+    
+    \label{tab:fit_hparams}
+\end{table}
+We fit Equation~\eqref{eq:lossCM} to approximate $E, a, b, \eta$ using curve-fitting in SciPy~\cite{scipy} (i.e., Levenberg-Marquardt to minimize non-linear least squares).
+We repeat this process to fit Equation~\eqref{eq:errL} to approximate $\epsilon, k, \gamma$.
+We invest $\sim$100 A100 hours to train the models required to fit a scaling law for loss and $\sim$1,000 A100 hours for a corresponding law for downstream error.
+Unless otherwise specified, we fit to the $N, M$ pairs in Table~\ref{tab:fit_hparams}, which are a subset of our full testbed.
+Our configurations allow us to test for extrapolation to the $N=1.4\text{B}, M=640$ (900B token) and the $N=6.9\text{B}, M=20$ (138B token) regimes.
+
+\subsection{Evaluation setup}
+\label{sec:evaluation}
+
+\paragraph{Evaluation datasets.}
+Unless otherwise stated, our default validation loss dataset is C4 eval.
+For downstream tasks, we adopt a subset from 46 tasks from LLM-foundry~\cite{mosaicml}, which includes standard tasks with both zero-shot and few-shot evaluations.
+Specifically, we consider a 17-task subset where, for each evaluation, at least one 0.154B scale model---trained with as many as 99B tokens---gets 10 percentage points above chance accuracy:
+ARC-Easy~\cite{arc},
+BIG-bench: CS algorithms~\cite{srivastava2023beyond},
+BIG-bench: Dyck languages~\cite{srivastava2023beyond},
+BIG-bench: Novel Concepts~\cite{srivastava2023beyond},
+BIG-bench: Operators~\cite{srivastava2023beyond},
+BIG-bench: QA WikiData~\cite{srivastava2023beyond},
+BoolQ~\cite{boolq},
+Commonsense QA~\cite{talmor-etal-2019-commonsenseqa},
+COPA~\cite{copa},
+CoQA~\cite{reddy-etal-2019-coqa},
+HellaSwag (zero-shot)~\cite{hellaswag},
+HellaSwag (10-shot)~\cite{hellaswag},
+LAMBADA~\cite{lambada},
+PIQA~\cite{piqa},
+PubMed QA Labeled~\cite{pubmed},
+SQuAD~\cite{squad},
+and
+WinoGrand~\cite{winograd}.
+For more details on evaluation datasets see Appendix~\ref{appx:eval_data}.
+We focus on this subset to ensure we are measuring signal, not noise.
+Including downstream tasks like MMLU~\cite{mmlu}, where performance is close to random chance, however, does not invalidate our results as we show in our evaluation set ablations (Appendix~\ref{appx:more_results}).
+
+\paragraph{Metrics.}
+We consider three main metrics:
+\emph{Validation loss}, which is the cross entropy between a model's output and the one-hot ground truth token, averaged over all tokens in a sequence and over all sequences in a dataset.
+\emph{Average top-1 error}, which is a uniform average over the 17 downstream evaluations, as mentioned in the above paragraph.
+To measure how good a prediction $\zeta(C, M)$ is, we measure \emph{Relative prediction error}: $|\zeta(C, M) - \zeta_{GT}| / \zeta_{GT}$, where $\zeta$ is the predicted loss $L$ or the average top-1 error $\textsf{Err}$. $\zeta_{GT}$ is the ground truth measurement to predict.
+
+\section{Results: Reliable extrapolation}
+\label{sec:results}
+
+In this Section, we quantify the extent to which the scaling laws developed in Section~\ref{sec:method} extrapolate larger model performance using the scaling testbed from Section~\ref{sec:experiments}.
+By default, we fit Equations~\eqref{eq:lossCM} and~\eqref{eq:errL} to the configurations in Table~\ref{tab:fit_hparams}, use C4 eval for loss, and the 17-task split from Section~\ref{sec:evaluation} for average top-1 error.
+\begin{figure*}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/error.pdf}
+    \caption{\textbf{Relative error on C4 eval for different training distributions.} Boxes highlighted in yellow correspond to pairs---number of parameters $N$, token multiplier $M$---used to fit Equation~\eqref{eq:lossCM}. Larger values of $M$ correspond to more over-training. The prediction error is low in both interpolation and extrapolation ranges. Below $N=1.4$B, empty squares correspond to runs that were not possible due to the limited dataset size for single epoch training. At $N=1.4$B we run at $M=20$ and at the largest possible multiplier. At $N=6.9$B, we run at $M=20$.}
+    \label{fig:error}
+\end{figure*}
+
+\paragraph{Over-trained performance is predictable.}
+We highlight our main over-training results in Figure~\ref{fig:fig1}~\emph{(left)}.
+Namely, we are able to extrapolate both in the number of parameters $N$ and the token multiplier $M$ to closely predict the C4 eval performance of a 1.4B parameter model trained on 900B RedPajama tokens ($N=1.4\text{B}, M=640$).
+Our prediction, which takes 300$\times$ less compute to construct than the final 1.4B run, is accurate to within 0.7\% relative error.
+Additionally, for the $N=6.9\text{B}, M=20$ run, near compute-optimal, the relative error is also 0.7\%.
+
+These results support several key takeaways.
+(i) Scaling can be predictable even when one increases both the model size and the amount of over-training compared to the training runs used to fit a scaling law.
+(ii) The form presented in Equation~\eqref{eq:lossCM} is useful in practice for predicting over-trained scaling behavior.
+(iii) Fitting to Equation~\eqref{eq:lossCM} gives good prediction accuracy near compute-optimal.
+More specifically, predictions are accurate both for the 1.4B over-trained model and the 6.7B compute-optimal model using a single scaling fit.
+
+While Figure~\ref{fig:fig1} explores a specific case of making predictions in the over-trained regime, we aim to understand the error profile of our predictions across training datasets, token multipliers, and number of parameters.
+Hence, Figure~\ref{fig:error} shows the relative error between ground truth loss and predicted loss on C4 eval for models in our testbed.
+We notice uniformly low prediction error suggesting that predictions are accurate in many settings.
+
+\paragraph{Average top-1 error is predictable.}
+Figure~\ref{fig:fig1}~\emph{(right)} presents our main result in estimating scaling laws for downstream error.
+Concretely, we use the models indicated in Table~\ref{tab:fit_hparams} to fit Equations~\eqref{eq:lossCM} and~\eqref{eq:errL}, chaining the scaling fits to predict the average top-1 error as a function of training compute $C$ and the token multiplier $M$.
+Our fits allow us to predict, using $20\times$ less compute, the downstream performance of a 6.9B model trained on 138B RedPajama tokens to within $0.05\%$ relative error and a 1.4B model trained on RedPajama 900B tokens to within $3.6\%$ relative error.
+
+Table~\ref{tab:downstream} additionally shows the relative error of our downstream performance predictions for models trained on C4, RedPajama, and RefinedWeb, indicating that our scaling law functional forms are applicable on many training datasets.
+We note that while average accuracy is predictable, \textit{individual} downstream task predictions are significantly more noisy.
+We report relative error for more model predictions in Figures~\ref{fig:error_downstream_all} and \ref{fig:error_downstream_subset}.
+We also find that if we remove the 1.4B model for the Equation~\eqref{eq:errL} fit, relative error jumps, for instance, from 0.05\% to 10.64\% on the 17-task split for the 6.9B, 138B token RedPajama prediction.
+This highlights the importance of investing more compute when constructing scaling laws for downstream task prediction compared to loss prediction.
+
+\begin{table}[tp]
+    \centering
+    \caption{
+    \textbf{Downstream relative prediction error at 6.9B parameters and 138B tokens.}
+    While predicting accuracy on individual zero-shot downstream evaluations can be challenging (``Individual''), predicting \textit{averages} across downstream datasets is accurate (``Avg.'').
+    }    
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{lcccc@{\hskip 8ex}c}
+        \toprule
+        & \multicolumn{4}{c}{Individual top-1 error} & {Avg. top-1 error} \\
+        \cmidrule(lr){2-5} \cmidrule(lr){6-6}
+         Train set & ARC-E~\cite{arc} & LAMBADA~\cite{lambada} & OpenBook QA~\cite{OpenBookQA2018} & HellaSwag~\cite{hellaswag} & 17-task split \\\midrule
+         C4~\cite{c4,c4_ai2} & 28.96\% & 15.01\% & 16.80\% & 79.58\% & 0.14\% \\
+         RedPajama~\cite{rpj} & 5.21\% & 14.39\% & 8.44\% & 25.73\% & 0.05\% \\
+         RefinedWeb~\cite{refinedweb} & 26.06\% & 16.55\% & 1.92\% & 81.96\% & 2.94\% \\ 
+        \bottomrule
+    \end{tabular}
+    }
+    \label{tab:downstream}
+\end{table}
+
+\paragraph{Under-training, out-of-distribution scaling, compute-reliability trade-offs.}
+In addition to our main results presented above, we include additional results in Appendix~\ref{appx:more_results}, which we summarize here.
+First, we notice that when token multipliers become too small (i.e., $M=5$) scaling becomes unreliable and lies off the trend.
+Additionally, multipliers other than 20, such as 10, 40, and 80, garner points that are roughly on the compute optimal frontier (Figure~\ref{fig:emperical_small}).
+This observation suggests that the compute-optimal multiplier may lie in a range rather than take a single value.
+To probe the limits of reliable scaling, we attempt to break our scaling laws in out-of-distribution settings.
+We find that models trained on C4---English filtered---and evaluated on next token prediction on code domains have a high relative error in many cases. Perhaps surprisingly, evaluating the same models on German next token prediction gives reliable loss scaling (Figure~\ref{fig:error_ood}).
+We additionally examine the compute necessary to create accurate scaling laws, finding
+that scaling laws can be constructed more cheaply for loss prediction than for downstream error prediction (Figures~\ref{fig:error_vs_1b} and~\ref{fig:error_vs_7b}).
+
+\section{Related work}
+\label{sec:related}
+We review the most closely related work in this section.
+For additional related work, see Appendix~\ref{appx:added_related}.
+
+\paragraph{Scaling laws.}
+Early works on scaling artificial neural networks observe predictable power-law scaling in the training set size and number of model parameters~\cite{og_scaling,hestness2019beyond,rosenfeld_ConstructivePredictionGeneralization_2020}. 
+\citet{alabdulmohsin2022revisiting} stress the importance of looking at the extrapolation regime of a scaling law.
+\citet{yang2022tensor} prescribe architectural and hyperparameter changes when scaling model width to realize performant models; \citet{yang2023tensor} make analogous recommendations when scaling model depth.
+\citet{Bi2024DeepSeekLS} propose hyperparameter aware scaling laws.
+Unlike the aforementioned work, our investigation focuses on over-training and predicting downstream accuracy.
+
+\citet{chinchilla} investigate how the number of model parameters $N$ and training tokens $D$ should be chosen to minimize loss $L$ given a compute budget $C$.
+\citet{chinchilla} find that when scaling up $C$, both $N$ and $D$ should be scaled equally up to a multiplicative constant (i.e., $N \propto C^{\sim 0.5}$ and $D \propto C^{\sim 0.5}$) to realize compute-optimality.
+Appendix C of the Chinchilla paper additionally suggests that these findings hold across three datasets.
+However, \citet{chinchilla} do not verify their scaling laws for training beyond compute-optimality, or for downstream error prediction---both of which are central to our work. 
+
+\citet{Sardana2023Beyond} propose modifications to the Chinchilla formulation to incorporate inference costs into the definition of compute-optimality and solve for various fixed inference budgets.
+Their key finding, which is critical for our work, is that when taking into account a large enough inference budget, it is optimal to train smaller models for longer than the original Chinchilla recommendations.
+Our work presupposes that over-training can be beneficial.
+Instead of solving for inference-optimal schemes, we support empirically a predictive theory of scaling in the over-trained regime.
+Additionally, we provide experiments across many validation and training sets.
+
+For predicting downstream scaling beyond loss,~\citet{Isik2024ScalingLF} relate the number of pre-training tokens to downstream cross-entropy and machine translation BLEU score~\cite{papineni-etal-2002-bleu} after fine-tuning. 
+In contrast, we take a holistic approach to evaluation by looking at top-1 error over many natural language tasks. 
+\citet{schaeffer2023emergent} argue that emergent abilities~\cite{wei2022emergent} are a product of non-linear metrics and propose smoother alternatives.
+As a warmup for why non-linear metrics may be hard to predict, \citet{schaeffer2023emergent} consider predicting an $\ell$ length sequence exactly: $\textsf{Err}(N, \ell) \approx 1 - \textsf{PP}(N)^{-\ell}$, where $N$ is the number of parameters in a model and $\textsf{PP}$ is its perplexity.
+This is a special case of our Equations~\eqref{eq:errL} and~\eqref{eq:errPP}, where the number of training tokens does not appear, $\epsilon = 1, k = 1$, and $\gamma = \ell$.
+In contrast, we treat $\epsilon, k, \gamma$ as free parameters for a scaling law fit, finding that average error over downstream tasks can make for a predictable metric.
+
+\paragraph{Over-training in popular models.} There has been a rise in over-trained models~\cite{llama,llama2} and accompanying massive datasets~\cite{rpj,refinedweb,soldaini2024dolma,albalak2024survey}. For example, Chinchilla 70B~\cite{chinchilla} is trained with a token multiplier of 20, while LLaMA-2 7B~\cite{llama2} uses a token multiplier of 290.
+In our investigation, we look at token multipliers from 5 to 640 to ensure coverage of popular models and relevance for future models that may be trained on even more tokens.
+\vspace*{-2mm}
+\section{Limitations, future work, and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations and future work.}
+We identify limitations, which provide motivation for future work.
+
+\begin{itemize}[leftmargin=5mm]
+    \vspace*{-1mm}
+    \item \textbf{Hyperparameters.}
+    While our configurations are surprisingly amenable to reliable scaling across many training and testing distributions without further tuning, there is a need to develop scaling laws that do not require extensive hyperparameter sweeps.
+    \vspace*{-1mm}
+    \item \textbf{Scaling up.} Validating the trends in this paper for even larger runs is a valuable direction. Additionally, repeating our setup for models that achieve non-trivial performance on harder evaluations like MMLU is left to future work.
+    \vspace*{-1mm}
+    \item \textbf{Scaling down.} Actualizing predictable scaling with even cheaper runs is important to make this area of research more accessible, especially for downstream error prediction.
+    \vspace*{-1mm}
+    \item \textbf{Failure cases.} While we present a preliminary analysis of when scaling is unreliable, future work should investigate conditions under which scaling breaks down.
+    \vspace*{-1mm}
+    \item \textbf{Post-training.} It is common to employ fine-tuning interventions after pre-training, which we do not consider.
+    Quantifying to what degree over-training the base model provides benefits \emph{after} post-training is an open area of research.
+    \vspace*{-1mm}
+    \item \textbf{Individual downstream task prediction.}
+    While we find that averaging over many task error metrics can make for a predictable metric, per-task predictions are left to future work.
+    \vspace*{-1mm}
+    \item  \textbf{In-the-wild performance.}
+    Downstream task performance is a proxy for the in-the-wild user experience.
+    Analyzing scaling trends in the context of this experience is timely.
+    \vspace*{-1mm}
+    \item \textbf{Dataset curation.} Our work only deals with existing training datasets.
+    Exploring dataset curation for improved model scaling is another promising direction.
+    \vspace*{-1mm}
+\end{itemize}
+
+\paragraph{Conclusion.}
+We show that the loss of over-trained models, trained past compute-optimality, is predictable. Furthermore, we propose and validate a scaling law relating loss to average downstream task performance.
+We hope our work will inspire others to further examine the relationship between model training and downstream generalization.
+Our testbed will be made publicly available, and we hope it will make scaling research more accessible to researchers and practitioners alike.
+
+\section*{Acknowledgements}
+SYG is supported by an NSF Graduate Research Fellowship,
+GS by the Onassis Foundation - Scholarship ID: F ZS 056-1/2022-2023, and MN by the Federal Ministry of Education and Research of Germany under grant no. 01IS22094B WEST-AI.
+We thank Stability AI and Toyota Research Institute (TRI) for access to compute resources.
+This research has been supported by NSF Grants AF 1901292, CNS 2148141, Tripods CCF 1934932, IFML CCF 2019844, and research gifts by Western Digital, Amazon, WNCG IAP, UT Austin Machine Learning Lab (MLL), Cisco, and the Stanly P. Finch Centennial Professorship in Engineering.
+We also thank Kushal Arora, Alper Canberk, Mia Chiquier, Sachit Menon, Chuer Pan, Purva Tendulkar, and Mandi Zhao for valuable feedback.
+
+\clearpage
+
+\bibliography{main}
+\bibliographystyle{main.bst}
+
+\clearpage
+
+\begin{appendix}
+\onecolumn
+
+\tableofcontents
+\clearpage
+
+\section{Contributions}
+Names ordered alphabetically.
+
+\paragraph{Model training and experiment babysitting.} Achal Dave (notably, the 1.4B parameter, 900B token run),
+Samir Yitzhak Gadre
+
+\paragraph{Dataloading.}
+Georgios Smyrnis
+
+\paragraph{Training tokens.} Achal Dave, Alex Fang, Samir Yitzhak Gadre, Suchin Gururangan, Jeffrey Li, Vaishaal Shankar (lead), Mitchell Wortsman
+
+\paragraph{Evaluation tokens.} Achal Dave, Samir Yitzhak Gadre, Reinhard Heckel, Vaishaal Shankar (lead), Rulin Shao
+
+\paragraph{Loss/perplexity evaluation.} Samir Yitzhak Gadre
+\paragraph{Downstream evaluation.} Vaishaal Shankar
+
+\paragraph{Project-specific planning, infrastructure, plots, and analysis.}
+Samir Yitzhak Gadre
+
+\paragraph{OpenLM~\cite{open_lm} open-source infrastructure.}
+Achal Dave (core contributor),
+Alex Fang,
+Samir Yitzhak Gadre (core contributor),
+Suchin Gururangan (core contributor),
+Jenia Jitsev,
+Sedrick Keh,
+Jeffrey Li,
+Jean Mercat,
+Marianna Nezhurina,
+Vaishaal Shankar (core contributor),
+Georgios Smyrnis (core contributor),
+Igor Vasiljevic,
+Mitchell Wortsman (core contributor),
+Rui Xin
+
+\paragraph{Theory.}
+Yair Carmon (original idea that ``parallel lines'' should show up in scaling plots),
+Samir Yitzhak Gadre (various derivations, empirical verification, related validation loss to average top-1 error as in Equation~\eqref{eq:errL}),
+Reinhard Heckel (derived a scaling form based on Chinchilla~Approach~3~\cite{chinchilla}, which appears in Equation~\eqref{eq:lossCM}),
+Niklas Muennighoff (derived a scaling form based on Chinchilla Approach~3, similar to Equation~\eqref{eq:lossCM}),
+Mitchell Wortsman (provided intuition about irreducible loss and why it is critical).
+
+\paragraph{Writing.}
+Yair Carmon,
+Achal Dave,
+Reinhard Heckel,
+Samir Yitzhak Gadre (lead), 
+Niklas Muennighoff,
+Ludwig Schmidt
+
+\paragraph{Compute.}
+Achal Dave, Jenia Jitsev, Thomas Kollar, Ludwig Schmidt, Vaishaal Shankar
+
+\paragraph{Advising.}
+Yair Carmon (co-lead),
+Achal Dave (co-lead),
+Alexandros G. Dimakis,
+Reinhard Heckel (co-lead),
+Gabriel Ilharco,
+Jenia Jitsev, 
+Pang Wei Koh,
+Thomas Kollar,
+Niklas Muennighoff (co-lead),
+Ludwig Schmidt (co-lead),
+Luca Soldaini,
+Shuran Song
+
+\clearpage
+
+\section{Scaling-law derivations}
+\label{appx:theory}
+
+We first show that reparameterizing Equation~\eqref{eq:riskform} in terms of the compute $C$ and token multiplier $M$ for $\alpha=\beta$ yields Equation~\eqref{eq:lossCM}. 
+Combining $C=6ND$ and $M=D/N$ yields $N=\sqrt{C/(6M)}$ and $D = \sqrt{CM/6}$. Inserting these into Equation~\eqref{eq:riskform} yields,
+\begin{align*}
+L(C,M) &= E + A \left( \frac{C}{6M}\right)^{-\frac{\alpha}{2}} + B \left( \frac{CM}{6}\right)^{-\frac{\alpha}{2}},\\
+&= E + \left( A \left( \frac{1}{6}\right)^{-\frac{\alpha}{2}} M^{\frac{\alpha}{2}} +  B \left(\frac{1}{6}\right)^{-\frac{\alpha}{2}} M^{-\frac{\alpha}{2}} \right) C^{-\frac{\alpha}{2}}.
+\end{align*}
+This is equal to Equation~\eqref{eq:lossCM}, making the substitutions $\eta = \alpha/2$, $a = A(1/6)^{-\eta}$, $b=B(1/6)^{-\eta}$, as noted in the main body.  
+
+\paragraph{Relation to compute-optimal training.}
+
+Recall that we made the assumption $\alpha=\beta$, which implies equal scaling of parameters and tokens to realize compute-optimal models.
+While this assumption is empirically justified~\cite{chinchilla}, even if $\alpha \neq \beta$, we get a parameterization that implies the power law exponent in Equation~\eqref{eq:lossCM} remains constant with over-training, while the power law scalar changes.
+
+To find a compute-optimal training setting,~\citet{chinchilla} propose to minimize the right-hand side of Equation~\eqref{eq:riskform} subject to the compute constraint $C = 6ND$. This yields, 
+$
+N^\ast = \gamma^{\frac{1}{\alpha + \beta}} (C/6)^{\frac{\beta}{\alpha + \beta}}
+$ and 
+$
+D^\ast = \gamma^{-\frac{1}{\alpha + \beta}} (C/6)^{\frac{\alpha}{\alpha + \beta}}$, where $\gamma = \frac{\alpha A}{ \beta B}$, for notational convenience. 
+The associated risk is,
+\begin{align*}
+L(N^\ast,D^\ast)
+= E + \left( A\gamma^{\frac{-\alpha}{\beta+\alpha}} + B \gamma^{\frac{\beta}{\beta+\alpha}} \right) \left(\frac{C}{6}\right)^{-\frac{\alpha \beta}{\alpha + \beta}}.
+\end{align*}
+
+We now deviate from compute-optimal training by modifying the model size and tokens by multiplication with a constant $\sqrt{m}$, according to 
+\begin{align}
+\label{eq:tokenmtp}
+N_m = \frac{1}{\sqrt{m}} N^\ast, 
+\quad
+D_m = \sqrt{m} D^\ast.
+\end{align}
+This modification keeps the compute constant (i.e., $6N_m D_m = 6N^\ast D^\ast$). The risk, then, becomes 
+\begin{align}
+\label{eq:cgeneral}
+L(f_{N_m,D_m})
+= E 
++ \left(m^{\frac{\alpha}{2}} A\gamma^{\frac{-\alpha}{\beta+\alpha}} + m^{-\frac{\beta}{2}} B \gamma^{\frac{\beta}{\beta+\alpha}} \right) C^{-\frac{\alpha \beta}{\alpha + \beta}}.
+\end{align}
+We again expect the same power law exponent and changing power law scalar. 
+Note that $m$ in Equation~\eqref{eq:cgeneral} is similar to $M$ in Equation~\eqref{eq:lossCM}. Specifically, $m$ is a multiple of the Chinchilla-optimal token multiplier $M^\ast = D^\ast / N^\ast$, which is no longer fixed as a compute budget changes for $\alpha \neq \beta$.
+\clearpage
+
+\section{Additional training details}
+\label{appx:additional_training_main}
+
+\paragraph{Architecture.}
+As stated in the main paper, we train transformers~\cite{transformer}, based on auto-regressive, decoder-only, pre-normalization architectures like GPT-2~\cite{Radford2019LanguageMA} and LLaMA~\cite{llama}.
+We adopt OpenLM~\cite{open_lm} for modeling, which utilizes PyTorch~\cite{paszke2019pytorch,pytorch2}, xformers~\cite{xFormers2022}, triton~\cite{triton}, FlashAttention~\cite{dao2022flashattention}, FSDP~\cite{Zhao2023PyTorchFE}, and bfloat16 automatic mixed precision.
+Like LLaMA, we omit bias terms, but replace RMSNorm~\cite{Zhang2019RootMS} with LayerNorm~\cite{ba2016layer}, which has readily available fused implementations.
+Following \citet{wortsman2023small}, we apply qk-LayerNorm~\cite{dehghani2023scaling}, which adds robustness to otherwise poor hyperparameter choices (e.g., learning rate).
+We use SwiGLU~\cite{swiglu} activations and depth-scaled initialization~\cite{zhang-etal-2019-improving}.
+We use a sequence length of 2,048, rotary positional embeddings~\cite{rope}, and the GPT-NeoX-20B tokenizer~\cite{neox}, which yields a vocabulary size of 50k.
+We do not use weight tying~\cite{press-wolf-2017-using,Inan2016TyingWV}.
+We sample without replacement during training and employ sequence packing without attention masking.
+We separate documents in our training corpora with end-of-text tokens.
+
+\paragraph{Objectives and optimization.}
+We train with a standard causal language modeling objective (i.e., next token prediction) with an additive z-loss~\cite{Chowdhery2022PaLMSL} (coefficient 1$e$-4), which mitigates output logit norm growth~\cite{merrill-etal-2021-effects} instabilities.
+We use the AdamW optimizer~\cite{loshchilov2017decoupled} (PyTorch defaults except \texttt{beta2} = 0.95), with independent weight decay~\cite{wortsman2023small} (coefficient 1$e$-4).
+For the learning rate schedule, we use linear warmup and cosine decay.
+We cool down to a low learning rate (3$e$-5).
+
+\section{Additional grid search details}
+\label{appx:additional_training}
+
+\paragraph{Final model configurations.}
+We present our final hyperparameters in Table~\ref{tab:hparams}.
+\begin{table*}[tp]
+    \centering
+    \small
+    \caption{\textbf{Main models and hyperparameters used in our investigation.} Models have number of parameters $N$, with number of layers $n_{\text{layers}}$, number of attention heads $n_{\text{heads}}$, model width $d_{\text{model}}$, and width per attention head $d_{\text{head}}$. Batch sizes are global and in units of sequences. Each sequence has 2,048 tokens.
+    A100 GPU hours are at $M=20$, which are near compute-optimal runs.
+    For the 1.4B scale, a batch size of 256 performs slightly better than 512.
+    }    
+    \begin{tabular}{rcccccccc}
+        \toprule
+        $N$ & $n_{\text{layers}}$ & $n_{\text{heads}}$ & $d_{\text{model}}$ & $d_{\text{head}}$ & Warmup & Learning rate & Batch size & $M=20$ A100 hours\\\midrule
+        0.011B & 8 & 4 & 96 & 24 & 100 & 3$e$-3 & 64 & 0.3 \\
+        0.079B & 8 & 4 & 512 & 128 & 400 & 3$e$-3 & 512 & 5 \\    
+        0.154B & 24 & 8 & 576 & 72 & 400 & 3$e$-3 & 512 & 12 \\     
+        0.411B & 24 & 8 & 1,024 & 128 & 2,000 & 3$e$-3 & 512 & 75\\    
+        1.4B & 24 & 16 & 2,048 & 128 & 5,000 & 3$e$-3 & 256 & 690\\
+        6.9B & 32 & 32 & 4,096 & 128 & 5,000 & 3$e$-4 & 2,048 & 17,000 \\\bottomrule
+    \end{tabular}    
+    \label{tab:hparams}
+\end{table*}
+
+\paragraph{Grid search configuration selection.}
+Recall in Section~\ref{sec:fitting}, we run a grid search over many configurations.
+We present the architectures we sweep over in Table~\ref{tab:grid_full}.
+\begin{table}[tp]
+\tiny
+\centering
+\caption{\textbf{Topologies for our grid searches.} We consider 130 architectures for our grid search. After sweeping over batch size and warmup, we get a total of 435 configurations.
+For a complete list of hyperparameter configurations, please see: \url{https://github.com/mlfoundations/scaling}
+}
+\begin{tabular}{cccc}
+\toprule
+$n_{layers}$ & $n_{heads}$ & $d_{model}$ & Number of \\
+ & & & parameters [B]\\
+\midrule
+4 & 4 & 96 & 0.010\\
+4 & 12 & 96 & 0.010\\
+12 & 12 & 96 & 0.011\\
+12 & 4 & 96 & 0.011\\
+8 & 4 & 96 & 0.011\\
+16 & 4 & 96 & 0.011\\
+16 & 12 & 96 & 0.011\\
+8 & 12 & 96 & 0.011\\
+24 & 4 & 96 & 0.012\\
+24 & 12 & 96 & 0.012\\
+4 & 4 & 192 & 0.021\\
+4 & 8 & 192 & 0.021\\
+4 & 12 & 192 & 0.021\\
+8 & 8 & 192 & 0.023\\
+8 & 4 & 192 & 0.023\\
+8 & 12 & 192 & 0.023\\
+12 & 4 & 192 & 0.025\\
+12 & 8 & 192 & 0.025\\
+12 & 12 & 192 & 0.025\\
+16 & 4 & 192 & 0.026\\
+16 & 8 & 192 & 0.026\\
+16 & 12 & 192 & 0.026\\
+24 & 8 & 192 & 0.030\\
+24 & 4 & 192 & 0.030\\
+24 & 12 & 192 & 0.030\\
+4 & 12 & 288 & 0.033\\
+4 & 4 & 288 & 0.033\\
+8 & 12 & 288 & 0.037\\
+8 & 4 & 288 & 0.037\\
+4 & 4 & 320 & 0.038\\
+4 & 8 & 320 & 0.038\\
+12 & 12 & 288 & 0.041\\
+12 & 4 & 288 & 0.041\\
+8 & 8 & 320 & 0.043\\
+8 & 4 & 320 & 0.043\\
+16 & 4 & 288 & 0.045\\
+16 & 12 & 288 & 0.045\\
+12 & 4 & 320 & 0.049\\
+12 & 8 & 320 & 0.049\\
+24 & 4 & 288 & 0.053\\
+24 & 12 & 288 & 0.053\\
+16 & 8 & 320 & 0.055\\
+16 & 4 & 320 & 0.055\\
+4 & 12 & 488 & 0.062\\
+4 & 4 & 512 & 0.065\\
+4 & 16 & 512 & 0.065\\
+4 & 8 & 512 & 0.065\\
+24 & 8 & 320 & 0.066\\
+24 & 4 & 320 & 0.066\\
+4 & 4 & 576 & 0.074\\
+4 & 8 & 576 & 0.074\\
+4 & 12 & 576 & 0.074\\
+8 & 12 & 488 & 0.075\\
+8 & 4 & 512 & 0.079\\
+8 & 8 & 512 & 0.079\\
+8 & 16 & 512 & 0.079\\
+4 & 4 & 640 & 0.085\\
+4 & 16 & 640 & 0.085\\
+4 & 8 & 640 & 0.085\\
+12 & 12 & 488 & 0.087\\
+8 & 4 & 576 & 0.090\\
+8 & 12 & 576 & 0.090\\
+8 & 8 & 576 & 0.090\\
+12 & 16 & 512 & 0.093\\
+12 & 8 & 512 & 0.093\\\bottomrule
+\end{tabular} 
+\begin{tabular}{cccc}
+\toprule
+$n_{layers}$ & $n_{heads}$ & $d_{model}$ & Number of \\
+ & & & parameters [B]\\
+\midrule
+12 & 4 & 512 & 0.093\\
+16 & 12 & 488 & 0.100\\
+8 & 16 & 640 & 0.105\\
+8 & 4 & 640 & 0.105\\
+8 & 8 & 640 & 0.105\\
+12 & 8 & 576 & 0.106\\
+16 & 16 & 512 & 0.106\\
+4 & 4 & 768 & 0.106\\
+12 & 12 & 576 & 0.106\\
+16 & 8 & 512 & 0.106\\
+4 & 8 & 768 & 0.106\\
+12 & 4 & 576 & 0.106\\
+4 & 16 & 768 & 0.106\\
+16 & 4 & 512 & 0.106\\
+4 & 12 & 768 & 0.106\\
+16 & 12 & 576 & 0.122\\
+16 & 4 & 576 & 0.122\\
+16 & 8 & 576 & 0.122\\
+12 & 4 & 640 & 0.126\\
+24 & 12 & 488 & 0.126\\
+12 & 16 & 640 & 0.126\\
+12 & 8 & 640 & 0.126\\
+24 & 8 & 512 & 0.133\\
+24 & 4 & 512 & 0.133\\
+24 & 16 & 512 & 0.133\\
+8 & 8 & 768 & 0.134\\
+8 & 16 & 768 & 0.134\\
+8 & 4 & 768 & 0.134\\
+8 & 12 & 768 & 0.134\\
+16 & 16 & 640 & 0.146\\
+16 & 8 & 640 & 0.146\\
+16 & 4 & 640 & 0.146\\
+24 & 8 & 576 & 0.154\\
+24 & 4 & 576 & 0.154\\
+24 & 12 & 576 & 0.154\\
+4 & 8 & 1024 & 0.155\\
+4 & 16 & 1024 & 0.155\\
+4 & 4 & 1024 & 0.155\\
+12 & 8 & 768 & 0.162\\
+12 & 4 & 768 & 0.162\\
+12 & 12 & 768 & 0.162\\
+12 & 16 & 768 & 0.162\\
+24 & 16 & 640 & 0.186\\
+24 & 8 & 640 & 0.186\\
+24 & 4 & 640 & 0.186\\
+16 & 16 & 768 & 0.191\\
+16 & 4 & 768 & 0.191\\
+16 & 8 & 768 & 0.191\\
+16 & 12 & 768 & 0.191\\
+8 & 8 & 1024 & 0.206\\
+8 & 4 & 1024 & 0.206\\
+8 & 16 & 1024 & 0.206\\
+24 & 8 & 768 & 0.247\\
+24 & 12 & 768 & 0.247\\
+24 & 4 & 768 & 0.247\\
+24 & 16 & 768 & 0.247\\
+12 & 8 & 1024 & 0.257\\
+12 & 4 & 1024 & 0.257\\
+12 & 16 & 1024 & 0.257\\
+16 & 8 & 1024 & 0.309\\
+16 & 4 & 1024 & 0.309\\
+16 & 16 & 1024 & 0.309\\
+24 & 16 & 1024 & 0.412\\
+24 & 8 & 1024 & 0.412\\
+24 & 4 & 1024 & 0.412\\
+\bottomrule
+\end{tabular}
+\label{tab:grid_full}
+\end{table}
+
+\section{Evaluation dataset details}
+\label{appx:eval_data}
+
+All 46 downstream evaluations are based on MosaicML's LLM-foundry evaluation suite~\cite{mosaicml}.
+We specifically consider the datasets given in Table~\ref{tab:eval_info}.
+\begin{table}[t!]
+\centering
+\scriptsize
+\caption{\textbf{46 downstream tasks.} All downstream tasks considered in this work, evaluated via LLM-foundry~\cite{mosaicml}.
+For more information on each dataset and specifics about the LLM-foundry category and evaluation type, please see: \url{https://www.mosaicml.com/llm-evaluation}.
+}
+\begin{tabular}{lllcrc}
+\toprule
+Downstream task & LLM-foundry category & Evaluation type & Shots & Samples & Baseline\\\midrule
+AGIEval LSAT AR~\cite{zhong2023agieval,zhong2019jec,Wang2021FromLT} & symbolic problem solving & multiple choice & 3 & 230 & 0.25\\
+AGIEval LSAT LR~\cite{zhong2023agieval,zhong2019jec,Wang2021FromLT} & reading comprehension & multiple choice & 3 & 510 & 0.25\\
+AGIEval LSAT RC~\cite{zhong2023agieval,zhong2019jec,Wang2021FromLT} & reading comprehension & multiple choice & 3 & 268 & 0.25\\
+AGIEval SAT English~\cite{zhong2023agieval} & reading comprehension & multiple choice & 3 & 206 & 0.25\\
+ARC-Challenge~\cite{arc} & world knowledge & multiple choice & 10 & 2376 & 0.25\\
+ARC-Easy~\cite{arc} & world knowledge & multiple choice & 10 & 2376 & 0.25\\
+BBQ~\cite{bbq} & safety & multiple choice & 3 & 58492 & 0.50\\
+BIG-bench: CS algorithms~\cite{srivastava2023beyond} & symbolic problem solving & language modeling & 10 & 1320 & 0.00\\
+BIG-bench: Conceptual combinations~\cite{srivastava2023beyond} & language understanding & multiple choice & 10 & 103 & 0.25\\
+BIG-bench: Conlang translation~\cite{srivastava2023beyond} & language understanding & language modeling & 0 & 164 & 0.00\\
+BIG-bench: Dyck languages~\cite{srivastava2023beyond} & symbolic problem solving & language modeling & 10 & 1000 & 0.00\\
+BIG-bench: Elementary math QA~\cite{srivastava2023beyond} & symbolic problem solving & multiple choice & 10 & 38160 & 0.25\\
+BIG-bench: Language identification~\cite{srivastava2023beyond} & language understanding & multiple choice & 10 & 10000 & 0.25\\
+BIG-bench: Logical deduction~\cite{srivastava2023beyond} & symbolic problem solving & multiple choice & 10 & 1500 & 0.25\\
+BIG-bench: Misconceptions~\cite{srivastava2023beyond} & world knowledge & multiple choice & 10 & 219 & 0.50\\
+BIG-bench: Novel Concepts~\cite{srivastava2023beyond} & commonsense reasoning & multiple choice & 10 & 32 & 0.25\\
+BIG-bench: Operators~\cite{srivastava2023beyond} & symbolic problem solving & language modeling & 10 & 210 & 0.00\\
+BIG-bench: QA WikiData~\cite{srivastava2023beyond} & world knowledge & language modeling & 10 & 20321 & 0.00\\
+BIG-bench: Repeat copy logic~\cite{srivastava2023beyond} & symbolic problem solving & language modeling & 10 & 32 & 0.00\\
+BIG-bench: Strange stories~\cite{srivastava2023beyond} & commonsense reasoning & multiple choice & 10 & 174 & 0.50\\
+BIG-bench: Strategy QA~\cite{srivastava2023beyond} & commonsense reasoning & multiple choice & 10 & 2289 & 0.50\\
+BIG-bench: Understanding fables~\cite{srivastava2023beyond} & reading comprehension & multiple choice & 10 & 189 & 0.25\\
+BoolQ~\cite{boolq} & reading comprehension & multiple choice & 10 & 3270 & 0.50\\
+COPA~\cite{copa} & commonsense reasoning & multiple choice & 0 & 100 & 0.50\\
+CoQA~\cite{reddy-etal-2019-coqa} & reading comprehension & language modeling & 0 & 7983 & 0.00\\
+Commonsense QA~\cite{talmor-etal-2019-commonsenseqa} & commonsense reasoning & multiple choice & 10 & 1221 & 0.25\\
+Enterprise PII classification~\cite{pii} & safety & multiple choice & 10 & 3395 & 0.50\\
+HellaSwag (10-shot)~\cite{hellaswag} & language understanding & multiple choice & 10 & 10042 & 0.25\\
+HellaSwag (zero-shot)~\cite{hellaswag} & language understanding & multiple choice & 0 & 10042 & 0.25\\
+Jeopardy~\cite{mosaicml} & world knowledge & language modeling & 10 & 2117 & 0.00\\
+LAMBADA~\cite{lambada} & language understanding & language modeling & 0 & 5153 & 0.00\\
+LogiQA~\cite{Liu2020LogiQAAC} & symbolic problem solving & multiple choice & 10 & 651 & 0.25\\
+MMLU (5-shot)~\cite{mmlu} & world knowledge & multiple choice & 5 & 14042 & 0.25\\
+MMLU (zero-shot)~\cite{mmlu} & world knowledge & multiple choice & 0 & 14042 & 0.25\\
+MathQA~\cite{mathqa} & symbolic problem solving & multiple choice & 10 & 2983 & 0.25\\
+OpenBook QA~\cite{OpenBookQA2018} & commonsense reasoning & multiple choice & 0 & 500 & 0.25\\
+PIQA~\cite{piqa} & commonsense reasoning & multiple choice & 10 & 1838 & 0.50\\
+PubMed QA Labeled~\cite{pubmed} & reading comprehension & language modeling & 10 & 1000 & 0.00\\
+SIQA~\cite{siqa} & commonsense reasoning & multiple choice & 10 & 1954 & 0.50\\
+SQuAD~\cite{squad} & reading comprehension & language modeling & 10 & 10570 & 0.00\\
+Simple Arithmetic: NoSpaces~\cite{mosaicml} & symbolic problem solving & language modeling & 10 & 1000 & 0.00\\
+Simple Arithmetic: WithSpaces~\cite{mosaicml} & symbolic problem solving & language modeling & 10 & 1000 & 0.00\\
+WinoGender MC: Female~\cite{winogender} & safety & multiple choice & 10 & 60 & 0.50\\
+WinoGender MC: Male~\cite{winogender} & safety & multiple choice & 10 & 60 & 0.50\\
+WinoGrande~\cite{sakaguchi2019winogrande} & language understanding & schema & 0 & 1267 & 0.50\\
+WinoGrand~\cite{winograd} & language understanding & schema & 0 & 273 & 0.50\\
+\bottomrule
+\end{tabular}
+\label{tab:eval_info}
+\end{table}
+Recall that we use a subset of 17 of these evaluations that give signal (are above random chance) for the compute range we consider.
+See Appendix~\ref{appx:more_results}, where we ablate over the 17 subset design choice by including more and less evaluations.
+
+\section{Additional results}
+\label{appx:more_results}
+
+\paragraph{Scaling law fits.}
+We present specific coefficients for our fits in Table~\ref{tab:fits}.
+
+\begin{table}[tp]
+    \centering
+    \small
+    \caption{\textbf{Scaling law fit parameters.}
+    Here we present our scaling coefficients fit to Equations~\eqref{eq:lossCM} and~\eqref{eq:errL} using configurations from Table~\ref{tab:fit_hparams}.}    
+    \begin{tabular}{lcc}
+        \toprule
+        Training dataset &  Fit for Equation~\eqref{eq:lossCM}: $L(C,M) = $ & Fit for Equation~\eqref{eq:errL}: $\textsf{Err}(L) =$ \\
+        & $E + (a \cdot M^{\eta} + b \cdot M^{-\eta}) C^{\eta}$ & $\epsilon - k \cdot \exp{(-\gamma L)}$\\\midrule
+        C4~\cite{c4,c4_ai2} & $1.51 + \left(141 \cdot M^{0.121} + 190 \cdot M^{-0.121} \right) C^{-0.121}$ & $0.850 - 2.08 \cdot \exp{(-0.756 \cdot L)}$ \\
+        RedPajama~\cite{rpj} & $1.84 + \left(212 \cdot M^{0.136} + 367 \cdot M^{-0.136} \right) C^{-0.136}$ & $0.857 - 2.21 \cdot \exp{(-0.715 \cdot L)}$ \\
+        RefinedWeb~\cite{refinedweb} & $1.73 + \left(157 \cdot M^{0.127} + 246 \cdot M^{-0.127} \right) C^{-0.127}$ & $0.865 - 2.21 \cdot \exp{(-0.707 \cdot L)}$ \\\bottomrule
+    \end{tabular}
+    \label{tab:fits}
+\end{table}
+
+\paragraph{Small-scale experiments can predict model rank order.}
+We expect to be able to rank hypothetical models based on their predicted performance, which is useful when deciding what large-scale runs to train.
+To verify, we rank 9 testbed models with $N\geq1.4\text{B}$ by ground-truth top-1 error and by estimated top-1 error.
+We find high rank correlation of 0.88 for the 17-task split.
+
+\paragraph{Over-performing grid search models experience more optimization steps.}
+As mentioned in Section~\ref{sec:fitting} and Figure~\ref{fig:grid}, we notice that models between 0.011B to 0.079B (i.e., $5.2 \times 10^{16}$ to $5.2 \times 10^{17}$ FLOPs trained near compute-optimal) over-perform compared to the trend established by other models in our initial grid searches. This results in a bump in the scaling plot.
+While we choose to exclude this range of models for our scaling study, we additionally investigate this phenomenon.
+In Figure~\ref{fig:grid_color} we color grid search configurations by the number of optimization steps (i.e., number of tokens seen divided by batch size divided by sequence length).
+We notice that models in the aforementioned range experience more optimization steps than their x-axis neighbors.
+For context, Figure~1~\emph{(left)} in \citet{kaplan2020scaling} also shows a bump; however, there the performance is worse than the general trend instead of better as in our work.
+We leave understanding more fully the interactions between hyperparameters, scaling, and performance to future work.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/grid_full_color.pdf}
+    \caption{\textbf{Understanding over-performing models in our grid search.}
+    \emph{(left)}
+    Models trained with $5.2 \times 10^{16}$ to $5.2 \times 10^{17}$ FLOPs over-perform relative to their neighbors.
+    In looking at the number of optimization steps, we notice that the over-performing models experience more optimization steps than their x-axis neighbors.
+    We hypothesize that the number of optimization steps is important, especially for smaller models, when trying to find models that lie along a trend.
+    \emph{(right)} A view of the same phenomenon, specifically on the efficient frontier. 
+    }
+    \label{fig:grid_color}
+\end{figure}
+
+\paragraph{Scaling is largely predictable in-distribution (ID).}
+Prior work focuses on understanding scaling using ID loss, often using training loss directly~\cite{kaplan2020scaling,chinchilla}.
+Hence, we also consider Paloma~\cite{paloma} loss evaluation sets, which are designed to probe performance in specific domains.
+We use Paloma's C4~\cite{c4,c4_ai2}, RedPajama~\cite{rpj}, and Falcon-RefinedWeb~\cite{refinedweb} splits to probe for ID loss.
+As seen in Figure~\ref{fig:error_id}, relative error is mostly low.
+Relative error is largest for the $N=1.4\text{B}, M=640$ RedPajama run at 15.4\%.
+Examining this case specifically, we find that the model performs better than the scaling law prediction.
+We hypothesize that as a model sees more tokens there is an increased likelihood of near-duplicate sequences ID, resulting in performance that is better than predicted.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/error_id.pdf}
+    \caption{\textbf{In-distribution (ID) settings.} Boxes highlighted in yellow correspond to data points used to fit Equation~\eqref{eq:lossCM}. Relative error is generally low across interpolation and extrapolation regimes. Relative error is largest for the RedPajama $N=1.4\text{B}, M=640$ prediction at 15.4\%. In this case, we find that our scaling law predicts the model should perform worse than it does in practice.
+    }
+    \label{fig:error_id}
+\end{figure}
+
+\paragraph{Relative error is stable across many choices of downstream evaluation suites.}
+
+To understand how sensitive our investigation is to our choices of downstream evaluation sets, we consider several other options as seen in Figure~\ref{fig:eval_ablation}.
+We find that our prediction errors are fairly (i) low and (ii) consistent for many choices of downstream evaluation sets including the whole suite of 46 evaluations.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/eval_ablation.pdf}
+    \caption{
+    \textbf{Downstream evaluation set ablation for 6.9B parameter, 138B token runs.}
+    Recall that we consider a 17 task evaluation suite created by including only test sets where any 0.154B model we trained (for any token multiplier and training dataset) gets $t=10$ percentage points above random chance.
+    We evaluate over this subset to make sure we are measuring signal not noise.
+    Here, we wish to understand how sensitive the relative prediction error is to our choice of $t$.
+    \emph{(left)}
+    We see that relative prediction error is fairly low before a threshold of $t=35$ (less than $10\%$ relative error).
+    When too many tasks are excluded (i.e., $t\geq 40$) relative error spikes.
+    Averaging over all 46 datasets ($t=-5$ as some evals are worse than random chance) also makes for a predictable metric (less than $3\%$ relative error).
+    \emph{(right)}
+    A parallel view, showing how many tasks are removed as $t$ increases.
+    40 out of the 46 tasks can be removed and relative error is still fairly stable.
+    }
+    \label{fig:eval_ablation}
+\end{figure}
+
+\begin{table}[tp]
+    \centering
+    \footnotesize
+    \caption{
+    \textbf{Downstream relative prediction error at 6.9B, 138B tokens, with and without the 1.4B data point.}
+    Recall in Table~\ref{tab:fit_hparams}, we introduce a $N=1.4$B, $M=20$ run to get better downstream error predictions.
+    Here we compare, prediction errors with and without this model for fitting the scaling law.
+    Note that without the model (i.e., rows with ``w/o 1.4B'') average top-1 predictions, over the 17 tasks. are less accurate.
+    }    
+    \begin{tabular}{ll|cccc|c}
+        \toprule
+         Scaling law fit & Train set & ARC-E & LAMBADA & OpenBook QA & HellaSwag & 17 eval  \\
+          & & \cite{arc} & \cite{lambada} & \cite{OpenBookQA2018} & \cite{hellaswag} &  \\         
+         \midrule
+        Table~\ref{tab:fit_hparams} & C4~\cite{c4,c4_ai2} & 28.96\% &15.01\% &16.80\% &79.58\% &0.14\% \\
+        Table~\ref{tab:fit_hparams} w/o 1.4B & C4~\cite{c4,c4_ai2} & 0.92\% &2.04\% &96.16\% &61.79\% &0.42\% \\\midrule
+        Table~\ref{tab:fit_hparams} & RedPajama~\cite{rpj} & 5.21\% &14.39\% &8.44\% &25.73\% &0.05\% \\
+        Table~\ref{tab:fit_hparams} w/o 1.4B & RedPajama~\cite{rpj} & 8.13\% &11.07\% &7.56\% &30.98\% &10.64\% \\\midrule
+        Table~\ref{tab:fit_hparams} & RefinedWeb~\cite{refinedweb} & 26.06\% &16.55\% &1.92\% &81.96\% &2.94\% \\
+        Table~\ref{tab:fit_hparams} w/o 1.4B & RefinedWeb~\cite{refinedweb} & 15.39\% &6.26\% &6.79\% &6.52\% &15.79\% \\
+        \midrule
+    \end{tabular}
+    \label{tab:downstream_wo}
+\end{table}
+
+\paragraph{Scaling can break down when under-training.}
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/emperical_small.pdf}
+    \caption{\textbf{Scaling with small token multipliers.} For smaller multipliers (e.g., $M=5$ in cyan), scaling does not follow the same trend as that of larger multipliers. Additionally, many token multipliers (e.g., $M \in \{10, 20, 40, 80\}$) garner points close to the compute-optimal frontier.}
+    \label{fig:emperical_small}
+\end{figure}
+
+We find that when a token multiple is too small (i.e., under-training regime), scaling appears unreliable.
+In Figure~\ref{fig:emperical_small} we see for $M=5$ the scaling trend is different.
+We hypothesize that tuning hyperparameters (e.g., warmup, batch size) directly for smaller multipliers may help mitigate the breakdown in predictability. 
+
+\paragraph{Scaling can be unpredictable out-of-distribution (OOD).}
+
+Our main result shows reliable C4 eval loss predictions with models trained on RedPajama, which is an OOD evaluation setting.
+However, both C4 and RedPajama both contain tokens sourced from CommonCrawl.
+
+To further probe OOD performance, we measure the relative error of scaling laws fit to models trained on C4 and evaluated on Paloma's 100 programming languages~\cite{paloma}, Paloma's Penn Tree Bank (PTB) split~\cite{ptb}, and a German version of C4~\cite{c4_ai2}.
+Recall that the C4 training set we use has been filtered for English text.
+Hence we expect (i) the proportion of code is minimal, (ii) the ``<unk>'' substrings in PTB raw text do not appear frequently, and (iii) German is not prevalent.
+We notice that extrapolation relative error tends to be high for large $M, N$ on programming languages and PTB (Figure~\ref{fig:error_ood} \emph{(left, center)}).
+In contrast, for German C4, relative error is still low across the extrapolation range, with a maximum relative error of 7.6\% at the $N=$1.4B, $M=80$ scale (Figure~\ref{fig:error_ood} \emph{(right)}). 
+We hypothesize that further modifications to scaling laws are necessary to predict when scaling should be reliable as a function of the training and evaluation distributions.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/error_ood.pdf}
+    \caption{\textbf{Out-of-distribution (OOD) settings.} Boxes highlighted in yellow correspond to data points used to fit Equation~\eqref{eq:lossCM}.
+    Recall that the C4 training set is English-filtered. Relative error can spike, suggesting unreliable scaling, for \emph{(left)} programming languages and \emph{(center)} Penn Tree Bank, which contains many frequently occurring, uncommon substrings.
+    However, scaling is relatively reliable when evaluating on \emph{(right)} German.
+    These results motivate future studies of OOD conditions that affect scaling in the over-trained regime.
+    }
+    \label{fig:error_ood}
+\end{figure}
+
+\paragraph{Small-scale experiments can predict average downstream top-1 error.}
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/error_downstream_all.pdf}
+    \caption{\textbf{Relative error on average top-1 predictions (46 task split).}
+    Boxes highlighted in yellow correspond to data points used to fit Equation~\eqref{eq:errL}.
+    Using our fits, we accurately predict downstream average top-1 error across interpolation and extrapolation regimes.
+    This result supports that (i) chaining a scaling law and our proposed exponential decay function is a valid procedure and (ii) average top-1 error can be highly predictable.
+    }
+    \label{fig:error_downstream_all}
+\end{figure}
+To verify that chaining Equations~\eqref{eq:lossCM} and \eqref{eq:errL} is effective in practice, we collect C4 eval loss and downstream error pairs for the configurations in Table~\ref{tab:fit_hparams}.
+In Figure~\ref{fig:error_downstream_all}, we look at relative error for our scaling predictions in the context of Average top-1 error over 46 evals and in Figure~\ref{fig:error_downstream_subset} over the high-signal 17 eval subset.
+We again notice reliable scaling in interpolation and extrapolation regimes, suggesting the validity of our procedure to predict downstream average top-1 error.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/error_downstream_subset.pdf}
+    \caption{\textbf{Relative error on average top-1 predictions (17 task split).}
+    Boxes highlighted in yellow correspond to data points used to fit Equation~\eqref{eq:errL}.
+    Using our fits, we accurately predict downstream average top-1 error across interpolation and extrapolation regimes.
+    This result supports that (i) chaining a scaling law and our proposed exponential decay function is a valid procedure and (ii) average top-1 error can be highly predictable.
+    }
+    \label{fig:error_downstream_subset}
+\end{figure}
+
+\paragraph{Loss evaluation ablations for downstream trends.}
+Figure~\ref{fig:downstream_corr_ablation} presents the correlation between downstream error and loss evaluated on different validation sets (C4, RedPajama, and RefinedWeb). Regardless of the validation set (x-axis), models follow the exponential decay relationship given in Equation~\eqref{eq:errL}, suggesting the choice of validation loss is not critical for the appearance of this phenomenon.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/downstream_corr_ablation.pdf}
+    \includegraphics[width=0.98\linewidth]{figs/downstream_corr_ablation_all.pdf}
+    \caption{\textbf{Correlation between average top-1 error and evaluation loss.}
+    We observe that regardless of evaluation loss distribution (x-axis), models tend to follow Equation~\eqref{eq:errL}.
+    This suggests that there can be several reasonable choices for the validation loss distribution.
+    Additionally, ID models trained on C4 and evaluated on a C4 validation set, perform best in terms of loss, but these gains don't necessarily translate to lower error downstream (e.g., \emph{(left column)}).
+    This suggests \emph{the need to fit Equation~\eqref{eq:errL} per dataset} and also suggests comparing models trained on different data distributions with a single loss evaluation can be misleading.
+    }
+    \label{fig:downstream_corr_ablation}
+\end{figure}
+
+\paragraph{Investing more compute in a scaling law makes it more predictive.}
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/error_vs.pdf}
+    \caption{\textbf{Trade-offs between scaling law for loss fitting considerations and reliability.} Each red circle represents a scaling law fit to Equation~\eqref{eq:lossCM} with as many as 29 models trained on RedPajama. Specifically, a grid formed by $N \in \{0.011\text{B}, 0.079\text{B}, 0.154\text{B}, 0.411\text{B}\}, M \in \{5, 10, 20, 40, 80, 160, 320\}$ gives 28 models and a $N=1.4B, M=20$ run gives the last model.
+    We sort models by training FLOPs in increasing order and sample models uniformly from index windows $[1, 2, ..., n]$ for $n \in [5, 6, .., 29]$ to fit Equation~\eqref{eq:lossCM}.
+    The blue star represents the default configuration presented in Table~\ref{tab:fit_hparams}. The prediction target is a $N=1.4B, M=640\text{ }(D=900\text{B})$ model. As the amount of compute \emph{(left)} and the number of points \emph{(right)} used to fit the scaling law increases, relative error trends downwards. Our default configuration keeps compute and number of points low, while still providing low prediction error compared to the trend.}
+    \label{fig:error_vs}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/error_vs_1b.pdf}
+    \caption{
+    \textbf{Compute vs. relative error for the 1.4B, 900B token RedPajama run.}
+    \emph{(left)} The compute necessary to accurately predict loss is less than that needed to accurately predict \emph{(right)} average downstream error.
+    This claim is supported by the fact that the slope of the trend for loss is steeper than for top-1 error.
+    These findings corroborate Figure~\ref{fig:error_vs_7b}.
+    }
+    \label{fig:error_vs_1b}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.98\linewidth]{figs/error_vs_7b.pdf}
+    \caption{
+    \textbf{Compute vs. relative error for the 6.9B, 138B token RedPajama run.}
+    \emph{(left)} The compute necessary to accurately predict loss is less than that needed to accurately predict \emph{(right)} average downstream error.
+    This claim is supported by the fact that the slope of the trend for loss is steeper than for top-1 error.
+    These findings corroborate Figure~\ref{fig:error_vs_1b}.
+    }
+    \label{fig:error_vs_7b}
+\end{figure}
+
+Thus far we have looked at standard configurations from Table~\ref{tab:fit_hparams} to construct our scaling laws, mainly to demonstrate extrapolation to larger $N, M$.
+However, for practitioners, the main constraint is often training compute.
+Hence, we wish to understand the trade-offs between the amount of compute invested in creating a scaling law and the relative error of the resulting law in the over-trained regime.
+In Figure~\ref{fig:error_vs}~\emph{(left)}, we see that as one increases the amount of compute, it is possible to get better fits with lower relative error.
+In Figure~\ref{fig:error_vs}~\emph{(right)}, we see a similar trend as one increases the number of data points used to fit a scaling law.
+Blue stars indicate the configurations from Table~\ref{tab:fit_hparams}, which provide accurate predictions relative to the general trends---hinting at their usefulness for our investigation.
+In Figures~\ref{fig:error_vs_1b} and~\ref{fig:error_vs_7b} we repeat the compute analysis comparing trade-offs for loss prediction and error prediction for our RedPajama 1.4B parameter, 900B token and 6.9B parameter, 138B token runs respectively.
+We find that less compute is generally necessary to construct a loss scaling law that achieves the same relative error as that of an error prediction scaling law.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/slopes.pdf}
+    \caption{
+    \textbf{Scaling exponent vs. token multiplier.} 
+    In Figure~\ref{fig:emperical}, we notice roughly parallel lines (i.e., roughly constant scaling exponent $\eta$) in the $\log$-$\log$ plot of loss vs. compute, even as the token multiplier $M$ changes.
+    Here we plot $\eta$ vs. $M$ directly, where the shaded region gives a 95\% bootstrap confidence interval for the trend.
+    This view supports that $\eta$ is relatively constant.
+    }
+    \label{fig:slopes}
+\end{figure}
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figs/downstream_corr_all.pdf}
+    \caption{\textbf{Downstream top-1 error vs. C4 eval loss for each of the 46 downstream evals.} Here we plot models from our testbed for each scatter plot.
+    We see that some individual evaluations, like ARC-Easy, follow exponential decay. Others, like BIG-bench: CS algorithms, show step function behavior. Still others, like MathQA, hover around random chance.}
+    \label{fig:mega}
+\end{figure}
+
+\paragraph{On compute-optimal token multipliers.}
+We consider 20 tokens per parameter as close to compute-optimal for our experiments.
+Here we investigate, using different approaches, what the compute-optimal token multipliers are for each dataset---assuming one should scale number of parameter and training tokens equally as~\citet{chinchilla} suggest.
+
+Turning to Figure~\ref{fig:emperical_small}, we notice that there are many multipliers, between 10 and 80 that yield models close to the frontier.
+Hence, empirically, it appears choices within this range should be suitable for the optimal token multiplier.
+
+We can also compute an optimal token multiplier using the coefficients in Table~\ref{tab:fits}.
+Based on \citet{chinchilla}'s Equation (4) and the assumption that $\alpha=\beta$, we write,
+\begin{align}
+\label{eq:m1}
+N^*(C) = G \left( \frac{C}{6} \right)^{\frac{1}{2}}, D^*(C) = G^{-1} \left( \frac{C}{6} \right)^{\frac{1}{2}}, G = \left( \frac{a}{b}\right)^{\frac{1}{4\eta}}.
+\end{align}
+To compute $M^* = D^*/N^*$, we then have,
+\begin{align}
+\label{eq:m2}
+M^* = \left( \frac{b}{a}\right)^{\frac{1}{2\eta}}.
+\end{align}
+Using the values from Table~\ref{tab:fits} and Equation~\eqref{eq:m2}, we find $M^*_{\text{C4}}=3.36$, $M^*_{\text{RedPajama}}=7.42$, $M^*_{\text{RefinedWeb}}=5.85$, where the subscript gives the dataset name.
+These values conflict with the observation in Figure~\ref{fig:emperical_small}, which suggests $M=5$ is already too small to give points on the Pareto frontier.
+We hypothesize this mismatch arises because we fit our scaling laws using models with $M \geq 20$.
+Additionally, we hyperparamter-tune at $M=20$.
+As previously discussed, it is likely possible to find better hyperparameter configurations at $M=5$ with further hyperparameter tuning at this token multiplier.
+
+\section{Additional related work}
+\label{appx:added_related}
+
+\paragraph{Language modeling.}
+Language models can be grouped into encoder-only~\cite{devlin-etal-2019-bert,albert,roberta,Sanh2019DistilBERTAD,clark2020electra}, encoder-decoder~\cite{lewis-etal-2020-bart,raffel2020exploring}, and decoder-only architectures~\cite{Radford2019LanguageMA,llama,llama2,MosaicML2023Introducing,jiang2023mistral,gunasekar2023textbooks,XGen,artetxe-etal-2022-efficient,thoppilan2022lamda,du2022glam,luukkonen2023fingpt,scao2022language,workshop2022bloom,allal2023santacoder,li2023starcoder,lozhkov2024starcoder,groeneveld2024olmo}.
+Most current implementations are based on the transformer~\cite{transformer}. However, there has been a recent resurgence in scaling language models based on non-transformer architectures~\cite{peng-etal-2023-rwkv,gu2021combining,gu2021efficiently,mamba}.
+Further, there has been substantial work on adapting pre-trained language models to better follow instructions~\cite{wei2021finetuned,chung2022scaling,muennighoff2022crosslingual,longpre2023data,muennighoff2023octopack,zhuo2024astraios,rafailov2024direct,ethayarajh2024kto,ustun2024aya,singh2024aya,muennighoff2024generative}.
+However, following prior work~\cite{chinchilla,muennighoff2023scaling} and given their overall prevalence, we limit ourselves to GPT-style, decoder-only transformers that have solely been pre-trained.
+
+\paragraph{Scaling laws.}
+\citet{kaplan2020scaling} investigate scaling trends in GPT language models. 
+\citet{bahri2021explaining} investigate different scaling regimes theoretically, and \citet{sharma_ScalingLawsData_2022} relate scaling coefficients to data manifold dimensions.
+\citet{tay2021scale,tay-etal-2023-scaling} elucidate the connection between model architecture and scaling trends, while \citet{Hernandez2021ScalingLF,tay2021scale} develop scaling laws for transfer learning.
+\citet{ivgi2022scaling} also consider transfer learning scaling laws and highlight the importance of hyperparameter selection in the low-compute regime.
+\citet{ghorbani2021scaling,gordon-etal-2021-data,bansal2022data} develop scaling laws for neural machine translation.
+\citet{caballero2023broken} propose a scaling law functional form, which they demonstrate is predictive in several domains.
+
+\paragraph{Scaling beyond language modeling.}
+There is a large body of work on scaling neural networks beyond language modeling, for example in computer vision~\cite{liu2022convnet,zhai2022scaling,sorscher2022beyond,abnar2022exploring,alabdulmohsin2022revisiting}, multimodal learning~\cite{Henighan2020ScalingLF,cherti2023reproducible,datacomp}, and image reconstruction~\cite{klug2023analyzing}. 
+
+\paragraph{Over-training in existing models.}
+\begin{table}[t!]
+    \centering
+    \small
+    \caption{\textbf{Token multipliers of existing models.} In our work, we run experiments with token multipliers between 5 and 640 for \{GPT-2~\cite{Radford2019LanguageMA}, LLaMA~\cite{llama}\}-style decoder-only architectures.}
+    \begin{tabular}{lp{1em}rlp{1.5em}rlp{2em}rl}
+        \toprule
+         Model family & \multicolumn{3}{c}{Parameters $N$} & \multicolumn{3}{c}{Training tokens $D$} & \multicolumn{3}{c}{Token multiplier $M$} \\
+         \midrule
+         T5~\cite{raffel2020exploring} & & 11B  & & & 34B  & & & 3.1\\
+         GPT-3~\cite{gpt3}             & & 175B & & & 300B & & & 1.7\\
+         Gopher~\cite{gopher}          & & 280B & & & 300B & & & 1.1\\
+         Chinchilla~\cite{chinchilla}  & & 70B  & & & 1.4T & & & 20{.0}\\
+         LLaMA~\cite{llama}            & & 7B   & & & 1T   & & & 140{.0}\\
+         LLaMA~\cite{llama}            & & 70B  & & & 1.4T & & & 20{.0} \\
+         LLaMA-2~\cite{llama2}         & & 7B   & & & 2T   & & & 290{.0} \\
+         LLaMA-2~\cite{llama2}         & & 70B  & & & 2T   & & & 30{.0} \\
+         XGen~\cite{XGen}              & & 7B   & & & 1.5T & & & 210{.0}\\
+         MPT~\cite{MosaicML2023Introducing} & & 7B & & & 1T & & & 140{.0} \\\bottomrule
+    \end{tabular}
+    \label{tab:other_mults}
+\end{table}
+To contextualize the extent to which we over-train, we provide token multipliers for popular models in Table~\ref{tab:other_mults}.
+
+\section{Broader impact}
+\label{appx:broader}
+
+Language models have known risks in terms of harmful language, toxicity, and human automation---to name a few~\cite{weidinger2021ethical,bender2021dangers}.
+We include the following for our public release ``WARNING: These are base models and not aligned with post-training. They are provided as is and intended as research artifacts only.''
+However, even as research artifacts, we recognize that models can still be misused by malicious actors or can be harmful to benevolent actors.
+When deciding to release our models and experiments, we considered (i) the benefit to the scientific community and (ii) the benchmark performance relative to other models that have already been released.
+For (i) we feel that our testbed is of use to others in the community who want to do scaling research, but do not necessarily have the means to train these model artifacts themselves. Hence, we predict (and hope) releasing all models and experiments will be helpful to others wanting to participate in scaling research.
+For (ii), we note that there are publicly available models~\cite{llama,llama2,jiang2023mistral}, which outperform models from our testbed and that are more likely to be widely adopted.
+Finally, we recognize that advancing scaling science also has potential for harm. Specifically, while we are concerned with loss and downstream task performance for popular evaluation settings, it is possible that nefarious actors may use scaling laws to help design more harmful models.
+
+\end{appendix}
+
+\end{document}
