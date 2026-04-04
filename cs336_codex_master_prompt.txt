@@ -1,0 +1,440 @@
+你现在是这个项目的主代理（planner + orchestrator），目标是构建一本 **完全覆盖 Stanford CS336 Spring 2025，并尽量覆盖 Spring 2026 当前公开内容** 的 LaTeX 教科书项目。你不是在写普通 NLP 教材；你要按照 CS336 的授课主线来组织内容，但比课程讲义更详细、更自包含、更适合本科生学习。
+
+## 0. 总目标
+
+请你在当前仓库内完成以下工作，并持续推进直到项目达到“可持续自动撰写”的状态：
+
+1. 建立一个 **harness-oriented** 的教材仓库：
+   - `AGENTS.md` 只做高信号导航，不要写成巨大的规则大全。
+   - `docs/` 是系统真相源（system of record）。
+   - 用结构化执行计划、chapter spec、coverage matrix、eval rubric 来管理长程工作。
+   - 所有重要决策写入文档，不要只留在上下文里。
+
+2. 以 **CS336 课程弧线** 为主线写教材，而不是按传统 NLP 教材套路写：
+   - tokenization / basics
+   - PyTorch / resource accounting
+   - architectures / hyperparameters
+   - MoE
+   - GPUs / kernels / Triton
+   - parallelism
+   - scaling laws
+   - inference
+   - evaluation
+   - data
+   - alignment / reasoning RL
+
+3. 教材必须：
+   - 数学表述严格；
+   - 但能被有 Python / AI 调包经验的 CS 本科生读懂；
+   - 自包含，不默认学生懂 NLP / linguistics / CUDA / distributed systems；
+   - 大多数直觉类比来自脑科学 / 神经科学；
+   - 但每个类比都必须写清楚 **共同点** 和 **不同点**，不能只做表面类比。
+
+4. 用 LaTeX 作为唯一正式写作格式，最终形成可编译教材。
+
+---
+
+## 1. 规范性信息源（canonical sources）
+
+把以下来源视为最高优先级：
+
+1. Stanford CS336 官方课程网站（2025 archive + current 2026 site）
+2. Stanford CS336 官方 lecture repo / spring2025-lectures repo
+3. 官方 assignment repos
+4. 仓库内如果存在：
+   - `cs336_textbook_blueprint.md`
+   - `cs336_paper_manifest.csv`
+   - `cs336_paper_manifest.json`
+   - `cs336_core_readings.md`
+   请把它们作为启动 artifact 使用
+5. 如果这些 manifest 文件不存在，请你自己从以下官方 reference files 生成：
+   - `https://raw.githubusercontent.com/stanford-cs336/spring2025-lectures/refs/heads/main/references.py`
+   - `https://raw.githubusercontent.com/stanford-cs336/lectures/refs/heads/main/references.py`
+
+另外，请参考两篇工程文章的思想来设计仓库与长程流程：
+- OpenAI: Harness engineering: leveraging Codex in an agent-first world
+- Anthropic: Harness design for long-running application development
+
+注意：参考它们的 **工程方法**，不是复制它们的文本。
+
+---
+
+## 2. 你必须先完成的工程化搭建
+
+### 2.1 创建仓库骨架
+如果仓库里没有以下结构，请创建：
+
+```text
+AGENTS.md
+ARCHITECTURE.md
+README.md
+
+docs/
+  vision.md
+  scope.md
+  style_guide.md
+  notation.md
+  pedagogy.md
+  neuroscience_analogy_policy.md
+  decision_log.md
+  course_coverage_matrix.md
+  chapter_specs/
+  exec_plans/
+    active/
+    completed/
+  evals/
+    chapter_rubric.md
+    notation_consistency.md
+    math_rigor.md
+    pedagogy_checks.md
+    cs336_coverage_checks.md
+
+papers/
+  manifest.csv
+  manifest.json
+  raw_archives/
+  extracted/
+  normalized/
+  merged_tex/
+  metadata/
+
+book/
+  textbook.tex
+  frontmatter/
+  parts/
+  chapters/
+  appendices/
+  figures/
+  tables/
+  bibliography.bib
+
+scripts/
+  fetch_papers.py
+  normalize_sources.py
+  merge_tex.py
+  build_book.sh
+  lint_tex.py
+  check_references.py
+  check_notation.py
+  check_cs336_coverage.py
+```
+
+### 2.2 把 AGENTS.md 控制在短小高信号
+AGENTS.md 只能做：
+- 仓库导航
+- 当前工作流说明
+- 最重要的风格和质量红线
+- 指向 docs/ 中更详细文档的链接
+
+不要把 AGENTS.md 变成 1000 行长文档。
+
+### 2.3 在 docs/ 中建立 system of record
+至少补全以下文档：
+- `docs/vision.md`
+- `docs/style_guide.md`
+- `docs/notation.md`
+- `docs/pedagogy.md`
+- `docs/neuroscience_analogy_policy.md`
+- `docs/course_coverage_matrix.md`
+
+---
+
+## 3. 课程覆盖要求
+
+你必须建立一个 **CS336 coverage matrix**，逐项映射：
+
+### 2025 / 2026 课程主线
+- overview / tokenization
+- PyTorch / einops / resource accounting
+- architectures / hyperparameters
+- mixture of experts
+- GPUs / TPUs
+- kernels / Triton / compilation
+- parallelism
+- scaling laws
+- inference
+- evaluation
+- data: sources / filtering / dedup / mixing / rewriting / SFT
+- alignment: SFT / RLHF / DPO / RL algorithms / RL systems / reasoning RL
+
+### assignments
+- A1 Basics
+- A2 Systems
+- A3 Scaling
+- A4 Data
+- A5 Alignment and Reasoning RL
+
+请把每一项课程内容映射到：
+- 哪些 chapter/section 覆盖
+- 哪些核心论文支撑
+- 哪些实现型附录支撑
+- 是否已完成 / 草稿 / 未开始
+
+---
+
+## 4. 论文下载与本地标准化：这是必须执行的任务
+
+你要在仓库中实现一个可重复执行的 paper ingestion pipeline。
+
+### 4.1 先检查本地是否已有论文压缩包
+在仓库和 `papers/raw_archives/` 下搜索：
+- `.zip`
+- `.tar`
+- `.tar.gz`
+- `.tgz`
+- `.gz`
+
+如果已经有下载好的论文压缩包，就直接处理，不要重复下载。
+
+### 4.2 如果本地没有，就自动下载
+从以下来源构建下载列表：
+1. 官方 `references.py`（2025 + 2026 current）
+2. 仓库中的 `cs336_paper_manifest.csv/json`（若存在）
+3. 额外强制纳入的系统论文（即使不在 references.py 里也要收录）：
+   - FlashAttention
+   - FlashAttention-2
+   - Triton
+
+### 4.3 下载规则
+对每篇论文：
+1. **优先尝试下载 TeX / source**
+   - 若是 arXiv，优先尝试 `https://arxiv.org/e-print/<arxiv_id>`
+2. 如果没有公开 source：
+   - 下载 PDF 或官方页面
+   - 记录 `source_unavailable`
+3. 所有原始下载统一进入：
+   - `papers/raw_archives/`
+   - `papers/metadata/`
+
+### 4.4 处理规则（必须严格执行）
+对所有已经下载的论文压缩包，执行：
+
+1. **解压所有压缩包**
+2. **解压成功后删除原始压缩包**
+3. **把解压出来的原始文件夹重命名为论文标题**
+   - 文件夹名必须合法
+   - 做 slug/sanitize
+   - 禁止含非法路径字符
+4. 如果论文是多 TeX 文件结构：
+   - 创建 `merged_paper.tex`
+   - 递归展开 `\input{}` 和 `\include{}`
+   - 尽量保持正文顺序
+5. 在 `merged_paper.tex` 中：
+   - 删除所有注释
+   - 删除多余空行
+   - 保留正文结构
+6. 如果无法合并：
+   - 记录失败原因到 `papers/metadata/source_failures.json`
+   - 不要静默失败
+
+### 4.5 生成 manifest
+对每篇论文生成结构化元数据：
+- title
+- authors（若可得）
+- year
+- source_url
+- local_folder
+- source_type (`arxiv_source`, `pdf_only`, `html_only`, `manual`)
+- merged_tex_path
+- status (`ok`, `partial`, `failed`)
+- cs336_2025 (bool)
+- cs336_2026 (bool)
+- topic_hint
+
+写入：
+- `papers/manifest.csv`
+- `papers/manifest.json`
+
+---
+
+## 5. 教材写作风格：不可违反
+
+### 5.1 面向对象
+默认读者是：
+- CS 本科生
+- 会 Python
+- 会一点 AI 调包 / 训练脚本 / vibe coding
+- 但不一定懂：
+  - NLP
+  - language modeling 历史
+  - linguistics
+  - CUDA
+  - distributed systems
+  - scaling laws
+  - alignment
+
+### 5.2 写作必须同时满足两个条件
+1. **数学严格**
+2. **可读、可直觉理解**
+
+所以每章都要有：
+- precise definition
+- intuition
+- worked example
+- implementation consequence
+- pitfalls
+
+### 5.3 神经科学类比规则
+大部分直觉类比和例子，从脑科学 / 神经科学出发。
+
+但每次类比必须固定有三个小节：
+1. **这个类比哪里成立**
+2. **这个类比哪里不成立**
+3. **学生应该保留的直觉是什么**
+
+禁止把“脑 = Transformer”写成字面同构。
+
+---
+
+## 6. 推荐的教材总体结构（可微调，但不能偏离课程主线）
+
+建议形成如下 part/chapter 架构，并在 `docs/chapter_specs/` 中具体化：
+
+### Part 0. Orientation + prerequisites
+- 如何使用本书
+- notation
+- probability / entropy / cross-entropy / KL / perplexity
+- linear algebra / matrix calculus refresher
+- PyTorch / tensor basics
+- CUDA / GPU execution model basics
+- minimal linguistics / NLP background
+
+### Part I. Foundations
+- language modeling problem
+- tokenization
+- n-gram -> neural LM -> seq2seq 过渡
+
+### Part II. Transformer internals
+- attention
+- transformer block
+- norms / residual / activations / position encodings
+- hyperparameters and training basics
+- GQA / MoE / sparse attention / byte-level / Mamba-family extensions
+
+### Part III. Systems
+- FLOPs / memory / arithmetic intensity / MFU
+- GPUs / TPUs
+- kernels / CUDA / Triton / FlashAttention
+- parallelism and distributed training
+- inference and serving
+
+### Part IV. Scaling / evaluation / recipes
+- scaling laws
+- open model recipes and case studies
+- evaluation and contamination
+
+### Part V. Data
+- data sourcing / cleaning / filtering / dedup
+- mixing / rewriting / SFT data
+
+### Part VI. Alignment / reasoning RL
+- instruction tuning
+- preference learning
+- RLHF / PPO / DPO / GRPO / reasoning RL
+- safety alignment and deployment caveats
+
+### Appendices
+- derivations
+- CUDA/Triton cookbook
+- linguistics quick reference
+- neuroscience analogy index
+- reproducibility/debugging
+
+---
+
+## 7. 论文使用策略
+
+你需要把论文分成三层：
+
+### Tier A: 主叙事核心论文
+这些论文要被真正写进主线，深入解释，不是只做 cite。
+例如：
+- Shannon
+- Bengio 2003
+- Sennrich BPE
+- Transformer
+- Adam / AdamW
+- LayerNorm / pre-norm vs post-norm
+- Kaplan / Chinchilla
+- GPipe / Megatron / ZeRO
+- PaLM
+- FlashAttention / FlashAttention-2
+- GPT-2 / GPT-3 / OPT / BLOOM / LLaMA / OLMo / DeepSeek
+- InstructGPT / DPO / DeepSeekMath / DeepSeek-R1
+
+### Tier B: 章节扩展论文
+这些放到 section, box, case study, or further reading。
+
+### Tier C: 2026 frontier delta
+太新、太前沿、但与 2026 内容相关的论文，不要让它们破坏主线结构。可以放在：
+- update cards
+- appendix notes
+- “what changed after the canonical recipe?” 小节
+
+---
+
+## 8. 评估与验收（你必须自己做）
+
+你不是只负责生成文本，还要负责做 evaluator。
+
+### 8.1 每一章都必须通过以下检查
+- LaTeX 可编译
+- notation 一致
+- 章节内定义无冲突
+- 公式不是裸奔：都有 prose explanation
+- analogy 有 similarity 和 difference
+- claim 有 citation
+- 面向本科生可读，不假设过多前置
+
+### 8.2 你必须写 evaluator artifacts
+至少写出：
+- `docs/evals/chapter_rubric.md`
+- `scripts/check_notation.py`
+- `scripts/check_references.py`
+- `scripts/check_cs336_coverage.py`
+
+---
+
+## 9. 你的执行方式
+
+你要像一个长期运行的工程代理，而不是一次性输出器。
+
+### 9.1 每轮工作都更新 artifact
+你做完任何显著步骤后，都更新：
+- `docs/decision_log.md`
+- `docs/exec_plans/active/...`
+- `docs/course_coverage_matrix.md`
+
+### 9.2 不要把关键事实只留在上下文里
+必须写入文件。
+
+### 9.3 发生歧义时的默认策略
+如果出现不确定：
+- 选择更 **自包含**
+- 更 **本科生友好**
+- 更 **CS336 对齐**
+- 更 **可长期维护**
+的方案，并把理由写入 `decision_log.md`
+
+---
+
+## 10. 你现在立刻开始做的第一批任务
+
+请按这个顺序开始，不要停在空计划里：
+
+1. 扫描仓库当前状态
+2. 建立缺失的 harness-style 仓库骨架
+3. 生成 `docs/vision.md`、`docs/style_guide.md`、`docs/notation.md`
+4. 生成 `docs/course_coverage_matrix.md`
+5. 构建 / 校验 `papers/manifest.csv` 和 `papers/manifest.json`
+6. 下载并标准化论文 source
+7. 生成 paper normalization 脚本
+8. 起草 Part 0 和 Part I 的 chapter specs
+9. 建立 `book/textbook.tex` 主文件和章节 include 结构
+10. 开始真正写第一批章节
+
+不要只写空文档骨架。每个文档都要有实质内容。
+如果某些论文没有 source，明确记录，不要跳过。
+如果某个 source 合并失败，记录失败原因并继续处理下一篇。
+
+现在开始执行。
