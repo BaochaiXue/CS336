@@ -1,0 +1,186 @@
+\section{Related Work}
+\label{sec: background}
+
+The fundamental challenge of transforming raw sequential data into computationally efficient representations manifests across multiple domains through implicit chunking processes.
+In language modeling, this challenge is addressed through tokenization using static vocabularies derived from frequency-based algorithms such as Byte-Pair Encoding (BPE)~\citep{BPE} in GPT models~\citep{GPT2, GPT3} and SentencePiece~\citep{SentencePiece} in Llama architectures~\citep{Llama2, Llama3}.
+Computer vision addresses similar challenges through spatial pooling operations~\citep{U-Net} that aggregate neighboring pixels into meaningful representations.
+
+Despite achieving strong empirical performance, it is widely known that traditional tokenization approaches in language models suffer from fundamental limitations that constrain model capabilities.
+Fixed vocabularies exhibit biases toward high-resource languages, demonstrate fragility when handling adversarial inputs, and show lower performance on character-level tasks~\citep{petrov2023language, ahia2023all, belinkov2017synthetic, Adv-BERT, ByT5}.
+These limitations stem from the static nature of predefined vocabularies, which cannot adapt their chunking strategies to input content or context.
+
+To address these constraints, \emph{tokenizer-free} methods have emerged that avoid the reliance on predefined vocabularies.
+
+\begin{itemize}
+    \item In \cref{sec:background:ar}, we discuss the most directly related prior work on autoregressive sequence models, extending the overview from \cref{sec: introduction}.
+    \item In \cref{sec:background:nonar}, we discuss non-autoregressive models. We note that essentially all autoregressive architectures can be turned into non-autoregressive architectures (including our proposed H-Net), and vice versa, which provide possible extensions of H-Net in future work. However, we provide this delineation because it marks an important difference in motivation that influences design considerations and downstream evaluations.
+    \item \cref{sec:background:other} mentions other works in non-language modalities related to tokenization.
+\end{itemize}
+
+We summarize our discussion on tokenizer-free architectures in \cref{tab: related}.
+
+\subsection{Autoregressive Tokenizer-free Architectures}
+\label{sec:background:ar} 
+
+
+As outlined in \cref{sec: introduction}, prior work on autoregressive tokenizers for architectures can be divided into four categories:
+\begin{enumerate}
+    \item Non-hierarchical \emph{isotropic} architectures.
+    \item Hierarchical architectures with \emph{static} chunking strategies, where chunk boundaries are content-agnostic (usually some variant of fixed-width pooling).
+    \item Hierarchical architectures with \emph{external} chunking strategeies, where chunk boundaries are provided by an external function or module.
+    \item Hierarchical architectures with \emph{dynamic} chunking strategies, where chunk boundaries are content-dependent and learned end-to-end.
+\end{enumerate}
+
+\subsubsection{Isotropic Architectures}
+The most direct approach to modeling language with tokenizers is to simply model raw byte sequences with a standard sequence model architecture.
+Since this naive approach suffers from computational challenges on long sequences, MambaByte \citep{MambaByte} proposed using a state space model for its linear-time efficiency.
+We similarly use Mamba(-2) \citep{Mamba2} layers in the outer stages of an H-Net.
+Notably, through extensive ablations we show that Mamba is not just more efficient but also better at modeling high-resolution data such as text characters and DNA base pairs.
+
+
+\subsubsection{Static Chunking}
+
+To reduce sequence length, several approaches downsample the input sequence hierarchically. 
+The most straightforward methods operate independently of input context, partitioning sequences using fixed-size intervals.
+Many strategies could be used to aggregate a width-$k$ window, including direct downsampling, average pooling, linear transformations that mix across the chunk, convolutions, and more; we lump these together as \emph{pooling} operations.
+
+Hourglass Transformer~\citep{HourglassTransformer} and MegaByte~\citep{MegaByte} exemplify this strategy.
+Other recent variants include the Block Transformer~\citep{ho2024block} and Multiscale Byte Language Model (MBLM) \citep{egli2025multiscale}, which use similar multi-stage static chunking architectures.
+Concurrently to H-Net, the MBLM also proposes using Mamba layers in the outer stages.
+
+These approaches share conceptual similarity with spatial pooling operations in vision models that reduce resolution through fixed-window aggregation~\citep{AlexNet, ResNet}.
+While these content-agnostic methods have simple and efficient implementations, they face an inherent limitation: they do not reflect natural semantic boundaries in the data.
+Fixed-size chunking inevitably creates arbitrary separations that can split meaningful units such as words, morphemes, or phrases, thereby limiting model expressivity.
+
+This class of models may also be called ``autoregressive U-Nets'', characterized by the U-Net multi-scale architecture \citep{U-Net} with additional considerations to maintain causality.
+Prior to these, the S4 and SaShiMi models \citep{S4,SaShiMi} used the same architecture successfully in the vision and audio modalities, where fixed-window downsampling exhibits more appropriate inductive bias in contrast to language.
+SaShiMi specifically operated over 8-bit quantized audio inputs, hence also was a form of byte-level modeling that used BPB as a metric.
+
+\subsubsection{External Chunking}
+\label{sec:background:ar:external} 
+
+An improvement to hierarchical architectures with static downsampling is to use content-aware chunking strategies that attempt to identify natural token boundaries based on semantic or statistical properties of the input data.
+Several recent models propose using the boundaries provided by an external module, with two main variations appearing.
+
+\paragraph{Delimiter-based methods.}
+The most intuitive content-aware approach segments on surface-level syntactical boundaries, which can be often implemented by simple rules or regular expressions.
+
+Dynamic Pooling Transformer (DPT)~\citep{DPT} proposed a variant that segmented on whitespace characters, effectively making each word its own token.
+SpaceByte~\citep{SpaceByte} extends this to ``space-like'' delimiters (\eg{} \texttt{/}, \texttt{]}, \texttt{:}) as natural boundary signals. 
+This approach provides semantically meaningful chunking for languages with explicit word separators such as English text and code.
+
+However, delimiter-based methods cannot be used for inputs lacking explicit separators (e.g. many non-European languages, or other modalities such as DNA). 
+Additionally, these approaches cannot be extended to multi-level hierarchical chunking due to ambiguities in defining natural delimiters at higher semantic levels.
+AU-Net \citep{AUNet} is a concurrent work that augments SpaceByte with additional stages of hierarchy using fixed-width chunking.
+Specifically, AU-Net 2 is SpaceByte with minor architectural modifications, while AU-Net 3 (and AU-Net 4) add additional levels of hierarchical with width-2 downsampling.
+
+In this work, we show that SpaceByte's delimiter chunking strategy can be a very powerful baseline on appropriate languages -- competitive with or outperforming traditional tokenizers on English and code -- when augmented with several of H-Net's additional techniques (\cref{sec: lang}, \cref{sec: ablation_studies}, \cref{fig: bpb_alt_text}, \cref{fig: abl_enc_dec_combination_spacebyte}).
+
+\paragraph{Entropy-based methods.}
+Another approach to circumvent the delimiter dependency is using the autoregressive conditional entropy as a heuristic to identify semantic boundaries.
+This was first proposed by the Dynamic Pooling Transformer (DPT)~\citep{DPT}, which detects entropy spikes that correlate with semantic transitions.
+The recent Byte Latent Transformer (BLT)~\citep{BLT} employs entropy thresholds computed by a separate pre-trained model to determine chunking boundaries.
+
+Despite showing promise, these entropy-based approaches face several practical limitations.
+First, they require extensive domain-specific hyperparameter tuning to establish appropriate entropy thresholds, reducing their general applicability.
+Second, they still fall behind in performance; for example, BLT necessitates an extra 3B parameters (at the 8B scale) solely for multi-gram hash embeddings to match BPE Transformer baselines.
+Finally, these methods also cannot be extended hierarchically because computing cross-entropy loss requires access to target vocabularies, which are unavailable for intermediate latent representations in multi-stage architectures.
+
+In this work, we do not compare against BLT because of its complexity: (i) necessitating training an auxiliary language model to provide proxy autoregressive conditional entropies (ii) converting it into an external neural tokenizer through tuning entropy heuristics (iii) using hash embeddings, which can be considered an orthogonal architectural component which may be incorporated into H-Net as well if desired.
+
+Instead, we compared against SpaceByte (and our own stronger versions of SpaceByte), which we believe to be representative of the external-chunking family of methods and competitive to the entropy-based chunking strategy of BLT (for our main experiments such as English data).
+
+\subsubsection{Dynamic Chunking}
+
+The ideal tokenizer-free architecture would incorporate a \emph{dynamic chunking method} that attempts to learn optimal segmentation strategies directly from data through gradient-based optimization.
+Such a method would be optimized jointly together with the outer (fine-resolution) and inner (coarse-resolution) networks, and be able to create boundaries that are \emph{content-} and \emph{context-} aware.
+
+The only prior work we are aware of that attempted a true dynamic chunking method is (one variant of) the Dynamic Pooling Transformer (DPT)~\citep{DPT}, 
+which incorporates stochastic exploration mechanisms using Gumbel noise~\citep{GumbelSoftmax,maddison2017concrete} to enable differentiable boundary selection during training.
+Despite their theoretical flexibility, trainable methods encounter critical challenges.
+The stochastic exploration process requires careful tuning of noise magnitudes and introduces high-variance gradients that destabilize training, making it difficult to scale to larger model sizes.
+
+In practice, the end-to-end (stochastic reparameterization) variant of DPT underperformed the external chunking variants (drawing boundaries on entropy spikes or whitespaces) \citep{DPT}, illustrating the difficulty of this problem.
+Furthermore, the training instability prevented DPT from expanding to multiple hierarchical stages, constraining these methods to single-stage chunking. 
+
+We additionally highlight simple architectural modifications of DPT motivated by improved inference~\citep{fleshman2023toucan} or multilingual ability~\citep{MAGNET}.
+Such techniques can also be easily adapted to H-Nets in future work.
+
+\subsection{Non-Autoregressive Tokenizer-free Architectures}
+\label{sec:background:nonar} 
+
+Each class of autoregressive architectures from \cref{sec:background:ar} has corresponding non-autoregressive variants as well.
+Although these often have similar design principles, they are also motivated by different tasks, settings, and design considerations (e.g. no evaluation on large-scale autoregressive pretraining) and thus can be difficult to compare directly to autoregressive models. We include these for context and completeness.
+
+\paragraph{Isotropic.}
+ByT5~\citep{ByT5} directly models bytes using a bidirectional encoder-decoder architecture, showing improved performance with small models (because more power is moved into model parameters rather than vocabulary embeddings) and spelling-sensitive tasks.
+
+\paragraph{Hierarchical (Static).}
+Funnel-Transformer~\citep{dai2020funnel} is an early architecture that uses a U-Net-like architecture for language, focusing on the non-causal setting.
+Canine \citep{Canine} proposes a hierarchical model with convolution-based static downsampling; their method also targets non-autoregressive language models.
+
+Charformer~\citep{CharFormer} presents a gradient-based subword tokenization (GBST) method that pools the input sequence at different resolutions, inducing an implicit ensemble of hierarchical models. It shows improved efficiency to performance trade-offs compared to models that use a single downsample resolution.
+
+We note that these methods can also be endowed with implicit supervision from external tokenizers; for example, Canine proposes a variant that uses subword tokens in the \emph{objective function} (via masking out subwords in the masked language modeling objective), but does not need the tokenizer at inference time. We also note that such techniques are particular to non-autoregressive models, since they allow for variations in the modeling objective.
+
+\paragraph{Hierarchical (External).}
+\citet{thawani2023learn} propose the eByte method, which resembles MegaByte but chunks on spaces with Transformer-based CLS-token pooling, and lacks the byte-level residual stream that enables autoregressive modeling.
+Word-based self-attention fusion (WSF)~\citep{sreedhar2023local} proposes a similar pooling strategy for encoder language models.
+
+\paragraph{Hierarchical (Dynamic).}
+MANTa~\citep{godey2022manta} introduces an end-to-end method that predicts segmentation boundaries and pools bytes into blocks using a matching objective.
+MrT5~\citep{kallinimrt5} is a recent method improving on ByT5 with a gating mechanism that allows for explicit dynamic token-merging at inference time, reducing sequence lengths by up to 80\%.
+
+\subsection{Other Tokenization-related Work}
+\label{sec:background:other} 
+
+\paragraph{Tokenizers for Other Modalities.}
+While computer vision pipelines do not use tokenizers like BPE in the same way as language models do,
+they frequently need to turn raw perceptual data (images and videos) into shorter sequences of representations.
+One approach is the simple patchification step first introduced by the Vision Transformer (ViT)~\citep{ViT}.
+However, images, videos, and audio can have varying amounts of semantic content and non-uniform redundancies.
+A number of more recent approaches attempt to produce variable length tokenizations that adapt to the information content of the data,
+Which performs a more similar role to tokenization in language models. 
+This can be done in the latent space of an autoencoder~\citep{TiTok, ALIT}
+or through explicit token merging (or "run length encoding") with heuristics~\citep{ToMe, RLT}.
+In the audio domain, SlowAE~\citep{SlowAE} proposes a joint autoencoder with autoregressive modeling that finds semantic segmentation boundaries, which resembles H-Net's approach at a high level.
+
+FAST~\citep{lin2025autoregressive} introduces a tokenizer for robotics,
+Which tokenizes continuous control actions by combining the Discrete Cosine Transform (DCT) with BPE.
+
+\paragraph{Vocabulary Scaling.}
+While scaling laws for language models have generally kept tokenizers fixed~\citep{ScalingLaw,Chinchilla,Llama3},
+recent works have showed that the tokenizer also warps scaling laws, in fact more so than model architecture changes~\citep{mayilvahanan2025llms}.
+\citet{tao2024scaling} and \citet{huang2025over}
+directly show that it is more optimal to scale an LLM's vocabulary together with the rest of the model parameters.
+
+In H-Nets, which are designed to operate over higher resolution raw data,
+the actual vocabulary can be kept minimal,
+but the chunking mechanism can be viewed as an implicit "tokenizer" with infinite vocabulary.
+As H-Nets scale in size, one expects that more iterations of hierarchy can be added (increasing effective chunk size), or the chunk size can directly be increased to leverage parameters more efficiently.
+This resembles the idea of increasing a vocabulary in tokenized models (which would generally increase the average length of tokens).
+
+SuperBPE~\citep{liu2025superbpe} shows that allowing vocabulary tokens to cross whitespace boundaries can also improve performance.
+This is related to H-Net's motivation of higher-level chunking of words into phrases; empirically, \cref{fig: tokenized_positions} shows how the 2-stage H-Net finds semantic multi-word groups in the inner stage.
+
+\paragraph{Cross-Tokenizer Transfer.}
+
+\citet{minixhofer2024zero} and \citet{minixhofer2025universal}
+address the problem of \emph{tokenizer transfer}, or adapting models across different tokenizers (for example for cross-language or cross-modality usage, or for knowledge distillation).
+
+\paragraph{Other Effects of Tokenization.}
+
+\citet{lee2024digitstodecisions} discuss the effects that tokenization has on arithmetic in LLMs. For example, comparing the performance of left-to-right vs. right-to-left tokenization.
+\citet{hayase2024data} show that examining the vocabulary of a BPE tokenizer leaks information about the data mix that it was trained on.
+
+\paragraph{Tokenization Theory.}
+
+\citet{schmidt2024tokenization}
+examined the hypothesis that the primary role of tokenization is to shrink the input sequence length. They invented a new tokenizer that has even higher compression rates than BPE (actually, they keep the same vocabulary but simply find different segmentations that are more compressed) yet leads to worse language models, providing evidence against the hypothesis.
+
+\citet{rajaraman2024analysis} showed that for certain data distributions, applying tokenization qualitatively changes what Transformers can learn. 
+
+\citet{phan2024exact} and \citet{vieira2024language} propose various algorithms for converting a language model over tokens into a language model over characters or bytes.
+This helps alleviate some limitations of tokenizers such as the "prompt boundary" problem, the ability to compare different LLMs with different tokenizers, and simply produces better estimates of a language model's true compressive ability (as measured by bits-per-byte).
+However, such algorithms are complex and expensive, and compared to direct byte-level models they are not practical for use during inference decoding (repeated autoregressive sampling).
+

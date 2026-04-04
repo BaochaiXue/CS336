@@ -1,0 +1,7 @@
+\section{Calibration}\label{app:calibration}
+
+We precisely follow the setup of \citet{minderer2021revisiting}: Since temperature scaling~\citep{guo2017calibration} requires some held-out data, we use 20\% of the ImageNet validation set to learn the temperature parameter while we report the accuracy and expected calibration error on the remaining 80\%.
+
+Moreover, since the expected calibration error is defined with respect to a probability distribution normalised over the classes, we use a \texttt{softmax} loss function during fine tuning. The \texttt{sigmoid} loss function is defined independently across the classes and does not yield the required normalisation. We use 20k steps together with a learning rate of 0.03. 
+
+We reuse the plotting tools provided at \url{https://github.com/google-research/robustness_metrics/tree/master/robustness_metrics/projects/revisiting_calibration}.

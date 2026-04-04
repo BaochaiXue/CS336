@@ -1,0 +1,15 @@
+%
+%
+%
+%
+\begin{table}[h]
+\centering
+\caption{\textbf{MMLU and Hellaswag overlap removal} (\xltrack scale). We remove overlaps detected with MMLU and Hellaswag, in cases where a question and one of its options are detected. We compare models trained before and after this decontamination step, and see that performance does not fall.}
+\label{tab:decontamination-appx-excision-results}
+\begin{tabular}{@{}lcc}
+\toprule
+Dataset                     & $E$ = MMLU & $E$ = Hellaswag\\ \midrule
+\hqpool      &  51.8    &    77.9   \\
+\hqpool ($E$ removed) & 52.7    &    78.4   \\ \bottomrule
+\end{tabular}
+\end{table}

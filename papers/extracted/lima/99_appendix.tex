@@ -1,0 +1,134 @@
+\section{Training Examples}
+\label{sec:training_examples}
+
+Figure~\ref{fig:training_examples} shows six training examples from various sources.
+
+
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/ppl_65b.pdf}
+    \caption{Validation set perplexity versus generation quality (as evaluated by ChatGPT), across the training process of LIMA 65B. We observe similar trends for 7B and 30B parameter models, and across different mixtures of training data.}
+    \label{fig:ppl}
+\end{figure}
+
+
+\input{tables/training}
+
+
+\section{Anticorrelation between Perplexity and Generation Quality}
+\label{sec:ppl}
+
+When fine-tuning LIMA, we observe that perplexity on held-out Stack Exchange data (2,000 examples) negatively correlates with the model's ability to produce quality responses.
+To quantify this manual observation, we evaluate model generations using ChatGPT, following the methodology described in Section~\ref{sec:ablations}.
+Figure~\ref{fig:ppl} shows that as perplexity rises with more training steps -- which is typically a negative sign that the model is overfitting -- so does the quality of generations increase.
+Lacking an intrinsic evaluation method, we thus resort to manual checkpoint selection using a small 50-example validation set.
+
+
+
+\section{Human Annotation}
+\label{sec:annotation}
+
+Figure~\ref{fig:human_annot} shows the human annotation interface we used to collect preference judgments. Annotators were asked to exercise empathy and imagine that they were the original prompters.
+
+\input{tables/human_annot}
+
+
+
+\section{ChatGPT Score}
+\label{sec:gpt_annotation}
+
+Automatically evaluating generative models is a difficult problem.
+For ablation experiments (Section~\ref{sec:ablations}), we use ChatGPT (GPT-3.5 Turbo) to evaluate model outputs on a 6-point Likert score given the prompt in Figure~\ref{fig:eval_prompt_single}.
+
+
+\begin{figure}[t]
+    \scriptsize
+    % \texttt
+    \centering
+\begin{tabular}{@{}p{\columnwidth}@{}}
+\toprule
+You are evaluating a response that has been submitted for a particular task, using a specific set of standards. Below is the data:
+
+~
+
+[BEGIN DATA]
+
+***
+
+[Task]: \{task\}
+
+***
+
+[Submission]: \{submission\}
+
+***
+
+[Criterion]: helpfulness:
+
+"1": "Not helpful - The generated text is completely irrelevant, unclear, or incomplete. It does not provide any useful information to the user."
+
+"2": "Somewhat helpful - The generated text has some relevance to the user's question, but it may be unclear or incomplete. It provides only partial information, or the information provided may not be useful for the user's needs."
+
+"3": "Moderately helpful - The generated text is relevant to the user's question, and it provides a clear and complete answer. However, it may lack detail or explanation that would be helpful for the user."
+
+"4": "Helpful - The generated text is quite relevant to the user's question, and it provides a clear, complete, and detailed answer. It offers additional information or explanations that are useful for the user. However, some of the points of the response are somewhat repetitive or could be combined for greater clarity and concision"
+
+"5": "Very helpful - The generated text is highly relevant to the user's question, and it provides a clear, complete, and detailed answer. It offers additional information, explanations, or analogies that are not only useful but also insightful and valuable to the user. However, the structured of the response is not well-organized and there is no clear progression or logical sequence of different points in the response."
+
+"6": "Highly helpful -  The generated text provides a clear, complete, and detailed answer. It offers additional information or explanations that are not only useful but also insightful and valuable to the user. The response is also in a logical and easy-to-follow manner by explicitly using headings, bullet points, or numbered lists to break up the information and make it easier to read."
+
+***
+
+[END DATA]
+
+~
+
+Does the submission meet the criterion? First, write out in a step by step manner your reasoning about the criterion to be sure that your conclusion is correct. Avoid simply stating the correct answers at the outset. Then print the choice only from ``1, 2, 3, 4, 5, 6'' (without quotes or punctuation) on its own line corresponding to the correct answer. At the end, repeat just the selected choice again by itself on a new line.\\
+\bottomrule
+\end{tabular}
+    \caption{Prompt for ChatGPT evaluation with a 6-scale Likert score. The placeholders "{task}" and "{submission}" will be replaced by specific details from the actual case being evaluated.}
+    \label{fig:eval_prompt_single}
+\end{figure}
+
+
+% \begin{figure}[t]
+%     \centering
+% \begin{lstlisting}
+% You are evaluating two responses that has been submitted for a particular task, using a specific set of standards. Below is the data:
+% [BEGIN DATA]
+% ***
+% [Task]: {input}
+% ***
+% [Submission1]: {Submission1}
+
+% [Submission2]: {Submission2}
+% ***
+% [Criterion]: helpfulness: "Helpfulness: Does the answer directly solve the question?"
+% ***
+% [END DATA]
+% Comparing these two submissions, which one is better? First, write out in a step by step manner your reasoning about the criterion to be sure that your conclusion is correct. Avoid simply stating the correct answers at the outset. Choose one of the following options:
+% A: Submission1 is significantly better.
+% B: Submission2 is significantly better.
+% C: Neither is significantly better.
+
+% Directly type in "A" or "B" or "C" (without quotes or punctuation) on its own line corresponding to the correct answer. At the end, repeat just the letter again by itself on a new line.
+% Reasoning:
+% \end{lstlisting}
+%     \caption{Prompt for system pair evaluation, where ``\{task\}'', ``\{submission1\}'' and ``\{submission2\}'' will be instantiated by an actual case.
+%     }
+%     \label{fig:eval_prompt_pair}
+% \end{figure}
+
+
+
+\section{Generating Text with Complex Structure}
+\label{sec:structure}
+
+In our preliminary experiments, we find that although LIMA can respond to many questions in our development set well, it cannot consistently respond to questions that specify the structures of the answer well, e.g. summarizing an article into bullet points or writing an article consisting of several key elements. 
+Hence, we investigate whether adding a few training examples in this vein can help LIMA generalize to prompts with unseen structural requirements.
+We added six examples with various formatting constraints, such as generating a product page that includes \textit{Highlights}, \textit{About the Product}, and \textit{How to Use} or generating question-answer pairs based on a given article.
+
+After training with these six additional examples, we test the model on a few questions with format constraints and observe that LIMA responses greatly improve.
+We present two examples in Figure~\ref{fig:structure_examples}, from which we can see that LIMA fails to generate proper answers without structure-oriented training examples (left column), but it can generate remarkably complex responses such as a marketing plan even though we do not have any marketing plan examples in our data (right column).
+
+\input{tables/structure_output}

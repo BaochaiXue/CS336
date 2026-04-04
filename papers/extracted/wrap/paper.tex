@@ -1,0 +1,59 @@
+\pdfoutput=1
+\documentclass[table]{article}
+
+\usepackage{colm2024_conference}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{inconsolata}
+\usepackage{graphicx, caption, subcaption}
+\input{math_commands.tex}
+\usepackage{subcaption}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\usepackage{tcolorbox} %
+\tcbuselibrary{most}
+
+\title{Rephrasing the Web:\\A Recipe for Compute and Data-Efficient Language Modeling}
+
+
+
+\author{Pratyush Maini\thanks{Equal Contribution} \hspace{0.5mm}\thanks{Work done during internship at Apple} \\
+Carnegie Mellon Univeristy\\
+\texttt{pratyushmaini@cmu.edu}
+\And Skyler Seto\footnotemark[1], He Bai, David Grangier, Yizhe Zhang, Navdeep Jaitly\\
+Apple \\
+\texttt{\{sseto,hbai22,grangier,yizhe\_zhang,njaitly\}@apple.com}\\
+}
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\newcommand{\SK}[1]{\textcolor{red}{SS: #1}}
+\newcommand{\ours}{\textbf{WRAP}}
+
+
+\colmfinalcopy %
+\begin{document}
+
+
+\maketitle
+
+\input{sections/0-abstract.tex}
+\input{sections/1-introduction-new.tex}
+\input{sections/2-related.tex}
+\input{sections/3-method.tex}
+\input{sections/4-results.tex}
+\input{sections/5-analysis.tex}
+\input{sections/7-conclusion}
+
+\bibliography{anthology,paper}
+\bibliographystyle{colm2024_conference}
+
+\newpage
+\appendix
+\input{sections/appendix}
+
+\end{document}

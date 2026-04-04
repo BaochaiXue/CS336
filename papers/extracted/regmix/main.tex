@@ -1,0 +1,122 @@
+
+\documentclass{article} %
+\usepackage{iclr2025_conference,times}
+
+\input{math_commands.tex}
+
+\usepackage{hyperref}
+\usepackage{url}
+
+\usepackage{xspace}
+
+\usepackage{wrapfig,lipsum,booktabs}
+
+
+\usepackage[utf8]{inputenc} %
+\usepackage[T1]{fontenc}    %
+\usepackage{hyperref}       %
+\usepackage{url}            %
+\usepackage{booktabs}       %
+\usepackage{amsfonts}       %
+\usepackage{nicefrac}       %
+\usepackage{microtype}      %
+\usepackage{xcolor}         %
+
+
+
+\definecolor{darkblue}{rgb}{0, 0, 0.5}
+\hypersetup{colorlinks=true, citecolor=darkblue, linkcolor=darkblue, urlcolor=darkblue}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\usepackage{graphicx} %
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{todonotes}
+
+\usepackage{bbm}
+
+\usepackage{xcolor}
+\usepackage{subfigure}
+
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{placeins}
+\usepackage{xspace}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{threeparttable}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\ourmethod}{\textsc{RegMix}\xspace}
+\providecommand{\qian}[1]{{\protect\color{blue}{[Qian: #1]}}}
+\providecommand{\niklas}[1]{{\protect\color{purple}{[Niklas: #1]}}}
+
+\title{\ourmethod: Data Mixture as Regression for\\Language Model Pre-training}
+
+
+\author{%
+Qian Liu$^{1}$\!\thanks{The first two authors contributed equally.}\;\quad Xiaosen Zheng$^{2*}$\quad Niklas Muennighoff$\,^{3,4}$\quad Guangtao Zeng$^5$\\ \textbf{Longxu Dou}$^1$\quad \textbf{Tianyu Pang}$^1$\quad \textbf{Jing Jiang}$^2$\quad \textbf{Min Lin}$^1$ \\
+    \textsuperscript{1}Sea AI Lab  \quad \textsuperscript{2}SMU \quad \textsuperscript{3}Contextual AI \quad \textsuperscript{4}Stanford University \quad \textsuperscript{5}SUTD \\
+    \texttt{\small liuqian.sea@gmail.com;\;xszheng.2020@phdcs.smu.edu.sg}
+}
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\iclrfinalcopy %
+\begin{document}
+
+
+\maketitle
+
+\begin{abstract}
+The data mixture for large language model pre-training significantly impacts performance, yet how to determine an effective mixture remains unclear.
+We propose \ourmethod to automatically identify a high-performing data mixture by formulating it as a regression task. \ourmethod trains many small models on diverse data mixtures, uses regression to predict performance of unseen mixtures, and applies the best predicted mixture to train a large-scale model with orders of magnitude more compute.
+To empirically validate \ourmethod, we train 512 models with 1M parameters for 1B tokens to fit the regression model and predict the best data mixture. Using this mixture we train a 1B parameter model for 25B tokens (i.e. $1000 \times$ larger and $25 \times$ longer) which we find performs best among 64 candidate 1B parameter models with other mixtures.
+Furthermore, \ourmethod consistently outperforms human selection in experiments involving models up to 7B models trained on 100B tokens, while matching or exceeding DoReMi using just 10\% of the computational resources.
+Our experiments also show that (1) Data mixtures significantly impact performance; (2) Web corpora rather than data perceived as high-quality like Wikipedia have the strongest positive correlation with downstream performance; (3) Domains interact in complex ways often contradicting common sense, thus automatic approaches like \ourmethod are needed; (4) Data mixture effects transcend scaling laws. Our code is available at \url{https://github.com/sail-sg/regmix}.
+
+\end{abstract}
+
+\input{figures/exp_7b}
+\input{sections/00_Intro}
+\input{sections/01_Related}
+\input{sections/02_Method}
+\input{sections/03_Evaluation}
+\input{sections/04_Applications}
+\input{sections/05_Limitation}
+
+\clearpage
+\section*{Ethics statement} 
+Optimizing the data mixture for LLM pre-training raises several ethical issues. 
+First, the optimized data mixture might be biased toward certain domains, which is good for achieving better performance. However, certain domains might be underrepresented or misrepresented, leading the trained models to perform poorly or produce biased results for these domains.
+Second, though our method aims to optimize the data mixture efficiently, searching for the optimal data mixture still requires computational resources, leading to high energy consumption and environmental impact.
+It is worthwhile to explore how to further reduce the computation cost. 
+
+\bibliography{ms}
+\bibliographystyle{iclr2025_conference}
+
+\clearpage
+\appendix
+
+\input{sections/Appendix/00_Additional}
+\input{sections/Appendix/01_Implementation}
+\input{sections/Appendix/02_All_Model_Results}
+\input{sections/Appendix/03_Rebuttal}
+\end{document}

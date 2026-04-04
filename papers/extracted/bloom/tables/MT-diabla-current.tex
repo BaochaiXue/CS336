@@ -1,0 +1,23 @@
+\begin{table}[!ht]
+    \centering\small
+    \begin{tabular}{llrrrr}
+    \toprule
+    & & \multicolumn{2}{c}{en$\rightarrow$fr} & \multicolumn{2}{c}{fr$\rightarrow$en} \\
+    1-shot context & Truncate & BLEU & COMET & BLEU & COMET \\
+    \toprule
+    \multirow{2}{*}{Rand.}   & $\times$ &  5.7 & 0.342 & 12.1 & 0.614 \\
+    &  $\checkmark$ & 37.6 & \textbf{0.634} & 41.4 & \textbf{0.757} \\
+    \midrule
+    \multirow{2}{*}{Prev.}   & $\times$ & 6.1 & 0.328 & 12.3 & 0.617 \\
+    & $\checkmark$ & \textbf{38.5} & 0.614 & \textbf{41.6} & 0.751 \\
+    %\midrule
+    %\multirow{2}{*}{Prev.}     & \multirow{2}{*}{same} & $\times$ & 19.32 & 0.5965 & 20.71 & 0.7190 \\
+    %&  & $\checkmark$ & \textbf{38.95} & \textbf{0.6325} & \textbf{42.10} & \textbf{0.7607} \\
+    %\midrule
+    %\multirow{2}{*}{Prev.}     & \multirow{2}{*}{opp.} & $\times$ & 3.64 & 0.0635 & 8.56 & 0.5184 \\
+    %& & $\checkmark$ & 37.76 & 0.5898 & 41.20 & 0.7423 \\
+    \bottomrule
+    \end{tabular}
+    \caption{DiaBLa 1-shot results (BLEU) for the ``xglm-source+target'' prompt when using the previous or a random sentence as the 1-shot example (with and without truncation of outputs). In bold the best results for each direction.}
+    \label{tab:diabla-context-results}
+\end{table}

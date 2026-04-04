@@ -1,0 +1,48 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ &  
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3\\ (1T tokens)\end{tabular}} &
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3.1\\ (16T tokens)\end{tabular}} &
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{} \\ (1T tokens)\end{tabular}} \\ \midrule
+\textbf{HellaSwag Original} & 79.1 & \emph{80.7} & \textbf{80.6}\\
+ \textbf{HellaSwag Noise Avg.} & 56.9 & 64.3 & \emph{\textbf{64.3}}\\
+  \hspace{0.5cm}\textbf{- AntSpeak} &
+45.6 & \emph{61.3} & \textbf{57.9} \\
+\hspace{0.5cm}\textbf{- Drop} & 
+53.8 & 57.3 & \emph{\textbf{58.2}} \\
+\hspace{0.5cm}\textbf{- RandomCase} & 
+55.3 & 65.0 & \emph{\textbf{65.7}}  \\
+\hspace{0.5cm}\textbf{- Repeat} & 
+57.0 & 61.5 & \emph{\textbf{66.6}}\\
+\hspace{0.5cm}\textbf{- UpperCase} & 
+72.9 & 76.5 & \emph{\textbf{77.3}}\\ 
+\midrule
+\textbf{Phonology-G2P} & 
+11.8 & \emph{18.9} & \textbf{13.0} \\
+\midrule
+\textbf{CUTE} & 
+27.5 & 20.0 & \emph{\textbf{54.1}} \\
+        \hspace{0.5cm}\textbf{- Contains Char}    & 0.0	          & 0.0 & \emph{\textbf{55.9}} \\
+        \hspace{0.5cm}\textbf{- Contains Word}    & 55.1	      & 21.6 & \emph{\textbf{73.5}} \\
+        \hspace{0.5cm}\textbf{- Del Char}         & 34.6	      & 34.3 & \emph{\textbf{35.9}} \\
+        \hspace{0.5cm}\textbf{- Del Word}         & \textbf{75.5} &	\emph{84.5} & 56.1 \\
+        \hspace{0.5cm}\textbf{- Ins Char}         & 7.5	          & 0.0 & \emph{\textbf{7.6}} \\
+        \hspace{0.5cm}\textbf{- Ins Word}         & \textbf{33.5} & \emph{63.3}	& 31.2 \\
+        \hspace{0.5cm}\textbf{- Orthography}      & 43.1	      & 0.0 & \emph{\textbf{52.4}} \\
+        \hspace{0.5cm}\textbf{- Semantic}         & 65	          & 0.0 & \emph{\textbf{90.5}} \\
+        \hspace{0.5cm}\textbf{- Spelling}         & 1.1	          & - & \emph{\textbf{99.9}} \\
+        \hspace{0.5cm}\textbf{- Spelling Inverse} & 30.1	      & 3.6 & \emph{\textbf{99.9}} \\
+        \hspace{0.5cm}\textbf{- Substitute Char}  & 0.4	          & 1.2 & \emph{\textbf{48.7}} \\
+        \hspace{0.5cm}\textbf{- Substitute Word}  & 16.4	      & 6.8 & \emph{\textbf{72.8}} \\
+        \hspace{0.5cm}\textbf{- Swap Char}        & 2.6	          & 2.4 & \emph{\textbf{11.5}} \\
+        \hspace{0.5cm}\textbf{- Swap Word}        & 20.1	      & 4.1 & \emph{\textbf{21}} \\
+
+\bottomrule
+\end{tabular}
+\caption{We compare our 8B \model{} model to 8B BPE \llama{} 3 trained on 1T tokens on tasks that assess robustness to noise and awareness of the constituents of language  (best result bold). We also report the performance of \llama{} 3.1 on the same tasks and underline best result overall. \model{} outperforms the \llama{} 3 BPE model by a large margin and even improves over \llama{} 3.1 in many tasks indicating that the byte-level awareness is not something that can easily be obtained with more data.}
+\label{tab:char_tasks}
+\end{table}

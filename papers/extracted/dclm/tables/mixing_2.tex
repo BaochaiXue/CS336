@@ -1,0 +1,18 @@
+%
+%
+%
+%
+\begin{table}[ht]
+\centering
+\caption{\textbf{Mixing with filtered data.} We evaluate our models on mixtures of data, where we combine our \hqpool with filtered data from other sources of \rpj \citep{rpj}. We find that the case where we use only \hqpool performs the best in our experiments. Evaluation is done at the \strack scale.}
+\label{tab:mixing_filtered}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Dataset Mixture      & \lowvar & MMLU   & \aggscore \\ \midrule
+\hqpool only              & \textbf{31.7}  & \textbf{26.5} & \textbf{16.6}     \\
+\hqpool + Filtered Wiki   & 31.0  & 24.9 & 16.3     \\
+\hqpool + Filtered Books  & 30.6  & 25.8 & 15.5     \\
+\hqpool + Filtered Arxiv  & 31.5  & 26.0 & 15.6     \\
+\hqpool + Filtered Github & 30.0  & 24.4 & 15.2     \\ \bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,27 @@
+\begin{table}[t!]
+\caption{
+\textbf{Architecture details and model benchmarks for Chinese and code models.}
+BPIC (defined in \cref{tab: main}) denotes the compression between the \main{} and outermost stage (bytes).
+Each \model{} used (3,3)-DC, targeting an inner downsampling ratio of $9$.
+However, the resulting BPIC was significantly different, indicating that code is much easier to compress than Chinese.
+In terms of results, \model{} (2-stage) performs better than both \model{} (space) and BPE Transformer on Chinese, which is reflected in the downstreams.
+On the other hand, \model{} (2-stage) achieves similar performance to \model{} (space) on code, and both \model{} models perform significantly better than Transformer.
+}
+
+\centering
+\small
+
+\begin{tabular}{lcccccccccccc}
+\toprule
+\multirow{2}{*}{\textsc{Model}}  & \multicolumn{4}{c}{\textsc{Chinese}}                                                  & & \multicolumn{3}{c}{\textsc{Code}} \\
+\cmidrule{2-5}
+\cmidrule{7-9}
+                        & \textsc{BPIC}  & \textsc{Main arch.}            & \textsc{Val. BPB} $\downarrow$ & \textsc{XW-zh. acc.} $\uparrow$      &  & \textsc{BPIC} & \textsc{Main arch.}             & \textsc{Val. BPB} $\downarrow$ \\
+\midrule
+Transformer             & 3.62  & \colorbox{Main}{T15}  & \underline{0.7404}                & 0.599                       &  & 3.58 & \colorbox{Main}{T13}   & 0.3376                \\
+\model{} (space)        & 3.38  & \colorbox{Main}{T19}  & 0.7478                & \underline{0.629}                       &  & 7.97 & \colorbox{Main}{T40}   & \underline{0.3163}                \\
+\model{} (2-stage)      & 5.81  & \colorbox{Main}{T30}  & \textbf{0.7032}                & \textbf{0.663}                       &  & 7.23 & \colorbox{Main}{T28}   & \textbf{0.3161}                \\
+\bottomrule
+\end{tabular}
+\label{tab: cd-supp}
+\end{table}

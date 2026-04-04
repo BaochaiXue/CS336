@@ -1,0 +1,214 @@
+\begin{thebibliography}{32}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bellemare et~al.(2013)Bellemare, Naddaf, Veness, and
+  Bowling]{Bellemare2013Atari}
+M.~G. Bellemare, Y.~Naddaf, J.~Veness, and M.~Bowling.
+\newblock The arcade learning environment: An evaluation platform for general
+  agents (extended abstract).
+\newblock \emph{J. Artif. Intell. Res.}, 47:\penalty0 253--279, 2013.
+
+\bibitem[Bisk et~al.(2019)Bisk, Zellers, Bras, Gao, and
+  Choi]{bisk2019physicaliqa}
+Y.~Bisk, R.~Zellers, R.~L. Bras, J.~Gao, and Y.~Choi.
+\newblock Piqa: Reasoning about physical commonsense in natural language, 2019.
+
+\bibitem[Bisk et~al.(2020)Bisk, Holtzman, Thomason, Andreas, Bengio, Chai,
+  Lapata, Lazaridou, May, Nisnevich, Pinto, and
+  Turian]{bisk2020experiencegroundslang}
+Y.~Bisk, A.~Holtzman, J.~Thomason, J.~Andreas, Y.~Bengio, J.~Chai, M.~Lapata,
+  A.~Lazaridou, J.~May, A.~Nisnevich, N.~Pinto, and J.~Turian.
+\newblock Experience grounds language, 2020.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
+  Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan,
+  Child, Ramesh, Ziegler, Wu, Winter, Hesse, Chen, Sigler, Litwin, Gray, Chess,
+  Clark, Berner, McCandlish, Radford, Sutskever, and Amodei]{brown2020gpt3}
+T.~B. Brown, B.~Mann, N.~Ryder, M.~Subbiah, J.~Kaplan, P.~Dhariwal,
+  A.~Neelakantan, P.~Shyam, G.~Sastry, A.~Askell, S.~Agarwal, A.~Herbert-Voss,
+  G.~Krueger, T.~Henighan, R.~Child, A.~Ramesh, D.~M. Ziegler, J.~Wu,
+  C.~Winter, C.~Hesse, M.~Chen, E.~Sigler, M.~Litwin, S.~Gray, B.~Chess,
+  J.~Clark, C.~Berner, S.~McCandlish, A.~Radford, I.~Sutskever, and D.~Amodei.
+\newblock Language models are few-shot learners, 2020.
+
+\bibitem[Clark et~al.(2018)Clark, Cowhey, Etzioni, Khot, Sabharwal, Schoenick,
+  and Tafjord]{Clark2018ARCAI2}
+P.~Clark, I.~Cowhey, O.~Etzioni, T.~Khot, A.~Sabharwal, C.~Schoenick, and
+  O.~Tafjord.
+\newblock Think you have solved question answering? try arc, the ai2 reasoning
+  challenge.
+\newblock \emph{ArXiv}, abs/1803.05457, 2018.
+
+\bibitem[Clark et~al.(2019)Clark, Etzioni, Khashabi, Khot, Mishra, Richardson,
+  Sabharwal, Schoenick, Tafjord, Tandon, Bhakthavatsalam, Groeneveld, Guerquin,
+  and Schmitz]{Clark2019RegentsScienceExams}
+P.~Clark, O.~Etzioni, D.~Khashabi, T.~Khot, B.~D. Mishra, K.~Richardson,
+  A.~Sabharwal, C.~Schoenick, O.~Tafjord, N.~Tandon, S.~Bhakthavatsalam,
+  D.~Groeneveld, M.~Guerquin, and M.~Schmitz.
+\newblock From 'f' to 'a' on the n.y. regents science exams: An overview of the
+  aristo project.
+\newblock \emph{ArXiv}, abs/1909.01958, 2019.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{BERTDevlin2019}
+J.~Devlin, M.-W. Chang, K.~Lee, and K.~Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock \emph{ArXiv}, abs/1810.04805, 2019.
+
+\bibitem[Geirhos et~al.(2020)Geirhos, Jacobsen, Michaelis, Zemel, Brendel,
+  Bethge, and Wichmann]{geirhos2020shortcut}
+R.~Geirhos, J.-H. Jacobsen, C.~Michaelis, R.~Zemel, W.~Brendel, M.~Bethge, and
+  F.~A. Wichmann.
+\newblock Shortcut learning in deep neural networks, 2020.
+
+\bibitem[Guo et~al.(2017)Guo, Pleiss, Sun, and
+  Weinberger]{kilian2017calibration}
+C.~Guo, G.~Pleiss, Y.~Sun, and K.~Q. Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock \emph{ICML}, 2017.
+
+\bibitem[Hendrycks et~al.(2019{\natexlab{a}})Hendrycks, Mazeika, and
+  Dietterich]{hendrycks2019oe}
+D.~Hendrycks, M.~Mazeika, and T.~Dietterich.
+\newblock Deep anomaly detection with outlier exposure.
+\newblock \emph{ICLR}, 2019{\natexlab{a}}.
+
+\bibitem[Hendrycks et~al.(2019{\natexlab{b}})Hendrycks, Zhao, Basart,
+  Steinhardt, and Song]{Hendrycks2019NaturalAE}
+D.~Hendrycks, K.~Zhao, S.~Basart, J.~Steinhardt, and D.~Song.
+\newblock Natural adversarial examples.
+\newblock \emph{ArXiv}, abs/1907.07174, 2019{\natexlab{b}}.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Burns, Basart, Critch, Li, Song, and
+  Steinhardt]{hendrycks2020ethicsdataset}
+D.~Hendrycks, C.~Burns, S.~Basart, A.~Critch, J.~Li, D.~Song, and
+  J.~Steinhardt.
+\newblock Aligning ai with shared human values, 2020.
+
+\bibitem[Huang et~al.(2019)Huang, Bras, Bhagavatula, and
+  Choi]{huang2019cosmosqa}
+L.~Huang, R.~L. Bras, C.~Bhagavatula, and Y.~Choi.
+\newblock Cosmos qa: Machine reading comprehension with contextual commonsense
+  reasoning, 2019.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei]{kaplan2020scalinglaws}
+J.~Kaplan, S.~McCandlish, T.~Henighan, T.~B. Brown, B.~Chess, R.~Child,
+  S.~Gray, A.~Radford, J.~Wu, and D.~Amodei.
+\newblock Scaling laws for neural language models, 2020.
+
+\bibitem[Khashabi et~al.(2020)Khashabi, Khot, Sabharwal, Tafjord, Clark, and
+  Hajishirzi]{khashabi2020unifiedqa}
+D.~Khashabi, T.~Khot, A.~Sabharwal, O.~Tafjord, P.~Clark, and H.~Hajishirzi.
+\newblock Unifiedqa: Crossing format boundaries with a single qa system, 2020.
+
+\bibitem[Khot et~al.(2019)Khot, Clark, Guerquin, Jansen, and
+  Sabharwal]{khot2019qasc}
+T.~Khot, P.~Clark, M.~Guerquin, P.~Jansen, and A.~Sabharwal.
+\newblock Qasc: A dataset for question answering via sentence composition,
+  2019.
+
+\bibitem[Kumar et~al.(2019)Kumar, Liang, and Ma]{kumar2019verifiedcalibration}
+A.~Kumar, P.~Liang, and T.~Ma.
+\newblock Verified uncertainty calibration, 2019.
+
+\bibitem[Lai et~al.(2017)Lai, Xie, Liu, Yang, and Hovy]{lai2017race}
+G.~Lai, Q.~Xie, H.~Liu, Y.~Yang, and E.~Hovy.
+\newblock Race: Large-scale reading comprehension dataset from examinations,
+  2017.
+
+\bibitem[Lan et~al.(2020)Lan, Chen, Goodman, Gimpel, Sharma, and
+  Soricut]{AlbertLan2020}
+Z.~Lan, M.~Chen, S.~Goodman, K.~Gimpel, P.~Sharma, and R.~Soricut.
+\newblock Albert: A lite bert for self-supervised learning of language
+  representations.
+\newblock \emph{ArXiv}, abs/1909.11942, 2020.
+
+\bibitem[Liu et~al.(2019)Liu, Ott, Goyal, Du, Joshi, Chen, Levy, Lewis,
+  Zettlemoyer, and Stoyanov]{RobertaLiu2019AR}
+Y.~Liu, M.~Ott, N.~Goyal, J.~Du, M.~Joshi, D.~Chen, O.~Levy, M.~Lewis,
+  L.~Zettlemoyer, and V.~Stoyanov.
+\newblock Roberta: A robustly optimized bert pretraining approach.
+\newblock \emph{ArXiv}, abs/1907.11692, 2019.
+
+\bibitem[Mihaylov et~al.(2018)Mihaylov, Clark, Khot, and
+  Sabharwal]{OpenBookQA2018}
+T.~Mihaylov, P.~Clark, T.~Khot, and A.~Sabharwal.
+\newblock Can a suit of armor conduct electricity? a new dataset for open book
+  question answering.
+\newblock In \emph{EMNLP}, 2018.
+
+\bibitem[Ovadia et~al.(2019)Ovadia, Fertig, Ren, Nado, Sculley, Nowozin,
+  Dillon, Lakshminarayanan, and Snoek]{ovadia2019can}
+Y.~Ovadia, E.~Fertig, J.~Ren, Z.~Nado, D.~Sculley, S.~Nowozin, J.~V. Dillon,
+  B.~Lakshminarayanan, and J.~Snoek.
+\newblock Can you trust your model's uncertainty? {E}valuating predictive
+  uncertainty under dataset shift.
+\newblock \emph{NeurIPS}, 2019.
+
+\bibitem[Petroni et~al.(2019)Petroni, Rocktäschel, Lewis, Bakhtin, Wu, Miller,
+  and Riedel]{petroni2019languagemodelsasknowledgebase}
+F.~Petroni, T.~Rocktäschel, P.~Lewis, A.~Bakhtin, Y.~Wu, A.~H. Miller, and
+  S.~Riedel.
+\newblock Language models as knowledge bases?, 2019.
+
+\bibitem[Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever]{Radford2019LanguageMA}
+A.~Radford, J.~Wu, R.~Child, D.~Luan, D.~Amodei, and I.~Sutskever.
+\newblock Language models are unsupervised multitask learners.
+\newblock 2019.
+
+\bibitem[Raffel et~al.(2019)Raffel, Shazeer, Roberts, Lee, Narang, Matena,
+  Zhou, Li, and Liu]{raffel2019exploringT5}
+C.~Raffel, N.~Shazeer, A.~Roberts, K.~Lee, S.~Narang, M.~Matena, Y.~Zhou,
+  W.~Li, and P.~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer, 2019.
+
+\bibitem[Richardson et~al.(2013)Richardson, Burges, and
+  Renshaw]{richardson-etal-2013-mctest}
+M.~Richardson, C.~J. Burges, and E.~Renshaw.
+\newblock {MCT}est: A challenge dataset for the open-domain machine
+  comprehension of text.
+\newblock In \emph{Proceedings of the 2013 Conference on Empirical Methods in
+  Natural Language Processing}, pages 193--203, Seattle, Washington, USA, Oct.
+  2013. Association for Computational Linguistics.
+
+\bibitem[Sai et~al.(2020)Sai, Mohankumar, and Khapra]{Sai2020NLGSurvey}
+A.~B. Sai, A.~K. Mohankumar, and M.~M. Khapra.
+\newblock A survey of evaluation metrics used for nlg systems.
+\newblock 2020.
+
+\bibitem[Turing(1950)]{Turing1990TuringTest}
+A.~Turing.
+\newblock Computing machinery and intelligence.
+\newblock 1950.
+
+\bibitem[Wang et~al.(2018)Wang, Singh, Michael, Hill, Levy, and
+  Bowman]{wang2018glue}
+A.~Wang, A.~Singh, J.~Michael, F.~Hill, O.~Levy, and S.~R. Bowman.
+\newblock Glue: A multi-task benchmark and analysis platform for natural
+  language understanding, 2018.
+
+\bibitem[Wang et~al.(2019)Wang, Pruksachatkun, Nangia, Singh, Michael, Hill,
+  Levy, and Bowman]{wang2019superglue}
+A.~Wang, Y.~Pruksachatkun, N.~Nangia, A.~Singh, J.~Michael, F.~Hill, O.~Levy,
+  and S.~R. Bowman.
+\newblock Superglue: A stickier benchmark for general-purpose language
+  understanding systems, 2019.
+
+\bibitem[Zellers et~al.(2019)Zellers, Holtzman, Bisk, Farhadi, and
+  Choi]{zellers2019hellaswag}
+R.~Zellers, A.~Holtzman, Y.~Bisk, A.~Farhadi, and Y.~Choi.
+\newblock Hellaswag: Can a machine really finish your sentence?, 2019.
+
+\bibitem[Zellers et~al.(2020)Zellers, Holtzman, Clark, Qin, Farhadi, and
+  Choi]{zellers2020turingadvice}
+R.~Zellers, A.~Holtzman, E.~Clark, L.~Qin, A.~Farhadi, and Y.~Choi.
+\newblock Evaluating machines by their real-world language use, 2020.
+
+\end{thebibliography}

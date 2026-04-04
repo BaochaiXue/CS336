@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [1][-]{section.3}{Background}{}% 3
+\BOOKMARK [1][-]{section.4}{RMSNorm}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Invariance Analysis}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Gradient Analysis}{section.4}% 6
+\BOOKMARK [1][-]{section.5}{pRMSNorm}{}% 7
+\BOOKMARK [1][-]{section.6}{Experiments}{}% 8
+\BOOKMARK [2][-]{subsection.6.1}{Machine Translation}{section.6}% 9
+\BOOKMARK [2][-]{subsection.6.2}{CNN/Daily Mail Reading Comprehension}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.3}{Image-Caption Retrieval}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.4}{CIFAR-10 Classification}{section.6}% 12
+\BOOKMARK [1][-]{section.7}{Conclusion and Future Work}{}% 13
+\BOOKMARK [1][-]{appendix.A}{Appendix}{}% 14
+\BOOKMARK [2][-]{subsection.A.1}{Machine Translation}{appendix.A}% 15
+\BOOKMARK [2][-]{subsection.A.2}{CNN/Daily Mail Reading Comprehension}{appendix.A}% 16
+\BOOKMARK [2][-]{subsection.A.3}{Image-Caption Retrieval}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.4}{CIFAR-10 Classification}{appendix.A}% 18

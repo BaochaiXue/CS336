@@ -1,0 +1,75 @@
+\section{Related Work}
+\label{sec:related}
+
+\paraf{LLM training.}
+A lot of efforts have been put to the training of pre-trained LLMs, including
+proprietary ones such as GPT-3~\cite{brown2020language},
+GPT-4~\cite{openai2023gpt4}, GShard~\cite{lepikhin2020gshard},
+PaLM~\cite{chowdhery2022palm}, and many others~\cite{askell2021general,
+wei2022finetuned, smith2022using, hoffmann2022training, su2023welm}, as well as
+open-source alternatives like OPT~\cite{zhang2022opt},
+BLOOM~\cite{scao2022bloom}, Llama~\cite{touvron2023llama1},
+Llama-2~\cite{touvron2023llama}. Existing technical reports in the field
+predominantly focus on model performance comparisons, leaving out the specific
+details of the system infrastructure that makes such training possible.
+This paper fills this gap by sharing our experience of end-to-end LLM
+pre-training at the scale of over 10,000 GPUs from a systems perspective.
+
+After pre-training, pre-trained base models can be further fine-tuned to adapt
+to downstream tasks better. This has led to the emergence of a range of dialogue
+models~\cite{alpaca, vicuna2023, koala_blogpost_2023, BELLE} exemplified by
+ChatGPT. However, it is worth noting that the computational power and data
+requirements for fine-tuning are substantially lower than those for
+pre-training. With the application of optimization techniques such as
+quantization~\cite{li2020train, xiao2022smoothquant, frantar2022gptq,
+dettmers2022llm} and low-rank adaptation~\cite{hu2021lora}, fine-tuning can be
+efficiently accomplished with limited resources. 
+
+\parabf{LLM optimizations.}
+In addition to the techniques mentioned previously in the paper, there exists a lot of other works targeted at improving the efficiency of LLMs. Sparse or linear attentions~\cite{child2019generating, katharopoulos2020transformers, zhu2021longshort} are proposed to make the memory consumption scales approximately linearly. Several studies
+aim to design new architectures rather than conventional
+transformer architectures to address the efficiency issue, such as
+RWKV~\cite{peng2023rwkv} and RetNet~\cite{sun2023retentive}. 
+Many recent studies have been devoted to developing communication acceleration techniques for LLMs. Some works reduce communication traffic using gradient compression~\cite{alistarh2017qsgd} or mixed-precision training~\cite{DBLP:conf/iclr/MicikeviciusNAD18}, while others schedule communication to overlap it with computation. 
+Many popular ML frameworks, such as TensorFlow~\cite{abadi2016tensorflow} and PyTorch~\cite{paszke2019pytorch}, enable overlapping communication with backward propagation by default.
+Recent works~\cite{jayarajan2019priority, hashemi2019tictac, peng2019generic, bao2020preemptive} further overlap gradient synchronization with forward computation via tensor partitioning, at the cost of extra overhead. Some works~\cite{li2018pipe, chen2022sapipe} introduce fixed staleness to the training pipeline for full overlapping communication and communication. However, the staleness may degrade the model performance.
+
+
+\parabf{Diagnosis tools in datacenters.} Many diagnosis tools have been developed
+to identify and pinpoint hardware and software problems in datacenters.
+Pingmesh~\cite{pingmesh} is an active
+probing system based on end hosts. Network wide RTT and packet loss and measured
+by sending probing ping packets and doing data analysis. Network-wide SLAs are
+provided and network problems including packet-blackhole and packet silent drop
+are detected.  EverFlow~\cite{everflow}, LossRadar~\cite{lossradar},
+NetBouncer~\cite{netbouncer} exploits the capability of switches to diagnose
+detailed network problems like network path failures or specific network port
+failures. NetBouncer leverages IP-in-IP tunnel techniques to do path probing.
+EverFlow requires mirroring network packets to a centralized server to do
+debugging. Hostping~\cite{hostping} is a diagnosis system based on
+end hosts that focuses on intra-host bottlenecks. It actively senses complex GPU
+server PCIe/NVLINK interconnects and does loopback bandwidth and latency tests.
+
+\parabf{Fault tolerance in large-scale distributed systems.}
+Fault tolerance has been a major concern in large-scale distributed systems,
+where a wide range of hardware and software failures can occur.
+Many fault tolerance techniques have been proposed in the past
+that cater the needs of different
+systems and deployment scenarios.
+Reactive fault
+tolerance techniques are used to reduce the impact of failures on a system when
+the failures occur. There are many techniques in this category such
+as Retry~\cite{haider2011fault}, Replication~\cite{haider2011fault},
+Checkpointing~\cite{peng2018optimus} and Message
+Logging~\cite{tanenbaum2007distributed}.
+These techniques incur some system overhead to recover from failures.
+Proactive fault tolerance techniques
+keep healthy components in place as backups of the faulty
+components, obviating the need of recovery from faults and errors, e.g., preemptive
+migration~\cite{chakravorty2006proactive, chakravorty2005proactive,
+chen2020elastic} and load balancing~\cite{behera2014performance}. However, these
+approaches often assume that failures are predictable,
+while it is challenging for real
+large-scale distributed systems to predict the failures due to the complexity
+of the systems.
+

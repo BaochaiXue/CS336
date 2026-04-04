@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Download | OpenWebTextCorpus</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Download" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Home of the Open WebText Corpus." />
+<meta property="og:description" content="Home of the Open WebText Corpus." />
+<link rel="canonical" href="/OpenWebTextCorpus/" />
+<meta property="og:url" content="/OpenWebTextCorpus/" />
+<meta property="og:site_name" content="OpenWebTextCorpus" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Download" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Home of the Open WebText Corpus.","headline":"Download","name":"OpenWebTextCorpus","url":"/OpenWebTextCorpus/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/OpenWebTextCorpus/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/OpenWebTextCorpus/feed.xml" title="OpenWebTextCorpus" /><script async src="https://www.googletagmanager.com/gtag/js?id=UA-139890108-1"></script>
+<script>
+  window['ga-disable-UA-139890108-1'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139890108-1');
+</script>
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/OpenWebTextCorpus/">OpenWebTextCorpus</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/OpenWebTextCorpus/">Download</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home"><h1 class="page-heading">Download</h1><h1 id="download"><a href="https://huggingface.co/datasets/Skylion007/openwebtext"><strong>Download</strong></a></h1>
+
+<p><strong>Summary:</strong></p>
+
+<p>Today we’re announcing the release of a beta version of Open WebText – an open source effort to reproduce OpenAI’s WebText dataset, as detailed <a href="https://d4mucfpksywv.cloudfront.net/better-language-models/language-models.pdf">here</a>. This distribution was created by Aaron Gokaslan and Vanya Cohen of Brown University. The following post outlines the steps taken to reproduce the dataset, and provides information for those seeking to contribute to its further development.</p>
+
+<p><strong>Open WebText:</strong></p>
+
+<p>We started by extracting all Reddit post urls from the <a href="https://files.pushshift.io/reddit/submissions/">Reddit submissions dataset</a>. These links were deduplicated, filtered to exclude non-html content, and then shuffled randomly. The links were then distributed to several machines in parallel for download, and all web pages were extracted using the newspaper python package. Using Facebook <a href="https://github.com/facebookresearch/fastText">FastText</a>, non-English web pages were filtered out.</p>
+
+<p>Subsequently, near-duplicate documents were identified using <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing#Applications">local-sensitivity hashing</a> (LSH). Documents were hashed into sets of 5-grams and all documents that had a similarity threshold of greater than 0.5 were removed. The the remaining documents were tokenized, and documents with fewer than 128 tokens were removed. This left 38GB of text data (40GB using SI units) from 8,013,769 documents.</p>
+
+<p><strong>Next Steps:</strong></p>
+
+<p>Given OpenAI’s limited release of information around WebText and GPT-2, we acknowledge there may be further room for improvement of the dataset. As such we welcome contributions and suggestions for improvements. We hope that the availability of this dataset encourages further work into reproducing GPT-2 and proves useful for other projects beyond. We will release more code on the master branch soon.</p>
+
+<p><strong>Citation</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@misc{Gokaslan2019OpenWeb,  
+	title={OpenWebText Corpus},
+	author={Aaron Gokaslan and Vanya Cohen},
+	howpublished={\url{http://Skylion007.github.io/OpenWebTextCorpus}}, 
+	year={2019}
+}
+</code></pre></div></div>
+
+<p><strong>Licensing:</strong></p>
+
+<p>These data are released under this licensing scheme:</p>
+
+<p>We do not own any of the text from which these data has been extracted.</p>
+
+<p>We license the actual packaging of these parallel data under the <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">Creative Commons CC0 license (“no rights reserved”)</a></p>
+
+<p>Notice and take down policy:</p>
+
+<p><strong>Notice:</strong> Should you consider that our data contains material that is owned by you and should therefore not be reproduced here, please:</p>
+
+<p>Clearly identify yourself, with detailed contact data such as an address, telephone number or email address at which you can be contacted.</p>
+
+<p>Clearly identify the copyrighted work claimed to be infringed.</p>
+
+<p>Clearly identify the material that is claimed to be infringing and information reasonably sufficient to allow us to locate the material.</p>
+
+<p>And contact us at the following email address: openwebtext at gmail.com</p>
+
+<p><strong>Take down:</strong> We will comply to legitimate requests by removing the affected sources from the next release of the corpus.</p>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/OpenWebTextCorpus/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">OpenWebTextCorpus</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">OpenWebTextCorpus</li><li><a class="u-email" href="mailto:openwebtext (at) gmail.com">openwebtext (at) gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/skylion007"><svg class="svg-icon"><use xlink:href="/OpenWebTextCorpus/assets/minima-social-icons.svg#github"></use></svg> <span class="username">skylion007</span></a></li><li><a href="https://www.linkedin.com/in/vanya-cohen-696943ab"><svg class="svg-icon"><use xlink:href="/OpenWebTextCorpus/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">vanya-cohen-696943ab</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Home of the Open WebText Corpus.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

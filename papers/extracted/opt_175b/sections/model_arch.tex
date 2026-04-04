@@ -1,0 +1,29 @@
+\subsection{Models}
+\label{sec:models}
+
+We present results on eight Transformer language models ranging from 125 million to 175 billion parameters. Architectural details are displayed in Table \ref{tab:model_sizes}. In the interest of transparency, and to reduce risk of training instabilities, our models and hyperparameters largely follow \citet{brown2020gpt3}, with variations in batch size mostly to obtain increased computational efficiency.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{lrrrrr}
+    \toprule
+    {\bf Model} & {\bf \#L} & {\bf \#H}  & {\bf d$_{\text{model}}$} & {\bf LR} & {\bf Batch} \\
+    \midrule
+        125M    & 12 & 12 & 768   & $6.0e{-4}$ & 0.5M \\
+        350M    & 24 & 16 & 1024  & $3.0e{-4}$ & 0.5M \\
+      % 760M    & 24 & 16 & 1536  & $2.5e{-4}$ & 0.5M \\
+        1.3B    & 24 & 32 & 2048  & $2.0e{-4}$ & 1M \\
+        2.7B    & 32 & 32 & 2560  & $1.6e{-4}$ & 1M \\
+        6.7B    & 32 & 32 & 4096  & $1.2e{-4}$ & 2M \\
+        13B     & 40 & 40 & 5120  & $1.0e{-4}$ & 4M \\
+        30B     & 48 & 56 & 7168  & $1.0e{-4}$ & 4M \\
+        66B     & 64 & 72 & 9216  & $0.8e{-4}$ & 2M \\
+        175B    & 96 & 96 & 12288 & $1.2e{-4}$ & 2M\\
+    \bottomrule
+    \end{tabular}
+    \caption{{\bf Model architecture details.} We report the number of layers (\#L),
+    number of attention heads (\#H), and the embedding size ({d$_{\text{model}}$}).
+    We also report the peak Learning Rate (LR) and global batch size in number of tokens (Batch).
+    }
+    \label{tab:model_sizes}
+\end{table}

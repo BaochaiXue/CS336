@@ -1,0 +1,211 @@
+\begin{thebibliography}{10}
+
+\bibitem{brown2020language}
+T.~Brown, B.~Mann, N.~Ryder, M.~Subbiah, J.~D. Kaplan, P.~Dhariwal, A.~Neelakantan, P.~Shyam, G.~Sastry, A.~Askell, {\em et~al.}, ``Language models are few-shot learners,'' {\em Advances in neural information processing systems}, vol.~33, pp.~1877--1901, 2020.
+
+\bibitem{chatgpt}
+``Introducing chatgpt.'' \url{https://openai.com/blog/chatgpt}, 2022.
+
+\bibitem{kaplan2020scaling}
+J.~Kaplan, S.~McCandlish, T.~Henighan, T.~B. Brown, B.~Chess, R.~Child, S.~Gray, A.~Radford, J.~Wu, and D.~Amodei, ``Scaling laws for neural language models,'' 2020.
+
+\bibitem{floridi2020gpt}
+L.~Floridi and M.~Chiriatti, ``Gpt-3: Its nature, scope, limits, and consequences,'' {\em Minds and Machines}, vol.~30, pp.~681--694, 2020.
+
+\bibitem{chowdhery2022palm}
+A.~Chowdhery, S.~Narang, J.~Devlin, M.~Bosma, G.~Mishra, A.~Roberts, P.~Barham, H.~W. Chung, C.~Sutton, S.~Gehrmann, {\em et~al.}, ``Palm: Scaling language modeling with pathways,'' {\em arXiv preprint arXiv:2204.02311}, 2022.
+
+\bibitem{he2016deep}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun, ``Deep residual learning for image recognition,'' in {\em IEEE Conference on Computer Vision and Pattern Recognition}, 2016.
+
+\bibitem{narayanan2021efficient}
+D.~Narayanan, M.~Shoeybi, J.~Casper, P.~LeGresley, M.~Patwary, V.~A. Korthikanti, D.~Vainbrand, P.~Kashinkunti, J.~Bernauer, B.~Catanzaro, A.~Phanishayee, and M.~Zaharia, ``Efficient large-scale language model training on gpu clusters using megatron-lm,'' 2021.
+
+\bibitem{beltagy2020longformer}
+I.~Beltagy, M.~E. Peters, and A.~Cohan, ``Longformer: The long-document transformer,'' 2020.
+
+\bibitem{You2020Large}
+Y.~You, J.~Li, S.~Reddi, J.~Hseu, S.~Kumar, S.~Bhojanapalli, X.~Song, J.~Demmel, K.~Keutzer, and C.-J. Hsieh, ``Large batch optimization for deep learning: Training bert in 76 minutes,'' in {\em International Conference on Learning Representations}, 2020.
+
+\bibitem{shoeybi2020megatronlm}
+M.~Shoeybi, M.~Patwary, R.~Puri, P.~LeGresley, J.~Casper, and B.~Catanzaro, ``Megatron-lm: Training multi-billion parameter language models using model parallelism,'' 2020.
+
+\bibitem{zero}
+S.~Rajbhandari, J.~Rasley, O.~Ruwase, and Y.~He, ``Zero: Memory optimizations toward training trillion parameter models.'' ArXiv, May 2020.
+
+\bibitem{huang2019gpipe}
+Y.~Huang, Y.~Cheng, A.~Bapna, O.~Firat, D.~Chen, M.~Chen, H.~Lee, J.~Ngiam, Q.~V. Le, Y.~Wu, {\em et~al.}, ``{GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism },'' in {\em NeurIPS}, 2019.
+
+\bibitem{pipedream}
+D.~Narayanan, A.~Harlap, A.~Phanishayee, V.~Seshadri, N.~R. Devanur, G.~R. Ganger, P.~B. Gibbons, and M.~Zaharia, ``Pipedream: Generalized pipeline parallelism for dnn training,'' in {\em ACM SOSP}, 2019.
+
+\bibitem{gpt-j}
+B.~Wang and A.~Komatsuzaki, ``{GPT-J-6B: A 6 Billion Parameter Autoregressive Language Model}.'' \url{https://github.com/kingoflolz/mesh-transformer-jax}, May 2021.
+
+\bibitem{pytorch_fsdp}
+Y.~Zhao, A.~Gu, R.~Varma, L.~Luo, C.-C. Huang, M.~Xu, L.~Wright, H.~Shojanazeri, M.~Ott, S.~Shleifer, A.~Desmaison, C.~Balioglu, P.~Damania, B.~Nguyen, G.~Chauhan, Y.~Hao, A.~Mathews, and S.~Li, ``Pytorch fsdp: Experiences on scaling fully sharded data parallel,'' 2023.
+
+\bibitem{dao2023flashattention}
+T.~Dao, ``Flashattention-2: Faster attention with better parallelism and work partitioning,'' {\em arXiv preprint arXiv:2307.08691}, 2023.
+
+\bibitem{li2020pytorch}
+S.~Li, Y.~Zhao, R.~Varma, O.~Salpekar, P.~Noordhuis, T.~Li, A.~Paszke, J.~Smith, B.~Vaughan, P.~Damania, and S.~Chintala, ``Pytorch distributed: Experiences on accelerating data parallel training,'' 2020.
+
+\bibitem{PFCStandard}
+I.~Group, ``Ieee 802.1 qbb - priority-based flow control.'' \url{https://1.ieee802.org/dcb/802-1qbb/}, 2009.
+
+\bibitem{zhu2015congestion}
+Y.~Zhu, H.~Eran, D.~Firestone, C.~Guo, M.~Lipshteyn, Y.~Liron, J.~Padhye, S.~Raindel, M.~H. Yahia, and M.~Zhang, ``{Congestion Control for Large-scale RDMA Deployments},'' {\em ACM SIGCOMM Computer Communication Review}, vol.~45, no.~4, pp.~523--536, 2015.
+
+\bibitem{kumar2020swift}
+G.~Kumar, N.~Dukkipati, K.~Jang, H.~M. Wassel, X.~Wu, B.~Montazeri, Y.~Wang, K.~Springborn, C.~Alfeld, M.~Ryan, {\em et~al.}, ``{Swift: Delay is Simple and Effective for Congestion Control in the Datacenter},'' in {\em SIGCOMM}, pp.~514--528, 2020.
+
+\bibitem{megatrongithub}
+``{Megatron-LM}.'' \url{https://github.com/NVIDIA/Megatron-LM/tree/main}, 2021.
+
+\bibitem{korthikanti2023reducing}
+V.~A. Korthikanti, J.~Casper, S.~Lym, L.~McAfee, M.~Andersch, M.~Shoeybi, and B.~Catanzaro, ``Reducing activation recomputation in large transformer models,'' {\em Proceedings of Machine Learning and Systems}, vol.~5, 2023.
+
+\bibitem{openai2023gpt4}
+OpenAI, ``Gpt-4 technical report,'' 2023.
+
+\bibitem{lepikhin2020gshard}
+D.~Lepikhin, H.~Lee, Y.~Xu, D.~Chen, O.~Firat, Y.~Huang, M.~Krikun, N.~Shazeer, and Z.~Chen, ``Gshard: Scaling giant models with conditional computation and automatic sharding,'' 2020.
+
+\bibitem{askell2021general}
+A.~Askell, Y.~Bai, A.~Chen, D.~Drain, D.~Ganguli, T.~Henighan, A.~Jones, N.~Joseph, B.~Mann, N.~DasSarma, N.~Elhage, Z.~Hatfield-Dodds, D.~Hernandez, J.~Kernion, K.~Ndousse, C.~Olsson, D.~Amodei, T.~Brown, J.~Clark, S.~McCandlish, C.~Olah, and J.~Kaplan, ``A general language assistant as a laboratory for alignment,'' 2021.
+
+\bibitem{wei2022finetuned}
+J.~Wei, M.~Bosma, V.~Y. Zhao, K.~Guu, A.~W. Yu, B.~Lester, N.~Du, A.~M. Dai, and Q.~V. Le, ``Finetuned language models are zero-shot learners,'' 2022.
+
+\bibitem{smith2022using}
+S.~Smith, M.~Patwary, B.~Norick, P.~LeGresley, S.~Rajbhandari, J.~Casper, Z.~Liu, S.~Prabhumoye, G.~Zerveas, V.~Korthikanti, E.~Zhang, R.~Child, R.~Y. Aminabadi, J.~Bernauer, X.~Song, M.~Shoeybi, Y.~He, M.~Houston, S.~Tiwary, and B.~Catanzaro, ``Using deepspeed and megatron to train megatron-turing nlg 530b, a large-scale generative language model,'' 2022.
+
+\bibitem{hoffmann2022training}
+J.~Hoffmann, S.~Borgeaud, A.~Mensch, E.~Buchatskaya, T.~Cai, E.~Rutherford, D.~de~Las~Casas, L.~A. Hendricks, J.~Welbl, A.~Clark, T.~Hennigan, E.~Noland, K.~Millican, G.~van~den Driessche, B.~Damoc, A.~Guy, S.~Osindero, K.~Simonyan, E.~Elsen, J.~W. Rae, O.~Vinyals, and L.~Sifre, ``Training compute-optimal large language models,'' 2022.
+
+\bibitem{su2023welm}
+H.~Su, X.~Zhou, H.~Yu, X.~Shen, Y.~Chen, Z.~Zhu, Y.~Yu, and J.~Zhou, ``Welm: A well-read pre-trained language model for chinese,'' 2023.
+
+\bibitem{zhang2022opt}
+S.~Zhang, S.~Roller, N.~Goyal, M.~Artetxe, M.~Chen, S.~ChenG, C.~Dewan, M.~Diab, X.~Li, X.~V. Lin, T.~Mihaylov, M.~Ott, S.~Shleifer, K.~Shuster, D.~Simig, P.~S. Koura, A.~Sridhar, T.~Wang, and L.~Zettlemoyer, ``Opt: Open pre-trained transformer language models,'' 2022.
+
+\bibitem{scao2022bloom}
+T.~L. Scao, A.~Fan, C.~Akiki, E.~Pavlick, S.~Ili{\'c}, D.~Hesslow, R.~Castagn{\'e}, A.~S. Luccioni, F.~Yvon, M.~Gall{\'e}, {\em et~al.}, ``Bloom: A 176b-parameter open-access multilingual language model,'' {\em arXiv preprint arXiv:2211.05100}, 2022.
+
+\bibitem{touvron2023llama1}
+H.~Touvron, T.~Lavril, G.~Izacard, X.~Martinet, M.-A. Lachaux, T.~Lacroix, B.~Rozière, N.~Goyal, E.~Hambro, F.~Azhar, A.~Rodriguez, A.~Joulin, E.~Grave, and G.~Lample, ``Llama: Open and efficient foundation language models,'' 2023.
+
+\bibitem{touvron2023llama}
+H.~Touvron, L.~Martin, K.~Stone, P.~Albert, A.~Almahairi, Y.~Babaei, N.~Bashlykov, S.~Batra, P.~Bhargava, S.~Bhosale, D.~Bikel, L.~Blecher, C.~C. Ferrer, M.~Chen, G.~Cucurull, D.~Esiobu, J.~Fernandes, J.~Fu, W.~Fu, B.~Fuller, C.~Gao, V.~Goswami, N.~Goyal, A.~Hartshorn, S.~Hosseini, R.~Hou, H.~Inan, M.~Kardas, V.~Kerkez, M.~Khabsa, I.~Kloumann, A.~Korenev, P.~S. Koura, M.-A. Lachaux, T.~Lavril, J.~Lee, D.~Liskovich, Y.~Lu, Y.~Mao, X.~Martinet, T.~Mihaylov, P.~Mishra, I.~Molybog, Y.~Nie, A.~Poulton, J.~Reizenstein, R.~Rungta, K.~Saladi, A.~Schelten, R.~Silva, E.~M. Smith, R.~Subramanian, X.~E. Tan, B.~Tang, R.~Taylor, A.~Williams, J.~X. Kuan, P.~Xu, Z.~Yan, I.~Zarov, Y.~Zhang, A.~Fan, M.~Kambadur, S.~Narang, A.~Rodriguez, R.~Stojnic, S.~Edunov, and T.~Scialom, ``Llama 2: Open foundation and fine-tuned chat models,'' 2023.
+
+\bibitem{alpaca}
+R.~Taori, I.~Gulrajani, T.~Zhang, Y.~Dubois, X.~Li, C.~Guestrin, P.~Liang, and T.~B. Hashimoto, ``Stanford alpaca: An instruction-following llama model.'' \url{https://github.com/tatsu-lab/stanford_alpaca}, 2023.
+
+\bibitem{vicuna2023}
+W.-L. Chiang, Z.~Li, Z.~Lin, Y.~Sheng, Z.~Wu, H.~Zhang, L.~Zheng, S.~Zhuang, Y.~Zhuang, J.~E. Gonzalez, I.~Stoica, and E.~P. Xing, ``Vicuna: An open-source chatbot impressing gpt-4 with 90{\%}* chatgpt quality,'' 2023.
+
+\bibitem{koala_blogpost_2023}
+X.~Geng, A.~Gudibande, H.~Liu, E.~Wallace, P.~Abbeel, S.~Levine, and D.~Song, ``Koala: A dialogue model for academic research.'' Blog post, April 2023.
+
+\bibitem{BELLE}
+Y.~Ji, Y.~Deng, Y.~Gong, Y.~Peng, Q.~Niu, B.~Ma, and X.~Li, ``Belle: Be everyone's large language model engine.'' \url{https://github.com/LianjiaTech/BELLE}, 2023.
+
+\bibitem{li2020train}
+Z.~Li, E.~Wallace, S.~Shen, K.~Lin, K.~Keutzer, D.~Klein, and J.~Gonzalez, ``Train big, then compress: Rethinking model size for efficient training and inference of transformers,'' in {\em International Conference on Machine Learning (ICML)}, 2020.
+
+\bibitem{xiao2022smoothquant}
+G.~Xiao, J.~Lin, M.~Seznec, J.~Demouth, and S.~Han, ``Smoothquant: Accurate and efficient post-training quantization for large language models,'' {\em arXiv}, 2022.
+
+\bibitem{frantar2022gptq}
+E.~Frantar, S.~Ashkboos, T.~Hoefler, and D.~Alistarh, ``Gptq: Accurate post-training quantization for generative pre-trained transformers,'' {\em arXiv}, 2022.
+
+\bibitem{dettmers2022llm}
+T.~Dettmers, M.~Lewis, Y.~Belkada, and L.~Zettlemoyer, ``Llm. int8 (): 8-bit matrix multiplication for transformers at scale,'' {\em arXiv}, 2022.
+
+\bibitem{hu2021lora}
+E.~J. Hu, Y.~Shen, P.~Wallis, Z.~Allen-Zhu, Y.~Li, S.~Wang, L.~Wang, and W.~Chen, ``Lora: Low-rank adaptation of large language models,'' 2021.
+
+\bibitem{child2019generating}
+R.~Child, S.~Gray, A.~Radford, and I.~Sutskever, ``Generating long sequences with sparse transformers,'' 2019.
+
+\bibitem{katharopoulos2020transformers}
+A.~Katharopoulos, A.~Vyas, N.~Pappas, and F.~Fleuret, ``Transformers are rnns: Fast autoregressive transformers with linear attention,'' 2020.
+
+\bibitem{zhu2021longshort}
+C.~Zhu, W.~Ping, C.~Xiao, M.~Shoeybi, T.~Goldstein, A.~Anandkumar, and B.~Catanzaro, ``Long-short transformer: Efficient transformers for language and vision,'' 2021.
+
+\bibitem{peng2023rwkv}
+B.~Peng, E.~Alcaide, Q.~Anthony, A.~Albalak, S.~Arcadinho, H.~Cao, X.~Cheng, M.~Chung, M.~Grella, K.~K. GV, X.~He, H.~Hou, P.~Kazienko, J.~Kocon, J.~Kong, B.~Koptyra, H.~Lau, K.~S.~I. Mantri, F.~Mom, A.~Saito, X.~Tang, B.~Wang, J.~S. Wind, S.~Wozniak, R.~Zhang, Z.~Zhang, Q.~Zhao, P.~Zhou, J.~Zhu, and R.-J. Zhu, ``Rwkv: Reinventing rnns for the transformer era,'' 2023.
+
+\bibitem{sun2023retentive}
+Y.~Sun, L.~Dong, S.~Huang, S.~Ma, Y.~Xia, J.~Xue, J.~Wang, and F.~Wei, ``Retentive network: A successor to transformer for large language models,'' 2023.
+
+\bibitem{alistarh2017qsgd}
+D.~Alistarh, D.~Grubic, J.~Li, R.~Tomioka, and M.~Vojnovic, ``{QSGD: Communication-Efficient SGD via Gradient Quantization and Encoding},'' in {\em NeurIPS}, 2017.
+
+\bibitem{DBLP:conf/iclr/MicikeviciusNAD18}
+P.~Micikevicius, S.~Narang, J.~Alben, G.~F. Diamos, E.~Elsen, D.~Garc{\'{\i}}a, B.~Ginsburg, M.~Houston, O.~Kuchaiev, G.~Venkatesh, and H.~Wu, ``{Mixed Precision Training},'' in {\em ICLR}, 2018.
+
+\bibitem{abadi2016tensorflow}
+M.~Abadi, P.~Barham, J.~Chen, Z.~Chen, A.~Davis, J.~Dean, M.~Devin, S.~Ghemawat, G.~Irving, M.~Isard, {\em et~al.}, ``{Tensorflow: A system for large-scale machine learning},'' in {\em OSDI}, 2016.
+
+\bibitem{paszke2019pytorch}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen, Z.~Lin, N.~Gimelshein, L.~Antiga, {\em et~al.}, ``{PyTorch: An Imperative Style, High-Performance Deep Learning Library },'' in {\em NeurIPS}, 2019.
+
+\bibitem{jayarajan2019priority}
+A.~Jayarajan, J.~Wei, G.~Gibson, A.~Fedorova, and G.~Pekhimenko, ``{Priority-based Parameter Propagation for Distributed DNN Training },'' in {\em MLSys}, 2019.
+
+\bibitem{hashemi2019tictac}
+S.~H. Hashemi, S.~Abdu~Jyothi, and R.~Campbell, ``{TicTac: Accelerating Distributed Deep Learning with Communication Scheduling},'' in {\em MLSys}, 2019.
+
+\bibitem{peng2019generic}
+Y.~Peng, Y.~Zhu, Y.~Chen, Y.~Bao, B.~Yi, C.~Lan, C.~Wu, and C.~Guo, ``{A generic communication scheduler for distributed DNN training acceleration},'' in {\em SOSP}, 2019.
+
+\bibitem{bao2020preemptive}
+Y.~Bao, Y.~Peng, Y.~Chen, and C.~Wu, ``{Preemptive All-reduce Scheduling for Expediting Distributed DNN Training},'' in {\em INFOCOM}, 2020.
+
+\bibitem{li2018pipe}
+Y.~Li, M.~Yu, S.~Li, S.~Avestimehr, N.~S. Kim, and A.~Schwing, ``{Pipe-SGD: A Decentralized Pipelined SGD Framework for Distributed Deep Net Training},'' in {\em NeurIPS}, 2018.
+
+\bibitem{chen2022sapipe}
+Y.~Chen, C.~Xie, M.~Ma, J.~Gu, Y.~Peng, H.~Lin, C.~Wu, and Y.~Zhu, ``Sapipe: Staleness-aware pipeline for data parallel dnn training,'' {\em Advances in Neural Information Processing Systems}, vol.~35, pp.~17981--17993, 2022.
+
+\bibitem{pingmesh}
+C.~Guo, L.~Yuan, D.~Xiang, Y.~Dang, R.~Huang, D.~Maltz, Z.~Liu, V.~Wang, B.~Pang, H.~Chen, Z.-W. Lin, and V.~Kurien, ``Pingmesh: A large-scale system for data center network latency measurement and analysis,'' {\em SIGCOMM Comput. Commun. Rev.}, vol.~45, p.~139–152, aug 2015.
+
+\bibitem{everflow}
+Y.~Zhu, N.~Kang, J.~Cao, A.~Greenberg, G.~Lu, R.~Mahajan, D.~Maltz, L.~Yuan, M.~Zhang, B.~Y. Zhao, and H.~Zheng, ``Packet-level telemetry in large datacenter networks,'' {\em SIGCOMM Comput. Commun. Rev.}, vol.~45, p.~479–491, aug 2015.
+
+\bibitem{lossradar}
+Y.~Li, R.~Miao, C.~Kim, and M.~Yu, ``Lossradar: Fast detection of lost packets in data center networks,'' in {\em Proceedings of the 12th International on Conference on Emerging Networking EXperiments and Technologies}, CoNEXT '16, (New York, NY, USA), p.~481–495, Association for Computing Machinery, 2016.
+
+\bibitem{netbouncer}
+C.~Tan, Z.~Jin, C.~Guo, T.~Zhang, H.~Wu, K.~Deng, D.~Bi, and D.~Xiang, ``Netbouncer: Active device and link failure localization in data center networks,'' in {\em Proceedings of the 16th USENIX Conference on Networked Systems Design and Implementation}, NSDI'19, (USA), p.~599–613, USENIX Association, 2019.
+
+\bibitem{hostping}
+K.~Liu, Z.~Jiang, J.~Zhang, H.~Wei, X.~Zhong, L.~Tan, T.~Pan, and T.~Huang, ``Hostping: Diagnosing intra-host network bottlenecks in {RDMA} servers,'' in {\em 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)}, (Boston, MA), pp.~15--29, USENIX Association, April 2023.
+
+\bibitem{haider2011fault}
+S.~Haider, N.~R. Ansari, M.~Akbar, and M.~R. Perwez, ``Fault tolerance in distributed paradigms,'' 2011.
+
+\bibitem{peng2018optimus}
+Y.~Peng, Y.~Bao, Y.~Chen, C.~Wu, and C.~Guo, ``Optimus: an efficient dynamic resource scheduler for deep learning clusters,'' in {\em Proceedings of the Thirteenth EuroSys Conference}, pp.~1--14, 2018.
+
+\bibitem{tanenbaum2007distributed}
+A.~S. Tanenbaum, {\em Distributed systems principles and paradigms}.
+\newblock 2007.
+
+\bibitem{chakravorty2006proactive}
+S.~Chakravorty, C.~L. Mendes, and L.~V. Kal{\'e}, ``Proactive fault tolerance in mpi applications via task migration,'' in {\em International Conference on High-Performance Computing}, pp.~485--496, Springer, 2006.
+
+\bibitem{chakravorty2005proactive}
+S.~Chakravorty, C.~Mendes, and L.~V. Kale, ``Proactive fault tolerance in large systems,'' in {\em HPCRI Workshop in conjunction with HPCA}, vol.~2005, pp.~1--7, Citeseer, 2005.
+
+\bibitem{chen2020elastic}
+Y.~Chen, Y.~Peng, Y.~Bao, C.~Wu, Y.~Zhu, and C.~Guo, ``Elastic parameter server load distribution in deep learning clusters,'' in {\em Proceedings of the 11th ACM Symposium on Cloud Computing}, pp.~507--521, 2020.
+
+\bibitem{behera2014performance}
+I.~Behera and C.~R. Tripathy, ``Performance modelling and analysis of mobile grid computing systems,'' {\em International Journal of Grid and Utility Computing}, vol.~5, no.~1, pp.~11--20, 2014.
+
+\end{thebibliography}

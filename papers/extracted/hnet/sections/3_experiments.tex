@@ -1,0 +1,252 @@
+\section{Experiments}
+\label{sec: experiments}
+
+\input{tab/architecture}
+
+We first describe our general experimental protocol for language modeling,  used for the majority of our experiments.
+In \cref{sec: lang}, we evaluate on a high-quality English dataset, showing significantly stronger performance than baselines, as well as improved robustness and interpretability from avoiding tokenization.
+In \cref{sec: experiments-alt-language}, we extend our evaluation to diverse datasets including Chinese, code, and DNA, with even larger performance improvements, demonstrating H-Net's versatility as a general sequence model architecture.
+In \cref{sec: ablation_studies}, we provide comprehensive ablations that study individual architectural components and design choices.
+
+\paragraph{Models.}
+
+We compare against a standard tokenized Transformer following the Llama architecture~\citep{Llama2,Llama3}.\footnote{This was called the "Transformer++" in \citet{Mamba}; since by now it is firmly established, we remove the "++".}
+We additionally compare against several byte-level baselines:
+\begin{itemize}
+  \item MambaByte~\citep{MambaByte} is an isotropic model using pure Mamba-2 layers.
+  \item LlamaByte is an isotropic model using pure Transformer layers.
+  \item SpaceByte~\citep{SpaceByte} represents the canonical hierarchical architecture with external boundary supervision, which chunks on spaces and "space-like" bytes.
+  \footnote{BLT is another architecture with external supervision using entropy instead of delimiters, but is unfortunately too complex to set up and control as a baseline. We believe that the delimiter-based method is highly competitive. See \cref{sec:background:ar:external}.}
+  On English, the space-like delimiter heuristic empirically has an average ratio of $6.0$ bytes per chunk.
+  \item SpaceByte++ is our modification of SpaceByte that includes our architectural modifications to the hierarchical structure (from \cref{sec: Method-Architectural-Overview}).
+  In particular, it changes the outer encoder/decoder networks to use Mamba-2, and modifies the layer counts and widths slightly to match the H-Net models below.
+  \item H-Net (space) further improves SpaceByte++ with our training improvements to the network (\cref{sec: Improved-Techniques}), in particular, adding post-network norms, residual projections, and learning rate multipliers on the outer networks. H-Net (space) differs from our full H-Net only through the chunking function.
+  \item H-Net (pool) is a baseline ablating the effect of a simple chunking strategy that pools every $k$ tokens, which is expected to be weaker than all of the data-dependent chunking strategies.
+  \item H-Net (1-stage) is our full H-Net method with DC learned end-to-end (\cref{sec: Method-Dynamic-Chunking-Mechanism}) with compression target $N^0=6$.
+  \item H-Net (2-stage) is our full H-Net method, iterated to two nested stages using $N^0=3, N^1=3$.
+\end{itemize}
+
+We provide results for two model scales, \emph{Large (L)} and \emph{XL}.
+Each scale is FLOP-matched to the corresponding GPT-3~\citep{GPT3} (\ie{} GPT-3 L and GPT-3 XL) variant of the tokenized Transformer ($760$M and $1.3$B parameters respectively).
+
+\paragraph{Experimental Setup.}
+
+Following established practice~\citep{ByT5, MambaByte, SpaceByte}, we measure performance using bits-per-byte (BPB) to ensure comparability across different input representations.
+For tokenized models, this amounts to simply rescaling the total negative log likelihood of a sequence (in tokens) by the total number of bytes.
+In addition, we systematically control the data and compute budget for all models (see \cref{tab: architecture}),
+matching all models carefully in both \textbf{bytes-per-batch} and \textbf{FLOPs-per-byte}:\footnote{Another way to interpret this is that every model sees the exact same underlying data (regardless of tokenization) per minibatch, and every model aims to use the same number of FLOPs in every forward/backward pass.}
+\begin{itemize}
+
+    \item Data Budget: We train all models on the 100B token subset sampled from the FineWeb-Edu dataset~\citep{FineWeb-Edu}.
+    All tokenizer-free models process $8192$ \texttt{utf-8} encoded bytes per sequence, while the Transformer uses $1792$ tokens from the GPT2 tokenizer (roughly equivalent to $8192$ bytes).
+    We use batch size $256$ for all models; the total batch size is just under $0.5$M tokens per batch for the baseline BPE Transformer, roughly matching protocols from prior work~\citep{Mamba}.
+    
+    \item Compute Budget: For calculating FLOPs, we follow standard methodology~\citep{Chinchilla} with an extension for Mamba-2 layers (see \cref{sec: appendix-FLOPs_computation}).
+    We use the BPE-tokenized Transformer's \#FLOPs as a reference, and the number of layers of the other models is adjusted accordingly to match the reference \#FLOPs.
+\end{itemize}
+
+Training employs AdamW~\citep{AdamW} optimizer with warmup-stable-decay (WSD)~\citep{WSD} scheduling with $10\%$ linear warmup and $20\%$ inverse-square-root decay~\citep{Inverse-Square-Root-Decay}.
+Following \citet{hagele2024scaling} which recommends WSD schedulers with half the maximum learning rates as a cosine schedule, we adopt learning rates $2.5\times$ higher than GPT-3~\citep{GPT2} standards; this corresponds to half of the maximum learning rate used in \citet{Mamba}, yielding $6.25 \times 10^{-4}$ for \textit{Large}-scale models and $5.0 \times 10^{-4}$ for \textit{XL}-scale models.
+Architecture details include gated MLPs~\citep{Llama2} in all Transformer layers and the \main{}'s Mamba layers, while Mamba layers in $\mathcal{E}$ and $\mathcal{D}$ are without an MLP.\footnote{Just as in the original Mamba~\citep{Mamba} and Mamba-2~\citep{Mamba2} blocks, our Mamba layers have roughly $6(D^s)^2$ parameters and Transformer layers have $12(D^s)^2$ parameters in stage $s$.}
+For Transformer layers in $\mathcal{E}$ and $\mathcal{D}$, we use Sliding Window Attention (SWA)~\citep{longformer} with the window size of $1024$.
+As discussed \cref{sec: Method-Architectural-Overview}, $\mathcal{E}$ and $\mathcal{D}$ comprise mainly Mamba-2 layers.
+
+\subsection{Language Modeling}
+
+\label{sec: lang}
+
+\paragraph{Training Curves.}
+
+
+
+Figure~\ref{fig: bpb_curve} presents validation BPB metrics throughout training for both Large and XL model scales.
+
+\paragraph{Large Scale.}
+At the \emph{Large} scale, we make note of the following comparisons.
+\begin{itemize}
+    \item All isotropic models severely underperform hierarchical models. Among these, \textbf{MambaByte} is significantly better than \textbf{LlamaByte}, both the FLOP-matched sliding window attention (SWA) variant  and even the global attention variant that is data-matched but uses $2\times$ the FLOPs.
+    \item \textbf{H-Net (pool)} is much worse than all other H-Net variants, validating that fixed-width chunking is not effective.
+    \item \textbf{SpaceByte} is much worse than \textbf{SpaceByte++}, validating our strategy for network design as well as usage of Mamba in the outer networks (\cref{sec: Method-Architectural-Overview}).
+    \textbf{SpaceByte++} is in turn worse than \textbf{H-Net (space)}, validating our improved signal propagation techniques (\cref{sec: Improved-Techniques}).
+    \item \textbf{H-Net (space)} is a very strong model reaching the performance of the \textbf{BPE Transformer}, validating the effect of data-dependent chunking strategies together with a well-designed hierarchical architecture.
+    \item \textbf{H-Net (1-stage)} is stronger than \textbf{H-Net (space)}, validating that our dynamic chunking mechanism successfully learns how to segment data in a \emph{context-dependent} way that improves over strong heuristics.
+    \item \textbf{H-Net (2-stage)} is significantly better than \textbf{H-Net (1-stage)}, validating  that iterated dynamic chunking can potentially learn a nested hierarchy of useful features, and leverage compute and parameters even more effectively.
+\end{itemize}
+
+\paragraph{XL Scale.}
+At the XL scale, we zoom in more closely and compare only the strongest set of methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage).
+
+The same trends hold as at the \emph{Large} scale.
+Our SpaceByte++ baseline is strong, but slightly worse than the BPE Transformer baseline.
+On the other hand, \textbf{all byte-level H-Net methods start off worse than the token-level Transformer, but scale better after enough data.}
+H-Net (space), H-Net (1-stage), and H-Net (2-stage)
+cross over the tokenized Transformer after just
+$200$B bytes, $100$B bytes, and $30$B bytes respectively.
+Beyond these points, \model{}'s performance advantage widens progressively, demonstrating that the benefits of learnable dynamic chunking get strengthened with additional training data,
+as the model continuously refines its chunking strategy.
+
+\input{fig/bpb_curve}
+
+\input{tab/main}
+\input{tab/aug_hellaswag}
+
+\paragraph{Downstream Evaluations.}
+\cref{tab: main} presents zero-shot accuracy across diverse downstream benchmarks~\citep{LAMBADA, HellaSwag, PIQA, ARC, WinoGrande, OpenBookQA} using \texttt{lm-evaluation-harness}~\citep{LMEvalHarness} for models at Large and XL scales.
+SpaceByte++, H-Net (space), and H-Net (1-stage) all have similar performance to the BPE Transformer at \emph{Large} scale,
+and slightly outperform it at the \emph{XL} scale,
+consistent with their close training curves (and possibly reflecting some noise in the evaluations).
+
+
+\textbf{\model{} (\twostage{}) consistently achieves the highest performance across most tasks},
+outperforming $2.2$\% and $2.6$\% over the Transformer baseline at \emph{Large} and \emph{XL} scales respectively.
+Notably, the \emph{Large} H-Net (2-stage) matches the average downstream performance of the \emph{XL} BPE Transformer.
+
+
+\paragraph{Robustness to Textual Perturbations.}
+\cref{tab: aug_hellaswag} evaluates model robustness on HellaSwag with various textual perturbations, following protocols from BLT~\citep{BLT}.
+Importantly, these are the same checkpoints trained on clean FineWeb-Edu data used to evaluate \cref{tab: main}),
+without any form of special data mix or augmentations that may improve character-level robustness.
+\model{} (\twostage{}) demonstrates substantially improved robustness compared to all baselines, with performance gaps exceeding those observed in standard benchmarks.
+
+
+
+\paragraph{Visualization of Tokenized Positions.}
+\label{sec: analysis}
+In \cref{fig: tokenized_positions}, we provide visualizations of the boundaries dynamically drawn by H-Net (1-stage) and H-Net (2-stage).
+The visualization offers several insights about how the model decides boundaries.
+\begin{itemize}
+    \item \textit{Single-stage behavior:} H-Net (1-stage) predominantly places boundaries at whitespace characters, closely mirroring the delimiters used by SpaceByte.
+    This indicates that H-Net learns that word boundaries represent natural semantic units in text.
+    This convergence to spacelike boundaries, discovered purely through end-to-end training, conversely validates SpaceByte's strong empirical performance.
+    \item \textit{Hierarchical chunking patterns:} The first stage of H-Net (2-stage) combines spacelike boundaries with first few characters of each word.
+    This strategy helps the model because once the initial positions of a word are identified, the remaining characters become highly predictable.
+    \item \textit{Content-aware chunking:}
+    One might question if H-Net's chunking decisions follow static rules, such as drawing boundaries only at certain fixed bytes (\eg{} whitespace).
+    However, as shown in the figure, H-Net often merges multiple words and spacelike characters based on content (examples include \texttt{the backbone}, \texttt{such as}, and \texttt{(ii)}).
+    \item \textit{Perturbation behavior:} 
+    \cref{fig: tokenized_positions_noisy} shows the same example with textual perturbations such as removing whitespaces, which more prominently demonstrates that boundaries drawn by H-Net are based on content and context. In particular, it often still chunks in between semantic words even if the space is removed.
+\end{itemize}
+
+\input{fig/tokenized_positions}
+
+\subsection{Alternate Language Datasets}
+
+\label{sec: experiments-alt-language}
+
+\input{fig/bpb_alt_text}
+
+Besides conventional language modeling, we also examine three other language modeling settings: Chinese, code, and DNA. These three settings present distinct challenges for traditional language-modeling pipelines:
+\begin{itemize}
+    \item Chinese characters consist of 3 \texttt{utf-8} encoded bytes each and Chinese language does not have natural spaces; thus, constructing a vocabulary or picking boundaries requires special consideration.
+    \item Code contains much more whitespace than typical language, which allows greater compressibility if handled properly. 
+        It also has latent hierarchical structure that can be leveraged for improved reasoning capabilities.
+    \item DNA does not have any natural tokenization cues and instead must be processed as raw base pairs. 
+\end{itemize} 
+
+\model{} can operate on raw data without the need for handcrafted features (whether vocabulary or deliniation cues); it therefore provides a natural architecture that can operate naturally on any language.
+
+
+\paragraph{Experimental setup for Chinese and code.}
+On Chinese and code, we use 46B token subset from FineWeb-Edu-Chinese-V2.1~\citep{OpenCSG} and Github subset from Pile~\citep{pile} to train three models at the 1.3B GPT-3 \textit{XL} scale: \model{} (2-stage), \model{} (space), and Transformer.
+We maintain the same bytes per gradient step (256 batch size with 8192 \texttt{utf-8} encoded bytes per example) as the main text experiments. For the \model{} (2-stage), we use the same target downsampling ratio ($N^0=N^1=3$) as the main experiments. Unlike BPE or spacelike-based tokenization, whose downsampling ratios can vary widely by dataset, \model{} allows for using similar compute budgets without much adjustment. For \model{} (space), we use the same definition of spacelike as the original SpaceByte paper \citep{SpaceByte}, and for BPE, we use the Llama3 tokenizer~\citep{Llama3}, as the GPT2 tokenizer attains very poor downsampling ratios on both datasets. Despite this change, both \model{} (space) and Transformer (BPE) still have highly varied downsampling ratios between ordinary (primarily English) language, Chinese, and code. On the other hand, \model{} can adhere to a target ratio regardless of dataset, chunking into concepts at appropriate ratios.
+
+Even with the Llama3 tokenizer, we find that \model{} (2-stage) scales better than BPE Transformer and \model{} (space) on both Chinese and code (\cref{fig: bpb_alt_text}), and achieves lower compression after the decay phase (\cref{tab: cd-supp}). We additionally measure the performance of each Chinese-language model on the Chinese split of XWinograd, a multilingual Winograd Schema Challenge \citep{xwinograd}, where \model{} (2-stage) is significantly better than \model{} (space) which in turn is better than Transformer (\cref{tab: cd-supp}).
+
+\input{tab/cd_supp}
+\input{fig/dna.tex}
+\input{fig/abl_remove_components}
+
+\paragraph{DNA (Human Genome).} DNA is a setting that presents both a unique promise and challenge for hierarchical modeling. 
+For one, handcrafted tokens do not work well on DNA, due to the lack of segmentation cues. 
+Additionally, the same sequence of base pairs may serve different functions (\eg{} depending on whether or not the pair is inside a gene or not).
+Consequently, a naive BPE-based approach may not work either. 
+On the other hand, DNA \emph{can} exhibit higher resolution structure (\eg{} codons, various regulatory elements),
+suggesting that there is room for principled hierarchical modeling.
+Indeed, state-of-the-art DNA models \citep{Evo2} operate directly on base pairs (A, C, G, T) with implicit hierarchical structure.
+
+
+Thus, we evaluated four models on DNA: two isotropic models (pure Transformer and pure Mamba-2) operating at the base-pair level, and two corresponding \model{} (1-stage) with Transformer and Mamba-2 as the \main{}. 
+Each model was trained on the HG38 dataset with a learning rate of $5\cdot 10^{-3}$ for modules at the base-pair resolution. 
+For the \model{} models, we used a downsampling ratio of $N^0 = 3$.
+All models were trained with a $d_{\text{model}}$ of $512$, which was used for all isotropic modules of \model{} (including the \main{}).
+
+
+Previous work has shown that SSMs show improved DNA modeling ability compared to Transformers \citep{Mamba}, and we find that this effect is preserved when examining Transformers vs. Mamba-2 as the \main{} (see \cref{tab: dna}). 
+This finding suggests that existing layer selection principles can be applied when deciding \main{} architecture.
+In fact, by directly comparing the perplexity curves during the stable phase of training (\cref{fig: dna}), we find that \model{} models can achieve similar performance to isotropic models with just $3.6\times$ the amount of data, a finding that holds for both choices of \main{} architecture.
+
+
+\input{fig/abl_enc_dec_combination}
+
+\subsection{Ablation Studies}
+\label{sec: ablation_studies}
+For ablation studies, we employ \model{} at \emph{Large} scale following the configurations in \cref{tab: architecture}, training on $36$B tokens randomly sampled from FineWeb-Edu.
+
+\paragraph{Importance of Components in \model{}.}
+\cref{fig: abl_remove_components} illustrates the impact of each architectural component on both model performance and compression ratio ($L^{s+1}/L^s$) stability during training.
+We conduct three targeted ablations: (i) using direct upsampling $\tilde{z}_t = \hat{z}_t$ by removing the smoothing module (\emph{w/o smoothing}), (ii) replacing the routing module that is based on scaled cosine similarity, with direct probability prediction from individual inputs (\emph{w/o cosine routing}),
+and (iii) skipping the straight-through estimator in equation \eqref{eq: Upsampler-Mult} (w/o STE).
+
+The smoothing module proves essential for stable training dynamics.
+Without this module, compression ratios fluctuate severely throughout training, preventing the model from learning consistent chunking boundaries.
+This instability directly manifests as substantial performance degradation, confirming that smooth gradient flow through the decompression process is crucial for effective end-to-end learning.
+While less critical than the smoothing module, both the similarity-based routing module and STE operation exhibit importance in training stability and final performance.
+These components help maintain consistent compression ratios and lead to more interpretable chunking patterns.
+The similarity-based approach particularly enables the model to identify natural linguistic boundaries (\eg{} whitespaces, subwords) by comparing adjacent representations rather than making isolated predictions.
+
+\paragraph{Encoder \& Decoder Layer Selection.}
+The composition of sequence mixing layers in H-Net's encoders and decoders substantially influences both compression efficiency and modeling capability.
+We systematically evaluate different architectural combinations using \model{} (\onestage{}) while fixing all other configurations in \cref{tab: architecture} the same.
+Four distinct encoder-decoder ($\mathcal{E}^0$-$\mathcal{D}^0$) pairings are tested: M4-M4, M2T1-T1M2, T1M2-M2T1, and T2-T2, where M denotes a Mamba-2 layer and T denotes a Transformer layer.
+These combinations are chosen by keeping the symmetry and replacing each Transformer layer with two Mamba-2 layers, as they contain equivalent parameter counts --- $12D^2$ for Transformer ($4D^2$ for the attention mechanism and $8D^2$ for an MLP) vs. $\approx 6D^2$ per Mamba-2 layer (no MLP).
+
+\cref{fig: abl_enc_dec_combination} and \cref{fig: abl_enc_dec_combination_spacebyte} demonstrate that Mamba layers are essential for effective byte-level sequence processing.
+For both \model{} and SpaceByte++, \textbf{the pure Transformer configuration (T2-T2) exhibits by far the worst performance despite using more FLOPs} (it also down-compresses sequences poorly compared to other configurations, thus using more compute in the \main{}).
+This configuration struggles to compress byte sequences effectively, resulting in both computational waste and degraded modeling performance.
+Performance improves monotonically with increased Mamba layer allocation, achieving optimal results with the highest compression efficiency in the pure Mamba configuration (M4-M4).
+These findings align with recent research demonstrating SSMs' advantages over Transformers for fine-grained sequence modeling~\citep{SaShiMi, Caduceus}, as corroborated by MambaByte's superior performance over LlamaByte in \cref{fig: bpb_curve}.
+
+\input{fig/abl_enc_dec_BPE_and_spacebyte}
+A natural question arises: does the importance of Mamba layers (i) stem specifically from \textbf{processing fine-grained byte inputs},
+or (ii) because \textbf{they are better for compressing information into the next stage, even at coarser input resolutions}?
+To investigate these hypotheses,
+we train a 1-stage H-Net on top of \emph{BPE-tokenized} inputs processed by the GPT-2 tokenizer.
+We then evaluate six different encoder-decoder combinations. 
+\begin{itemize}
+    \item If hypothesis (i) holds, then we would expect different combinations of Mamba/Transformer layers in the encoder/decoder to have similar performance, since it is known that they have similar performance on standard tokenized language modeling.
+    \item If hypothesis (ii) holds, then we would expect that encoders/decoders using some Mamba layers to be better than pure Transformer layers.
+\end{itemize}
+
+As demonstrated in \cref{fig: abl_enc_dec_combination_BPE}, Mamba layers prove significantly important even when processing BPE tokens rather than raw bytes, providing evidence for the second hypothesis.
+
+We hypothesize that this consistent advantage across input granularities stems from fundamental architectural differences between SSMs and Transformers.
+While Transformers naturally store complete key-value caches for all positions, SSMs are designed to compress information into fixed-size states.
+This compression-oriented architecture aligns naturally with our chunking mechanism, which requires aggregating multiple input vectors into consolidated representations.
+The inherent compression capability of Mamba layers makes them particularly well-suited for the encoder and decoder roles in our hierarchical architecture~\citep{gu2025tradeoffs}.
+Based on these findings, we employ Mamba layers throughout all encoders and decoders in our final \model{} configuration, as detailed in \cref{tab: architecture}.
+
+These findings transfer to more general hierarchical structures (such as a 2-stage H-Net at the byte level),
+in which case the outermost encoder and decoder layers ($\mathcal{E}^0$ and $\mathcal{D}^0$)
+serve a similar role as the GPT-2 tokenizer and the inner layers ($\mathcal{E}^1$ and $\mathcal{D}^1$)
+would share similar findings of benefiting from using Mamba layers.
+
+
+\paragraph{Hybrid Architectures for the Main Network.}
+
+\input{fig/abl_hybrid_moe}
+
+We also aimed to understand the role of architecture selection in the \main{}.
+To this end, we compared \model{} (2-stage) with an identical model where we replaced the Transformer stack with a hybrid model containing both 20 Mamba-2 and 7 Transformer layers interleaved in a 3:1 ratio.
+Hybrid architectures have shown promise in isotropic (BPE) models~\citep{NvidiaMambaHybrid}, and similarly perform better for our choice of \main{} (\cref{fig: hybrid}).
+
+
+
+\paragraph{Comparison to Mixture-of-Experts.}
+
+\model{} can be viewed as a form of dynamic sparsity similar to Mixture-of-Experts (MoEs), in that they are able to improve performance by using more parameters, all while keeping the total FLOPs budget constant.
+We were interested in understanding whether or not its performance benefits were simply due to increasing sparsity.
+We compare against a sparsified version of LlamaByte (byte-level isotropic Transformer model) at the \textit{Large} scale with a standard Mixture-of-Experts recipe~\citep{MoE} and similar parameter count as ours (\cref{fig: moe}).
+While sparsity does improve LlamaByte performance, it is still far worse than either FLOPs-matched \model{} (1-stage) or \model{} (2-stage), even with similar parameter count.
+We interpret this result as: \model{} not only achieves sparsity, but does so in a more \textit{semantically meaningful manner}, which allows for better scaling than even generic sparse methods.
+
+\include{tab/related}

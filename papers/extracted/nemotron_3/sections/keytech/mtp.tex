@@ -1,0 +1,72 @@
+\subsection{Multi-Token Prediction (MTP)}
+\label{subsec:mtp}
+Multi-Token Prediction (MTP) has emerged as a highly effective technique for improving both the 
+\emph{accuracy} and the \emph{inference efficiency} of large language models. Prior work—
+including DeepSeek-V3~\citep{deepseekai2025deepseekv3technicalreport} and the original MTP 
+formulation~\citep{gloeckle2024better}—shows that predicting multiple future tokens provides richer 
+training signals and encourages models to plan several steps ahead. These auxiliary predictions also 
+serve naturally as draft tokens for speculative decoding~\citep{leviathan2023fast}, enabling 
+substantial end-to-end acceleration without requiring a separate draft model.
+
+In Nemotron~3, integrating MTP leads to consistent gains across validation loss and a broad range of downstream benchmarks, including general knowledge, code generation, common-sense understanding, reading comprehension, and math. On an ablation study using the 8B active parameters transformer MoE model base model, MTP improves performance by roughly 2.4\% on average across benchmarks (see Table~\ref{tab:moe_mtp_results}). These improvements reflect MTP’s ability to provide denser supervision and enhance the model’s multi-step reasoning capabilities. From a systems perspective, MTP introduces minimal additional FLOPs and integrates seamlessly into our training workflow, delivering substantial speculative-decoding benefits~\citep{gloeckle2024better} while maintaining high overall efficiency.
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{l|cc}
+\toprule
+\textbf{Task} & 
+\textbf{Baseline (8B MoE Base)} &
+\textbf{Baseline + MTP} \\
+\midrule
+
+\rowcolor{black!5}
+\multicolumn{3}{l}{\textbf{General Knowledge}} \\
+MMLU (5-shot, acc)        & 70.06 & \textbf{71.26} \\
+MMLU-Pro (5-shot, CoT EM) & 45.05 & \textbf{47.84} \\
+\midrule
+
+\rowcolor{black!5}
+\multicolumn{3}{l}{\textbf{Code}} \\
+MBPP-Sanitized (3-shot) & 65.58 & \textbf{66.89} \\
+% Note: Code avg actually decreases (59.21 → 56.76), so NOT included
+% If you want only improvements, REMOVE this row
+\midrule
+
+\rowcolor{black!5}
+\multicolumn{3}{l}{\textbf{Commonsense Understanding}} \\
+ARC-Challenge (25-shot, acc\_norm) & 86.43 & \textbf{88.05} \\
+WinoGrande (0-shot, acc)        & 74.59 & \textbf{75.45} \\
+\midrule
+\rowcolor{black!5}
+\multicolumn{3}{l}{\textbf{Reading Comprehension}} \\
+RACE (0-shot, acc)              & 84.02 & \textbf{85.36} \\
+\midrule
+\rowcolor{black!5}
+\multicolumn{3}{l}{\textbf{Math}} \\
+% MATH and math500 both decrease, so excluded
+GSM8K (8-shot, acc)   & 82.49 & \textbf{84.46} \\
+\bottomrule
+\end{tabular}
+
+\caption{
+Accuracy scores with and without MTP on a simple 8B active parameter transformer MoE base model trained on 1T tokens. We observe improvements in accuracy on multiple tasks spanning different categories.
+}
+\label{tab:moe_mtp_results}
+\end{table}
+
+
+A major practical benefit of MTP in Nemotron~3 is its strong synergy with speculative decoding. 
+The predictions produced by MTP exhibit high agreement with the base model, enabling fast, 
+low-latency generation — particularly beneficial in batch-size--1 and long-form generation scenarios.  
+We designed a lightweight MTP module that achieves around 97\% acceptance on the first two predicted tokens in an ablation study on an 8B active MoE model. Overall, MTP enriches the training 
+signal, enhances the model’s ability to anticipate multiple future steps, provides high-quality 
+speculative-decoding predictions, and accelerates text generation~\citep{gloeckle2024better}. 
+
+%This stability supports more aggressive speculative 
+%decoding strategies and contributes directly to faster, more fluid model responses. % , and maintains reasonably high acceptance for deeper draft sequences evlauated on a base model
+
+
+
+% MTP is a key enabler of Nemotron~3’s accuracy and performance. It
+

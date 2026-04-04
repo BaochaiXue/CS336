@@ -1,0 +1,22 @@
+\begin{table*}[tb!]
+\centering
+\scalebox{0.8}{
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Model} & \textbf{Arc-C} & \textbf{HellaSwag} & \textbf{MMLU} & \textbf{Winogrande} & \textbf{GSM8K} & \textbf{MATH} & \textbf{HumanEval} & \textbf{MBPP} \\
+\midrule
+% \textbf{deepseek-6.7b}
+% & 45.0 & 67.9 & 49.2 & 64.0 & 41.0 & 42.1 & 60.7 & 13.9 \\
+% \textbf{Mistral-7B-v0.1}
+% & 57.2 & 81.4 & 62.5 & 74.0 & 35.6 & 26.2 & 39.6 & 9.5 \\
+% \textbf{solar\_10.7B}
+% & 57.9 & 82.1 & 64.2 & 74.6 & 56.8 & 29.3 & 38.9 & 6.9 \\
+\textbf{Yi-6B} & 50.3 & 74.4 & 63.2 & 71.3 & 32.5 & 4.6 & 15.9 & 26.3 \\
+\textbf{Yi-9B Init} & 52.1 & 73.3 & 63.0 & 69.4 & 31.3 & 4.1 & 12.8 & 25.8  \\
+\textbf{Yi-9B} & \textbf{55.6}  & \textbf{76.4} & \textbf{68.4} & \textbf{73.0} & \textbf{52.3} & \textbf{15.9} & \textbf{39.0} & \textbf{54.4} \\
+\bottomrule
+\end{tabular}
+}
+\caption{Performance between Yi-6B and Yi-9B: Arc Challenge (25-shot), HellaSwag (10-shot) MMLU (5-shot), Winogrande (5-shot), GSM8K (5-shot), MATH (4-shot), HumanEval pass@1, MBPP pass@1(3-shot). Yi-9B Init is just depthwise upscaling from Yi-6B by duplicating layers 12-28 without further training.}
+\label{tab:depth_upscaling}
+\end{table*}

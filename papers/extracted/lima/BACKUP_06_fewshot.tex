@@ -1,0 +1,55 @@
+\section{Pretrained Models Quickly Learn New Tasks}
+
+After demonstrating that LIMA is competent in a variety of question-answering and text generation tasks, we now test the boundaries of what can be achieved with only 1,000 examples.
+We challenge LIMA in both multi-turn dialogue and text generation with structural constraints, and discover that LIMA exhibits surprising levels of robustness to these new tasks, and that even a handful of related training examples can dramatically boost its capabilities.
+
+
+\subsection{Multi-Turn Dialogue}
+
+Can a model fine-tuned on only 1,000 single-turn interactions engage in multi-turn dialogue?
+We test LIMA across 10 live conversations, labeling each response as \textit{Fail}, \textit{Pass}, or \textit{Excellent} (see Section~\ref{sec:analysis}).
+LIMA responses are surprisingly coherent for a zero-shot chatbot, referencing information from previous steps in the dialogue.
+It is clear though that the model is operating out of distribution; in 6 out of 10 conversations, LIMA fails to follow the prompt within 3 interactions.
+
+To improve its ability to converse, we gather 30 multi-turn dialogue chains.
+Among these, 10 dialogues are composed by the authors, while the remaining 20 are based on comment chains from Stack Exchange, which we manually edit to fit the style of an assistant.
+We fine-tune a new version of LIMA from the pretrained LLaMa model using the combined 1,030 examples, and conduct 10 live conversations based on the same prompts used for the zero-shot model.
+Figure~\ref{fig:dialogue} shows excerpts from such dialogues.
+
+Figure~\ref{fig:dialogue_results} shows the distribution of response quality before and after adding 30 examples of dialogue.
+We observe that adding conversations substantially improves generation quality, raising the proportion of excellent responses from 45.2\% to 76.1\%.
+Moreover, the failure rate drops from 15 fails per 42 turns (zero-shot) to 1 fail per 46 (fine-tuned).
+We further compare the quality of the entire dialogue, and find that the fine-tuned model was significantly better in 7 out of 10 conversations, and tied with the zero-shot model in 3.
+This leap in capability from a mere 30 examples, as well as the fact that the zero-shot model can converse at all, reinforces the hypothesis that such capabilities are learned during pretraining, and can be invoked through limited supervision.
+
+\begin{wrapfigure}{r}{0.25\textwidth}
+  \begin{center}
+    \includegraphics[width=\linewidth]{figs/multiturn_bar.pdf}
+  \end{center}
+  \caption{Analysis of dialogue turns, averaged over 10 test chats.}
+  \label{fig:dialogue_results}
+\end{wrapfigure}
+
+\input{tables/dialogue}
+
+
+\subsection{Generating Text with Complex Structure}
+
+\omer{review}
+
+In our preliminary experiments, we find that although LIMA can respond to many questions in our development set well, it cannot consistently respond to questions that specify the structures of the answer well, e.g. summarizing an article into bullet points or writing an article consisting of several key elements. 
+Hence we investigate whether adding a few training examples of such question-answer pairs can help LIMA generalize to these tasks. 
+We added six examples with format constraints, such as generating a product page that includes [highlights], [about the product], and [how to use] and generating QA pairs based on an article.
+
+After training with these additional six examples, we test the model on a few questions with format constraints and surprisingly find that the responses of LIMA on such question are greatly improved. We present two generation examples in Table~\ref{fig:structure_examples}, from which we can see that LIMA failed to generate proper answers without any training examples that have format constraints in the question (left column), but it can generate remarkable examples of marketing plan given that we don't have any examples of marketing plans in the training data; in addition, it can summarize text into bullet points following user intents (right column).
+
+% \begin{itemize}
+%     \item Two examples that output a table based on the information from an article
+%     \item one example of generating a paper review that includes sections of summary, strengths, weaknesses, potential.
+%     \item One example of generating a product page that includes [highlights], [about the product], and [how to use].
+% \end{itemize}
+
+
+\input{tables/structure_output}
+
+

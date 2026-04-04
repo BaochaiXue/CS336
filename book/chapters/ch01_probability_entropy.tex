@@ -5,9 +5,11 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Define and compute entropy, cross-entropy, and KL divergence for discrete distributions
+  \item Derive the connection between maximum likelihood estimation and cross-entropy minimization
+  \item Explain perplexity and use it to evaluate language models
+  \item State precisely what a language model is as a probability distribution
+  \item Use these concepts to motivate why we train language models the way we do
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +17,322 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:01:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Every language model is, at its core, a probability distribution over sequences of tokens. When we ``train'' a model, we are adjusting its parameters so that the probability distribution it represents comes closer to the true distribution of natural language. To make this precise, we need three foundational concepts from information theory:
+
+\begin{enumerate}
+  \item \textbf{Entropy} tells us how much uncertainty a distribution has---how ``surprised'' we should be on average.
+  \item \textbf{Cross-entropy} measures how well one distribution approximates another, and gives us our training loss.
+  \item \textbf{KL divergence} quantifies the ``gap'' between two distributions, connecting training loss to the information-theoretic ideal.
+\end{enumerate}
+
+These are not abstract mathematical curiosities. Cross-entropy is literally the loss function we minimize when training GPT, LLaMA, or any autoregressive language model. Understanding it deeply will make every subsequent chapter more intuitive.
+
+This chapter connects directly to Shannon's 1950 paper on predicting English text~\parencite{shannon1950}, which is the intellectual ancestor of all language modeling work.
 
 % ─── Formal Setup ───
-\section{Formal Setup and Notation}
+\section{Probability Distributions over Tokens}
 \label{ch:01:sec:setup}
 
-TODO: Define notation and state assumptions.
+\begin{definition}[Discrete probability distribution]
+\label{def:01:prob_dist}
+Let $\vocab = \{v_1, v_2, \ldots, v_{|\vocab|}\}$ be a finite set (our \textbf{vocabulary}). A \textbf{probability distribution} over $\vocab$ is a function $p: \vocab \to [0, 1]$ such that
+\begin{equation}
+\label{eq:01:prob_sum}
+\sum_{v \in \vocab} p(v) = 1.
+\end{equation}
+We write $p(v)$ for the probability assigned to token $v$.
+\end{definition}
 
-% ─── Main Ideas ───
-\section{Main Ideas}
-\label{ch:01:sec:main}
+In language modeling, $\vocab$ is our vocabulary of tokens (words, subwords, or characters---see Chapter~7). A language model assigns a probability to each possible next token given a context of previous tokens.
 
-TODO: Core technical content.
+\begin{example}
+\label{ex:01:simple_dist}
+Suppose our vocabulary is $\vocab = \{\texttt{the}, \texttt{cat}, \texttt{sat}, \texttt{on}, \texttt{mat}\}$ and after seeing the context ``the cat sat on the,'' our model assigns:
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Token $v$ & $p(v \mid \text{``the cat sat on the''})$ \\
+\midrule
+\texttt{mat} & 0.62 \\
+\texttt{cat} & 0.15 \\
+\texttt{the} & 0.08 \\
+\texttt{sat} & 0.10 \\
+\texttt{on} & 0.05 \\
+\bottomrule
+\end{tabular}
+\end{center}
+This is a valid probability distribution: all values are in $[0,1]$ and they sum to $1.00$.
+\end{example}
 
-% ─── Worked Example ───
-\section{Worked Example}
-\label{ch:01:sec:example}
 
-TODO: Complete worked example.
+% ─── Entropy ───
+\section{Entropy: Measuring Uncertainty}
+\label{ch:01:sec:entropy}
 
-% ─── Systems Consequences ───
-\section{Systems and Implementation Consequences}
-\label{ch:01:sec:systems}
+\subsection{Definition and Intuition}
 
-TODO: Implementation and performance implications.
+How ``uncertain'' or ``surprising'' is a probability distribution? Shannon's entropy answers this precisely.
+
+\begin{definition}[Entropy]
+\label{def:01:entropy}
+The \textbf{entropy} of a discrete probability distribution $p$ over a finite set $\vocab$ is
+\begin{equation}
+\label{eq:01:entropy}
+H(p) = -\sum_{v \in \vocab} p(v) \log p(v),
+\end{equation}
+where $\log$ denotes the natural logarithm and we adopt the convention $0 \log 0 = 0$.
+\end{definition}
+
+\paragraph{Symbol table.} $H(p)$ is the entropy (a non-negative real number); $p(v)$ is the probability of token $v$; the sum is over all tokens in the vocabulary $\vocab$.
+
+\paragraph{Interpretation.} Entropy measures the average ``surprise'' or ``information content'' when we draw a token from $p$. The quantity $-\log p(v)$ is called the \textbf{surprisal} of token $v$: rare events (low $p(v)$) have high surprisal, and common events have low surprisal. Entropy is the expected surprisal.
+
+\subsection{Key Properties}
+
+\begin{proposition}[Bounds on entropy]
+\label{prop:01:entropy_bounds}
+For any distribution $p$ over $\vocab$ with $|\vocab| = V$:
+\begin{equation}
+0 \leq H(p) \leq \log V.
+\end{equation}
+\begin{itemize}
+  \item $H(p) = 0$ if and only if $p$ is a point mass (all probability on one token---zero uncertainty).
+  \item $H(p) = \log V$ if and only if $p$ is the uniform distribution (maximum uncertainty).
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+The lower bound follows because $-p(v)\log p(v) \geq 0$ for all $v$. For the upper bound, we use the fact that $\log$ is concave. By Jensen's inequality:
+\begin{equation}
+H(p) = \E_{v \sim p}[-\log p(v)] \leq -\log\left(\E_{v \sim p}[p(v)]\right) = -\log\left(\sum_{v} p(v)^2\right) \leq \log V,
+\end{equation}
+with equality when $p(v) = 1/V$ for all $v$. Alternatively, one can verify this using Lagrange multipliers or the log-sum inequality.
+\end{proof}
+
+\subsection{Worked Example: Computing Entropy}
+
+Consider a bigram language model over $\vocab = \{a, b, c\}$ that predicts the next character with distribution $p(a) = 0.7$, $p(b) = 0.2$, $p(c) = 0.1$:
+
+\begin{align}
+H(p) &= -[0.7 \log 0.7 + 0.2 \log 0.2 + 0.1 \log 0.1] \\
+      &= -[0.7 \times (-0.357) + 0.2 \times (-1.609) + 0.1 \times (-2.303)] \\
+      &= -[-0.250 - 0.322 - 0.230] \\
+      &= 0.802 \text{ nats}.
+\end{align}
+
+For comparison, the uniform distribution over 3 tokens has entropy $\log 3 \approx 1.099$ nats. Our distribution has lower entropy because it concentrates most probability on token $a$---it is more ``certain'' about what comes next.
+
+\paragraph{Sanity check.} The entropy $0.802$ is between $0$ (point mass) and $1.099$ (uniform), as expected.
+
+% ─── Cross-Entropy ───
+\section{Cross-Entropy: Measuring Model Quality}
+\label{ch:01:sec:cross_entropy}
+
+\subsection{Definition}
+
+In language modeling, we have two distributions:
+\begin{itemize}
+  \item $p$: the true distribution of language (unknown, but we have samples from it)
+  \item $q$ (or $p_{\vtheta}$): our model's predicted distribution
+\end{itemize}
+
+We want to measure how well $q$ approximates $p$.
+
+\begin{definition}[Cross-entropy]
+\label{def:01:cross_entropy}
+The \textbf{cross-entropy} of distribution $q$ relative to distribution $p$ is
+\begin{equation}
+\label{eq:01:cross_entropy}
+H(p, q) = -\sum_{v \in \vocab} p(v) \log q(v) = \E_{v \sim p}[-\log q(v)].
+\end{equation}
+\end{definition}
+
+\paragraph{Symbol table.} $p(v)$ is the probability of token $v$ under the true distribution; $q(v)$ is the probability under our model; $-\log q(v)$ is the surprisal that our model assigns to token $v$.
+
+\paragraph{Interpretation.} Cross-entropy is the average surprisal when events are drawn from $p$ but we use model $q$ to predict them. If $q = p$, then $H(p, q) = H(p)$---the best we can do. If $q$ diverges from $p$, cross-entropy increases.
+
+\subsection{Cross-Entropy as a Training Loss}
+
+In practice, we do not know $p$ exactly. Instead, we have a training corpus $\mathcal{D} = (x_1, x_2, \ldots, x_n)$ of $n$ tokens drawn (approximately) from $p$. The empirical cross-entropy is:
+\begin{equation}
+\label{eq:01:empirical_ce}
+\hat{H}(p, q) = -\frac{1}{n} \sum_{i=1}^{n} \log q(x_i \mid x_1, \ldots, x_{i-1}).
+\end{equation}
+
+This is exactly the average negative log-likelihood per token---the standard training loss for autoregressive language models such as GPT, LLaMA, and DeepSeek.
+
+\begin{keyinsight}
+When you see a language model training with ``cross-entropy loss,'' it is minimizing exactly \cref{eq:01:empirical_ce}: the average surprisal of the training data under the model. Lower is better.
+\end{keyinsight}
+
+
+% ─── KL Divergence ───
+\section{KL Divergence: The Gap Between Distributions}
+\label{ch:01:sec:kl}
+
+\begin{definition}[KL divergence]
+\label{def:01:kl}
+The \textbf{Kullback--Leibler divergence} from distribution $p$ to distribution $q$ is
+\begin{equation}
+\label{eq:01:kl}
+\KL{p}{q} = \sum_{v \in \vocab} p(v) \log \frac{p(v)}{q(v)} = H(p, q) - H(p).
+\end{equation}
+\end{definition}
+
+\paragraph{Interpretation.} KL divergence is the ``extra cost'' (in nats) of using model $q$ instead of the true distribution $p$. It decomposes cross-entropy into two parts:
+\begin{equation}
+\underbrace{H(p, q)}_{\text{cross-entropy (what we minimize)}} = \underbrace{H(p)}_{\text{entropy of data (constant)}} + \underbrace{\KL{p}{q}}_{\text{gap (what shrinks during training)}}.
+\end{equation}
+
+Since $H(p)$ does not depend on the model parameters $\vtheta$, minimizing cross-entropy $H(p, p_{\vtheta})$ is equivalent to minimizing $\KL{p}{p_{\vtheta}}$.
+
+\begin{proposition}[Gibbs' inequality]
+\label{prop:01:gibbs}
+For any distributions $p$ and $q$ over the same finite set:
+\begin{equation}
+\KL{p}{q} \geq 0,
+\end{equation}
+with equality if and only if $p = q$.
+\end{proposition}
+
+\begin{proof}
+By Jensen's inequality applied to the convex function $-\log$:
+\begin{equation}
+\KL{p}{q} = -\sum_v p(v) \log \frac{q(v)}{p(v)} \geq -\log\left(\sum_v p(v) \cdot \frac{q(v)}{p(v)}\right) = -\log\left(\sum_v q(v)\right) = -\log 1 = 0.
+\end{equation}
+Equality holds iff $q(v)/p(v)$ is constant for all $v$ with $p(v) > 0$, i.e., $p = q$.
+\end{proof}
+
+\begin{warningbox}
+\textbf{KL divergence is not symmetric}: $\KL{p}{q} \neq \KL{q}{p}$ in general. It is not a metric (distance) in the mathematical sense. In language modeling, we always minimize $\KL{p}{p_{\vtheta}}$ (forward KL), not $\KL{p_{\vtheta}}{p}$ (reverse KL). The choice matters: forward KL encourages the model to cover all modes of $p$ (it is ``mean-seeking''), while reverse KL encourages the model to concentrate on the highest-probability mode (it is ``mode-seeking'').
+\end{warningbox}
+
+
+% ─── MLE Connection ───
+\section{Maximum Likelihood and Cross-Entropy}
+\label{ch:01:sec:mle}
+
+We now show that the standard training objective for language models---maximum likelihood estimation---is equivalent to cross-entropy minimization.
+
+\begin{proposition}[MLE = Cross-entropy minimization]
+\label{prop:01:mle_ce}
+Given a training corpus $\mathcal{D} = (x_1, \ldots, x_n)$, the maximum likelihood estimate
+\begin{equation}
+\vtheta^* = \argmax_{\vtheta} \sum_{i=1}^n \log p_{\vtheta}(x_i \mid x_{<i})
+\end{equation}
+is equivalent to
+\begin{equation}
+\vtheta^* = \argmin_{\vtheta} \hat{H}(p_{\text{data}}, p_{\vtheta}).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Maximizing $\sum_i \log p_{\vtheta}(x_i \mid x_{<i})$ is the same as minimizing $-\frac{1}{n}\sum_i \log p_{\vtheta}(x_i \mid x_{<i})$, which is exactly the empirical cross-entropy $\hat{H}(p_{\text{data}}, p_{\vtheta})$ from \cref{eq:01:empirical_ce}. The scaling factor $1/n$ does not affect the argmin.
+\end{proof}
+
+\begin{keyinsight}
+This is why ``next-token prediction'' works as a training objective. By predicting the next token as accurately as possible (maximizing likelihood), we are simultaneously minimizing the information-theoretic gap between our model and natural language.
+\end{keyinsight}
+
+
+% ─── Perplexity ───
+\section{Perplexity: The Standard Evaluation Metric}
+\label{ch:01:sec:perplexity}
+
+\begin{definition}[Perplexity]
+\label{def:01:perplexity}
+The \textbf{perplexity} of a model $q$ on a sequence $(x_1, \ldots, x_T)$ is
+\begin{equation}
+\label{eq:01:perplexity}
+\PPL(q) = \exp\left(-\frac{1}{T}\sum_{t=1}^T \log q(x_t \mid x_{<t})\right) = \exp\left(\hat{H}(p, q)\right).
+\end{equation}
+\end{definition}
+
+\paragraph{Interpretation.} Perplexity is the exponential of cross-entropy. It can be interpreted as the \textbf{effective vocabulary size}: a perplexity of 100 means the model is ``as confused'' as if it were choosing uniformly among 100 equally likely tokens at each step.
+
+\paragraph{Key relationships.}
+\begin{itemize}
+  \item A perfect model ($q = p$) achieves $\PPL = \exp(H(p))$---the irreducible perplexity determined by the entropy of language itself.
+  \item Lower perplexity = better model.
+  \item Perplexity is the standard metric reported in language modeling papers (e.g., GPT-2, LLaMA).
+  \item If using $\log_2$ instead of $\ln$, we get $\PPL = 2^{H_2(p,q)}$ where $H_2$ is cross-entropy in bits.
+\end{itemize}
+
+\subsection{Worked Example: Perplexity Calculation}
+
+Suppose our model assigns the following probabilities to a 5-token test sequence:
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Position $t$ & Token $x_t$ & $q(x_t \mid x_{<t})$ \\
+\midrule
+1 & \texttt{the} & 0.20 \\
+2 & \texttt{cat} & 0.05 \\
+3 & \texttt{sat} & 0.30 \\
+4 & \texttt{on} & 0.50 \\
+5 & \texttt{mat} & 0.60 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Then:
+\begin{align}
+\text{avg.\ NLL} &= -\frac{1}{5}\left[\log 0.20 + \log 0.05 + \log 0.30 + \log 0.50 + \log 0.60\right] \\
+&= -\frac{1}{5}\left[-1.609 + (-2.996) + (-1.204) + (-0.693) + (-0.511)\right] \\
+&= -\frac{1}{5}(-7.013) = 1.403 \\[6pt]
+\PPL &= \exp(1.403) \approx 4.07.
+\end{align}
+
+A perplexity of $4.07$ means the model is, on average, as uncertain as if it were choosing uniformly among about $4$ tokens---not bad for a vocabulary that might contain tens of thousands of tokens.
+
+\paragraph{Sanity check.} The geometric mean of the per-token probabilities is $(0.20 \times 0.05 \times 0.30 \times 0.50 \times 0.60)^{1/5} \approx 0.245$, and $1/0.245 \approx 4.07$. This confirms: perplexity is the reciprocal of the geometric mean probability.
+
+
+% ─── Shannon's Game ───
+\section{Shannon's Game and the Entropy Rate of English}
+\label{ch:01:sec:shannon}
+
+In 1950, Claude Shannon asked: how much information does each letter in English carry~\parencite{shannon1950}? He devised a guessing game where a human predicts the next character in a text, and used the results to estimate the entropy rate of English at approximately $1.0$--$1.5$ bits per character.
+
+This experiment is the direct ancestor of modern language model evaluation:
+\begin{itemize}
+  \item Shannon's human predictor $\longrightarrow$ our neural language model $p_{\vtheta}$
+  \item Shannon's guessing accuracy $\longrightarrow$ our model's perplexity
+  \item Shannon's entropy bound $\longrightarrow$ the irreducible loss floor
+\end{itemize}
+
+Modern language models like GPT-4 approach or surpass human-level prediction accuracy on many text domains, suggesting they have learned much of the statistical structure of language. But as we will see in later chapters, statistical prediction is not the same as understanding.
+
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Predictive Coding in the Brain}
   \paragraph{Where the analogy helps.}
-  TODO
+  The brain constantly generates predictions about upcoming sensory input. When the actual input matches the prediction, neural activity is low (low surprise). When the input is unexpected, prediction error signals propagate up the cortical hierarchy. This is strikingly parallel to how a language model computes surprisal $-\log p_{\vtheta}(x_t \mid x_{<t})$: expected tokens incur low loss, surprising tokens incur high loss.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  The brain's predictive coding operates across multiple modalities (vision, touch, proprioception) simultaneously, uses lateral and feedback connections, and updates predictions in real time with no distinct ``training phase.'' A Transformer language model processes text only, uses feedforward computation (with residual connections, not true recurrence), and has a sharp divide between training and inference.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Think of next-token prediction loss as a measure of the model's ``surprise''---exactly like prediction error signals in the brain. Training reduces this surprise by learning the statistical patterns of language. But the model's ``prediction'' is purely statistical, not a theory of the world.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:01:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``Lower cross-entropy always means a better model.''} Only when comparing models on the same data with the same tokenization. Different tokenizations change the token count $T$, making cross-entropy values incomparable. Always compare with matched tokenization or use bits-per-byte.
+
+  \item \textbf{``KL divergence is a distance metric.''} It is not: $\KL{p}{q} \neq \KL{q}{p}$ in general, and it does not satisfy the triangle inequality. Treat it as a directed measure of information loss.
+
+  \item \textbf{``Perplexity of 1 means a perfect model.''} A perplexity of 1 would mean the model predicts every token with probability 1---this is impossible for natural language, which has genuine uncertainty. A ``perfect'' model would achieve $\PPL = \exp(H(p))$, which is greater than 1.
+
+  \item \textbf{``Cross-entropy loss is just a convention; we could use MSE.''} Cross-entropy is the uniquely correct loss for maximum likelihood training of categorical distributions. Using MSE would correspond to a different (and generally worse) probabilistic assumption about the output.
+
+  \item \textbf{``Shannon showed that English has about 1 bit of entropy per character, so LLMs are almost done.''} Shannon estimated the \emph{entropy rate per character}. Modern subword models operate over much larger token units. The entropy rate of language depends on the unit of measurement, and there is still substantial room for improvement, especially for rare and specialized language.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,30 +340,45 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item Compute the entropy of the distribution $p(a) = 0.5, p(b) = 0.25, p(c) = 0.25$ in both nats and bits.
+
+  \item A model assigns probability $0.1$ to a token that actually appeared. What is the surprisal in nats? In bits?
+
+  \item If a model has perplexity 50 on a test set, what is its average cross-entropy loss per token (in nats)?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Prove that among all distributions over $\{1, 2, \ldots, V\}$, the uniform distribution uniquely maximizes entropy. (Hint: use Lagrange multipliers or the log-sum inequality.)
+
+  \item Show that $\KL{p}{q} \geq 0$ using the log-sum inequality instead of Jensen's inequality.
+
+  \item Derive the relationship between perplexity and the geometric mean of per-token probabilities: $\PPL = \left(\prod_{t=1}^T q(x_t \mid x_{<t})\right)^{-1/T}$.
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Write a Python function \texttt{compute\_perplexity(log\_probs: list[float]) -> float} that takes a list of log-probabilities $\log q(x_t \mid x_{<t})$ and returns the perplexity of the sequence. Test it on the worked example from \cref{ch:01:sec:perplexity}.
+
+  \item Write a function that takes two discrete probability distributions (as NumPy arrays) and computes their cross-entropy and KL divergence. Verify that $\KL{p}{q} = H(p,q) - H(p)$.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item Shannon's 1950 experiment used human predictors. How would you design a modern version of this experiment using a language model? What would change if you used GPT-4 instead of a human? What aspects of language might a human still predict better than a model?
 \end{enumerate}
+
 
 % ─── Further Reading ───
 \section{Further Reading}
 \label{ch:01:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{shannon1950}: The foundational paper on predicting English text. Introduces the entropy rate experiments that motivate all language modeling work. Remarkably readable for a 1950 paper.
+
+  \item Cover \& Thomas, \textit{Elements of Information Theory}, Chapter~2: A rigorous treatment of entropy, relative entropy (KL divergence), and mutual information. The standard reference for information theory.
+
+  \item MacKay, \textit{Information Theory, Inference, and Learning Algorithms}, Chapters~2--4: A more intuitive and example-rich treatment of the same material, freely available online.
+
+  \item \textcite{bengio2003}: The paper that introduced neural language models. Uses cross-entropy training as described in this chapter. Reading it shows how the information-theoretic framework connects to neural architectures.
 \end{itemize}

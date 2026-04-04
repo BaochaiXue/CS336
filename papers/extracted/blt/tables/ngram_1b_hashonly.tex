@@ -1,0 +1,25 @@
+\begin{table}[th]
+\centering
+\begin{tabular}{@{}lllrrrr@{}}
+\toprule
+ & & &  \multicolumn{4}{c}{BPB} \\
+\cmidrule(lr){4-7} 
+Ngram Sizes & Per Ngram Vocab & Total Vocab &  Wikipedia &    CC &  Github &  Train Dist \\
+\midrule
+               - &       - &        - &    0.892 & 0.867 &   0.506 &       0.850 \\
+           6,7,8 &      100k &   300k &    0.873 & 0.860 &   0.499 &       0.842 \\
+           6,7,8 &      200k &   600k &    0.862 & 0.856 &   0.492 &       0.838 \\
+           3,4,5 &      100k &   300k &    0.859 & 0.855 &   0.491 &       0.837 \\
+           6,7,8 &      400k &     1M &    0.855 & 0.853 &   0.491 &       0.834 \\
+           3,4,5 &      200k &   600k &    0.850 & 0.852 &   0.485 &       0.833 \\
+     3,4,5,6,7,8 &      100k &   600k &    0.850 & 0.852 &   0.486 &       0.833 \\
+           3,4,5 &      400k &     1M &    0.844 & 0.851 &   0.483 &       0.832 \\
+     3,4,5,6,7,8 &      200k &     1M &    0.840 & 0.849 &   0.481 &       0.830 \\
+     3,4,5,6,7,8 &      400k &     2M &    \textbf{0.831} & \textbf{0.846} &   \textbf{0.478} &       \textbf{0.826} \\
+\bottomrule
+\end{tabular}
+\caption{Ablations on the use of n-gram hash embedding tables for a 1B \model{} model trained on 100B bytes. We find that hash n-gram embeddings are very effective with very large improvements in BPB.
+The most significant parameter is the per-ngram vocab size and that smaller ngram sizes are more impactful than larger ones.
+}
+\label{tab:ngram_ablations_1b}
+\end{table}

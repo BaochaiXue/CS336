@@ -1,0 +1,83 @@
+\section{Introduction}
+\label{sec: introduction}
+
+
+A broad goal of deep learning is to learn meaningful patterns from raw data, automatically extracting features and building abstractions in an end-to-end fashion.
+However, fixed-vocabulary \textbf{tokenization}, the process of compressing raw text into predefined chunks through algorithms such as byte-pair encoding (BPE)~\citep{BPE,SentencePiece}, remains a pervasive handcrafted preprocessing step in modern language models (LMs)~\citep{Llama3, GPT3}.
+Tokenization comes with a host of well-documented drawbacks,
+from poor character-level understanding to lack of meaning and interpretability to degraded performance on complex languages and modalities~\citep{petrov2023language, ahia2023all, belinkov2017synthetic, Adv-BERT, ByT5, Canine}.
+\footnote{Many other edge cases have been discussed in informal online discourse rather than papers; we defer to Andrej Karpathy's \href{https://x.com/karpathy/status/1657949234535211009}{lectures} and \href{https://x.com/karpathy/status/1759996551378940395}{tweets}.}
+Replacing the tokenization--LM--detokenization pipeline with a single end-to-end model would also adhere better to the spirit of deep learning, ideally scaling more powerfully with data and parameters (c.f. \emph{the bitter lesson})~\citep{sutton2019bitter,peric2025bitter}.
+However, tokenization remains an indispensable component of language models and other sequential data for its ability to compress and shorten sequences; as of yet, no \emph{end-to-end} tokenizer-free model has matched the performance of tokenizer-based language models when matched for computational budget.
+
+A line of recent works has turned to overcoming tokenization in autoregressive sequence models, which requires addressing a series of difficult technical challenges:
+\footnote{An extended related work can be found in \cref{sec: background}, which is summarized in \cref{tab: related}.}
+\begin{itemize}
+    \item Direct byte-level language modeling with isotropic architectures\footnote{Non-hierarchical models comprised of repeated blocks, such as the standard Transformer~\citep{Transformer}.} can be improved with efficient sequence models such as MambaByte~\citep{MambaByte}, 
+    but still incur prohibitive computational costs while underperforming tokenized models in compute-matched settings.
+    \item To improve efficiency, hierarchical architectures such as Hourglass Transformer~\citep{HourglassTransformer} and MegaByte~\citep{MegaByte} use small byte-level models to compress raw inputs into subsampled sequences, which are then processed with a more powerful standard language model. However, simple pooling strategies such as compressing every $k$ inputs are not data-dependent, and perform poorly on modalities with variable information rates such as language.
+    \item SpaceByte~\citep{SpaceByte} and Byte Latent Transformer~\citep{BLT} introduce data-dependent chunking strategies such as delimiter- or entropy-based heuristics. These heuristics, however, rely on auxiliary \emph{external} boundary predictors, and are therefore modality-specific and not fully end-to-end.
+    \item
+    Although jointly trainable boundary predictors are the ideal solution, they require optimizing discrete selection operations without supervision, which is fundamentally a challenging problem.
+    Consequently, existing end-to-end approaches~\citep{DPT} exhibit training instabilities that preclude scaling beyond small models or nesting multi-level hierarchies.
+\end{itemize}
+Fundamentally, creating a tokenizer-free architecture requires incorporating the data chunking process directly into the model, while overcoming challenges in efficiency, learnability, and stability at scale.
+
+\subsubsection*{Dynamic Chunking: End-to-end Sequence Modeling Without Tokenization}
+
+In this work, we introduce an end-to-end \textbf{hierarchical network (H-Net)} that compresses raw data through a recursive, data-dependent \textbf{dynamic chunking (DC)} process (\cref{fig: main}).
+H-Nets match the efficiency of tokenized pipelines while substantially improving modeling ability,
+by replacing handcrafted heuristics with content-aware and context-dependent segmentation learned from data.
+
+\paragraph{Hierarchical Processing.}
+The H-Net adopts the hierarchical architecture from prior work~\citep{SaShiMi,HourglassTransformer,SpaceByte}, resembling an autoregressive U-Net~\citep{U-Net}: (i) raw data is processed by a small \textbf{\encoder{}}, (ii) then downsampled and passed through a \textbf{\main{}} operating on compressed chunks, (iii) and finally upsampled before being passed through a \textbf{\decoder{}} operating on the original resolution.
+This modularity creates a natural processing hierarchy where outer stages capture fine-grained patterns while inner stages operate on coarse representations akin to traditional tokens.
+Crucially, while the main network contains the bulk of parameters and can be any standard architecture designed for operating on tokenized language---such as a Transformer~\citep{Transformer} or state space model (SSM)~\citep{Mamba}---we show that the encoder and decoder networks are strongly improved by using SSMs, which have an inductive bias for compression~\citep{gu2025tradeoffs}.
+
+
+
+\paragraph{Dynamic Chunking.}
+H-Net's core is a novel dynamic chunking (DC) mechanism which interfaces between the main network and the encoder/decoder networks, learning how to segment data while using standard differentiable optimization.
+DC is composed of two complementary new techniques: (i) a \textbf{routing module} which predicts boundaries between adjacent elements through a similarity score (ii) and a \textbf{smoothing module} which interpolates representations using the router's outputs, attenuating the effect of uncertain boundaries and significantly improving learnability.
+By combining these with a new auxiliary loss function that targets desired downsampling ratios, and modern techniques for gradient-based learning of discrete choices~\citep{MoE,STE},
+DC lets an H-Net learn how to compress data in a fully end-to-end fashion.
+
+\paragraph{Signal Propagation.}
+We introduce several architectural and training techniques to improve stability and scalability during end-to-end optimization. 
+These include: (i) carefully placing projections and normalization layers to balance signal propagation between interacting sub-networks, and (ii) adjusting optimization parameters for each layer based on its dimensionality and effective batch size, which changes between stages of the hierarchical structure.
+
+Altogether, H-Net learns segmentation strategies \emph{optimized jointly} with the main backbone, dynamically compressing input vectors based on contextual information into meaningful chunks.
+H-Net represents the first truly end-to-end, tokenizer-free language model:
+with a single stage of dynamic chunking, a \textbf{\emph{byte-level H-Net} matches the perplexity and downstream performance of a strong \emph{BPE-tokenized Transformer}} at sizes exceeding 1B parameters. Empirically, the dynamic chunking module naturally compresses data to a similar resolution as BPE tokenizers (4.5-5 bytes/chunk) and qualitatively learns meaningful boundaries, all without any external supervision or heuristics.
+
+\input{fig/main}
+
+\vspace*{1em}
+
+\subsubsection*{Hierarchical Chunking: From Data to Abstractions}
+
+
+Beyond addressing tokenization, H-Net improves general sequence modeling across a wide range of settings.
+Subword tokenization in language models is a special case of \emph{chunking}---the process of building higher-level abstractions from low-level data---and is a central component of intelligence.\footnote{\href{https://en.wikipedia.org/wiki/Chunking_(psychology)}{Chunking} is a formal concept from cognitive psychology central to human memory and cognition, and is the inspiration for this work's terminology.}
+Crucially, because H-Net is fully end-to-end, \textbf{it can be iterated recursively: the main network can itself be an H-Net}.
+Intuitively, more stages of chunking represent higher order meanings; just as characters can be combined into words, words can be combined into clauses, sentences, and beyond.
+Iterating the hierarchy should therefore lead to even more efficient use of compute and parameters, and more effective reasoning over compressed representations.
+
+
+Recursive H-Nets represent a new class of foundation model architectures that not only overcome tokenization, but discover and operate over abstractions learned from raw data, leading to higher-quality models with less pre-processing.
+Iterating the 1-stage H-Net to 2 hierarchical stages further improves its capabilities and strongly outperforms all baselines, with steeper training curves and better scaling with data.
+A byte-level 2-stage H-Net overtakes the perplexity of a strong tokenized Transformer after just 30B training bytes, with the gap widening throughout training, and matches the downstream evaluations of the tokenized Transformer of twice its size.
+
+Finally, H-Nets realize the benefits of overcoming tokenization:
+\begin{itemize}
+    \item \textit{Robustness}.
+    Without special data mixes, the pretrained H-Net is dramatically more robust to textual perturbations than the token-based Transformer, as evaluated on the noisy HellaSwag suite of benchmarks.
+    \item \textit{Interpretability}.
+    Qualitative visualizations of learned boundaries reveal that H-Net automatically discovers semantically coherent units without explicit supervision, validating that end-to-end learning successfully detects the structural patterns traditionally imposed through handcrafted tokenization.
+    \item \textit{Other languages}.
+    H-Net's improvements are even more pronounced on languages without obvious segmentation cues, including Chinese and code ($59.9 \to 66.3$ on XWinograd-zh compared to tokenized Transformer) and DNA language modeling ($3.6\times$ improved data efficiency compared to isotropic models).
+\end{itemize}
+
+We publicly release model code\footnote{\url{https://github.com/goombalab/hnet}} and pretrained checkpoints\footnote{\url{https://huggingface.co/cartesia-ai}}. 
+
+

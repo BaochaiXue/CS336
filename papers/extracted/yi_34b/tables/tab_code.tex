@@ -1,0 +1,42 @@
+\begin{table}
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    & \multirow{2}{*}{\bf Size} & \multirow{2}{*}{\bf Avg} & \multicolumn{1}{c}{\bf Human-Eval} & \multicolumn{1}{c}{\bf MBPP} \\
+    & & & pass@1 & pass@1 \\
+    \midrule
+    \bf GPT-3.5 & - & 54.8 & 48.1 & 61.4 \\
+    \bf GPT-4 & - & \textbf{65.3} & \textbf{67.0} & \textbf{63.6} \\
+    \gmidrule
+    % \midrule
+    \bf Falcon & 180B & 23.8 & 0.61 & 47.0 \\
+    \gmidrule
+    \multirow{2}{*}{\bf Qwen} & 7B & 32.0 & 29.9 & 34.0 \\
+     & 14B & 40.6 & 32.3 & 48.9 \\
+    \gmidrule
+    \multirow{2}{*}{\bf Baichuan 2} & 7B & 23.3 & 18.3 & 28.3 \\ 
+    & 13B & 23.4 & 20.7 & 26.1 \\
+    \gmidrule
+    \multirow{3}{*}{\bf L\textsmaller{LaMA} 2} 
+    & 7B & 13.8 & 12.8 & 14.8 \\
+    & 34B & 27.8 & 22.6 & 33.0 \\
+     & 70B & 38.4 & 31.7 & 45.0 \\
+     \gmidrule
+    \bf Mistral & 7B & 39.0 & 30.5 & 47.5 \\
+    \gmidrule
+    \bf InternLM & 20B & 34.8 & 28.1 & 41.4 \\
+    \gmidrule
+    \bf Skywork & 7B & 18.1 & 13.4 & 22.8 \\
+    % \midrule
+    \gmidrule
+    \multirow{2}{*}{\bf Yi} & 6B & 21.1 & 15.9 & 26.3 \\
+     & 34B & 32.1 & 23.2 & 41.0 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Code generation results on Human-Eval and MBPP.
+  % \qj{pass@1 or pass@80?}. 
+  We report 0-shot with greedy decoding results for pass@1 scores.
+  % \alex{what kind of prompt did we use? do we test the numbers of all these models on our own, or we copy the number from their papers?}
+  }
+  \label{tab:code}
+\end{table}

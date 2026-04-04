@@ -1,0 +1,25 @@
+% handle comments in a way to easily enable/disable
+% To add a comment command for yourself, either use \pinaforecomment like below
+% Or add your custom comment in two places:
+% (1) The actual comment below \ifcomment
+% (2) A no-op version after \else
+\definecolor{lightblue}{HTML}{3cc7ea}
+\ifcomment
+    \newcommand{\pinaforecomment}[3]{\colorbox{#1}{\parbox{.8\linewidth}{#2: #3}}}
+    \newcommand{\todoArti}[1]{\todo[color=cyan!40]{Arti: #1}}
+    \newcommand{\todoSrini}[1]{\todo[color=cyan!40]{Srini: #1}}
+\else
+    \newcommand{\pinaforecomment}[3]{}
+    \newcommand{\todoArti}[1]{}
+    \newcommand{\todoSrini}[1]{}
+\fi
+
+\newcommand{\prcomment}[1]{\pinaforecomment{lightblue}{Pedro}{#1}}
+\newcommand{\mike}[1]{\pinaforecomment{green}{Mike}{#1}}
+\newcommand{\ari}[1]{\pinaforecomment{purple}{Ari}{#1}}
+\newcommand{\margaret}[1]{\pinaforecomment{pink}{Margaret}{#1}}
+\newcommand{\ben}[1]{\pinaforecomment{orange}{Ben}{#1}}
+
+\newcommand{\abr}[1]{\textsc{#1}}
+
+

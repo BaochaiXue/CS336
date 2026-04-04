@@ -1,0 +1,50 @@
+\section{Training Infrastructure and Efficiency}
+
+\chonk is implemented in JAX~\citep{jax2018github} using the FLAX library~\citep{flax2020github} and built within Scenic~\citep{dehghani2021scenic}. It leverages both model and data parallelism. In particular, we used the \texttt{jax.xmap} API, which provides explicit control over both the sharding of all intermediates (e.g.\ weights and activations) as well as inter-chip communication.
+We organized the chips into a 2D logical mesh of size $t\times k$, where $t$ is the size of the data-parallel axis and $k$ is the size of the model axis.
+Then, for each of the $t$ groups, $k$ devices get the same batch of images, each device keeps only $1/k$ of the activations and is responsible for computing $1/k$ of the output of all linear layers (detailed below).
+
+\begin{figure}[ht]
+    \centering
+    \subfigure[The matrix $A$ is row-sharded across the devices.]{
+    \includegraphics[width=0.6\textwidth]{figs/vit2b_async_linear_gather.pdf}}
+    \subfigure[The matrix $A$ is column-sharded across the devices.]{
+    \includegraphics[width=0.6\textwidth]{figs/vit2b_async_linear_scatter.pdf}}
+    \vspace{-10pt}
+    \caption{Asynchronized parallel linear operation ($y=Ax$): model parallel matrix multiplication with overlapping communication and computation across devices.}
+    % \vspace{-15pt}
+    \label{fig:vit22b_async_linear}
+\end{figure}
+
+\paragraph{Asynchronous parallel linear operations.}
+As we use explicit sharding, we built a wrapper around the dense layers in FLAX that adapts them to the setting where their inputs are split across $k$ devices.
+To maximize throughput, two aspects have to be considered --- computation and communication.
+Namely, we want the operations to be analytically equivalent to the unsharded case, to communicate as little as possible, and ideally to have them overlap~\citep{wang2022overlap} so that we can keep the matrix multiply unit, where most of the FLOP capacity is, busy at all times.
+
+To illustrate the process, consider the problem of computing $y=Ax$ under the constraint that the $i$-th block of $x$ and $y$ both reside  on the $i$-th device. We denote the blocks of $A\in\mathbb{R}^{m\times n}$ by $A_{i,j}\in\mathbb{R}^{\frac{m}{k}\times\frac{n}{k}}$, and analogously $x_i\in\mathbb{R}^{\frac{n}{k}}$ and  $y_j\in\mathbb{R}^{\frac{m}{k}}$, with $i,j\in\{1,\ldots,k\}$.
+The first option is to have device $i$ hold the $i$-th block of rows, necessary for computation of $y_i$, so that to compute $y_i$ the chip needs to communicate $k-1$ times to complete $x$, a total of $(k-1)(n/k)$ floats.
+Alternatively, device $i$ can hold the $i$-th block of columns, all acting on $x_i$.
+This way, the device computes the vectors $y_{ji}=A_{ji}x_i$, which have to be communicated (scatter-reduced) with the other devices.
+Note that here the communicated vectors belong to the output space, a total of $(k-1)(m/k)$ floats.
+This \emph{asymmetry} is leveraged in communication costs when $n\neq m$; column-sharding is used in the computation of the output of the MLP in a Transformer, where $n=4m$, and row-sharding elsewhere.
+
+Furthermore, matrix multiplications are overlapped with the communication with the neighbours.
+This asynchronous approach allows for high matrix core utilization and increased device efficiency, while minimizing waiting on incoming communication.
+\Cref{fig:vit22b_async_linear} presents the overlapping communication and computation across $4$ devices with the parallel linear operation in row-sharding and column-sharding modes.
+The general case of this technique is presented in \citet{wang2022overlap}, who
+also introduce the XLA operations we leverage here.
+
+\paragraph{Parameter sharding.}
+The model is data-parallel on the first axis.
+Each parameter can be either fully replicated over this axis, or have each device hold a chunk of it.
+We opted to shard some large tensors from the model parameters to be able to fit larger models and batch sizes.
+This means that the device would have to gather the parameters before computing of the forward and scatter on the backward pass, but again, note that this happens asynchronous with computation.
+In particular, while computing one layer the device can start communicating the weights of the next one, thus minimizing the communication overhead.
+
+
+% Token processing time: ([bs]*[seq-len]) / ([step-time]*[num-cores])
+% ViT-22b:  256 * (64 * 1024)  / 14.2  / 1024 = 1153.8
+% ViT-e:  256 * (16 * 1024)  / 0.858  / 1024 = 4773.8 --> but there is no point in adding this if we don't have ViT-G to ViT-e comparison. 
+Using these techniques, \chonk processes $1.15$k tokens per second per core during training (forward and backward pass) on TPUv4~\citep{jouppi2020domain}. 
+\chonk's model flops utilization (MFU)~\citep{chowdhery2022palm,dehghani2021efficiency} is \emph{54.9\%}, indicating a very efficient use of the hardware. Note that PaLM reports 46.2\% MFU~\citep{chowdhery2022palm, pope2022efficiently} and we measured 44.0\% MFU for ViT-e (data-parallel only) on the same hardware.
+% https://docs.google.com/spreadsheets/d/1msRBUnoYezsyj1OcPxK_CVfBv0W5LXnfwbk9tDXN56Y/edit?resourcekey=0-kVP2XnAhnJ2QvNqHtOu12w#gid=1693330429

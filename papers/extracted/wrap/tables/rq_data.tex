@@ -1,0 +1,75 @@
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lcccccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-E & BoolQ & Wino. & PIQA & HellaSwag & TruthfulQA & OBQA & LogiQA & Avg \\
+        \midrule
+        Med+C4-35B  & 59.8  &  57.0  &  55.7  &  74.6  &  44.5  &  36.5  &  23.8  &  21.5  &  46.7\\
+        QA+C4-35B &  62.2  &  63.3  &  55.7  &  74.8  &  44.6  &  41.4  &  22.4  &  23.2  &  48.4\\
+        Med-35B &  56.6  &  59.5  &  53.4  &  74.0  &  41.9  &  36.3  &  22.2  &  22.7  &  45.8\\
+        QA-35B &  61.7  &  62.0  &  53.9  &  75.2  &  43.4  &  43.0  &  22.8  &  23.4  &  48.2\\
+        \bottomrule
+    \end{tabular}}
+    \caption{\textbf{Importance of Real Data:} Evaluation of $\sim1.3$B parameter LLMs trained for 150B tokens on General Understanding Tasks. Results show that adding real data helps improve model performance when pre-training on `Medium' or `Wikipedia-style' paraphrases. 
+    }
+    \label{tab:general_understanding_150B_real_data}
+\end{table*}
+
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-C & SciQ & PubMedQA & MathQA & MMLU & Avg \\
+        \midrule
+       Med+C4-35B & 27.2  &  82.2  &  46.2  &  23.1  &  25.2  &  40.8\\
+        QA+C4-35B & 29.0  &  85.1  &  62.2  &  22.5  &  26.1  &  45.0\\
+        Med-35B & 27.0  &  80.0  &  59.4  &  22.5  &  24.7  &  42.7\\
+        QA-35B &  27.1  &  85.5  &  59.2  &  22.2  &  25.0  &  43.8\\
+        \bottomrule
+    \end{tabular}}
+    \caption{\textbf{Importance of Real Data:} Evaluation of $\sim1.3$B parameter LLMs on Specialized Knowledge Tasks.
+    Results show that adding real data helps improve model performance when pre-training on `Q/A-style' paraphrases. }
+    \label{tab:specialized_knowledge_real_data}
+\end{table*}
+
+
+
+
+
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-C & SciQ & PubMedQA & MathQA & MMLU & Avg \\
+        \midrule
+       Med+C4-35B & 27.2  &  82.2  &  46.2  &  23.1  &  25.2  &  40.8\\
+        QA+C4-35B & 29.0  &  85.1  &  62.2  &  22.5  &  26.1  &  45.0\\
+        Combined-1:1-35B &  28.2  &  85.9  &  61.2  &  23.2  &  23.9  &  44.5 \\
+        Combined-1:2-35B &  29.0  &  85.7  &  57.4  &  23.5  &  23.1  &  43.7\\
+        \bottomrule
+    \end{tabular}}
+    \caption{\textbf{Combining multiple styles:} Evaluation of $\sim1.3$B parameter LLMs trained for 150B tokens on `Specialized Knowledge Tasks'. Results suggest that combining rephrasing styles does not yield performance benefit on zero-shot tasks compared to just Q/A style.}
+    \label{tab:specialized_knowledge_combination}
+\end{table*}
+
+
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lcccccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-E & BoolQ & Wino. & PIQA & HellaSwag & TruthfulQA & OBQA & LogiQA & Avg \\
+        \midrule
+        Med+C4-35B &  59.8  &  57.0  &  55.7  &  74.6  &  44.5  &  36.5  &  23.8  &  21.5  &  46.7\\
+        QA+C4-35B &  62.2  &  63.3  &  55.7  &  74.8  &  44.6  &  41.4  &  22.4  &  23.2  &  48.4\\
+        Combined-1:1-35B &  60.6  &  60.2  &  57.7  &  73.8  &  43.7  &  40.2  &  22.0  &  22.1  &  47.5\\
+        Combined-1:2-35B &  61.4  &  62.0  &  57.0  &  74.8  &  44.6  &  39.5  &  23.0  &  21.3  &  48.0 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{\textbf{Combining multiple styles:} Evaluation of $\sim1.3$B parameter LLMs trained for 150B tokens on General Understanding Tasks. 
+    Results suggest that combining rephrasing styles does not yield performance benefit on zero-shot tasks compared to just Q/A style.}
+    \label{tab:general_understanding_combination}
+\end{table*}

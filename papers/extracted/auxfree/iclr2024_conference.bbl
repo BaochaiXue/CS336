@@ -1,0 +1,68 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Dai et~al.(2024)Dai, Deng, Zhao, Xu, Gao, Chen, Li, Zeng, Yu, Wu, Xie, Li, Huang, Luo, Ruan, Sui, and Liang]{Dai2024DeepSeekMoETU}
+Damai Dai, Chengqi Deng, Chenggang Zhao, Runxin Xu, Huazuo Gao, Deli Chen, Jiashi Li, Wangding Zeng, Xingkai Yu, Yu~Wu, Zhenda Xie, Y.~K. Li, Panpan Huang, Fuli Luo, Chong Ruan, Zhifang Sui, and Wenfeng Liang.
+\newblock Deepseekmoe: Towards ultimate expert specialization in mixture-of-experts language models.
+\newblock \emph{ArXiv}, abs/2401.06066, 2024.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:266933338}.
+
+\bibitem[DeepSeek-AI et~al.(2024)DeepSeek-AI, Zhu, Guo, Shao, Yang, Wang, Xu, Wu, Li, Gao, Ma, Zeng, Bi, Gu, Xu, Dai, Dong, Zhang, Piao, Gou, Xie, Hao, Wang, Song, Chen, Xie, Guan, mei You, Liu, Du, Gao, Lu, Chen, Wang, Deng, Li, Zhao, Ruan, Luo, and Liang]{DeepSeekAI2024DeepSeekCoderV2BT}
+DeepSeek-AI, Qihao Zhu, Daya Guo, Zhihong Shao, Dejian Yang, Peiyi Wang, Runxin Xu, Y.~Wu, Yukun Li, Huazuo Gao, Shirong Ma, Wangding Zeng, Xiao Bi, Zihui Gu, Hanwei Xu, Damai Dai, Kai Dong, Liyue Zhang, Yishi Piao, Zhibin Gou, Zhenda Xie, Zhewen Hao, Bing-Li Wang, Jun-Mei Song, Deli Chen, Xin Xie, Kang Guan, Yu~mei You, Aixin Liu, Qiushi Du, Wenjun Gao, Xuan Lu, Qinyu Chen, Yaohui Wang, Chengqi Deng, Jiashi Li, Chenggang Zhao, Chong Ruan, Fuli Luo, and Wenfeng Liang.
+\newblock Deepseek-coder-v2: Breaking the barrier of closed-source models in code intelligence.
+\newblock \emph{ArXiv}, abs/2406.11931, 2024.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:270562723}.
+
+\bibitem[Fedus et~al.(2021)Fedus, Zoph, and Shazeer]{Fedus2021SwitchTS}
+William Fedus, Barret Zoph, and Noam~M. Shazeer.
+\newblock Switch transformers: Scaling to trillion parameter models with simple and efficient sparsity.
+\newblock \emph{J. Mach. Learn. Res.}, 23:\penalty0 120:1--120:39, 2021.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:231573431}.
+
+\bibitem[Lepikhin et~al.(2020)Lepikhin, Lee, Xu, Chen, Firat, Huang, Krikun, Shazeer, and Chen]{Lepikhin2020GShardSG}
+Dmitry Lepikhin, HyoukJoong Lee, Yuanzhong Xu, Dehao Chen, Orhan Firat, Yanping Huang, Maxim Krikun, Noam~M. Shazeer, and Z.~Chen.
+\newblock Gshard: Scaling giant models with conditional computation and automatic sharding.
+\newblock \emph{ArXiv}, abs/2006.16668, 2020.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:220265858}.
+
+\bibitem[Loshchilov \& Hutter(2016)Loshchilov and Hutter]{Loshchilov2016SGDRSG}
+Ilya Loshchilov and Frank Hutter.
+\newblock Sgdr: Stochastic gradient descent with warm restarts.
+\newblock \emph{arXiv: Learning}, 2016.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:14337532}.
+
+\bibitem[Sennrich et~al.(2015)Sennrich, Haddow, and Birch]{Sennrich2015NeuralMT}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock \emph{ArXiv}, abs/1508.07909, 2015.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:1114678}.
+
+\bibitem[Shao et~al.(2024)Shao, Dai, Guo, Liu, and Wang]{Shao2024DeepSeekV2AS}
+Zhihong Shao, Damai Dai, Daya Guo, Bo~Liu, and Zihan Wang.
+\newblock Deepseek-v2: A strong, economical, and efficient mixture-of-experts language model.
+\newblock \emph{ArXiv}, abs/2405.04434, 2024.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:269613809}.
+
+\bibitem[Shazeer et~al.(2017)Shazeer, Mirhoseini, Maziarz, Davis, Le, Hinton, and Dean]{Shazeer2017OutrageouslyLN}
+Noam~M. Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc~V. Le, Geoffrey~E. Hinton, and Jeff Dean.
+\newblock Outrageously large neural networks: The sparsely-gated mixture-of-experts layer.
+\newblock \emph{ArXiv}, abs/1701.06538, 2017.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:12462234}.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin]{Vaswani2017AttentionIA}
+Ashish Vaswani, Noam~M. Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Neural Information Processing Systems}, 2017.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:13756489}.
+
+\bibitem[Zhou et~al.(2022)Zhou, Lei, Liu, Du, Huang, Zhao, Dai, Chen, Le, and Laudon]{Zhou2022MixtureofExpertsWE}
+Yan-Quan Zhou, Tao Lei, Han-Chu Liu, Nan Du, Yanping Huang, Vincent Zhao, Andrew~M. Dai, Zhifeng Chen, Quoc~V. Le, and James Laudon.
+\newblock Mixture-of-experts with expert choice routing.
+\newblock \emph{ArXiv}, abs/2202.09368, 2022.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:247011948}.
+
+\end{thebibliography}

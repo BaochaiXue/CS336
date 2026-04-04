@@ -1,0 +1,34 @@
+% \section{Pretrained Models Quickly Learn New Tasks}
+
+% After demonstrating that LIMA is competent in a variety of question-answering and text generation tasks, we now test the boundaries of what can be achieved with only 1,000 examples.
+% We challenge LIMA in both multi-turn dialogue and text generation with structural constraints, and discover that LIMA exhibits surprising levels of robustness to these new tasks, and that even a handful of related training examples can dramatically boost its capabilities.
+
+
+\section{Multi-Turn Dialogue}
+
+Can a model fine-tuned on only 1,000 single-turn interactions engage in multi-turn dialogue?
+We test LIMA across 10 live conversations, labeling each response as \textit{Fail}, \textit{Pass}, or \textit{Excellent} (see Section~\ref{sec:analysis}).
+LIMA responses are surprisingly coherent for a zero-shot chatbot, referencing information from previous steps in the dialogue.
+It is clear though that the model is operating out of distribution; in 6 out of 10 conversations, LIMA fails to follow the prompt within 3 interactions.
+
+\begin{wrapfigure}{r}{0.25\textwidth}
+    \vspace{-15pt}
+    \includegraphics[width=\linewidth]{figs/multiturn_bar.pdf}
+    \caption{Analysis of dialogue turns, averaged over 10 test chats.}
+    \label{fig:dialogue_results}
+    \vspace{-15pt}
+\end{wrapfigure}
+
+To improve its ability to converse, we gather 30 multi-turn dialogue chains.
+Among these, 10 dialogues are composed by the authors, while the remaining 20 are based on comment chains from Stack Exchange, which we edit to fit the assistant's style.
+We fine-tune a new version of LIMA from the pretrained LLaMa model using the combined 1,030 examples, and conduct 10 live conversations based on the same prompts used for the zero-shot model.
+Figure~\ref{fig:dialogue} shows excerpts from such dialogues.
+
+Figure~\ref{fig:dialogue_results} shows the distribution of response quality.
+Adding conversations substantially improves generation quality, raising the proportion of excellent responses from 45.2\% to 76.1\%.
+Moreover, the failure rate drops from 15 fails per 42 turns (zero-shot) to 1 fail per 46 (fine-tuned).
+We further compare the quality of the entire dialogue, and find that the fine-tuned model was significantly better in 7 out of 10 conversations, and tied with the zero-shot model in 3.
+This leap in capability from a mere 30 examples, as well as the fact that the zero-shot model can converse at all, reinforces the hypothesis that such capabilities are learned during pretraining, and can be invoked through limited supervision.\footnote{We also experiment with \textit{removing} examples of a particular task from our dataset. In Appendix~\ref{sec:structure}, we show how even 6 examples can make or break the ability to generate text with complex structure.}
+
+
+\input{tables/dialogue}

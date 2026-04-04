@@ -1,0 +1,35 @@
+\section{Model Card}
+\label{sec:model_card}
+Following \citet{DBLP:journals/corr/abs-1810-03993}, we provide a model card for \OPT{}. 
+
+\subsection{Model Details}
+\begin{itemize}
+    \item \textbf{Person or organization developing model:} \OPT{} was developed by Meta AI.
+    \item \textbf{Model date:} \OPT{} was released on May 3, 2022.
+    \item \textbf{Model version:} \OPT{} described in this paper is version 1.0.0.
+    \item \textbf{Model type:} \OPT{} is a large decoder-only transformer language model.
+    \item \textbf{Information about training algorithms, parameters, fairness constraints or other applied approaches, and features:} \OPT{} was trained with AdamW for parameter sizes from 125M to 175B. See the Data Card (Appendix \ref{sec:datasheet}) for information about training data and Section \ref{sec:training_setup} - \ref{sec:training_process} for information about the training process. 
+    \item \textbf{Paper or other resource for more information:} See the rest of this paper for more details on \OPT{} as well as the corresponding post on the Meta AI Research Blog. More details are also available in metaseq, our open-source repository.\footnote{\url{https://github.com/facebookresearch/metaseq/}}
+    \item \textbf{License:} \OPT{} and the smaller baseline models are made available through a non-commercial use license agreement provided in our model license.\footnote{\url{https://github.com/facebookresearch/metaseq/blob/main/projects/OPT/MODEL_LICENSE.md}}
+    \item \textbf{Where to send questions or comments about the model:} Please contact the corresponding authors \texttt{\{susanz,roller,namangoyal\}@fb.com} for any questions or comments.
+\end{itemize}
+
+
+\subsection{Intended Use}
+\begin{itemize}
+    \item \textbf{Primary intended uses:} We release \OPT{} for research into Language Models, especially as it pertains to Responsible AI. See Section \ref{sec:release} for more detailed Considerations for Release. Information on how to use the model can be found at \texttt{metaseq}, our open-source repository.
+    \item \textbf{Primary intended users:} We primarily target researchers and the related research community.
+    \item \textbf{Out-of-scope use cases: } \OPT{} is not released for production use or real-world deployments. As we note in Section \ref{sec:limitations}, \OPT{}, like similar large language models, has a variety of shortcomings that make it premature for commercial use.
+\end{itemize}
+ 
+
+\subsection{Data, Limitations, and Recommendations}
+\begin{itemize}
+    \item \textbf{Data selection for training:} Training data for \OPT{} was selected based on a combination of breadth and availability. See our Data Card (Appendix \ref{sec:datasheet}) for more detailed information on the data used to train our model. 
+    \item \textbf{Data selection for evaluation:} Evaluations in this paper were chosen to provide comparable performance assessments relative to similar scale models in the literature. Given concerns in the community around safety and fairness of large language models in general, we also explicitly provide evaluations on Responsible AI (see Section~\ref{sec:rai_evals}). 
+    \item \textbf{Limitations:} Like other large language models for which the diversity (or lack thereof) of training data induces downstream impact on the quality of our model, \OPT{} has limitations in terms of bias and safety. \OPT{} can also have quality issues in terms of generation diversity and hallucination. In general, \OPT{} is not immune from the plethora of issues that plague modern large language models. By releasing with a non-commercial license, we also hope to increase communication, transparency, and study of the problems of large language models, especially in areas which may not be aligned with commercial interests. See Section \ref{sec:limitations} for a more detailed discussion of limitations of \OPT{}. 
+    \item \textbf{Recommendations for future work:} See Section \ref{sec:release} for more about our Considerations for Release, including a discussion of potential avenues of research enabled by opening our model to more of the research community. We hope that the release of \OPT{}, as well as information around our model training process, will increase open science around both large language models in specific and natural language processing and deep learning in general.
+\end{itemize}
+ 
+
+

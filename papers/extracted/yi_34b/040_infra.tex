@@ -1,0 +1,50 @@
+
+
+We build the infrastructure supporting the full-stack data processing, pretraining, finetuning, and serving. Our infrastructure feasures:
+(1). automated managing and monitoring the computing resource; 
+(2). improved the training speed from optimized parallel strategies, kernel efficiency, and long-context support;
+(3). unified finetuning framework supporting heterogeneous distributed training backend, such as simultaneously using Megatron and DeepSpeed for multiple models in Direct Preference Optimization (DPO)~\citep{rafailov2023direct};
+(4). reducing the deployment cost by various LLM serving accelerations such as quantization, continuous batching, and paged attention.
+Below we explain these techniques one by one. 
+
+\paragraph{Computing Resources Management} 
+To efficient schedule large-scale language model development, particularly pretraining, which may take months on thousands of GPUs , 
+we build a highly efficient multi-cloud task scheduling algorithm to manage pre-training, SFT, and RLHF tasks of different priorities. We also build a high-performance in-house training framework that allows us to automatically elastic scale the pre-train jobs to different node sizes based on the GPU availability. More importantly, all the training-related hyper-parameters will be scaled at the same time seamlessly. 
+
+During the large language model training stage, a wide range of failures regularly occur, ranging from GPU crashes to communication fabric errors to loss spikes. We use the following strategies to address these reliability challenges:
+(1) we apply automated inspection, prediction, and labeling of nodes for different kind of software/hardware error categories. Nodes marked as tainted will be temporarily removed from the resource pool until the errors got cleared. 
+(2) we implement a task queuing system with pre-checks and the capability for fast, automatic recovery in the event of failures during training tasks. 
+(3) we develop of a user-friendly multi-task submission and management console, enabling developers to seamlessly manage and track their training tasks and hyper-parameters.
+
+\paragraph{Performance and Cost Efficiency} \textit{Memory} and \textit{communication} restrictions are the two major technical challenges of large scale model training requiring integrated solutions beyond adding more GPUs.
+We use and improve upon the following techniques to tackle the memory and communication restrictions: (1) ZeRO-1~\cite{zero} to remove the memory consumption by partitioning optimizer states cross data-parallel processes; (2) tensor parallel combined with pipeline parallel~\cite{megatron-lm} within each compute node to avoid inter-node communication bottleneck, and the 3D parallel strategy is well designed and optimized to avoid using activation checkpointing and minimize the pipeline bubbles; (3) kernel fusion techniques like flash attention\cite{dao2022flashattention}\cite{dao2023flashattention2} and JIT kernels to reduce redundant global memory access and consumption; (4) topology-aware resource allocation (ranking strategy) to minimize the communication across different layers of switches, which is the limitation of a typical fat-tree-topology. 
+
+\paragraph{Finetuning Framework}
+Different from pretraining, finetuning LLMs may require the orchestration of multiple models, as is the practice of DPO~\citep{rafailov2023direct} and PPO~\citep{ouyang2022training}.
+In such training jobs, a typical process is to use reference/reward model to predict a batch of data (which also requires nontrivial time), then let the target model use this data to calculate loss and update parameters. 
+To this end, we build a multi-model scheduling framework to support multiple backends for different LLMs in a single job. For example, when finetuning a language model with DPO, the intermediate results from the reference model can be cached and reused, improving the training speed and resource cost to be close to the supervised finetuning counterparts. 
+
+
+\input{tables/tab_overall}
+
+
+
+\paragraph{Fast and Efficient Inference}
+% Text generation driven by large language models requires considerable computational resources and memory usage. Despite this, the process exhibits low parallelism and inefficient memory utilization, leading to a significant increase in inference costs.
+We primarily use quantization, dynamic batching, and Paged Attention for improving decoding speed and memory usage.
+We use quantization to decrease both the memory footprint and computation demand. 
+By 4-bit model quantization~\citep{wu2023understanding} and 8-bit KV cache quantization~\citep{dettmers2022llm}, we are able to achieve significant GPU memory saving with near-zero performance degradation (e.g., less than 1$\%$ accuracy drop in MMLU/CMMLU benchmark). 
+We use dynamic batching~\citep{gyeong280922} to minimize the response time and improve batching efficiency.
+We use PagedAttention\cite{kwon2023efficient} to improve memory utilization and improve decoding. 
+% The text decoding and generation process is particularly bottlenecked at memory usage. To enhance memory utilization, we have adopted the .
+
+%As a result of these optimizations, we have successfully deployed our Yi-34B model on two consumer GPUs, enabling the simultaneous generation of 256 concurrent requests. Furthermore, our total throughput has surpassed 1300 tokens per second.
+
+% 基于大语言模型的生成具有计算量大，并行度低，显存开销大，显存利用率低等问题。这使得推理成本相应地显著增加。为了解决这个问题，我们研究并实施了一系列优化技术。(1) 我们采用了量化技术来减少模型的内存占用和计算需求，在 4-bit 模型量化和 8-bit kv cache 量化结果上面精度损失小于 1\%。(2) 在文本解码生成过程中，上下文 KV cache 驻留在显存中会消耗大量的显存，我们使用了 PagedAttention 技术来提高显存的利用率 (3) 为了降低延时并提高 batching 效率，我们采用了 continuous batching 技术。通过这些优化技术点，我们将 Yi-34B 部署在 2 个 RTX 4090 实例上面，能够同时提供 256 个并发请求的生成；总吞吐超过 1300 tokens/s.
+
+\paragraph{Long-context Window Support} 
+We implement and improve computation-communication overlapping, sequence parallelism, and communication compression to support up to 200K context length continue pretraining and finetuning. 
+Our method to scale the context length to 200K is \textit{solely} based on engineering, that is to say, we do not modify the model architecture like sparse, local, or sliding window attention -- the model remains using the full attention even the input is 200K.  
+
+% The feature of long context plays a key role in downstream tasks like document summarization, document-based QA, etc. However, it raises various challenges for infrastructure from the perspectives of computation, memory, and communication. Due to these infrastructure constraints, common open-source large language models (LLMs) only support context length up to 4K (LLaMA-2) or 8K (Mistral-7B) tokens. To address this limitation, we have implemented a series of optimizations: (1) Computation-Communication Overlapping, (2) Sequence Parallelism, and (3) Communication Compression. With these enhancements, the context length can be extended up to 300K tokens within
+% our GPU clusters.

@@ -1,0 +1,35 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & 
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3\\ 1T Tokens\end{tabular}} & 
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{}-Space \\ 6T Bytes\end{tabular}} &
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{}-Entropy \\ 4.5T Bytes \end{tabular}}
+ \\ \midrule
+\textbf{Arc-E} &  
+77.6 & 75.4 & \textbf{79.6} \\
+\textbf{Arc-C} & 
+\textbf{53.3} & 49.8 & 52.1  \\
+\textbf{HellaSwag} & 
+79.1 & 79.6 & \textbf{80.6}  \\
+\textbf{PIQA} & 
+80.7 & \textbf{81.1} & 80.6 \\
+\textbf{MMLU} & 
+\textbf{58.1} & 54.8 & 57.4 \\
+\textbf{MBPP} & 
+40.2 & 37.6 & \textbf{41.8} \\
+\textbf{HumanEval} & 
+31.1 & 27.4 & \textbf{35.4} \\ 
+\midrule 
+\textbf{Average} & 60.0 & 58.0 & \textbf{61.1} \\ 
+\midrule
+\textbf{Bytes/Patch on Train Mix} & 4.4 & \textbf{6.1} & 4.5 \\ 
+\bottomrule
+\end{tabular}
+\caption{Comparison of \flop{}-matched \model{} \textbf{8B} models trained on the \model{}-1T dataset comprising high-quality tokens of text and code from publicly available sources, with baseline models using the \llama{} 3 tokenizer. \model{} performs better than \llama{} 3 on average, and depending on the patching scheme, achieves significant \flop{}s savings with a minor reduction in performance.}
+\label{tab:evals}
+\end{table}

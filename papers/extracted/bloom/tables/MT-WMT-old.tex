@@ -1,0 +1,65 @@
+\begin{table}[ht!]
+\centering\small
+\addtolength{\tabcolsep}{-2.5pt}
+%\resizebox{\textwidth}{!}{
+\begin{tabular}{lrr|rr|rr|rr}
+\toprule
+ & \multicolumn{2}{c}{en $\rightarrow$ fr} & \multicolumn{2}{c}{fr $\rightarrow$ en } & \multicolumn{2}{c}{en $\rightarrow$ hi} & \multicolumn{2}{c}{hi $\rightarrow$ en} \\
+% & mean & & mean &  \\
+%name &  &  &      \\
+\midrule
+Prompt / Shots  & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+\midrule
+a\_good\_translation-source+target & 15.38 & 36.39 & 16.81 &  36.56 & 1.90 & 14.49 & 13.04 & 24.60  \\
+gpt3-target     & 7.90 & 32.55 & 12.73 & 33.14 & 0.26 & 6.51 & 0.66 & 9.99 \\
+version-target  & 21.96 & 34.22 & 26.79 & 35.42 & 1.96 & 13.95 & 11.48 & 25.81 \\
+xglm-source+target     & 4.16 & 28.99 & 11.23 & 33.30 & 0.63 & 14.55 & 4.10 & 13.22 \\
+\bottomrule
+\end{tabular}%}
+\caption{WMT'14 zero- and one-shot results for BLOOM-176B. The prompts used are described in Table~\ref{tab:prompt-examples}.}% and in more detail in Appendix~\ref{app:mt-prompt-description}.}
+\label{tab:WMT-14enfr-byprompts-0shot}
+\end{table}
+% a\_good\_translation & 36.39 & 36.56 & 14.49 & 24.60 \\
+% gpt3     & 32.55 & 33.14 & 6.51 & 9.99 \\
+% version  & 34.22 & 35.42 & 13.95 & 25.81 \\
+% xglm     & 28.99 & 33.30 & 14.55 & 13.22 \\
+
+% \begin{table}[ht!]
+% \centering\small
+% \addtolength{\tabcolsep}{-2.5pt}
+% %\resizebox{\textwidth}{!}{
+% \begin{tabular}{lcccc}
+% \toprule
+% Prompt & en $\rightarrow$ fr & fr $\rightarrow$ en & en $\rightarrow$ hi & hi $\rightarrow$ en \\
+% % & mean & & mean &  \\
+% %name &  &  &      \\
+% \midrule
+% a\_good\_translation & 15.38  & 16.81  & 1.90  & 13.04  \\
+% gpt3     & 7.90 & 12.73 & 0.26 & 0.66 \\
+% version  & 21.96 & 26.79 & 1.96 & 11.48 \\
+% xglm     & 4.16 & 11.23 & 0.63 & 4.10 \\
+% \bottomrule
+% \end{tabular}%}
+% \caption{WMT'14 \textbf{zero-shot} results for BLOOM-176B. The prompts are described in Table~\ref{tab:prompt-examples}.}% and in more detail in Appendix~\ref{app:mt-prompt-description}.}
+% \label{tab:WMT-14enfr-byprompts-0shot}
+% \end{table}
+
+% \begin{table}[ht!]
+% \centering\small
+% \addtolength{\tabcolsep}{-2.5pt}
+% %\resizebox{\textwidth}{!}{
+% \begin{tabular}{lcccc}
+% \toprule
+% Prompt & en $\rightarrow$ fr & fr $\rightarrow$ en & en $\rightarrow$ hi & hi $\rightarrow$ en \\
+% % & mean & & mean &  \\
+% %name &  &  &      \\
+% \midrule
+% a\_good\_translation & 36.39 & 36.56 & 14.49 & 24.60 \\
+% gpt3     & 32.55 & 33.14 & 6.51 & 9.99 \\
+% version  & 34.22 & 35.42 & 13.95 & 25.81 \\
+% xglm     & 28.99 & 33.30 & 14.55 & 13.22 \\
+% \bottomrule
+% \end{tabular}%}
+% \caption{WMT'14 \textbf{one-shot} results for BLOOM-176B. Table~\ref{tab:prompt-examples}.}% and in more detail in Appendix~\ref{app:mt-prompt-description}.}
+% \label{tab:WMT-14enfr-byprompts-1shot}
+% \end{table}

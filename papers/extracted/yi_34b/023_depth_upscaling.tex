@@ -1,0 +1,17 @@
+Recent studies on scaling laws~\citep{henighan2020scaling, hoffmann2022training, kaplan2020scaling} have underscored the predictable improvement in model performance with increases in computational budget, model size, and data size. Yet, identifying the most effective distribution of resources between model and data sizes upon expanding the computational budget remains a formidable challenge in the field of scaling laws. Additionally, research conducted by~\citet{deepseekai2024deepseek} has highlighted that the allocation of an increased computational budget towards model scaling should be proportional to the quality of the data available. In light of these insights, we propose a novel approach aimed at dynamically adjusting the resource allocation between data and model sizes through a series of staged training processes. This strategy iteratively fine-tunes the balance between data characteristics and model size according to scaling laws, enhancing both model training efficiency and performance.
+
+\textbf{Method}\quad
+Following the methodology outlined by~\citet{kim2023solar}, our goal is to upscale our Yi-6B base model, which has 32 layers, to a 9B model named the Yi-9B base model, featuring 48 layers, by duplicating the original 16 middle layers 12-28. Depth up-scaling involves expanding the base model's depth and subsequently continuing the pretraining phase for the enhanced model.
+
+\input{images/fig_layer_cosine_graph}
+Our investigations reveal that the decision on which layers to replicate could be informed by evaluating the cosine similarity scores between the inputs and outputs of each layer. Such an approach allows for targeted model scaling without necessitating additional pretraining, leading only to minimal performance impacts. This minimal impact on performance is attributed to the high cosine similarity, approaching one, between the inputs and outputs of the duplicated layers, as evidenced in Figure \ref{fig:layer_cosine_score}. This observation suggests that the replication of these layers does not significantly alter the output logits produced by the original model. This method ensures the efficient scaling of the model by optimizing its architecture based on the internal processing dynamics of its layers.
+
+\input{tables/table_depth_upscaling}
+\textbf{Continual Training}\quad
+The dataset is composed of approximately 800 billion tokens across two stages, with around 70\% having been recently collected and carefully selected. We have enhanced the code coverage in the final stage to improve code performance.
+
+To optimize the training process, we maintain a constant learning rate of 3e-5, and adopt a strategic approach to gradually increase the batch size from 4M tokens whenever the model's loss plateaued. This incremental adjustment of the batch size, alongside maintaining all other parameters in alignment with the established Yi-6B base model configuration, was instrumental in navigating the challenges of training at scale.
+
+The effectiveness of these strategies is demonstrated in Table \ref{tab:depth_upscaling}, which details the Yi-9B base model's performance across a variety of benchmarks, including common sense, reasoning, knowledge, coding, and mathematics. It underscores the competitive advantages of Yi-9B base model in specific domains, illustrating the efficacy of our methodology in enhancing model performance by optimally adjusting the interplay between data characteristics and model size.
+
+

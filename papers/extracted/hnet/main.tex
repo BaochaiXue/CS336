@@ -1,0 +1,329 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}    
+\usepackage{hyperref}       
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=cyan,      
+    urlcolor=magenta,
+    citecolor=ForestGreen,
+    pdftitle={H-Net},
+    pdfpagemode=FullScreen,
+}
+\usepackage{url}            
+\usepackage{booktabs}       
+\usepackage{amsfonts}       
+\usepackage{nicefrac}       
+\usepackage{microtype}      
+\usepackage{xcolor}         
+\usepackage{url}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+\usepackage{amsfonts}       
+\usepackage{xcolor}         
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{dsfont}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{xfrac}
+\usepackage{colortbl}
+\usepackage{wrapfig,lipsum}
+\usepackage{float}
+\usepackage{pythonhighlight}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{bbm}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage[textsize=tiny]{todonotes}
+\usepackage{tablefootnote}
+\usepackage{enumitem}
+\usepackage{wasysym}
+
+\usepackage[parfill]{parskip}
+\usepackage[citestyle=authoryear,sorting=nyt,maxbibnames=20,backend=biber,uniquename=false]{biblatex}
+\newcommand{\citep}{\parencite}
+\newcommand{\citet}{\textcite}
+\addbibresource{references.bib}  
+
+\setlength{\textwidth}{6.8in}  
+\setlength{\textheight}{9in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\topmargin}{-0.5in}
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\setlength{\marginparwidth}{0.8in}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[tt=false, type1=true]{libertine}
+\RequirePackage[varqu]{zi4}
+\RequirePackage[libertine]{newtxmath}
+
+\newtoggle{lipsumfull}
+\toggletrue{lipsumfull}
+\iftoggle{lipsumfull}{}{
+  \renewcommand{\lipsum}{}
+}
+
+
+\newcommand{\tightcmidrule}[2][]{
+  \begingroup
+    \setlength{\aboverulesep}{0pt}
+    \setlength{\belowrulesep}{0pt}
+    \cmidrule[#1]{#2}
+  \endgroup
+}
+
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}  
+\newcommand{\model}{H-Net}
+\newcommand{\chunk}{chunking layer}
+\newcommand{\Chunk}{Chunking layer}
+\newcommand{\CHUNK}{Chunking Layer}
+\newcommand{\dechunk}{dechunking layer}
+\newcommand{\Dechunk}{Dechunking layer}
+\newcommand{\DECHUNK}{Dechunking Layer}
+\newcommand{\encoder}{encoder network}
+\newcommand{\Encoder}{Encoder network}
+\newcommand{\main}{main network}
+\newcommand{\Main}{Main network}
+\newcommand{\decoder}{decoder network}
+\newcommand{\Decoder}{Decoder network}
+\newcommand{\router}{routing module}
+\newcommand{\Router}{Routing module}
+\newcommand{\ROUTER}{Routing Module}
+\newcommand{\smoother}{smoothing module}
+\newcommand{\Smoother}{Smoothing module}
+\newcommand{\SMOOTHER}{Smoothing Module}
+\newcommand{\downsampler}{downsampler}
+\newcommand{\Downsampler}{Downsampler}
+\newcommand{\upsampler}{upsampler}
+\newcommand{\Upsampler}{Upsampler}
+\newcommand{\twostage}{2-stage}
+\newcommand{\onestage}{1-stage}
+
+\newcommand{\ie}{\emph{i.e.,}}
+\newcommand{\eg}{\emph{e.g.,}}
+
+\definecolor{lavender}{rgb}{0.75, 0.58, 0.89}
+
+\definecolor{Gray7}{RGB}{73, 80, 87}
+\definecolor{Red7}{RGB}{240, 62, 62}
+\definecolor{Pink7}{RGB}{214, 51, 108}
+\definecolor{Grape7}{RGB}{174, 62, 201}
+\definecolor{Violet7}{RGB}{112, 72, 232}
+\definecolor{Indigo7}{RGB}{66, 99, 235}
+\definecolor{Blue7}{RGB}{28, 126, 214}
+\definecolor{Cyan7}{RGB}{16, 152, 173}
+\definecolor{Teal7}{RGB}{12, 166, 120}
+\definecolor{Green7}{RGB}{55, 178, 77}
+\definecolor{Lime7}{RGB}{116, 184, 22}
+\definecolor{Yellow7}{RGB}{245, 159, 0}
+\definecolor{Orange7}{RGB}{247, 103, 7}
+
+\definecolor{Gray0}{RGB}{248, 249, 250}
+\definecolor{Red0}{RGB}{255, 245, 245}
+\definecolor{Pink0}{RGB}{255, 240, 246}
+\definecolor{Grape0}{RGB}{248, 240, 252}
+\definecolor{Violet0}{RGB}{243, 240, 255}
+\definecolor{Indigo0}{RGB}{237, 242, 255}
+\definecolor{Blue0}{RGB}{231, 245, 255}
+\definecolor{Cyan0}{RGB}{227, 250, 252}
+\definecolor{Teal0}{RGB}{230, 252, 245}
+\definecolor{Green0}{RGB}{235, 251, 238}
+\definecolor{Lime0}{RGB}{244, 252, 227}
+\definecolor{Yellow0}{RGB}{255, 249, 219}
+\definecolor{Orange0}{RGB}{255, 244, 230}
+
+\definecolor{Main}{RGB}{165, 216, 255}
+\definecolor{EncDec0}{RGB}{231, 245, 255}
+\definecolor{EncDec1}{RGB}{208, 235, 255}
+\definecolor{Chunk}{RGB}{255, 243, 190}
+\definecolor{DeChunk}{RGB}{255, 227, 228}
+
+
+\newcommand{\new}[1]{}
+\newcommand{\fix}[1]{}
+\newcommand{\mgt}[1]{}
+\newcommand{\best}[1]{\textbf{#1}}
+\newcommand{\second}[1]{\underline{#1}}
+
+
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bff}{\mathbf{f}}  
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bh}{\mathbf{h}}  
+\newcommand{\bii}{\mathbf{i}}
+\newcommand{\bj}{\mathbf{j}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\bl}{\mathbf{l}}
+\newcommand{\bm}{\mathbf{m}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\bo}{\mathbf{o}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcD}{\mathcal{D}}
+\newcommand{\mcE}{\mathcal{E}}
+\newcommand{\mcF}{\mathcal{F}}
+\newcommand{\mcG}{\mathcal{G}}
+\newcommand{\mcH}{\mathcal{H}}
+\newcommand{\mcI}{\mathcal{I}}
+\newcommand{\mcJ}{\mathcal{J}}
+\newcommand{\mcK}{\mathcal{K}}
+\newcommand{\mcL}{\mathcal{L}}
+\newcommand{\mcM}{\mathcal{M}}
+\newcommand{\mcN}{\mathcal{N}}
+\newcommand{\mcO}{\mathcal{O}}
+\newcommand{\mcP}{\mathcal{P}}
+\newcommand{\mcQ}{\mathcal{Q}}
+\newcommand{\mcR}{\mathcal{R}}
+\newcommand{\mcS}{\mathcal{S}}
+\newcommand{\mcT}{\mathcal{T}}
+\newcommand{\mcU}{\mathcal{U}}
+\newcommand{\mcV}{\mathcal{V}}
+\newcommand{\mcW}{\mathcal{W}}
+\newcommand{\mcX}{\mathcal{X}}
+\newcommand{\mcY}{\mathcal{Y}}
+\newcommand{\mcZ}{\mathcal{Z}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+
+\title{Dynamic Chunking for End-to-End Hierarchical Sequence Modeling}
+\date{}
+
+\author{
+    \textbf{Sukjun Hwang} \\
+    Carnegie Mellon University \\
+    \texttt{sukjunh@cs.cmu.edu} \\
+    \and
+    \textbf{Brandon Wang} \\
+    Cartesia AI\\
+    \texttt{brandon.wang@cartesia.ai}\\
+    \and
+    \textbf{Albert Gu} \\
+    Carnegie Mellon University, Cartesia AI\\
+    \texttt{agu@cs.cmu.edu}, \texttt{albert@cartesia.ai}\\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+\input{sections/0_abstract}
+\input{sections/1_introduction}
+\input{sections/2_method_v2}
+\input{sections/3_experiments}
+\input{sections/4_discussion}
+\input{sections/5_conclusion}
+\input{sections/6_acknowledgement}
+
+\clearpage
+
+\printbibliography
+
+
+
+\appendix
+\input{supplementary/supplementary}
+
+
+\end{document}

@@ -1,0 +1,23 @@
+%
+%
+
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Effect of Instruction Tuning.} We compare our final model with its instruction-tuned variant, both trained on a 4k context length. Including instruction tuning maintains performance on language tasks such as MMLU and results in considerable gains on 5-shot GSM8K with chain-of-thought, demonstrating the effectiveness of this training in performing complex reasoning.}
+\label{table:it-comp}
+
+
+\begin{tabular}{lcccccc}
+\toprule
+      Model & Params & Tokens &       \lowvar            &     \aggscore & MMLU & GSM8K\\
+
+\midrule
+
+    \hqpool &     7B &   2.5T &                  \textbf{56.0}  &          43.7 &          \textbf{63.9} & 2.1\\
+    
+        \hqpool-IT &     7B &   2.58T &          55.0  &       \textbf{46.5} &          62.9 & \textbf{52.5}  \\\bottomrule
+
+\end{tabular}
+
+\end{table}

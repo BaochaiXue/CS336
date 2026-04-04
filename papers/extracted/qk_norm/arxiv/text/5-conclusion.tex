@@ -1,0 +1,14 @@
+\section{Conclusion}
+\label{sec:conclusion}
+We presented \chonk, the currently largest  vision transformer model at 22 billion parameters.
+We show that with small, but critical changes to the original architecture, we can achieve both excellent hardware utilization and training stability, yielding a model that advances the SOTA on several benchmarks.
+In particular, great performance can be achieved using the frozen model to produce embeddings, and then training thin layers on top.
+Our evaluations further show that \chonk is more aligned with humans when it comes to shape and texture bias, and offers benefits in fairness and robustness, when compared to existing models.
+
+% What can we summarize in a paragraph for the final act. I suggest: great performance when frozen, fairness / human alignment / reliability.
+
+% To improve efficiency, we used parallel layers, asynchronous linear operations and omitted the biases for QKV projections and layer normalization, resulting in high hardware utilization of 54.86\%.
+% The use of QK normalization was essential for convergence.
+
+% In particular, \chonk achieves new state of the art results on multiple benchmarks for full fine-tuning or when used as frozen representation - LiT tuning, linear probing, Head2Toe. 
+% Distilling \chonk to ViT-B/16 and ViT-L/14 achieved new SOTA on Imagenet for the respective sizes.

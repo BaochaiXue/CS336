@@ -1,0 +1,19 @@
+\section{Related Work}
+
+Alignment techniques, particularly supervised fine-tuning~\citep{askell2021general,ouyang2022training}, have witnessed remarkable advancements in their ability to effectively leverage the knowledge within large models and enhance human interaction in natural language. The latest studies have predominantly concentrated on investigating alignment techniques in the creation of supervised instruction data~\citep{honovich2022unnatural} and different choices of large language models (e.g.,~\citep{touvron2023llama}). %\omer{I don't understand the second half of this sentence}\pfliu{rewording a little bit but feel free to make further edit}
+The commonality of these works lies in either using OpenAI products (e.g., ChatGPT)\footnote{\url{https://chat.openai.com/}} to \emph{distill} instructions~\citep{alpaca,vicuna2023} or using a large number of instructions for supervised fine-tuning~\citep{beeching2023stackllama,sun2023principledriven,openassistant}.
+For example, Alpaca~\citep{alpaca} underwent fine-tuning using 52,000 self-instructed instructions~\citep{wang2022selfinstruct}. 
+% In the case of Dolly~\cite{XX}, it was trained on approximately 15,000 pairs of instruction and response records provided by Databricks employees across various domains. 
+StackLLaMA~\citep{beeching2023stackllama}, on the other hand, relied on 10 million instructions from StackExchange and employed LLaMa 7B for training. OpenAssistant~\citep{openassistant} was trained using roughly 160,000 messages containing assistant-style conversations, which were both generated and annotated by humans.
+% Vicuna-13B~\cite{XX}, an open-source chatbot, utilized fine-tuning with LLaMA on 70,000 conversations contributed by ChatGPT users. 
+
+
+% \omer{We should call out distillation directly}\pfliu{fixed}
+
+% \omer{We're not comparing with all that stuff...} \pfliu{compress a little}
+
+In this paper, we are particularly concerned about the impact of data quality on fine-tuning, as well as how to manually construct high-quality data without relying on existing commercial products (e.g., ChatGPT) as assistance. This enables researchers to gain a more accurate understanding of alignment techniques through fine-tuning and efficiently find solutions in alignment applications in new scenarios.
+
+\omer{missing: constitutional} 
+% add unnatural self-*}
+

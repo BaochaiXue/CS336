@@ -1,0 +1,39 @@
+\section{\ours: Web Rephrase Augmented Pretraining}
+Generating synthetic data using an off-the-shelf language model can be both computationally expensive and operationally challenging. Prior approaches to generating synthetic textbook quality data using LLMs~\citep{gunasekar2023textbooks} required (1) a language model that contains sufficient world knowledge to generate articles worth training on, thereby increasing generation cost; (2) a careful selection of prompts that enable generating high quality, and diverse articles that fill any knowledge gaps in the synthetic corpus. This challenge was highlighted in follow-up work of \citet{li2023textbooks}, and has the potential of inadvertently creeping in biases in the language models~\citep{maini_phi_1_5}, as opposed to those trained on the natural diversity of the web.
+As a remedy to the challenge of (i) generation cost, and (ii) data diversity, we propose \ours~ that leverages the natural diversity of articles on the web, allowing us to utilize significantly smaller LLMs (than GPT-3.5) to generate high-quality paraphrases of noisy and unstructured articles on the web.
+
+\subsection{Rephrasing the Web}
+\label{sec:synthetic_data_generation}
+It has been observed in past work that up-weighting high-quality data, such as texts from Wikipedia, can be useful to improve language modeling. These terms have generally been very loosely defined and there is only anecdotal evidence of the same~\citep{brown2020language,wenzek-etal-2020-ccnet}. At the same time, web data is deficient of text in question-answering or conversational format, which is a prominent use case of language models. Based on these two insights, we design the rephrasing styles for our work.
+
+\paragraph{Rephrasing Styles}
+In lieu of the anecdotal evidence above, we attempt rephrasing documents on the web in four different styles---(i) Easy (text that even a toddler will understand); (ii) Medium (in high quality English such as that found on Wikipedia); (iii) Hard (in terse and abstruse language); (iv) Q/A (in conversation question-answering format). In order to operationalize rephrasing in these stylistic variations, we appropriately prompt an instruction-tuned model. The rephrased examples of these four styles and the prompts templates used in our work are provided in Appendix~\ref{app:prompt_styles}.
+
+\paragraph{Generating Synthetic Data}
+Now, we detail how we utilize an instruction-tuned language model to rephrase texts from web-crawled datasets such as C4~\citep{raffel2020exploring} (which we use for all our experiments). In particular, we use a frozen Mistral-7B instruction-tuned model~\citep{jiang2023mistral} (see Ablations in Section~\ref{sec:ablations} for other models).
+To generate synthetic data in ``medium'' style, the Mistral model is prompted using the following instruction: \emph{``For the following paragraph give me a paraphrase of the same in high-quality English language as in sentences on Wikipedia''}. The prompt was created using iterative human feedback by comparing outputs of `medium' sized LLMs with those of GPT-4.
+We use the model output to create a parallel corpus of ``high-quality'' synthetic data corresponding to the original noisy web data. Each example has a maximum of 300 tokens, which was decided based on our empirical observation that asking an LLM to rephrase more than 300 tokens, often led to loss of information. Discussions on data quality can be found in Section~\ref{sec:synth_properties}.
+ 
+
+
+
+\paragraph{Combining Real and Synthetic Data}
+Our method of re-phrasing web data naturally incorporates the information diversity found on the internet. However, it does not incorporate the noise 
+in real data. While synthetic data may help LLMs pre-train faster, we also want them to be able to understand noisy web text that may be filled with typos and linguistic errors so that the LLMs do not fail in user facing situations. In order to incorporate this style diversity in language modeling, we sample real and synthetic data in a 1:1 ratio. 
+
+
+\subsection{Implementation Details}
+\label{sec:implementation_details}
+\paragraph{Architecture}
+We train decoder-only transformer models ~\citep{vaswani2017attention} at three different scales, small, medium and XL. 
+The small-scale (128M parameter) model consists of 12 layers, 12 attention heads, and a hidden dimension size of 768.
+The medium-scale (350M parameter) model consists of 24 layers, 16 attention heads, and a hidden dimension size of 1024.
+The XL-scale (1.3B parameter) model consists of 24 layers, 16 attention heads, and a hidden dimension size of 2048.
+We do not use dropout in either model and a maximum sequence length of 1024. The models are trained using NVIDIA's \href{https://github.com/NVIDIA/Megatron-LM}{Megatron-LM} repository.
+
+\paragraph{Pre-training}
+We train all our XL models for a total of 300k steps with a batch size of one million tokens, unless otherwise specified.
+We use a maximum learning rate of $3e^{-4}$ for the 128M, and 350M parameter models, and $2e^{-4}$ for the 1.3B parameter model. The minimum learning rate is $1e^{-5}$.  We use a weight decay of $0.01$, along with a gradient clipping norm of $1.0$.
+We use cosine learning rate scheduler with a warmup for 1\% of the total steps;
+ and the Adam optimizer with $\beta_1=0.9$ and $\beta_2=0.999$.
+

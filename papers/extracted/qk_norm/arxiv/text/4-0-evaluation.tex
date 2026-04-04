@@ -1,0 +1,24 @@
+\section{Experiments}
+\label{sec:evaluation}
+%\todo{ALL: Preferably use \textbf{\chonk} (also ViT-e, ViT-G, ViT-g,...) everywhere in tables/figures. We can also use \chonk/14 (ViT-e/14, ViT-G/14, ViT-g/14, ViT-L/16...) if the patch-size is absolutely needed, and 22B, e, g, G, ... only if there is s shortage of space.}
+% I tried to go through the whole file and remove the /patch parts. Where it wasn't clear whether they are "absolutely needed" I tried to use "track changes" for someone else to agree.
+
+\subsection{Training details}
+\label{sec:training}
+\paragraph{Dataset.}
+\chonk is trained on a version of JFT~\citep{sun2017revisiting}, extended to around 4B images~\citep{zhai2022scaling}.
+These images have been semi-automatically annotated with a class-hierarchy of 30k labels.
+Following the original Vision Transformer, we flatten the hierarchical label structure and use all the assigned labels in a multi-label classification fashion employing the sigmoid cross-entropy loss.
+
+\paragraph{Hyperparameters.}
+\chonk was trained using 256 visual tokens per image, where each token represents a $14 \times 14$ patch extracted from $224 \times 224$ sized images. 
+\chonk is trained for 177k steps with batch size of 65k: approximately 3 epochs.
+We use a reciprocal square-root learning rate schedule with a peak of $10^{-3}$, and linear warmup (first 10k steps) and cooldown (last 30k steps) phases. For better few-shot adaptation, we use a higher weight decay on the head ($3.0$) than body ($0.03$) for upstream training~\citep{zhai2022scaling, abnar2021exploring}. 
+
+
+% Transfer
+\input{arxiv/text/4-1-eval_transfer_classification}
+\input{arxiv/text/4-2-eval_transfer_dense_prediction}
+\input{arxiv/text/4-3-eval_transfer_video}
+\input{arxiv/text/4-4-eval_beyond_accuracy}
+

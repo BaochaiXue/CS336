@@ -1,0 +1,205 @@
+\documentclass[numbers,sort&compress]{article}
+\usepackage[preprint]{neurips_2023}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality 
+\usepackage{natbib}         % supporting citet and citep
+\bibliographystyle{plainnat}
+
+\usepackage{multicol}
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}   
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{authblk}        % author block
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amssymb}        % more math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage{relsize}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{colortbl}
+
+
+\usepackage{fancyhdr}       % header
+\usepackage{graphicx}       % graphics
+\usepackage{caption} 
+\usepackage{float}
+\captionsetup[table]{skip=5pt}
+\graphicspath{{media/}}
+\renewcommand{\arraystretch}{1.2}
+
+
+\newcommand{\kai}[1]{\textcolor{red}{Kai: #1}}
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\xy}[1]{\textcolor{blue}{[Research Team] Xiang Yue: #1}}
+\newcommand{\alex}[1]{\textcolor{blue}{[Research Team] Alex: #1}}
+\newcommand{\yc}[1]{\textcolor{blue}{[Research Team] Yuchen: #1}}
+\newcommand{\yz}[1]{\textcolor{blue}{[Research Team] Yizhong: #1}}
+\newcommand{\qj}[1]{\textcolor{blue}{[Research Team] Qi Jia: #1}}
+\newcommand{\ty}[1]{\textcolor{blue}{[Research Team] Tianyu: #1}}
+\newcommand{\ww}[1]{\textcolor{blue}{[Research Team] Wenhao Wu: #1}}
+\newcommand{\jp}[1]{\textcolor{blue}{[Research Team] Junpeng: #1}}
+\newcommand{\yf}[1]{\textcolor{blue}{[Research Team] Yifan: #1}}
+\newcommand{\sy}[1]{\textcolor{blue}{[Research Team] Shuyue: #1}}
+\newcommand{\reed}[1]{\textcolor{red}{[Pretrain Team] Chao Li: #1}}
+\newcommand{\morry}[1]{\textcolor{red}{[Pretrain Team] Xinyao: #1}}
+\newcommand{\jc}[1]{\textcolor{red}{[Infra] JC: #1}}
+\newcommand{\eddy}[1]{\textcolor{blue}{[Research Team] Eddy: #1}}
+\newcommand{\wy}[1]{\textcolor{blue}{[Research Team] Wang Yue: #1}}
+\newcommand{\dx}[1]{\textcolor{blue}{[Research Team] Dongxu: #1}}
+
+\newcommand{\gmidrule}{\arrayrulecolor{gray!50}\midrule\arrayrulecolor{black}}
+
+%% Title
+\title{Yi: Open Foundation Models by 01.AI }
+
+\author{
+  % Chao Li, Chengen Huang, Edward Yeo, Ge Zhang, Guanwei Zhang, Heng Li, Jiangcheng Zhu, Jianqun Chen, Jing Chang, 
+  % Kaidong Yu, Peng Liu, Qiang Liu, Senbin Yang, Tao Yu, Wen Xie, Wenhao Huang, Xiaohui Hu, Xiaoyi Ren, Xinyao Niu, 
+  % Yuanfeng(Pengcheng Nie), Yuchi Xu, Alex Fu, Zhenyu Gu, Zhiyuan Liu, Zonghong Dai
+  % \thanks{Authors contributed equally to this work. The author names are sorted in alphabetic order.} \\
+  \textbf{01.AI} \\
+  \; \\ 
+  \textbf{Code:}\; \url{https://github.com/01-ai/Yi}\\
+  \textbf{Model:}\; \url{https://huggingface.co/01-ai} \\
+  % \textbf{Product Beta (ZH)}\; \url{https://www.wanzhi01.com} \\
+}
+\begin{document}
+\maketitle
+
+% \arrayrulecolor{gray!50}
+
+% \alex{I have the following suggestions in general: (1). we may want to clearly differentiate ``implement'' a technique v.s. ``use'' a technique. ``Implement'' means the technique is \textit{not} in the existing library, and we write code for it, consequently we get the credit. ``Use'' means the technique is \textit{already} in the existing library, and we simply use it by setting up the config. When we say we ``use'' a technique, the credit belongs to the original author, but not us. For example, we \textit{implement} the most part of our data processing pipeline (so the credit belongs to us),  but we \textit{use} tensor parallelism in megatron (so the credit belongs to megatron, not us). We \textit{use} the classical transformer architecture (so the credit belongs to the transformer authors, not llama), and we \textit{use} simialr model config as LLaMA (so the LLaMA team takes the credit of config, but not model architecture.)}
+
+% \alex{(2). currently in many parts of the paper, I cannot differetiate which part is our implementation, and which part is existing work. Also I see the mixed usage of ``implement'' v.s. ``use'' in multiple places, e.g., ``we implement tensor parallelism'', but actually tensor parallelism is implemented by megatron, not us. We would like to be extremely careful about these word choices because we want to avoid criticisms about over-claiming or stealing credit}
+
+% \alex{(3). when it comes to model performance, I would suggest to consistently use the phrase ``\textit{Yi-34B is on par with GPT-3.5}'' as it has multiple indications: (1) it is already a significantly achievement given the short development period of Yi, and we really want to lock it; 
+% (2). whenever researchers, developers and larger community member think about a model matching GPT-3.5, we would like to make sure that Yi-34B is the fisrt model they recall;
+% (3). it also strongly implies that in the very near future, we can match GPT-4. 
+% }
+
+
+\begin{abstract}
+% In this work, we introduce Yi-34B and Yi-6B, the first release of our LLM series, trained on 3T \reed{3.1T} tokens of English and Chinese corpora. Yi models consistently demonstrate superior performance on a wide range of tasks, including question answering, reasoning, coding, and mathematics. \qj{QA is a kind of NLP task format, while the others are task purpose.} Yi-34B outperforms multiple open-source models in various larger sizes such as LLaMA2-70B and Falcon-180B in reasoning, comprehension, and general abilities. \yz{The last two sentences are a bit redundant.}
+% We also released our chat model, the Yi-34B-Chat, which has shown the leading performance among open-source models and also delivers a performance close to GPT3.5.
+% All the models are released under the Apache 2.0 license \yz{probably highlight it can be used for commercial?}.  \\
+
+% 
+% \blue{[Re-write by Alex and Yizhong]}
+We introduce the Yi model family, a series of language and multimodal models that demonstrate strong multi-dimensional capabilities. 
+The Yi model family is based on 6B and 34B pretrained language models, then we extend them to chat models, 200K long context models, depth-upscaled models, and vision-language models. 
+Our base models achieve strong performance on a wide range of benchmarks like MMLU, 
+and our finetuned chat models deliver strong human preference rate on major evaluation platforms like AlpacaEval and Chatbot Arena.
+% Our two base models outperform state-of-the-art open language models of similar or even larger sizes on a wide range of benchmarks, and our finetuned Yi-34B-chat delivers close to ChatGPT-3.5 user preference rate.
+Building upon our scalable super-computing infrastructure and the classical transformer architecture, 
+% \eddy{Would it make sense to mention Llama here? I realize it is discussed in the Model Architecture section, but maybe for the avoidance of doubt?}, 
+% \alex{Maybe not. LLaMA also uses classical transformer architecture. A general strategy I would suggest is to appropriately acknowledge LLaMA but keep its influence minimal.}
+we attribute the performance of Yi models primarily to its data quality resulting from our data-engineering efforts. 
+For pretraining, we construct 3.1 trillion tokens of English and Chinese corpora using a cascaded data deduplication and quality filtering  pipeline. 
+For finetuning, we polish a small scale (less than 10K) instruction dataset over multiple iterations such that every single instance has been verified directly by our machine learning engineers.
+For vision-language, we combine the chat language model with a vision transformer encoder and train the model to align visual representations to the semantic space of the language model. 
+We further extend the context length to 200K through lightweight continual pretraining and demonstrate strong needle-in-a-haystack retrieval performance. 
+We show that extending the depth of the pretrained checkpoint through continual pretraining further improves performance. 
+% Finally, we give a preview of the ongoing Yi-Medium model performance. 
+We believe that given our current results, continuing to scale up model parameters using thoroughly optimized data will lead to even stronger frontier models.
+
+% \textbf{Code:}\url{https://github.com/01-ai/Yi}\\
+% \textbf{Model:}\url{https://huggingface.co/01-ai/Yi-34B} \url{https://huggingface.co/01-ai/Yi-34B-Chat}\\
+\end{abstract}
+
+
+% \keywords{First keyword \and Second keyword \and More}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+\input{010_intro}
+
+
+% \section{Scaling Law Experiments}
+
+% \begin{equation}
+% \hat{L}(N, D) \triangleq E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}
+% \end{equation}
+
+% See Figure \ref{fig:fig1} as an example to insert images.
+
+\section{Pretraining}
+\label{sec:pretrain}
+\input{020_pretraining}
+
+
+\section{Finetuning}
+\label{sec:finetuning}
+\input{030_finetuning}
+
+\section{Infrastructure}
+\label{sec:infra}
+\input{040_infra}
+
+\section{Safety}
+\label{sec:safety}
+\input{031_safety}
+
+\section{Evaluations}
+\label{sec:evaluations}
+\input{050_eval}
+
+
+\section{Capability Extension}
+In this section, we discuss our post-training methods to extend the Yi base model to 200K long-context, equip it with visual understanding capability, and enhance the 6B model by depth upsacaling.
+
+
+\subsection{Long Context Modeling}
+\label{sec:long_context}
+\input{021_long_context}
+
+\subsection{Vision-Language}
+\label{sec:vision_language}
+\input{022_vision_language}
+
+\subsection{Depth Upscaling}
+\label{sec:depth_upscaling}
+\input{023_depth_upscaling}
+
+
+% \section{In-Depth Study}
+% \label{sec:in_depth}
+% \input{060_in_depth_study}
+
+% \section{Yi-Medium Tech Preview}
+% \label{sec:yi_medium}
+% \input{061_yi_medium}
+
+\section{Final Discussions}
+\label{sec:conclusion}
+\input{070_conclusion}
+
+\newpage
+\appendix
+
+\section{Author List and Contributions}
+\input{app_author_list}
+
+% \section{Detailed Experimental Results}
+% \input{app_more_exp}
+
+\clearpage
+\bibliography{references}  
+
+
+\end{document}

@@ -1,0 +1,27 @@
+\section{Introduction}
+
+Language models are pretrained to predict the next token at an incredible scale, allowing them to learn general-purpose representations that can be transferred to nearly any language understanding or generation task. 
+To enable this transfer, various methods for \textit{aligning} language models have thus been proposed, primarily focusing on \textit{instruction tuning} \citep{mishra2021natural, weifinetuned, sanh2022multitask} over large multi-million-example datasets \citep{chung2022scaling, beeching2023stackllama, openassistant}, and more recently \textit{reinforcement learning from human feedback} (RLHF)~\citep{bai2022training, ouyang2022training}, collected over millions of interactions with human annotators.
+Existing alignment methods require significant amounts of compute and specialized data to achieve ChatGPT-level performance.
+However, we demonstrate that, given a strong pretrained language model, remarkably strong performance can be achieved by simply fine-tuning on 1,000 carefully curated training examples.
+
+We hypothesize that alignment can be a simple process where the model learns the style or format for interacting with users, to expose the knowledge and capabilities that were already acquired during pretraining.
+To test this hypothesis, we curate 1,000 examples that approximate real user prompts and high-quality responses.
+We select 750 top questions and answers from community forums, such as Stack Exchange and wikiHow, sampling for quality and diversity.
+In addition, we manually write 250 examples of prompts and responses, while optimizing for task diversity and emphasizing a uniform response style in the spirit of an AI assistant.
+Finally, we train LIMA, a pretrained 65B-parameter LLaMa model~\citep{touvron2023llama} fine-tuned on this set of 1,000 demonstrations.
+%\footnote{We publicly release all training and test data at: \url{https://...} \omer{URL}}
+
+We compare LIMA to state-of-the-art language models and products across 300 challenging test prompts.
+In a human preference study, we find that LIMA outperforms RLHF-trained DaVinci003 from OpenAI, which was trained with RLHF, as well as a 65B-parameter reproduction of Alpaca
+~\citep{alpaca}, which was trained on 52,000 examples.
+While humans typically prefer responses from GPT-4, Claude, and Bard over LIMA, this is not always the case; LIMA produces equal or preferrable responses in 43\%, 46\%, and 58\% of the cases, respectively.
+Repeating the human preference annotations with GPT-4 as the annotator corroborates our findings.
+Analyzing LIMA responses on an absolute scale reveals that 88\% meet the prompt requirements, and 50\% are considered excellent.
+
+Ablation experiments reveal vastly diminishing returns when scaling up data quantity without also scaling up prompt diversity, alongside major gains when optimizing data quality.
+In addition, despite having zero dialogue examples, we find that LIMA can conduct coherent multi-turn dialogue, and that this ability can be dramatically improved by adding only 30 hand-crafted dialogue chains to the training set.
+Overall, these remarkable findings demonstrate the power of pretraining and its relative importance over large-scale instruction tuning and reinforcement learning approaches.
+
+
+

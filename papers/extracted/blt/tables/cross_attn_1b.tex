@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}cccrrrr@{}}
+\toprule
+ &  & &  \multicolumn{4}{c}{BPB}  \\
+ \cmidrule(lr){4-7} 
+Cross Attn. Dec. & Cross Attn. Enc. & Pooling Init &  Wikipedia &    CC &  Github &  Train Dist \\
+\midrule
+               - &       All Layers &        False &      0.830 & 0.915 &   \textbf{0.442} &       0.891 \\
+               - &       Last Layer &        False &      0.836 & 0.906 &   0.447 &       0.886 \\
+               - &                - &            - &      0.833 & 0.892 &   0.446 &       0.866 \\
+     First Layer &       Last Layer &         True &      0.825 & 0.883 &   0.443 &       0.861 \\
+      All Layers &       Last Layer &         True &      \textbf{0.823} & 0.871 &   0.443 &       0.846 \\
+      All Layers &       All Layers &         True &      0.828 & \textbf{0.868} &   0.443 &       \textbf{0.844} \\
+\bottomrule
+\end{tabular}
+\caption{Ablations on the use of Cross Attention for a 1B \model{} model trained on 100B bytes. We report bits-per-byte (bpb) on different datasets. We also report bpb on a random sample of the training data (denoted as Train Dist.) The Cross Attn. Enc. and Dec. columns denote which transformer layers the cross-attention block is applied after (or before for the decoder) in the local encoder and decoder respectively.
+}
+\label{tab:crossattn_ablations_1b}
+\end{table}

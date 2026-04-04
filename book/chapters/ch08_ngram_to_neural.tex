@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Construct an $n$-gram language model and explain its fundamental limitations (the curse of dimensionality).
+  \item Describe how continuous vector embeddings solve the data sparsity problem.
+  \item Formulate a simple Neural Probabilistic Language Model (NPLM).
+  \item Understand why recurrent neural networks (RNNs) failed to scale for long context lengths.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +16,134 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:08:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Before Transformers dominated NLP, the field progressed through two distinct epochs: the $n$-gram era and the early neural era. This chapter covers both, not just for historical context, but because understanding \emph{why} these older methods failed provides the precise motivation for the mathematical structure of the Transformer.
+
+The $n$-gram method represents language as exact counts of discrete sequences. It is simple and fast, but it suffers from the ``curse of dimensionality''---it cannot generalize to sequences it has never seen before. The first neural language models fixed this by embedding discrete tokens into a continuous vector space, allowing them to generalize based on geometric similarity. However, their architectures (feed-forward or recurrent) struggled to efficiently route information across long distances. This sets the stage appropriately for Chapter~9, where we introduce the attention mechanism.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:08:sec:setup}
 
-TODO: Define notation and state assumptions.
+Recall the language modeling problem from Chapter~6: we want to estimate $P(x_t \mid x_{<t})$.
+Let $C(w_1, \dots, w_k)$ denote the number of times the exact sequence of tokens $(w_1, \dots, w_k)$ appears in our training corpus.
+
+We map each token $x_i \in \vocab$ to an integer index $v \in \{1, \dots, V\}$. A \textbf{one-hot vector} $\ve_v \in \{0,1\}^V$ is a vector where the $v$-th element is 1 and all other elements are 0.
+
+An \textbf{embedding matrix} $\vW_E \in \R^{V \times d}$ maps tokens to continuous vectors in $d$-dimensional space. The embedding for token $v$ is exactly the $v$-th row of $\vW_E$, which can be mathematically written as $\vx = \ve_v^\T \vW_E \in \R^d$.
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{The $N$-Gram Language Model}
 \label{ch:08:sec:main}
 
-TODO: Core technical content.
+An $n$-gram model makes a simplifying Markov assumption: the probability of the next token depends \emph{only} on the preceding $n-1$ tokens.
+\begin{equation}
+P(x_t \mid x_1, \dots, x_{t-1}) \approx P(x_t \mid x_{t-n+1}, \dots, x_{t-1}).
+\end{equation}
+
+To estimate this probability, we use maximum likelihood estimation based on counts:
+\begin{equation}
+P_{\text{MLE}}(x_t = v \mid x_{t-n+1}, \dots, x_{t-1}) = \frac{C(x_{t-n+1}, \dots, x_{t-1}, v)}{C(x_{t-n+1}, \dots, x_{t-1})}.
+\end{equation}
+
+\subsection{The Curse of Dimensionality}
+
+Suppose we build a 5-gram model over a vocabulary of $V = 50,000$. There are $V^4 = 6.25 \times 10^{18}$ possible histories of length 4. Even a massive corpus like Common Crawl (trillions of tokens) will not contain the vast majority of these histories. 
+
+If we encounter a history $h$ that never appeared in the training set, $C(h) = 0$, and the probability is undefined. If we encounter a history that appeared, but a valid next word never followed it in the training set, $P_{\text{MLE}} = 0$, resulting in infinite cross-entropy (-$\log 0 = \infty$). 
+
+To fix this, $n$-gram models use \textbf{smoothing} (e.g., Kneser-Ney), which falls back to lower-order models (4-grams, then 3-grams) when data is sparse. But smoothing does not solve the fundamental flaw: $n$-gram models treat tokens as atomic symbols. They do not know that ``cat'' and ``dog'' are similar. If a model learns that ``A dog is sleeping in the \_\_\_'' predicts ``bed'', it cannot generalize this to ``A cat is sleeping in the \_\_\_'' unless that exact 6-gram also appeared.
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Trigram Calculation}
 \label{ch:08:sec:example}
 
-TODO: Complete worked example.
+Suppose our corpus is exactly the following three sentences:
+\begin{itemize}
+    \item \texttt{<s> i love deep learning </s>}
+    \item \texttt{<s> i love machine learning </s>}
+    \item \texttt{<s> cats love deep sleeping </s>}
+\end{itemize}
+
+We want to build a trigram ($n=3$) model and compute the probability of ``\texttt{learning}'' given the history ``\texttt{love deep}''.
+
+1. Count the history: $C(\texttt{love}, \texttt{deep}) = 2$.
+2. Count the full trigram: $C(\texttt{love}, \texttt{deep}, \texttt{learning}) = 1$.
+3. Compute MLE:
+\begin{equation}
+    P_{\text{MLE}}(\texttt{learning} \mid \texttt{love}, \texttt{deep}) = \frac{1}{2} = 0.5.
+\end{equation}
+
+Now, compute the probability of ``\texttt{learning}'' given ``\texttt{love machine}'':
+1. $C(\texttt{love}, \texttt{machine}) = 1$.
+2. $C(\texttt{love}, \texttt{machine}, \texttt{learning}) = 1$.
+3. $P_{\text{MLE}} = \frac{1}{1} = 1.0$.
+
+\section{The Neural Probabilistic Language Model (NPLM)}
+
+In 2003, Bengio et al. proposed a solution to the curse of dimensionality: represent each token as a continuous vector. If the vectors for ``cat'' and ``dog'' are close in the $d$-dimensional space, the neural network's smooth prediction function will automatically assign similar probabilities to contexts involving them.
+
+A classic window-based neural language model computes $P(x_t \mid x_{t-n+1}, \dots, x_{t-1})$ via three steps:
+\begin{enumerate}
+    \item \textbf{Embed}: Look up the vector for each of the $n-1$ context tokens.
+    \item \textbf{Concatenate}: Flatten these vectors into a single vector $\vh_{\text{in}} \in \R^{(n-1)d}$.
+    \item \textbf{Project}: Pass $\vh_{\text{in}}$ through a multi-layer perceptron (MLP) to get a hidden state, then project it to the vocabulary size to get \textbf{logits} $\vz \in \R^V$.
+    \item \textbf{Softmax}: Convert logits to probabilities.
+\end{enumerate}
+
+\begin{equation}
+\label{eq:08:softmax}
+P(x_t = v \mid \text{context}) = \softmax(\vz)_v = \frac{\exp(z_v)}{\sum_{k=1}^V \exp(z_k)}.
+\end{equation}
+
+\section{The Recurrent Era and Its Failure Modes}
+
+Window-based feed-forward neural networks still suffer from a fixed context window $n$. To allow infinite context, researchers turned to Recurrent Neural Networks (RNNs) and their variants (LSTMs, GRUs). In an RNN, the hidden state at time $t$ depends on the input at time $t$ and the hidden state at time $t-1$:
+\begin{equation}
+\vh_t = f(\vW_x \vx_t + \vW_h \vh_{t-1} + \mathbf{b}).
+\end{equation}
+
+\textbf{Why did RNNs lose to Transformers?}
+\begin{enumerate}
+    \item \textbf{Vanishing Gradients}: Gradients must flow backwards through time (BPTT). Over hundreds of steps, the repeated multiplication by the recurrent weight matrix $\vW_h$ causes gradients to vanish or explode, making it impossible to learn long-term dependencies.
+    \item \textbf{State Bottleneck}: The entire history of the sequence must be compressed into a single, fixed-size vector $\vh_t$. If the sequence is 10,000 tokens long, $\vh_t$ struggles to remember the first 100 tokens.
+    \item \textbf{Lack of Parallelism}: To compute $\vh_t$, you strictly must compute $\vh_{t-1}$ first. This serial dependency makes RNNs fundamentally hostile to GPU hardware, which excels at doing thousands of operations simultaneously. During training, we know the whole sequence, but an RNN still forces us to process it sequentially.
+\end{enumerate}
+
+These three flaws---vanishing gradients, state bottlenecks, and serial execution---are exactly the problems the Transformer's attention mechanism solves.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:08:sec:systems}
 
-TODO: Implementation and performance implications.
+The transition from $n$-grams to neural models shifted NLP from memory-bound table lookups to compute-bound dense linear algebra.
+
+\begin{itemize}
+    \item \textbf{Embedding tables} are sparse lookups. We do not actually multiply $\ve_v^\T \vW_E$ (which is mostly zeros), we simply index into the $v$-th row in PyTorch using `nn.Embedding`.
+    \item \textbf{The Softmax Bottleneck}: The final projection matrix $\vW_{\text{out}} \in \R^{d \times V}$ is massive. If $d=4096$ and $V=100,000$, computing the logits takes a huge number of FLOPs. The softmax operation itself requires calculating the sum of exponentials across the entire vocabulary $V$ for every batch item and token position. Early NPLMs used approximations like hierarchical softmax or negative sampling to avoid computing the full denominator, but modern hardware is fast enough that we simply compute the full softmax.
+\end{itemize}
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Population Coding and Embeddings}
   \paragraph{Where the analogy helps.}
-  TODO
+  How does the brain represent the concept of ``apple''? It is not a single ``apple neuron'' firing (a one-hot encoding). Instead, it is a pattern of activation across millions of neurons (a distributed representation). If you see a pear, the neural pattern will be highly overlapping with the apple pattern. This is precisely how continuous vector embeddings work in neural networks: similar concepts map to vectors with high cosine similarity.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Neural networks use dense float vectors where every dimension participates in every concept. The brain uses sparse coding---only a small, specialized subset of neurons fires for any given stimulus, which is vastly more energy efficient.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Moving from distinct $n$-gram symbols to continuous vectors enables generalization. A model learns about a new word simply by mapping its vector near the vectors of similar words it already knows.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:08:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``Embeddings are fixed mappings from words to meaning.''} While Word2Vec embeddings were static, modern language models compute contextual embeddings. The vector for ``bank'' in ``river bank'' is entirely different from ``bank'' in ``bank account'' in the deeper layers of a modern model, though the initial lookup vector is the same.
+  \item \textbf{``RNNs failed because they couldn't model language.''} RNNs and LSTMs were highly successful language models. They failed because they could not scale on GPU hardware. The Transformer won not because it has a better linguistic inductive bias, but because it is massively parallelizable, allowing us to train on exponentially more data.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,30 +151,31 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item In a 4-gram model over a vocabulary of 10,000, how many possible 4-grams exist? 
+  \item If an embedding matrix is $100,000 \times 4096$ using 16-bit floats (2 bytes per number), how much memory does it consume?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Prove mathematically why repeatedly multiplying a vector by a matrix $\vW$ (as in a simplified RNN $\vh_t = \vW \vh_{t-1}$) whose largest eigenvalue is less than 1 leads to exponentially decaying gradients (the vanishing gradient problem).
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Write a PyTorch class `SimpleNPLM` that inherits from `nn.Module`. It should take a sequence of $(n-1)$ integer tokens, map them through an `nn.Embedding`, concatenate them, pass them through a linear layer and a ReLU, and finally output logits over the vocabulary.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item If RNNs suffered from a state bottleneck (compressing all history into one vector), how do you think modern architectures like the Transformer solve this? (Preview your intuition before Chapter 9).
 \end{enumerate}
+
 
 % ─── Further Reading ───
 \section{Further Reading}
 \label{ch:08:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{bengio2003}: A Neural Probabilistic Language Model. Introduces word embeddings and the neural approach to curing the curse of dimensionality.
+  \item \textcite{mikolov2013}: Efficient Estimation of Word Representations in Vector Space (Word2Vec). A milestone paper explaining the geometric properties of word embeddings.
 \end{itemize}

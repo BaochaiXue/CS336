@@ -1,0 +1,73 @@
+\section{Plex}
+\label{app:plex}
+
+\subsection{Details about the evaluation}
+
+We start by providing some details about the datasets and the different evaluation protocols based on \citet{djolonga2020robustness}.
+
+\paragraph{ImageNet-C~\citep{hendrycks2019benchmarking}.} This variant of the ImageNet dataset contains algorithmically generated corruptions (e.g., blur and noise) applied to the ImageNet test-set. The results that we report in the paper are averaged over the 16 corruptions and over their 5 different intensity levels.
+
+\paragraph{OOD detection~\citep{hendrycks2019scaling,fort2021exploring}.} In this task, we try to classify whether a given test point belongs to the in-distribution dataset (in our case, ImageNet) or an out-of-distribution dataset (following \citet{hendrycks2019scaling, tran2022plex}, we take Places365 which consists of about 1.8 million images from 365 scene categories, where there are at most 5000 images per category~\citep{zhou2017places}).
+
+To perform the detection, we use the maximum softmax probability (MSP)~\citep{hendrycks2019scaling, tran2022plex}. We evaluate the performance of the resulting binary classification task thanks to the AUROC and AUPRC.
+
+\paragraph{Selective prediction.}
+In this task, a model may defer its predictions to human experts when it is not confident enough.
+In particular, this task jointly assesses a model’s predictive performance and quality of
+uncertainty estimates~\citep{el2010foundations}. 
+Following \citet{tran2022plex}, we measure the performance with the oracle collaborative AUC~\citep{kivlichan2021measuring}, with a review fraction of 0.5\% of all predictions.
+
+\paragraph{Label uncertainty.} For this evaluation, we aim at demonstrating the ability of the model to capture the inherent ambiguity of image labels assigned by humans. Following \citet{tran2022plex}, we focus on the ImageNet ReaL-H dataset that exploits the human ratings from \citet{beyer2020we} to construct a label
+distribution representing rater uncertainty for each image. The performance is measured by the negative log likelihood computed with respect to the soft labels (i.e., vectors in the simplex as opposed to the usual one-hot vectors).
+
+\subsection{Details about the Plex architecture}
+
+Plex~\citep{tran2022plex} calls for BatchEnsemble layers~\citep{wen2019batchensemble} to be added
+in
+the model architecture during both pre-training and fine-tuning.\footnote{In \citet{tran2022plex}, the BatchEnsemble layers are added only to a few of the last layers of the encoder in order to reduce the computational and memory cost. The efficient implementation of ViT-22B constrains us to apply BatchEnsemble layers \textit{throughout} the network.} Due to the high cost of training ViT-22B, we add the BatchEnsemble layers during the fine-tuning stage only. We replace all \texttt{Dense} layers in the ViT-22B, except for the \texttt{Dense} layer in the MLP layer for the pooling head with BatchEnsemble layers. \citet{tran2022plex} further suggest to replace the final \texttt{Dense} layer of the network with a heteroscedastic output head~\citep{collier2021correlated}. We thus follow this approach and evaluate both a heteroscedastic and BatchEnsemble final layer.
+
+\subsection{Details about the hyperparameters}
+
+All models were fine-tuned on ImageNet with a batch size 512. We swept over fine-tuning for 20k or 40k steps and learning rates of 0.01 and 0.03, with Plex models performing better at 40k fine-tuning steps---as already observed by \citet{tran2022plex}---and learning rate of 0.03. Two BatchEnsemble members were used, with a random sign initialization in the BatchEnsemble layer of -0.5.
+
+For the experiments with a heteroscedastic output layer, 1k MC samples were used and the low-rank component of the covariance matrix employed 15 factors. Furthermore, we report results for a temperature parameter of 5 (after a hyperparameter search over the [0.5, 10] range).
+
+Unlike most of the models in the rest of the paper, the models of this section are fine tuned with a \texttt{softmax} loss function. We do so to be consistent with the design choices of \citet{tran2022plex} and because a distribution normalised across the classes is required by several of the metrics employed (e.g., ECE). 
+
+\subsection{Results of Plex-22B and challenges}
+
+In \cref{tab:full_plex}, we report the results of ViT-L/32, Plex-L/32, ViT-22B and the extensions of Plex to the 22B scale, Plex-22B, with the BatchEnsemble (BE) and heteroscedastic (HET) heads. All the models are fine tuned with a resolution of 384. 
+
+The main observation is that the increased scale of ViT-22B comes with substantial improvements across all metrics, except for the label uncertainty over ImageNet-ReaL-H.
+
+More surprisingly, we can see that across all metrics (except for the label uncertainty over ImageNet-ReaL-H), the Plex-22B variants perform worse than the vanilla ViT-22B model. This observation does not extend the findings from \citet{tran2022plex} where Plex consistently leads to improvement at the S, B and L scales.
+
+We believe that this surprising observation may be related to specific challenges faced at the 22B scale:
+\begin{itemize}
+    \item \textbf{Pre-training vs.~fine-tuning}: While \citet{tran2022plex} introduce BatchEnsemble layers already at pre-training time, the high training cost of ViT-22B forces us to only operate at fine-tuning time. In this regime, it may not be possible to properly learn the BatchEnsemble and heteroscedastic layers. 
+    Moreover, while fine-tuning with standard ViT backbones enjoys a well-performing and robust recipe, namely  initializing the final \texttt{Dense} layer kernel to all zeros, we do not have an equivalent approach when adding the Plex components. 
+    \item \textbf{Hyperparameter tuning}: Even though we already covered a reasonable combination of hyperparameters (fine-tuning duration, learning rate and temperature), it is possible that a finer-grained search is required to close the performance gap.
+    \item \textbf{Numerical stability}: As discussed in \cref{sec:model_architecture}, it was required to use particular techniques to stabilize the training of ViT-22B. We hypothesise that similar techniques may have to be developed specifically for the Plex components (BatchEnsemble and heteroscedastic layers) to keep their efficiency at this scale.
+\end{itemize}
+
+
+\begin{table}[t]
+    \caption{Evaluation on some representative metrics from the Plex reliability benchmark~\citep{tran2022plex}.}
+\centering
+  \setlength{\tabcolsep}{4pt}
+  \resizebox{0.8\columnwidth}{!}{%
+    \begin{tabular}{@{} l @{} c ccc c ccc cc @{}}
+      \toprule
+       && \multicolumn{4}{c}{IN-C (mean over shifts)} && \multicolumn{2}{c}{IN vs.~Places365} && \multicolumn{1}{c}{IN-ReaL-H} \\
+\cmidrule{3-6}\cmidrule{8-9}\cmidrule{11-11}
+	      Metrics && ACC $\uparrow$ & NLL $\downarrow$ & ECE $\downarrow$ & OC-AUC $\uparrow$ && AUROC $\uparrow$ & AUPRC $\uparrow$ && NLL $\downarrow$ \\
+      \midrule
+      ViT-L/32~\citep{tran2022plex} &&  70.1 & 1.28 &  0.05 & 0.91 && 0.83 &  0.96 && 1.09 \\
+      Plex-L/32~\citep{tran2022plex} &&  71.3 & 1.21 & 0.02 &  0.91 && 0.83 &  0.97 && 1.03\\
+      ViT-22B && 83.7 & 0.63 &  0.01 & 0.97 && 0.88 &  0.98  && 1.21\\
+      Plex-22B [BE] && 81.0 &     0.98 &     0.18 & 0.95 && 0.86 &  0.98 && 0.94\\
+      Plex-22B [HET] && 80.9 & 0.97 & 0.17 & 0.94 && 0.86 & 0.97 &&  0.93 \\
+      \bottomrule
+ \end{tabular}}
+    \label{tab:full_plex}
+\end{table}

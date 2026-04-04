@@ -1,0 +1,45 @@
+\begin{table}[t!]
+\caption{
+\textbf{Zero-shot performance comparison across multiple benchmarks, all data-/FLOP-matched.}
+Evaluation results on seven downstream tasks at both Large (760M) and XL (1.3B) scales.
+\textsc{GFLOPs/Byte} is measured during evaluation on FineWeb-Edu validation set.
+See \cref{tab: architecture} for architectural details.
+}
+\centering
+\small
+\resizebox{\linewidth}{!}
+{ 
+\begin{tabular}{lcccccccccccc} 
+\toprule
+\multirow{2}{*}{\textsc{Model}} & \multirow{2}{*}{\textsc{Input}} & \textsc{GFLOPs/} & \textsc{F-Edu} & \textsc{LMB.} & \textsc{Hella.} & \textsc{PIQA} & \textsc{ARC-e} & \textsc{ARC-c} & \textsc{Wino.} & \textsc{Open.} & \textsc{Average} \\
+& & \textsc{Byte} & \textsc{bpb} $\downarrow$ & \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ \\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{Large}}}\\
+\cellcolor{Gray7!20}{Transformer} & Token & 0.42 & 0.756 & 45.0 & 54.5 & \second{72.3} & \second{69.9} & \second{36.3} & 55.9 & 38.8 & 53.3\\
+\addlinespace[-0.15em]
+\cmidrule{1-12}
+\addlinespace[-0.25em]
+\cellcolor{Grape7!10}{LlamaByte} & & 0.42 & 0.859 & 37.0 & 40.5 & 64.7 & 55.1 & 26.7 & 52.3 & 32.4 & 44.1\\
+\cellcolor{Grape7!10}{LlamaByte (Global)} & & 0.95 & 0.845 & 36.4 & 41.5 & 65.7 & 57.2 & 27.1 & 49.8 & 32.2 & 44.3\\
+\cellcolor{Blue7!10}{MambaByte} & & 0.42 & 0.845 & 32.9 & 42.0 & 66.2 & 55.9 & 28.1 & 51.7 & 33.2 & 44.3\\
+\cellcolor{Cyan7!10}{SpaceByte} & & 0.41 & 0.791 & 43.0 & 49.0 & 69.0 & 63.3 & 33.5 & 53.3 & 35.0 & 49.4 \\
+\cellcolor{Cyan7!10}{SpaceByte++} & Byte & 0.42 & 0.760 & \best{48.0} & 55.7 & 71.3 & 67.9 & 35.4 & 57.5 & 39.6 & \second{53.6}\\
+\cellcolor{Green7!10}{H-Net (pool)} & & 0.42 & 0.780 & 43.2 & 54.7 & 69.7 & 67.9 & 34.7 & 54.8 & 36.4 & 51.6\\
+\cellcolor{Green7!10}{H-Net (space)} & & 0.42 & \second{0.755} & 46.7 & \second{55.9} & \best{72.4} & 68.8 & 34.6 & 57.6 & 38.0 & 53.4\\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & & 0.43 & \second{0.755} & 46.2 & 55.5 & 71.0 & 68.1 & 35.6 & \second{58.6} & \second{40.0} & \second{53.6}\\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & 0.43 & \best{0.743} & \second{46.9} & \best{57.4} & 72.0 & \best{71.7} & \best{39.2} & \best{60.4} & \best{40.6} & \best{55.5} \\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{XL}}}\\
+\cellcolor{Gray7!20}{Transformer} & Token & 0.69 & 0.730 & 48.1 & 58.0 & 73.1 & 72.2 & 37.5 & 58.6 & 40.8 & 55.5 \\
+\addlinespace[-0.15em]
+\cmidrule{1-12}
+\addlinespace[-0.25em]
+\cellcolor{Cyan7!10}{SpaceByte++} & & 0.72 & 0.733 & \best{51.3} & 60.1 & 72.4 & 71.8 & 38.0 & 58.5 & 40.6 & 56.1\\
+\cellcolor{Green7!10}{H-Net (space)} & & 0.70 & \second{0.726} & 50.3 & \second{61.5} & \second{73.6} & 72.4 & \second{40.2} & \second{60.2} & 41.8 & \second{57.1} \\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & \multirow{-2}{*}{Byte} & 0.72 & 0.728 & 48.4 & 59.5 & 72.4 & \second{73.0} & 38.3 & 59.2 & \second{42.4} & 56.2 \\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & 0.69 & \best{0.715} & \second{50.5} & \best{62.2} & \best{73.7} & \best{74.2} & \best{42.2} & \best{60.5} & \best{44.0} & \best{58.2} \\
+\bottomrule
+\end{tabular}
+} 
+\label{tab: main}
+\end{table}

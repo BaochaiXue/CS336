@@ -1,0 +1,367 @@
+\contentsline {chapter}{Preface}{iii}{chapter*.1}%
+\contentsline {part}{I\hspace {1em}Orientation and Prerequisites}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}How to Use This Book}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}The ``From Scratch'' Philosophy}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}How to Read This Book}{3}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Sequential Reading}{3}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}``I Know ML'' Path}{4}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Systems Focus}{4}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Assignment Companion}{4}{subsection.1.2.4}%
+\contentsline {section}{\numberline {1.3}Notation Conventions}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Neuroscience Analogies}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Notation Table}{5}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Probability, Entropy, and Information Theory}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Big Picture}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Probability Distributions over Tokens}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Entropy: Measuring Uncertainty}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Definition and Intuition}{8}{subsection.2.3.1}%
+\contentsline {paragraph}{Symbol table.}{9}{section*.9}%
+\contentsline {paragraph}{Interpretation.}{9}{section*.10}%
+\contentsline {subsection}{\numberline {2.3.2}Key Properties}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Worked Example: Computing Entropy}{9}{subsection.2.3.3}%
+\contentsline {paragraph}{Sanity check.}{10}{section*.11}%
+\contentsline {section}{\numberline {2.4}Cross-Entropy: Measuring Model Quality}{10}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Definition}{10}{subsection.2.4.1}%
+\contentsline {paragraph}{Symbol table.}{10}{section*.12}%
+\contentsline {paragraph}{Interpretation.}{10}{section*.13}%
+\contentsline {subsection}{\numberline {2.4.2}Cross-Entropy as a Training Loss}{10}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}KL Divergence: The Gap Between Distributions}{11}{section.2.5}%
+\contentsline {paragraph}{Interpretation.}{11}{section*.14}%
+\contentsline {section}{\numberline {2.6}Maximum Likelihood and Cross-Entropy}{12}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Perplexity: The Standard Evaluation Metric}{12}{section.2.7}%
+\contentsline {paragraph}{Interpretation.}{12}{section*.15}%
+\contentsline {paragraph}{Key relationships.}{13}{section*.16}%
+\contentsline {subsection}{\numberline {2.7.1}Worked Example: Perplexity Calculation}{13}{subsection.2.7.1}%
+\contentsline {paragraph}{Sanity check.}{13}{section*.17}%
+\contentsline {section}{\numberline {2.8}Shannon's Game and the Entropy Rate of English}{14}{section.2.8}%
+\contentsline {paragraph}{Where the analogy helps.}{14}{section*.18}%
+\contentsline {paragraph}{Where the analogy breaks.}{14}{section*.19}%
+\contentsline {paragraph}{What intuition to keep.}{14}{section*.20}%
+\contentsline {section}{\numberline {2.9}Common Misconceptions}{14}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Exercises}{15}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Further Reading}{16}{section.2.11}%
+\contentsline {chapter}{\numberline {3}Linear Algebra and Matrix Calculus}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Big Picture}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Formal Setup and Notation}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Main Ideas}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Worked Example}{17}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Systems and Implementation Consequences}{17}{section.3.5}%
+\contentsline {paragraph}{Where the analogy helps.}{18}{section*.25}%
+\contentsline {paragraph}{Where the analogy breaks.}{18}{section*.26}%
+\contentsline {paragraph}{What intuition to keep.}{18}{section*.27}%
+\contentsline {section}{\numberline {3.6}Common Misconceptions}{18}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Exercises}{18}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Further Reading}{18}{section.3.8}%
+\contentsline {chapter}{\numberline {4}PyTorch and Tensor Computation}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Big Picture}{19}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Formal Setup and Notation}{19}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Main Ideas}{19}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Worked Example}{19}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Systems and Implementation Consequences}{19}{section.4.5}%
+\contentsline {paragraph}{Where the analogy helps.}{20}{section*.32}%
+\contentsline {paragraph}{Where the analogy breaks.}{20}{section*.33}%
+\contentsline {paragraph}{What intuition to keep.}{20}{section*.34}%
+\contentsline {section}{\numberline {4.6}Common Misconceptions}{20}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Exercises}{20}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Further Reading}{20}{section.4.8}%
+\contentsline {chapter}{\numberline {5}CUDA and GPU Execution}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Big Picture}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Formal Setup and Notation}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Main Ideas}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Worked Example}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Systems and Implementation Consequences}{21}{section.5.5}%
+\contentsline {paragraph}{Where the analogy helps.}{22}{section*.39}%
+\contentsline {paragraph}{Where the analogy breaks.}{22}{section*.40}%
+\contentsline {paragraph}{What intuition to keep.}{22}{section*.41}%
+\contentsline {section}{\numberline {5.6}Common Misconceptions}{22}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Exercises}{22}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Further Reading}{22}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Minimal Linguistics Background}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Big Picture}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Formal Setup and Notation}{23}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Main Ideas}{23}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Worked Example}{23}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Systems and Implementation Consequences}{23}{section.6.5}%
+\contentsline {paragraph}{Where the analogy helps.}{24}{section*.46}%
+\contentsline {paragraph}{Where the analogy breaks.}{24}{section*.47}%
+\contentsline {paragraph}{What intuition to keep.}{24}{section*.48}%
+\contentsline {section}{\numberline {6.6}Common Misconceptions}{24}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Exercises}{24}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Further Reading}{24}{section.6.8}%
+\contentsline {part}{II\hspace {1em}Language Modeling Foundations}{25}{part.2}%
+\contentsline {chapter}{\numberline {7}The Language Modeling Problem}{27}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Big Picture}{27}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Formal Setup and Notation}{28}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Autoregressive Decomposition}{28}{section.7.3}%
+\contentsline {paragraph}{Symbol table.}{28}{section*.53}%
+\contentsline {paragraph}{Interpretation.}{28}{section*.54}%
+\contentsline {section}{\numberline {7.4}Scoring versus Generation}{28}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Scoring}{29}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Generation}{29}{subsection.7.4.2}%
+\contentsline {section}{\numberline {7.5}Worked Example: Computing Sequence Probability}{29}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Systems and Implementation Consequences}{30}{section.7.6}%
+\contentsline {paragraph}{Where the analogy helps.}{30}{section*.55}%
+\contentsline {paragraph}{Where the analogy breaks.}{30}{section*.56}%
+\contentsline {paragraph}{What intuition to keep.}{30}{section*.57}%
+\contentsline {section}{\numberline {7.7}Common Misconceptions}{30}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Exercises}{31}{section.7.8}%
+\contentsline {section}{\numberline {7.9}Further Reading}{31}{section.7.9}%
+\contentsline {chapter}{\numberline {8}Tokenization}{33}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Big Picture}{33}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Formal Setup and Notation}{34}{section.8.2}%
+\contentsline {paragraph}{Vocabulary size.}{34}{section*.62}%
+\contentsline {section}{\numberline {8.3}Byte-Pair Encoding (BPE)}{34}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}The BPE Training Algorithm}{34}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Encoding with BPE}{35}{subsection.8.3.2}%
+\contentsline {section}{\numberline {8.4}The Unigram Language Model Tokenizer}{35}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Worked Example: BPE Training}{35}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Systems and Implementation Consequences}{36}{section.8.6}%
+\contentsline {paragraph}{Where the analogy helps.}{37}{section*.63}%
+\contentsline {paragraph}{Where the analogy breaks.}{37}{section*.64}%
+\contentsline {paragraph}{What intuition to keep.}{37}{section*.65}%
+\contentsline {section}{\numberline {8.7}Common Misconceptions}{37}{section.8.7}%
+\contentsline {section}{\numberline {8.8}Exercises}{38}{section.8.8}%
+\contentsline {section}{\numberline {8.9}Further Reading}{38}{section.8.9}%
+\contentsline {chapter}{\numberline {9}From N-Grams to Neural Language Models}{39}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Big Picture}{39}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Formal Setup and Notation}{40}{section.9.2}%
+\contentsline {section}{\numberline {9.3}The $N$-Gram Language Model}{40}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}The Curse of Dimensionality}{40}{subsection.9.3.1}%
+\contentsline {section}{\numberline {9.4}Worked Example: Trigram Calculation}{40}{section.9.4}%
+\contentsline {section}{\numberline {9.5}The Neural Probabilistic Language Model (NPLM)}{41}{section.9.5}%
+\contentsline {section}{\numberline {9.6}The Recurrent Era and Its Failure Modes}{41}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Systems and Implementation Consequences}{42}{section.9.7}%
+\contentsline {paragraph}{Where the analogy helps.}{43}{section*.70}%
+\contentsline {paragraph}{Where the analogy breaks.}{43}{section*.71}%
+\contentsline {paragraph}{What intuition to keep.}{43}{section*.72}%
+\contentsline {section}{\numberline {9.8}Common Misconceptions}{43}{section.9.8}%
+\contentsline {section}{\numberline {9.9}Exercises}{43}{section.9.9}%
+\contentsline {section}{\numberline {9.10}Further Reading}{44}{section.9.10}%
+\contentsline {part}{III\hspace {1em}Transformer Internals}{45}{part.3}%
+\contentsline {chapter}{\numberline {10}Attention Mechanisms}{47}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Big Picture}{47}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Formal Setup and Notation}{47}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Main Ideas}{47}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Worked Example}{47}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Systems and Implementation Consequences}{47}{section.10.5}%
+\contentsline {paragraph}{Where the analogy helps.}{48}{section*.77}%
+\contentsline {paragraph}{Where the analogy breaks.}{48}{section*.78}%
+\contentsline {paragraph}{What intuition to keep.}{48}{section*.79}%
+\contentsline {section}{\numberline {10.6}Common Misconceptions}{48}{section.10.6}%
+\contentsline {section}{\numberline {10.7}Exercises}{48}{section.10.7}%
+\contentsline {section}{\numberline {10.8}Further Reading}{48}{section.10.8}%
+\contentsline {chapter}{\numberline {11}Transformer Blocks from Scratch}{49}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Big Picture}{49}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Formal Setup and Notation}{49}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Main Ideas}{49}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Worked Example}{49}{section.11.4}%
+\contentsline {section}{\numberline {11.5}Systems and Implementation Consequences}{49}{section.11.5}%
+\contentsline {paragraph}{Where the analogy helps.}{50}{section*.84}%
+\contentsline {paragraph}{Where the analogy breaks.}{50}{section*.85}%
+\contentsline {paragraph}{What intuition to keep.}{50}{section*.86}%
+\contentsline {section}{\numberline {11.6}Common Misconceptions}{50}{section.11.6}%
+\contentsline {section}{\numberline {11.7}Exercises}{50}{section.11.7}%
+\contentsline {section}{\numberline {11.8}Further Reading}{50}{section.11.8}%
+\contentsline {chapter}{\numberline {12}Norms, Residuals, and Positional Encodings}{51}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Big Picture}{51}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Formal Setup and Notation}{51}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Main Ideas}{51}{section.12.3}%
+\contentsline {section}{\numberline {12.4}Worked Example}{51}{section.12.4}%
+\contentsline {section}{\numberline {12.5}Systems and Implementation Consequences}{52}{section.12.5}%
+\contentsline {paragraph}{Where the analogy helps.}{52}{section*.91}%
+\contentsline {paragraph}{Where the analogy breaks.}{52}{section*.92}%
+\contentsline {paragraph}{What intuition to keep.}{52}{section*.93}%
+\contentsline {section}{\numberline {12.6}Common Misconceptions}{52}{section.12.6}%
+\contentsline {section}{\numberline {12.7}Exercises}{52}{section.12.7}%
+\contentsline {section}{\numberline {12.8}Further Reading}{52}{section.12.8}%
+\contentsline {chapter}{\numberline {13}Hyperparameters, Initialization, and Optimization}{53}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Big Picture}{53}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Formal Setup and Notation}{53}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Main Ideas}{53}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Worked Example}{53}{section.13.4}%
+\contentsline {section}{\numberline {13.5}Systems and Implementation Consequences}{54}{section.13.5}%
+\contentsline {paragraph}{Where the analogy helps.}{54}{section*.98}%
+\contentsline {paragraph}{Where the analogy breaks.}{54}{section*.99}%
+\contentsline {paragraph}{What intuition to keep.}{54}{section*.100}%
+\contentsline {section}{\numberline {13.6}Common Misconceptions}{54}{section.13.6}%
+\contentsline {section}{\numberline {13.7}Exercises}{54}{section.13.7}%
+\contentsline {section}{\numberline {13.8}Further Reading}{54}{section.13.8}%
+\contentsline {chapter}{\numberline {14}Architectural Variants and Extensions}{55}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Big Picture}{55}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Formal Setup and Notation}{55}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Main Ideas}{55}{section.14.3}%
+\contentsline {section}{\numberline {14.4}Worked Example}{55}{section.14.4}%
+\contentsline {section}{\numberline {14.5}Systems and Implementation Consequences}{56}{section.14.5}%
+\contentsline {paragraph}{Where the analogy helps.}{56}{section*.105}%
+\contentsline {paragraph}{Where the analogy breaks.}{56}{section*.106}%
+\contentsline {paragraph}{What intuition to keep.}{56}{section*.107}%
+\contentsline {section}{\numberline {14.6}Common Misconceptions}{56}{section.14.6}%
+\contentsline {section}{\numberline {14.7}Exercises}{56}{section.14.7}%
+\contentsline {section}{\numberline {14.8}Further Reading}{56}{section.14.8}%
+\contentsline {part}{IV\hspace {1em}Systems and Implementation}{57}{part.4}%
+\contentsline {chapter}{\numberline {15}Resource Accounting}{59}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Big Picture}{59}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Formal Setup and Notation}{59}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Main Ideas}{59}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Worked Example}{59}{section.15.4}%
+\contentsline {section}{\numberline {15.5}Systems and Implementation Consequences}{59}{section.15.5}%
+\contentsline {paragraph}{Where the analogy helps.}{60}{section*.112}%
+\contentsline {paragraph}{Where the analogy breaks.}{60}{section*.113}%
+\contentsline {paragraph}{What intuition to keep.}{60}{section*.114}%
+\contentsline {section}{\numberline {15.6}Common Misconceptions}{60}{section.15.6}%
+\contentsline {section}{\numberline {15.7}Exercises}{60}{section.15.7}%
+\contentsline {section}{\numberline {15.8}Further Reading}{60}{section.15.8}%
+\contentsline {chapter}{\numberline {16}GPUs, TPUs, and Memory Hierarchy}{61}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Big Picture}{61}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Formal Setup and Notation}{61}{section.16.2}%
+\contentsline {section}{\numberline {16.3}Main Ideas}{61}{section.16.3}%
+\contentsline {section}{\numberline {16.4}Worked Example}{61}{section.16.4}%
+\contentsline {section}{\numberline {16.5}Systems and Implementation Consequences}{61}{section.16.5}%
+\contentsline {paragraph}{Where the analogy helps.}{62}{section*.119}%
+\contentsline {paragraph}{Where the analogy breaks.}{62}{section*.120}%
+\contentsline {paragraph}{What intuition to keep.}{62}{section*.121}%
+\contentsline {section}{\numberline {16.6}Common Misconceptions}{62}{section.16.6}%
+\contentsline {section}{\numberline {16.7}Exercises}{62}{section.16.7}%
+\contentsline {section}{\numberline {16.8}Further Reading}{62}{section.16.8}%
+\contentsline {chapter}{\numberline {17}Kernels, CUDA, Triton, and FlashAttention}{63}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Big Picture}{63}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Formal Setup and Notation}{63}{section.17.2}%
+\contentsline {section}{\numberline {17.3}Main Ideas}{63}{section.17.3}%
+\contentsline {section}{\numberline {17.4}Worked Example}{63}{section.17.4}%
+\contentsline {section}{\numberline {17.5}Systems and Implementation Consequences}{64}{section.17.5}%
+\contentsline {paragraph}{Where the analogy helps.}{64}{section*.126}%
+\contentsline {paragraph}{Where the analogy breaks.}{64}{section*.127}%
+\contentsline {paragraph}{What intuition to keep.}{64}{section*.128}%
+\contentsline {section}{\numberline {17.6}Common Misconceptions}{64}{section.17.6}%
+\contentsline {section}{\numberline {17.7}Exercises}{64}{section.17.7}%
+\contentsline {section}{\numberline {17.8}Further Reading}{64}{section.17.8}%
+\contentsline {chapter}{\numberline {18}Parallelism and Distributed Training}{65}{chapter.18}%
+\contentsline {section}{\numberline {18.1}Big Picture}{65}{section.18.1}%
+\contentsline {section}{\numberline {18.2}Formal Setup and Notation}{65}{section.18.2}%
+\contentsline {section}{\numberline {18.3}Main Ideas}{65}{section.18.3}%
+\contentsline {section}{\numberline {18.4}Worked Example}{65}{section.18.4}%
+\contentsline {section}{\numberline {18.5}Systems and Implementation Consequences}{65}{section.18.5}%
+\contentsline {paragraph}{Where the analogy helps.}{66}{section*.133}%
+\contentsline {paragraph}{Where the analogy breaks.}{66}{section*.134}%
+\contentsline {paragraph}{What intuition to keep.}{66}{section*.135}%
+\contentsline {section}{\numberline {18.6}Common Misconceptions}{66}{section.18.6}%
+\contentsline {section}{\numberline {18.7}Exercises}{66}{section.18.7}%
+\contentsline {section}{\numberline {18.8}Further Reading}{66}{section.18.8}%
+\contentsline {chapter}{\numberline {19}Inference and Serving}{67}{chapter.19}%
+\contentsline {section}{\numberline {19.1}Big Picture}{67}{section.19.1}%
+\contentsline {section}{\numberline {19.2}Formal Setup and Notation}{67}{section.19.2}%
+\contentsline {section}{\numberline {19.3}Main Ideas}{67}{section.19.3}%
+\contentsline {section}{\numberline {19.4}Worked Example}{67}{section.19.4}%
+\contentsline {section}{\numberline {19.5}Systems and Implementation Consequences}{67}{section.19.5}%
+\contentsline {paragraph}{Where the analogy helps.}{68}{section*.140}%
+\contentsline {paragraph}{Where the analogy breaks.}{68}{section*.141}%
+\contentsline {paragraph}{What intuition to keep.}{68}{section*.142}%
+\contentsline {section}{\numberline {19.6}Common Misconceptions}{68}{section.19.6}%
+\contentsline {section}{\numberline {19.7}Exercises}{68}{section.19.7}%
+\contentsline {section}{\numberline {19.8}Further Reading}{68}{section.19.8}%
+\contentsline {part}{V\hspace {1em}Scaling, Evaluation, and Recipes}{69}{part.5}%
+\contentsline {chapter}{\numberline {20}Scaling Laws}{71}{chapter.20}%
+\contentsline {section}{\numberline {20.1}Big Picture}{71}{section.20.1}%
+\contentsline {section}{\numberline {20.2}Formal Setup and Notation}{71}{section.20.2}%
+\contentsline {section}{\numberline {20.3}Main Ideas}{71}{section.20.3}%
+\contentsline {section}{\numberline {20.4}Worked Example}{71}{section.20.4}%
+\contentsline {section}{\numberline {20.5}Systems and Implementation Consequences}{71}{section.20.5}%
+\contentsline {paragraph}{Where the analogy helps.}{72}{section*.147}%
+\contentsline {paragraph}{Where the analogy breaks.}{72}{section*.148}%
+\contentsline {paragraph}{What intuition to keep.}{72}{section*.149}%
+\contentsline {section}{\numberline {20.6}Common Misconceptions}{72}{section.20.6}%
+\contentsline {section}{\numberline {20.7}Exercises}{72}{section.20.7}%
+\contentsline {section}{\numberline {20.8}Further Reading}{72}{section.20.8}%
+\contentsline {chapter}{\numberline {21}Model Recipes and Open-Model Case Studies}{73}{chapter.21}%
+\contentsline {section}{\numberline {21.1}Big Picture}{73}{section.21.1}%
+\contentsline {section}{\numberline {21.2}Formal Setup and Notation}{73}{section.21.2}%
+\contentsline {section}{\numberline {21.3}Main Ideas}{73}{section.21.3}%
+\contentsline {section}{\numberline {21.4}Worked Example}{73}{section.21.4}%
+\contentsline {section}{\numberline {21.5}Systems and Implementation Consequences}{74}{section.21.5}%
+\contentsline {paragraph}{Where the analogy helps.}{74}{section*.154}%
+\contentsline {paragraph}{Where the analogy breaks.}{74}{section*.155}%
+\contentsline {paragraph}{What intuition to keep.}{74}{section*.156}%
+\contentsline {section}{\numberline {21.6}Common Misconceptions}{74}{section.21.6}%
+\contentsline {section}{\numberline {21.7}Exercises}{74}{section.21.7}%
+\contentsline {section}{\numberline {21.8}Further Reading}{74}{section.21.8}%
+\contentsline {chapter}{\numberline {22}Evaluation}{75}{chapter.22}%
+\contentsline {section}{\numberline {22.1}Big Picture}{75}{section.22.1}%
+\contentsline {section}{\numberline {22.2}Formal Setup and Notation}{75}{section.22.2}%
+\contentsline {section}{\numberline {22.3}Main Ideas}{75}{section.22.3}%
+\contentsline {section}{\numberline {22.4}Worked Example}{75}{section.22.4}%
+\contentsline {section}{\numberline {22.5}Systems and Implementation Consequences}{75}{section.22.5}%
+\contentsline {paragraph}{Where the analogy helps.}{76}{section*.161}%
+\contentsline {paragraph}{Where the analogy breaks.}{76}{section*.162}%
+\contentsline {paragraph}{What intuition to keep.}{76}{section*.163}%
+\contentsline {section}{\numberline {22.6}Common Misconceptions}{76}{section.22.6}%
+\contentsline {section}{\numberline {22.7}Exercises}{76}{section.22.7}%
+\contentsline {section}{\numberline {22.8}Further Reading}{76}{section.22.8}%
+\contentsline {part}{VI\hspace {1em}Data}{77}{part.6}%
+\contentsline {chapter}{\numberline {23}Data Sources, Crawling, and Cleaning}{79}{chapter.23}%
+\contentsline {section}{\numberline {23.1}Big Picture}{79}{section.23.1}%
+\contentsline {section}{\numberline {23.2}Formal Setup and Notation}{79}{section.23.2}%
+\contentsline {section}{\numberline {23.3}Main Ideas}{79}{section.23.3}%
+\contentsline {section}{\numberline {23.4}Worked Example}{79}{section.23.4}%
+\contentsline {section}{\numberline {23.5}Systems and Implementation Consequences}{79}{section.23.5}%
+\contentsline {paragraph}{Where the analogy helps.}{80}{section*.168}%
+\contentsline {paragraph}{Where the analogy breaks.}{80}{section*.169}%
+\contentsline {paragraph}{What intuition to keep.}{80}{section*.170}%
+\contentsline {section}{\numberline {23.6}Common Misconceptions}{80}{section.23.6}%
+\contentsline {section}{\numberline {23.7}Exercises}{80}{section.23.7}%
+\contentsline {section}{\numberline {23.8}Further Reading}{80}{section.23.8}%
+\contentsline {chapter}{\numberline {24}Filtering, Deduplication, and Data Mixing}{81}{chapter.24}%
+\contentsline {section}{\numberline {24.1}Big Picture}{81}{section.24.1}%
+\contentsline {section}{\numberline {24.2}Formal Setup and Notation}{81}{section.24.2}%
+\contentsline {section}{\numberline {24.3}Main Ideas}{81}{section.24.3}%
+\contentsline {section}{\numberline {24.4}Worked Example}{81}{section.24.4}%
+\contentsline {section}{\numberline {24.5}Systems and Implementation Consequences}{82}{section.24.5}%
+\contentsline {paragraph}{Where the analogy helps.}{82}{section*.175}%
+\contentsline {paragraph}{Where the analogy breaks.}{82}{section*.176}%
+\contentsline {paragraph}{What intuition to keep.}{82}{section*.177}%
+\contentsline {section}{\numberline {24.6}Common Misconceptions}{82}{section.24.6}%
+\contentsline {section}{\numberline {24.7}Exercises}{82}{section.24.7}%
+\contentsline {section}{\numberline {24.8}Further Reading}{82}{section.24.8}%
+\contentsline {part}{VII\hspace {1em}Alignment and Reasoning}{83}{part.7}%
+\contentsline {chapter}{\numberline {25}Instruction Tuning and Preference Tuning}{85}{chapter.25}%
+\contentsline {section}{\numberline {25.1}Big Picture}{85}{section.25.1}%
+\contentsline {section}{\numberline {25.2}Formal Setup and Notation}{85}{section.25.2}%
+\contentsline {section}{\numberline {25.3}Main Ideas}{85}{section.25.3}%
+\contentsline {section}{\numberline {25.4}Worked Example}{85}{section.25.4}%
+\contentsline {section}{\numberline {25.5}Systems and Implementation Consequences}{86}{section.25.5}%
+\contentsline {paragraph}{Where the analogy helps.}{86}{section*.182}%
+\contentsline {paragraph}{Where the analogy breaks.}{86}{section*.183}%
+\contentsline {paragraph}{What intuition to keep.}{86}{section*.184}%
+\contentsline {section}{\numberline {25.6}Common Misconceptions}{86}{section.25.6}%
+\contentsline {section}{\numberline {25.7}Exercises}{86}{section.25.7}%
+\contentsline {section}{\numberline {25.8}Further Reading}{86}{section.25.8}%
+\contentsline {chapter}{\numberline {26}RLHF, DPO, GRPO, and Reasoning RL}{87}{chapter.26}%
+\contentsline {section}{\numberline {26.1}Big Picture}{87}{section.26.1}%
+\contentsline {section}{\numberline {26.2}Formal Setup and Notation}{87}{section.26.2}%
+\contentsline {section}{\numberline {26.3}Main Ideas}{87}{section.26.3}%
+\contentsline {section}{\numberline {26.4}Worked Example}{87}{section.26.4}%
+\contentsline {section}{\numberline {26.5}Systems and Implementation Consequences}{88}{section.26.5}%
+\contentsline {paragraph}{Where the analogy helps.}{88}{section*.189}%
+\contentsline {paragraph}{Where the analogy breaks.}{88}{section*.190}%
+\contentsline {paragraph}{What intuition to keep.}{88}{section*.191}%
+\contentsline {section}{\numberline {26.6}Common Misconceptions}{88}{section.26.6}%
+\contentsline {section}{\numberline {26.7}Exercises}{88}{section.26.7}%
+\contentsline {section}{\numberline {26.8}Further Reading}{88}{section.26.8}%
+\contentsline {chapter}{\numberline {27}Safety, Reward Hacking, and Deployment}{89}{chapter.27}%
+\contentsline {section}{\numberline {27.1}Big Picture}{89}{section.27.1}%
+\contentsline {section}{\numberline {27.2}Formal Setup and Notation}{89}{section.27.2}%
+\contentsline {section}{\numberline {27.3}Main Ideas}{89}{section.27.3}%
+\contentsline {section}{\numberline {27.4}Worked Example}{89}{section.27.4}%
+\contentsline {section}{\numberline {27.5}Systems and Implementation Consequences}{90}{section.27.5}%
+\contentsline {paragraph}{Where the analogy helps.}{90}{section*.196}%
+\contentsline {paragraph}{Where the analogy breaks.}{90}{section*.197}%
+\contentsline {paragraph}{What intuition to keep.}{90}{section*.198}%
+\contentsline {section}{\numberline {27.6}Common Misconceptions}{90}{section.27.6}%
+\contentsline {section}{\numberline {27.7}Exercises}{90}{section.27.7}%
+\contentsline {section}{\numberline {27.8}Further Reading}{90}{section.27.8}%
+\contentsline {chapter}{\numberline {A}Proof Techniques and Derivations}{93}{appendix.A}%
+\contentsline {part}{Appendices}{93}{part*.203}%
+\contentsline {chapter}{\numberline {B}CUDA and Triton Cookbook}{95}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Linguistics Quick Reference}{97}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Neuroscience Analogy Index}{99}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Reproducibility and Debugging}{101}{appendix.E}%
+\contentsline {chapter}{References}{103}{appendix*.204}%

@@ -1,0 +1,34 @@
+\section{Conclusion}
+% We introduced a new benchmark that measures how well text models can learn and apply diverse knowledge encountered during pretraining. By covering 57 subjects at varying levels of difficulty, it assesses language understanding in greater breadth and depth than previous benchmarks. 
+% This has only become possible with recent improvements in data efficiency, especially with the feasibility of few-shot evaluation using models like GPT-3 [GPT-3]. 
+% This allows one to test models using a modest number of test examples without needing to collect thousands of training examples, similar to how we evaluate humans. This both makes it possible to evaluate models on dozens of subjects, many of which have fewer than a thousand publicly available questions online.
+% We anticipate that this methodology will become more standard as few-shot learning becomes widespread. 
+
+% Discuss how data efficiency enables not collecting huge training set, so we can cover more ground.
+
+% Now that models have strong linguistic understanding and are quickly developing strong ``commonsense'' reasoning, they can start to use language as a general tool for learning about any topic describable in text.
+% We assessed the ability of a model to learn arbitrary topics by constructing a benchmark that tests knowledge of diverse academic and professional subjects. 
+% Because our benchmark enumerates most topics students study at varying levels of education, it may be ``complete'' in the sense that strong performance on it may indicate an ability to reach high accuracy in almost any discipline. 
+% This suggests it will be an enduring metric, the breadth and depth of which can help researchers analyze the aggregate properties of models across diverse tasks and monitor important weaknesses. \dan{We'll need to fix the conclusion}
+
+We introduced a new test that measures how well text models can learn and apply knowledge encountered during pretraining. By covering 57 subjects at varying levels of difficulty, the test assesses language understanding in greater breadth and depth than previous benchmarks.
+We found that it has recently become possible for models to make meaningful progress on the test, but that state-of-the-art models have lopsided performance and rarely excel at any individual task. We also showed that current models are uncalibrated and have difficulty with tasks that require calculations. Worryingly, models also perform especially poorly on socially relevant subjects including morality and law.
+% Future work should address these and other shortcomings.
+Our expansive test can help researchers pinpoint important shortcomings of models, making it easier to gain a clearer picture of state-of-the-art capabilities.\looseness=-1
+% By comprehensively evaluating the breadth and depth of a model's academic and professional understanding, our benchmark can be used to analyze aggregate properties of models across tasks and to identify important shortcomings.
+
+% other important highlights to recap?
+% methodological change
+% not calibrated
+% procedural vs descriptive
+
+
+
+% Tweet.
+
+% How multipurpose is GPT-3? We gave it questions about law, medicine, accounting, calculus, and more. We found that GPT-3 is now better than random chance across many tasks, but for all 57 tasks it still has wide room for improvement.
+% arxiv-link
+% github-link
+\newpage
+\section*{Acknowledgements}
+We would like to thank the following for their helpful comments: Oyvind Tafjord, Jan Leike, David Krueger, Alex Tamkin, Girish Sastry, and Henry Zhu. DH is supported by the NSF GRFP Fellowship and an Open Philanthropy Project Fellowship. This research was also supported by the NSF Frontier Award 1804794.

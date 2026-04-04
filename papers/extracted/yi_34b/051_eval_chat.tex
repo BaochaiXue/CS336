@@ -1,0 +1,92 @@
+
+In this section, we report the automatic and human preference evaluation of the Chat Model. 
+We use greedy decoding to generate responses. For the automatic evaluation benchmarks, we extract answers from the model's generated outputs and calculate accuracy. During the evaluation process, we observed that different prompts have varying influence on  results. Therefore, for the same set of questions, we use identical prompts to evaluate all models, aiming to ensure as fair and unbiased results as possible.
+
+% \input{tables/tab_reading_comprehension}
+
+
+\subsubsection{Automatic Evaluations}
+
+% We employed some of the identical evaluation datasets as those used for the base model to assess the general capabilities of our model in Sec. \ref{sec:main results}.
+
+For automatic evaluation, we use the same benchmarks as is for the base model, detailed in Sec. \ref{sec:main results}.
+We use both zero-shot and few-shot methods but generally, zero-shot is more suitable for chat models. Our evaluation involves generating responses while following instructions explicitly or implicitly (such as the format in the few-shot examples). We then isolate relevant answers from the generated text. Unlike the base model, for the zero-shot evaluations on the GSM8K and BBH datasets, we employ the Chain-of-Thought (CoT) approach to guide the model in deliberation before reaching an answer.
+
+
+The results shown in Tab. \ref{tab:chat_models} demonstrate the effectiveness of our chat models in understanding human instructions and generating appropriate instruction-following responses. 
+We particularly highlight the 4-bit quantization results, as 4-bit quantization substantially reduces the memory requirement while the model performance nearly does not drop. 
+This observation serve as the foundation of serving the model on consumer-grade devices. 
+
+% The results indicate that the Yi-34B-Chat model exhibits commendable performance on evaluation sets encompassing Chinese-English knowledge-based, mathematical, and reasoning categories.
+
+
+In line with Goodhart's principle, when a measurement metric becomes the target of our pursuit, it ceases to serve as a reliable standard of assessment. Consequently, the outcomes of our evaluations on benchmarks are exclusively employed for ensuring that our alignment training does not detrimentally impact the foundational knowledge and capabilities of the base model. We do not engage in targeted optimization of our chat model with the objective of enhancing benchmark performance.
+
+
+To further evaluate the generalizability of our model's capabilities, we conducted assessments of its mathematical computation proficiency by subjecting it to the 2023 Hungarian high school mathematics final exam questions, first proposed by the xAI Grok team then reproduced by~\citet{testing_language_models_on_a_held_out_high_school_national_finals_exam}. This evaluation was undertaken with the aim of determining whether our model exhibited signs of overfitting to training datasets that are mathematically oriented.
+The results in Fig.~\ref{fig:hungarian_national_hs_finals_exam} show that Yi-34B-Chat performs inspiringly on both the GSM8K and the Hungarian mathematics exam. However, note that Yi-6B-Chat does not exhibit strong mathematical capabilities (on both GSM8K and the Hungarian mathematics exam). We speculate that smaller models may require more data to activate their corresponding abilities during the SFT stage.
+
+
+\input{tables/tab_chat}
+
+
+\input{images/fig_math}
+
+
+\subsubsection{Human Evaluations}
+
+% Our goal is to train an AI assistant that is both helpful and harmless. Consequently, 
+
+In this section we conducted an assessment of the model's conversational abilities, considering aspects to ensure its effectiveness and safety. We have compiled a collection of open-source evaluation datasets from the community, such as alpaca-eval\cite{dubois2023alpacafarm}, Belle-eval~\citep{belle2023exploring}, and MT-bench\cite{zheng2023judging}. Additionally, we have established our own helpful and harmless evaluation dataset by gathering and constructing data of varying difficulty levels, for the purpose of comprehensively assessing the conversational abilities of chat models.
+
+However, whether it is a public evaluation set or a self-built evaluation set, the evaluation results are strongly influenced by the assessment criteria and the design of the prompt. Our internal evaluation results may be unfair to other models, making it difficult to accurately represent the true capability level of our model.
+Therefore, here we only present external evaluation results to demonstrate the current conversational abilities of our chat model.
+We consider: 
+(1). AlapcaEval\footnote{https://tatsu-lab.github.io/alpaca\_eval/}~\citep{alpaca_eval}, which is designed to assess the English conversation capabilities of models by comparing the responses of a specified model to reference replies from Davinci003~\citep{dubois2023alpacafarm} in order to calculate a win-rate;
+(2). LMSys\footnote{https://huggingface.co/spaces/lmsys/chatbot-arena-leaderboard}~\citep{zheng2023judging} Chatbot Arena, which showcases the responses of different models through a dialogue platform, then asks users to make selections based on their preferences, then computes the Elo score; (3). SuperClue\footnote{https://www.superclueai.com/}, on the other hand, is a leaderboard aimed at comprehensively evaluating the Chinese language capabilities of models.
+
+
+\begin{table*}[t!]
+\centering
+\scalebox{0.9}{
+\begin{tabular}{l c c c c c c c c c c c}
+
+\toprule
+% \multicolumn{1}{l}{\multirow{1}{*}{\textbf{Model}}}  & \multicolumn{1}{c}{\multirow{1}{*}{\textbf{Size}}} & \multicolumn{1}{c}{\multirow{1}{*}{\textbf{AlpacaEval}}}   & \multicolumn{1}{c}{\multirow{1}{*}{\textbf{lmsys}}} & \multicolumn{1}{c}{\multirow{1}{*}{\textbf{SuperClue}}} \\ 
+\bf Model & \bf Size & \bf AlpacaEval & \bf LMSys Chatbot Arena & \bf SuperClue \\ 
+
+% \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}    & \multicolumn{1}{c}{}  \\
+
+% \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{win-rate (\%)}  & \multicolumn{1}{c}{ChatbotArena ELO} & \multicolumn{1}{c}{score} \\
+
+\midrule
+
+GPT-4-Turbo & - &  \textbf{97.7} & \textbf{1243} & \textbf{89.79} \\
+
+% \midrule
+
+GPT-3.5-Turbo & - &  89.37 & 1117 & 59.39 \\
+
+% \midrule
+
+LLaMA2-Chat & 70B &  92.66 & 1077 & - \\
+
+% \midrule
+
+Yi-Chat & 34B &  94.08 & 1110 & 71.87 \\
+
+\bottomrule
+
+
+\end{tabular}
+}
+\caption{Human evaluation comparison with other open-source chat models.}
+\label{tab:human_evaluation}
+\end{table*}
+
+
+Tab. \ref{tab:human_evaluation} presents the performance results of Yi-34B-Chat in the three third-party evaluations we consider, with the cutoff date for the results being December 21, 2023. The data demonstrates that, although there is still a gap compared to GPT-4, our model exhibits proficient bilingual (Chinese and English) dialogue capabilities and aligns well with user preferences. Additional comparative results of various models are accessible for review on the official website.
+
+\input{images/fig_sftdata}
+We further demonstrate the data quality by comparing the speed of preference increase during data scaling.
+As is shown in Fig.~\ref{fig:sftdata}, when compared with UltraChat~\citep{ding2023enhancing} and its cleaned version UltraChat 200K, we see a clear tendency of performance improvements when scaling up the Yi data. 

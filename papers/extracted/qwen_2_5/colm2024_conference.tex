@@ -1,0 +1,117 @@
+\documentclass{article} %
+\usepackage{colm2024_conference}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{wrapfig}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{colortbl}
+\usepackage[utf8]{inputenc}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tabularx}
+\usepackage{blindtext}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+\usepackage{tikz}
+\usetikzlibrary{er,positioning,bayesnet}
+\usepackage{makecell}
+\usepackage{tipa}
+\usepackage{siunitx}
+\usepackage{nicefrac}
+\usepackage{tocloft}
+\usepackage{listings}
+\usepackage[raster,skins]{tcolorbox} %
+\usepackage{xltabular}
+\usepackage{adjustbox}
+\usepackage{xurl}
+\input{math_commands.tex}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\title{Qwen2.5 Technical Report}
+
+
+
+\author{
+\bf Qwen Team
+}
+
+
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet diverse needs. 
+Compared to previous iterations, Qwen 2.5 has been significantly improved during both the pre-training and post-training stages. 
+In terms of pre-training, we have scaled the high-quality pre-training datasets from the previous 7 trillion tokens to 18 trillion tokens.
+This provides a strong foundation for %
+common sense, expert knowledge, and reasoning capabilities.
+In terms of post-training, we implement intricate supervised finetuning with over 1 million samples, as well as multistage reinforcement learning, including offline learning DPO and online learning GRPO. 
+Post-training techniques significantly enhance human preference, and notably improve long text generation, structural data analysis, and instruction following.
+
+\smallskip
+To handle diverse and varied use cases effectively, 
+we present Qwen2.5 LLM series in rich configurations.
+The open-weight offerings include base models and instruction-tuned models in sizes of 0.5B, 1.5B, 3B, 7B, 14B, 32B, and 72B parameters. Quantized versions of the instruction-tuned models are also provided. Over 100 models can be accessed from Hugging Face Hub, ModelScope, and Kaggle.
+In addition, for hosted solutions, the proprietary models currently include two mixture-of-experts (MoE) variants: Qwen2.5-Turbo and Qwen2.5-Plus, both available from \href{https://www.alibabacloud.com/en/product/modelstudio}{Alibaba Cloud Model Studio}.
+
+
+Qwen2.5 has demonstrated top-tier performance on a wide range of benchmarks evaluating language understanding, reasoning, mathematics, coding, human preference alignment, etc. Specifically, the open-weight flagship Qwen2.5-72B-Instruct outperforms a number of open and proprietary models and demonstrates competitive performance to the state-of-the-art open-weight model, Llama-3-405B-Instruct, which is around 5 times larger.
+Qwen2.5-Turbo and Qwen2.5-Plus offer superior cost-effectiveness while performing competitively against GPT-4o-mini and GPT-4o respectively.
+Additionally, as the foundation, Qwen2.5 models have been instrumental in training specialized models such as Qwen2.5-Math~\citep{qwen2.5math}, Qwen2.5-Coder~\citep{qwen2.5coder}, QwQ~\citep{qwq}, and multimodal models.
+
+
+
+
+\end{abstract}
+
+\vfill
+
+\begin{figure}[hbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{figures/main.pdf}
+    \caption{In the iterative development of the Qwen series, data scaling has played a crucial role. Qwen~2.5, which leverages 18 trillion tokens for pre-training, has demonstrated the most advanced capabilities within the Qwen series, especially in terms of domain expertise, underscoring the importance of scale together with mixture in enhancing the model's capabilities.}
+    \label{fig:intro}
+\end{figure}
+
+\vfill
+
+\newpage
+
+
+
+
+
+\input{content/intro.tex}
+\input{content/arch.tex}
+\input{content/pretraining}
+\input{content/posttraining}
+\input{content/experiments.tex}
+\input{content/conclusion.tex}
+\input{content/authors.tex}
+
+\bibliography{biblio}
+\bibliographystyle{colm2024_conference}
+
+
+\end{document}

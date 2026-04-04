@@ -1,0 +1,56 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkviolet1270255}{RGB}{127,0,255}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{sandybrown25517896}{RGB}{255,178,96}
+\definecolor{turquoise64236211}{RGB}{64,236,211}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204,at={(0.02,0.98)},anchor=north west},
+log basis x={10},
+tick align=outside,
+tick pos=left,
+title={Math},
+x grid style={darkgray176},
+xlabel={Parameters},
+xmin=219771451.673039, xmax=239020972258.945,
+xmode=log,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Accuracy},
+ymin=0, ymax=0.01201,
+ytick style={color=black},
+yticklabel={\pgfmathprintnumber{\tick}\%},
+scaled y ticks=false,
+y coord trafo/.code={\pgfmathparse{#1*100}\pgfmathresult}
+]
+
+\addplot [semithick, darkviolet1270255, mark=*, mark size=3, mark options={solid},densely dashed]
+table {%
+2516582400 0.0036
+5637144576 0.0084
+19900000000 0.011
+};
+\addlegendentry{EleutherAI}
+\addplot [semithick, turquoise64236211, mark=*, mark size=3, mark options={solid}]
+table {%
+301989888 0.0032
+1207959552 0.0038
+6442450944 0.0042
+173946175488 0.0072
+};
+\addlegendentry{OpenAI}
+\addplot [semithick, sandybrown25517896, mark=*, mark size=3, mark options={solid}]
+table {%
+1207959552 0.0008
+2516582400 0.002
+6442450944 0.0026
+12681408000 0.0014
+};
+\addlegendentry{FairSeq}
+\end{axis}
+
+\end{tikzpicture}

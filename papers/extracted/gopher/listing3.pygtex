@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+Determine whether a given sentence asserts a causal, correlative, or neutral
+relation between two events. If the sentence asserts a causal relation respond
+causal, if the sentence asserts a correlative relation respond correlative, if
+the sentence asserts neither a causal nor a correlative relation between two
+events respond neutral.
+
+Sentence: If Billy claps, the lights turn on.
+Relation: correlative
+
+Sentence: Drinking this tea calms my nerves.
+Relation: causal
+
+Sentence: Each time I pull the lever, a ball is released.
+Relation: correlative
+
+Sentence: Each time I drink that liquid, I feel queasy.
+Relation: correlative
+
+Sentence: Wearing sunscreen protects skin from sun damage.
+Relation: causal
+
+Sentence: If I plant these seeds, tulips grow.
+Relation:
+\end{Verbatim}

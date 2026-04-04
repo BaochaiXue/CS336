@@ -1,0 +1,44 @@
+\begin{table}[t!]
+  \centering
+  \begin{tabular}{@{}lcccccc@{}}
+\toprule
+           &   \bf Size   & \bf Average  & \bf Humanity & \bf STEM  & \bf Social Science & \bf Other \\
+\midrule
+% \midrule
+\bf GPT-4 & - & \textbf{86.40}   & \textbf{87.00} & \textbf{89.80}    & 75.70 & \textbf{83.60}    \\
+\bf GPT-3.5 & - & 70.00 & 72.80 & 79.00    & 58.40 & 71.80   \\
+\gmidrule
+% \midrule
+\bf Falcon  & 180B      & 70.38 & 66.88    & 59.16 & 80.79          & 76.76 \\
+\gmidrule
+\multirow{3}{*}{\bf  L\textsmaller{LaMA} 2} 
+& 7B & 46.80 & 51.50 & 52.20 & 38.00 & 49.90 \\
+& 34B & 62.60 & 59.40 & 52.10 & 71.80 & 69.20 \\
+& 70B & 68.90 & 65.00 & 58.00 & 80.30 & 74.60 \\
+\gmidrule
+% L\textsmaller{LaMA} 33B hf     & 58.18 & 55.58    & 46.94 & 67.47          & 64.31 \\
+\multirow{2}{*}{\bf Qwen}
+ & 7B & 58.45 & 52.94    & 50.30 & 68.38         & 65.24 \\ 
+ & 14B     & 66.69 & 61.57   & 59.59 & 76.24         & 72.19 \\
+ \gmidrule
+\multirow{2}{*}{\bf Baichuan 2} 
+ &  7B & 54.70 & 60.30 & 62.10 & 45.10 & 56.40 \\
+ & 13B     & 55.97 & 48.46    & 47.98 & 67.11          & 64.44 \\
+ \gmidrule
+\bf Mistral & 7B & 62.43 & 56.77 & 52.68 & 73.29 & 70.16 \\
+\gmidrule
+\bf InternLM & 20B & 62.10 & 67.4 & 70.6 & 51.8 & 63.8 \\
+\gmidrule
+\bf Skywork & 13B & 62.10 &  -    & -      & -      & - \\
+% \midrule
+\gmidrule
+\multirow{2}{*}{\bf Yi} & 6B          & 63.24 & 59.10    & 53.15 & 73.83          & 69.26 \\
+& 34B    & 76.32 & 73.17   & 68.03 & \textbf{85.11}          & 80.78 \\
+\bottomrule
+
+  \end{tabular}
+   \caption{Detailed results of MMLU. 
+   Yi-34B performs relatively well on humanity and social science, and we aim to improve the STEM performance  in future efforts. 
+   }
+  \label{tab:mmlu_table}
+\end{table}

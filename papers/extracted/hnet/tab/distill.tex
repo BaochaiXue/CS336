@@ -1,0 +1,21 @@
+\begin{table}[t!]
+\caption{
+\textbf{Distilling Llama 3.2 3B to a byte level model.} Average acc indicates average of the benchmarks measured in \cref{tab: main}. 
+H-Net loses performance across the board compared to the teacher, which is expected because we cannot quite replicate the exact behavior of the original model due to non-causality of BPE tokens.
+However, it is still much stronger than an H-Net trained from scratch on this small amount of data (189B bytes).
+}
+\centering
+\small
+{ 
+\begin{tabular}{lcccccccccccc} 
+\toprule
+\multirow{2}{*}{\textsc{Model}} & \textsc{LMB.} & \textsc{Hella.} & \textsc{PIQA} & \textsc{ARC-e} & \textsc{ARC-c} & \textsc{Wino.} & \textsc{Open.} & \textsc{Average} & \textsc{MMLU (5-shot)}\\
+& \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc}\texttt{\_n} $\uparrow$ & \textsc{acc} $\uparrow$ & \textsc{acc} $\uparrow$ \\
+\midrule
+Llama 3.2 3B (base) & 0.701 & 0.737 & 0.768 & 0.745 & 0.460 & 0.688 & 0.428 & 0.647 & 0.561 \\
+Distilled H-Net (1-stage) & 0.634 & 0.702 & 0.761 & 0.721 & 0.433 & 0.665 & 0.414 & 0.617 & 0.519 \\
+\bottomrule
+\end{tabular}
+} 
+\label{tab: distill}
+\end{table}

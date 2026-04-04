@@ -1,0 +1,11 @@
+\begin{tabular}{lcccccc}
+\toprule
+Hyperparameters & \fasttext filtering & LR & WD & MMLU & \lowvar \\ %
+\midrule
+\multirow{2}{*}{Low LR}&  \xmark & 3.0e-04 & 0.33 & 25.4 & 38.3 \\ %
+&  \cmark & 3.0e-04 & 0.33 & \textbf{29.2} & \textbf{41.0} \\ %
+\midrule
+\multirow{2}{*}{High LR}& \xmark & 1.0e-03 & 0.1 & 25.5 & 39.7 \\ %
+&  \cmark & 1.0e-03 & 0.1 & \textbf{38.3} & \textbf{44.1} \\ %
+\bottomrule
+\end{tabular}

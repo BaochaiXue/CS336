@@ -1,0 +1,113 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Background}{5}{section.2}%
+\contentsline {section}{\numberline {3}Method}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Models}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Training}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Infrastructure}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Training Dataset}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Results}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Task Selection}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Comparisons with State of the Art}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Performance Improvements with Scale}{11}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Toxicity and Bias Analysis}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Toxicity}{13}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Generation Analysis}{13}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Classification Analysis}{14}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Distributional Bias}{14}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Gender and Occupation Bias}{15}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Sentiment Bias towards Social Groups}{16}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Perplexity on Dialects}{17}{subsubsection.5.2.3}%
+\contentsline {section}{\numberline {6}Dialogue}{17}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Prompting For Dialogue}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2} Fine-tuning for Dialogue }{18}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Dialogue \& Toxicity }{19}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Discussion}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Towards Efficient Architectures}{20}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Challenges in Toxicity and Bias}{21}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Safety benefits and safety risks}{22}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Conclusion}{23}{section.8}%
+\contentsline {section}{\numberline {9}Acknowledgements}{23}{section.9}%
+\contentsline {section}{\numberline {10}Contributions}{24}{section.10}%
+\contentsline {section}{\numberline {A}\textit {MassiveText}\xspace }{39}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Dataset Pipeline}{39}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Pipeline stages}{39}{subsubsection.A.1.1}%
+\contentsline {paragraph}{Content Filtering (All subsets)}{40}{figure.caption.18}%
+\contentsline {paragraph}{Text Extraction (\textit {MassiveWeb}\xspace only)}{40}{figure.caption.18}%
+\contentsline {paragraph}{Quality Filtering (\textit {MassiveWeb}\xspace only)}{40}{figure.caption.18}%
+\contentsline {paragraph}{Repetition Removal (\textit {MassiveWeb}\xspace only)}{40}{figure.caption.18}%
+\contentsline {paragraph}{Test-set Filtering (All subsets)}{41}{table.caption.19}%
+\contentsline {subsubsection}{\numberline {A.1.2}Constructing Token Sequences}{42}{subsubsection.A.1.2}%
+\contentsline {subsection}{\numberline {A.2}Dataset Analysis}{42}{subsection.A.2}%
+\contentsline {paragraph}{Document Lengths}{42}{subsection.A.2}%
+\contentsline {paragraph}{Training Data Toxicity}{42}{figure.caption.20}%
+\contentsline {paragraph}{Language Distribution}{43}{figure.caption.20}%
+\contentsline {paragraph}{\textit {MassiveWeb}\xspace URL Breakdown}{43}{figure.caption.20}%
+\contentsline {paragraph}{Tokenizer Compression Rate}{44}{figure.caption.21}%
+\contentsline {subsection}{\numberline {A.3}Dataset Ablations}{45}{subsection.A.3}%
+\contentsline {subsubsection}{\numberline {A.3.1}\textit {MassiveText}\xspace Subsets Weighting}{45}{subsubsection.A.3.1}%
+\contentsline {subsubsection}{\numberline {A.3.2}Iterative Refinement of \textit {MassiveWeb}\xspace }{45}{subsubsection.A.3.2}%
+\contentsline {subsection}{\numberline {A.4}Text normalisation}{46}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}\textit {MassiveText}\xspace Datasheet}{46}{subsection.A.5}%
+\contentsline {section}{\numberline {B}\textit {Gopher}\xspace Model Card}{49}{appendix.B}%
+\contentsline {section}{\numberline {C}Lessons Learned}{53}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}Adafactor}{53}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}Lower-Precision Training with \texttt {bfloat16}}{53}{subsection.C.2}%
+\contentsline {section}{\numberline {D}Results}{55}{appendix.D}%
+\contentsline {subsection}{\numberline {D.1}Overview}{55}{subsection.D.1}%
+\contentsline {subsection}{\numberline {D.2}Pile}{59}{subsection.D.2}%
+\contentsline {subsection}{\numberline {D.3}Language Modelling}{60}{subsection.D.3}%
+\contentsline {subsection}{\numberline {D.4}Filtering Test-Set Documents}{60}{subsection.D.4}%
+\contentsline {subsection}{\numberline {D.5}Scaling Curves}{61}{subsection.D.5}%
+\contentsline {subsection}{\numberline {D.6}Scaling Context Length}{62}{subsection.D.6}%
+\contentsline {subsection}{\numberline {D.7}MMLU}{64}{subsection.D.7}%
+\contentsline {subsection}{\numberline {D.8}BIG-bench\xspace }{69}{subsection.D.8}%
+\contentsline {subsubsection}{\numberline {D.8.1}Task Selection}{69}{subsubsection.D.8.1}%
+\contentsline {subsubsection}{\numberline {D.8.2}Multiple Choice Evaluation}{73}{subsubsection.D.8.2}%
+\contentsline {subsubsection}{\numberline {D.8.3}BIG-bench\xspace 5-Shot Results}{74}{subsubsection.D.8.3}%
+\contentsline {subsubsection}{\numberline {D.8.4}Relative vs absolute accuracy}{76}{subsubsection.D.8.4}%
+\contentsline {subsubsection}{\numberline {D.8.5}Comparing \textit {Gopher}\xspace family models to models from the T0 family}{77}{subsubsection.D.8.5}%
+\contentsline {subsubsection}{\numberline {D.8.6}Raw accuracy details}{77}{subsubsection.D.8.6}%
+\contentsline {subsection}{\numberline {D.9}TriviaQA \& NaturalQuestions}{80}{subsection.D.9}%
+\contentsline {subsection}{\numberline {D.10}TruthfulQA}{81}{subsection.D.10}%
+\contentsline {subsection}{\numberline {D.11}Reading Comprehension: RACE}{82}{subsection.D.11}%
+\contentsline {subsection}{\numberline {D.12}Fact-Checking: FEVER \& MultiFC}{84}{subsection.D.12}%
+\contentsline {paragraph}{Closed-book setup: leveraging implicit knowledge in the weights.}{85}{subsection.D.12}%
+\contentsline {paragraph}{Open-book oracle setup: recognition of textual entailment (RTE).}{86}{subsection.D.12}%
+\contentsline {paragraph}{Comparison to previous work on few-shot fact-checking}{86}{subsection.D.12}%
+\contentsline {subsubsection}{\numberline {D.12.1}MultiFC}{86}{subsubsection.D.12.1}%
+\contentsline {subsection}{\numberline {D.13}Common Sense: PIQA, WinoGrande, SocialIQA, HellaSwag}{87}{subsection.D.13}%
+\contentsline {section}{\numberline {E}Toxicity and Bias Analysis}{89}{appendix.E}%
+\contentsline {subsection}{\numberline {E.1}Toxic Generations}{89}{subsection.E.1}%
+\contentsline {subsubsection}{\numberline {E.1.1}Methodology}{89}{subsubsection.E.1.1}%
+\contentsline {subsubsection}{\numberline {E.1.2}Results}{89}{subsubsection.E.1.2}%
+\contentsline {subsection}{\numberline {E.2}Classifying Toxicity}{90}{subsection.E.2}%
+\contentsline {subsubsection}{\numberline {E.2.1}Prompt Templates}{90}{subsubsection.E.2.1}%
+\contentsline {subsubsection}{\numberline {E.2.2}Subgroup Bias Metrics}{93}{subsubsection.E.2.2}%
+\contentsline {subsection}{\numberline {E.3}Distributional Bias}{95}{subsection.E.3}%
+\contentsline {subsubsection}{\numberline {E.3.1}Gender and Occupation}{95}{subsubsection.E.3.1}%
+\contentsline {paragraph}{Gender Word Probability}{95}{subsubsection.E.3.1}%
+\contentsline {paragraph}{Winogender}{96}{table.caption.58}%
+\contentsline {subsubsection}{\numberline {E.3.2}Sentiment Bias}{97}{subsubsection.E.3.2}%
+\contentsline {paragraph}{Metrics}{97}{subsubsection.E.3.2}%
+\contentsline {paragraph}{Additional Results}{98}{equation.E.1}%
+\contentsline {paragraph}{Terms and templates}{98}{equation.E.1}%
+\contentsline {paragraph}{Sentiment bias word co-occurrence}{99}{table.caption.63}%
+\contentsline {section}{\numberline {F}Compute Usage}{102}{appendix.F}%
+\contentsline {section}{\numberline {G}Reducing Inference and Training Costs}{103}{appendix.G}%
+\contentsline {subsection}{\numberline {G.1}Efficient Fine-tuning}{103}{subsection.G.1}%
+\contentsline {subsection}{\numberline {G.2}Reducing Inference Costs}{105}{subsection.G.2}%
+\contentsline {subsubsection}{\numberline {G.2.1}Distillation}{105}{subsubsection.G.2.1}%
+\contentsline {subsubsection}{\numberline {G.2.2}Pruning}{107}{subsubsection.G.2.2}%
+\contentsline {subsection}{\numberline {G.3}Reducing Training Costs}{109}{subsection.G.3}%
+\contentsline {subsubsection}{\numberline {G.3.1}Dynamic Sparse Training}{109}{subsubsection.G.3.1}%
+\contentsline {subsubsection}{\numberline {G.3.2}Reverse Distillation}{109}{subsubsection.G.3.2}%
+\contentsline {subsubsection}{\numberline {G.3.3}Warm starting}{110}{subsubsection.G.3.3}%
+\contentsline {subsubsection}{\numberline {G.3.4}Alternative Warm Starting Methods}{111}{subsubsection.G.3.4}%
+\contentsline {subsection}{\numberline {G.4}Future Work for Efficient Training}{112}{subsection.G.4}%
+\contentsline {section}{\numberline {H}\textit {Dialogue-Prompted Gopher}\xspace Details}{112}{appendix.H}%
+\contentsline {subsection}{\numberline {H.1}Construction}{112}{subsection.H.1}%
+\contentsline {subsection}{\numberline {H.2}Dialogue Dataset Filtering}{115}{subsection.H.2}%
+\contentsline {subsection}{\numberline {H.3}Comparison Methodology}{115}{subsection.H.3}%
+\contentsline {subsection}{\numberline {H.4}RTP in a Dialogue Setting}{115}{subsection.H.4}%
+\contentsline {subsection}{\numberline {H.5}Selected Transcripts}{115}{subsection.H.5}%

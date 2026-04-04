@@ -1,0 +1,24 @@
+\begin{figure}
+    \centering
+    \resizebox{\columnwidth}{!}{%
+        \begin{tabular}{p{0.12\textwidth}|p{0.5\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}}
+            \toprule
+             \textbf{Task} & \textbf{Prompt} & \textbf{\llama{}} 3 &  \textbf{\model{}} \\
+             \midrule
+             \texttt{Substitute Word} & \texttt{Question: Substitute " and " with " internet " in " She went to the kitchen and saw two cereals. ". Answer:} & \texttt{She went to the kitchen and saw two cereals.} & \texttt{She went to the kitchen internet saw two cereals.} \\
+             \hline
+             \texttt{Swap Char} & \texttt{Question: Swap " h " and " a " in " that ". Answer: } & \texttt{that} & \texttt{taht} \\ 
+             \hline
+             \texttt{Substitute Char} & \texttt{Question: Substitute " a " with " m " in " page ". Answer: } & \texttt{-} & \texttt{pmge} \\
+             \hline
+             \texttt{Semantic Similarity} & \texttt{Question: More semantically related to " are ": " seem ", " acre ". Answer: } & \texttt{acre} & \texttt{seem} \\
+             \hline
+             \texttt{Orthographic Similarity} & \texttt{Question: Closer in Levenshtein distance to " time ": " timber ", " period ". Answer: } & \texttt{period} & \texttt{timber} \\
+             \hline
+             \texttt{Insert Char} & \texttt{Question: Add an " z " after every " n " in " not ". Answer: } & \texttt{znotz} & \texttt{nzot} \\
+             \bottomrule
+        \end{tabular}
+        }
+        \caption{Output responses from \llama{} 3 and \model{} models for various tasks from CUTE benchmark. \model{} model performs better on sequence manipulation tasks compared to the tokenizer-based \llama{} 3 model. Note that few-shot examples are not shown in the above prompts to maintain clarity.}
+    \label{fig:cute_examples}
+\end{figure}

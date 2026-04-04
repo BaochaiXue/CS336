@@ -1,0 +1,48 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & 
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3\\ (1T tokens)\end{tabular}} &
+ 
+ \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{} \\ (1T tokens)\end{tabular}} \\ \midrule
+\textbf{HellaSwag} & 80.7 & \textbf{80.6}\\
+  \hspace{0.5cm}\textbf{- AntSpeak} & 
+45.6  & \textbf{57.9} \\
+\hspace{0.5cm}\textbf{- Drop} & 
+53.8 & \textbf{58.2} \\
+\hspace{0.5cm}\textbf{- RandomCase} & 
+55.3 & \textbf{65.7}  \\
+\hspace{0.5cm}\textbf{- Repeat} & 
+57.0 & \textbf{66.6}\\
+\hspace{0.5cm}\textbf{- UpperCase} & 
+72.9 & \textbf{77.3}\\ 
+\midrule
+\textbf{Phonology-G2P} & 
+11.8 & \textbf{13.0} \\
+\midrule
+\textbf{CUTE} & 
+27.5 & \textbf{54.1} \\
+        \hspace{0.5cm}\textbf{- Contains Char}    & 0.0	          & \textbf{55.9} \\
+        \hspace{0.5cm}\textbf{- Contains Word}    & 55.1	       & \textbf{73.5} \\
+        \hspace{0.5cm}\textbf{- Del Char}         & 34.6	       & \textbf{35.9} \\
+        \hspace{0.5cm}\textbf{- Del Word}         & \textbf{75.5}  & 56.1 \\
+        \hspace{0.5cm}\textbf{- Ins Char}         & 7.5	          & \textbf{7.6} \\
+        \hspace{0.5cm}\textbf{- Ins Word}         & \textbf{33.5} & 31.2 \\
+        \hspace{0.5cm}\textbf{- Orthography}      & 43.1	      & \textbf{52.4} \\
+        \hspace{0.5cm}\textbf{- Semantic}         & 65	          & \textbf{90.5} \\
+        \hspace{0.5cm}\textbf{- Spelling}         & 1.1	          & \textbf{99.9} \\
+        \hspace{0.5cm}\textbf{- Spelling Inverse} & 30.1	      & \textbf{99.9} \\
+        \hspace{0.5cm}\textbf{- Substitute Char}  & 0.4	          & \textbf{48.7} \\
+        \hspace{0.5cm}\textbf{- Substitute Word}  & 16.4	      & \textbf{72.8} \\
+        \hspace{0.5cm}\textbf{- Swap Char}        & 2.6	          & \textbf{11.5} \\
+        \hspace{0.5cm}\textbf{- Swap Word}        & 20.1	      & \textbf{21} \\
+
+\bottomrule
+
+\end{tabular}
+\caption{We compare our 8B \model{} model to 8B BPE \llama{} 3 on tasks that assess robustness to noise and awareness of the constituents of language. Overall \model{} outperforms the \llama{} 3 BPE model.}
+\label{tab:char_tasks}
+\end{table}

@@ -1,0 +1,63 @@
+\documentclass[sigconf,nonacm]{acmart}
+% \documentclass[sigconf]{acmart}
+
+\settopmatter{printacmref=false}
+
+\usepackage{amsmath}
+\usepackage[font=small]{caption}
+\usepackage{comment}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage{grffile}
+\usepackage{xcolor}
+
+\newcommand{\note}[2]{\textcolor{#1}{#2}}{}
+
+\newcommand{\msr}{{\large$^\ast$}}
+\newcommand{\stanford}{{\large$^\ddagger$}}
+\newcommand{\nv}{{\large$^\dagger$}}
+\newcommand{\ack}{{\large$^\star$}}
+
+\newcommand{\mo}[1]{\textcolor{blue}{\small #1}}
+\newcommand{\ds}[1]{\textcolor{red}{\small #1}}
+
+\title{Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM}
+\author{
+\rm{Deepak Narayanan\stanford\ack, Mohammad Shoeybi\nv, Jared Casper\nv, Patrick LeGresley\nv, \\ Mostofa Patwary\nv, Vijay Korthikanti\nv, Dmitri Vainbrand\nv, Prethvi Kashinkunti\nv, \\ Julie Bernauer\nv, Bryan Catanzaro\nv, Amar Phanishayee\msr, Matei Zaharia\stanford}
+\\
+\rm{\textit{\nv NVIDIA\hspace{0.02in} \stanford Stanford University\hspace{0.02in} \msr Microsoft Research}}
+}
+\thanks{\ack \footnotesize{Work done as an intern at NVIDIA}}
+
+\copyrightyear{2021}
+\acmYear{2021}
+\setcopyright{acmlicensed}\acmConference[SC '21]{The International Conference for High Performance Computing, Networking, Storage and Analysis}{November 14--19, 2021}{St. Louis, MO, USA}
+\acmBooktitle{The International Conference for High Performance Computing, Networking, Storage and Analysis (SC '21), November 14--19, 2021, St. Louis, MO, USA}
+\acmPrice{15.00}
+\acmDOI{10.1145/3458817.3476209}
+\acmISBN{978-1-4503-8442-1/21/11}
+
+\begin{document}
+
+\input{tex/abstract}
+
+\maketitle
+
+\renewcommand{\shortauthors}{}
+
+\input{tex/introduction}
+\input{tex/model_parallelism}
+\input{tex/parallelization_dimensions}
+\input{tex/optimizations}
+\input{tex/evaluation}
+\input{tex/related_work}
+\input{tex/conclusion}
+\input{tex/acknowledgements}
+\input{tex/appendix}
+
+\newpage
+
+\bibliography{paper}
+\bibliographystyle{plain}
+
+\end{document}

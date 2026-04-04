@@ -1,0 +1,256 @@
+\newpage  % The model card is well-suited for its own set of pages
+\section{Model Card}
+\label{app:model_card}
+
+\cref{tab:model_card} presents the model card~\citep{mitchell2019model} of the \chonk model.
+
+{\fontsize{9pt}{9pt}\selectfont
+\begin{longtable}[c]{ p{.05\textwidth} | p{.65\textwidth} }
+\caption{Model Card of \chonk model.}
+\label{tab:model_card}
+\endfirsthead
+\endhead
+\toprule
+\multicolumn{2}{c}{\textbf{Model Summary}}      \\ \toprule
+\multicolumn{1}{l|}{Model Architecture} & 
+%%%%%
+Dense encoder-only model with 22 billion parameters. Transformer model architecture with variants to speed up and stabilize the training. For details, see Model Architecture~(\cref{sec:model_architecture}).  \\ \midrule
+\multicolumn{1}{l|}{Input(s)} & 
+%%%%%
+The model takes images as input. %
+\\ \midrule
+\multicolumn{1}{l|}{Output(s)} & 
+%%%%%
+The model generates a class label as output during pretraining. %
+\\
+\toprule
+%\hline  % toprule does not duplicate on page break in longtable with booktabs
+\multicolumn{2}{c}{\textbf{Usage}}      \\ \toprule
+\multicolumn{1}{l|}{Application} & 
+%%%%%
+The primary use is research on computer vision applications as a feature extractor that can be used in image recognition (finetuning, fewshot, linear-probing, zeroshot), dense prediction (semantic segmentation, depth estimation), video action recognition and so on. On top of that, \chonk is used in research that aim at understanding the impact of scaling vision transformers. % \vspace{0.1in}
+% Within Google, \chonk is being used as a pre-trained backbone for research on a variety image, video, and multi-modal applications. 
+\\ 
+\midrule
+\multicolumn{1}{l|}{Known Caveats} & 
+%%%%%
+When using \chonk, similar to any large scale model, it is difficult to understand how the model arrived at a specific decision, which could lead to lack of trust and accountability.
+
+Moreover, we demonstrated that \chonk is less prone to unintentional bias and enhances current vision backbones by reducing spurious correlations. However, this was done through limited studies and particular benchmarks. Besides, there is always a risk of misuse in harmful or deceitful contexts when it comes to large scale machine learning models. 
+
+\chonk should not be used for downstream applications without a prior assessment and mitigation of the safety and fairness concerns specific to the downstream application. We recommend spending enough time and energy on mitigation the risk at the downstream application level.  
+\\
+\toprule
+
+\multicolumn{2}{c}{\textbf{System Type}}      \\ \toprule
+\multicolumn{1}{l|}{System Description} & This is a standalone model.  \\ \midrule
+\multicolumn{1}{l|}{Upstream Dependencies} & None.  \\ \midrule
+\multicolumn{1}{l|}{Downstream Dependencies} & None. \\
+\toprule
+\multicolumn{2}{c}{\textbf{Implementation Frameworks}}      \\ \toprule
+\multicolumn{1}{l|}{
+\begin{minipage}{0.2\textwidth}
+Hardware \& Software: \\ Training
+\end{minipage}
+} & 
+Hardware: TPU v4~\citep{jouppi2020domain}. 
+\vspace{0.05in}
+Software: JAX~\citep{jax2018github}, Flax~\citep{flax2020github}, Scenic~\citep{dehghani2021scenic}.    %\vspace{0.1in}
+% For details, see Training Infrastructure~(\cref{}).
+\\ \midrule
+\multicolumn{1}{l|}{
+\begin{minipage}{0.2\textwidth}
+Hardware \& Software: \\ Deployment
+\end{minipage}
+} & Hardware: TPU v4~\citep{jouppi2020domain}. 
+\vspace{0.05in}
+Software: Scenic~\citep{dehghani2021scenic}. \\ \midrule
+\multicolumn{1}{l|}{Compute Requirements} & \chonk was trained on 1024 TPU V4 chips for 177K steps.
+\\
+\hline 
+\pagebreak  % depends on the actual start position and content of the table
+\toprule
+\multicolumn{2}{c}{\textbf{Model Characteristics}}      \\ \toprule
+\multicolumn{1}{l|}{Model Initialization} & The model is trained from a random initialization.  \\ \midrule
+\multicolumn{1}{l|}{Model Status} & This is a static model trained on an offline dataset.  \\ \midrule
+\multicolumn{1}{l|}{Model Stats} & \chonk model has 22 billion parameters. \\
+% \hline 
+\toprule
+\multicolumn{2}{c}{\textbf{Data Overview}}      \\ \toprule
+\multicolumn{1}{l|}{Training Dataset} & \chonk is trained on a version of JFT~\citep{sun2017revisiting}, extended to contain around 4B images~\citep{zhai2022scaling}. See \cref{sec:training} for the description of datasets used to train \chonk.
+\\ \midrule
+\multicolumn{1}{l|}{Evaluation Dataset} & We evaluate the \chonk on a wide variety of tasks and report the results on each individual tasks and datasets~\citep{dehghani2021benchmark}. Specifically, we evaluate the models on:
+ADE20K~\citep{zhou2017scene},
+Berkeley Adobe Perceptual Patch Similarity (BAPPS)~\citep{zhang2018perceptual},
+Birds~\citep{WahCUB_200_2011},
+Caltech101~\citep{li_andreeto_ranzato_perona_2022},
+Cars~\citep{KrauseStarkDengFei-Fei_3DRR2013},
+CelebA~\citep{liu2015faceattributes},
+Cifar-10~\citep{krizhevsky2009learning},
+Cifar-100~\citep{krizhevsky2009learning},
+CLEVR/count~\citep{johnson2017clevr},
+CLEVR/distance~\citep{johnson2017clevr},
+ColHist~\citep{kather2016multi},
+DMLab ~\citep{beattie2016deepmind},
+dSprites/location~\citep{dsprites17},
+dSprites/orientation~\citep{dsprites17},
+DTD~\citep{cimpoi2014describing},
+EuroSAT~\citep{helber2019eurosat},
+Flowers102~\citep{nilsback2008automated},
+ImageNet~\citep{deng2009imagenet},
+Inaturalist~\citep{cui2018large},
+ImageNet-v2~\citep{recht2019imagenet_v2},
+ImageNet-R~\citep{hendrycks2020imagenet_r}, 
+ImageNet-A~\citep{hendrycks2021imagenet_a},
+ImageNet-C~\citep{hendrycks2019benchmarking},
+ImageNet-ReaL-H~\citep{tran2022plex},
+Kinetics 400~\citep{kay2017kinetics},
+KITTI~\citep{geiger2013vision},
+Moments in Time~\citep{monfort2019moments},
+ObjectNet~\citep{barbu2019objectnet}, 
+Pascal Context~\citep{mottaghi2014role},
+Pascal VOC~\citep{everingham2010pascal},
+Patch Camelyon~\citep{teh2019metric},
+Pets~\citep{parkhi2012cats},
+Places365~\citep{zhou2017places},
+Resisc45~\citep{cheng2017remote},
+Retinopathy ~\citep{kaggle-diabetic-retinopathy},
+SmallNORB/azimuth~\citep{lecun2004learning},
+SmallNORB/elevation~\citep{lecun2004learning},
+Sun397~\citep{xiao2010sun},
+SVHN~\citep{netzer2011reading},
+UC Merced~\citep{yang2010bag},
+Waymo Open real-world driving dataset~\citep{sun2020scalability}.
+\\
+\hline 
+\pagebreak  % depends on the actual start position and content of the table
+\toprule
+\multicolumn{2}{c}{\textbf{Evaluation Results}}  \\ 
+\toprule
+\multicolumn{1}{l|}{Benchmark Information} & 
+\vspace{-5pt}
+\begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+    \item \textbf{Quality of transfer to downstream tasks.}
+    \begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+    \item Transfer to image classification (via linear probing, zero-shot transfer, OOD transfer, fewshot transfer, Head2Toe transfer, and fine-tuning).
+    \begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+    \item Datasets Used:
+            Birds~\citep{WahCUB_200_2011},
+            Caltech101~\citep{li_andreeto_ranzato_perona_2022},
+            Cars~\citep{KrauseStarkDengFei-Fei_3DRR2013},
+            CelebA~\citep{liu2015faceattributes},
+            Cifar-10~\citep{krizhevsky2009learning},
+            Cifar-100~\citep{krizhevsky2009learning},
+            CLEVR/count~\citep{johnson2017clevr},
+            CLEVR/distance~\citep{johnson2017clevr},
+            ColHist~\citep{kather2016multi},
+            DMLab ~\citep{beattie2016deepmind},
+            dSprites/location~\citep{dsprites17},
+            dSprites/orientation~\citep{dsprites17},
+            DTD~\citep{cimpoi2014describing},
+            EuroSAT~\citep{helber2019eurosat},
+            Flowers102~\citep{nilsback2008automated},
+            ImageNet~\citep{deng2009imagenet},
+            iNaturalist~\citep{cui2018large},
+            ImageNet-v2~\citep{recht2019imagenet_v2},
+            ImageNet-R~\citep{hendrycks2020imagenet_r}, 
+            ImageNet-A~\citep{hendrycks2021imagenet_a},
+            ImageNet-C~\citep{hendrycks2019benchmarking},
+            ImageNet-ReaL-H~\citep{tran2022plex},
+            Kinetics 400~\citep{kay2017kinetics},
+            KITTI~\citep{geiger2013vision},
+            ObjectNet~\citep{barbu2019objectnet},
+            Patch Camelyon~\citep{teh2019metric},
+            Pets~\citep{parkhi2012cats},
+            Places365~\citep{zhou2017places},
+            Resisc45~\citep{cheng2017remote},
+            Retinopathy ~\citep{kaggle-diabetic-retinopathy},
+            SmallNORB/azimuth~\citep{lecun2004learning},
+            SmallNORB/elevation~\citep{lecun2004learning},
+            Sun397~\citep{xiao2010sun},
+            SVHN~\citep{netzer2011reading},
+            UC Merced~\citep{yang2010bag}.
+    \end{itemize} 
+    \vspace{+0.1cm}
+    \item Transfer to video classification.
+    \begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+    \item Datasets Used: Kinetics 400~\citep{kay2017kinetics}, Moments in Time~\citep{monfort2019moments}.
+    \end{itemize} 
+    \vspace{+0.1cm}
+    \item Transfer to dense prediction.
+    \begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+    \item Semantic segmentation
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item Datasets Used: ADE20k~\citep{zhou2017scene}, Pascal Context~\citep{mottaghi2014role}, Pascal VOC~\citep{everingham2010pascal}.
+            \end{itemize} 
+    \vspace{+0.1cm}
+    \item Depth estimation
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item Dataset used: Waymo Open real-world driving dataset~\citep{sun2020scalability}.
+            \end{itemize} 
+    \end{itemize} 
+    \end{itemize}  
+    \item \textbf{Quality of learned features.}
+    \begin{itemize}
+    \addtolength{\itemsep}{-1ex}
+        \item Fairness. 
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item Dataset used: CelebA~\citep{liu2015faceattributes}.
+            \end{itemize} 
+        \vspace{+0.1cm}
+        \item Human alignment.
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item We used the {\tt model-vs-human} toolbox~\citep{geirhos2021partial}.
+            \end{itemize} 
+        \vspace{+0.1cm}
+        \item Calibration.
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item We follow the setup of \citet{minderer2021revisiting}. We use ImageNet validation set~\citep{deng2009imagenet}.
+            \end{itemize} 
+        \vspace{+0.1cm}
+        \item Perceptual similarity.
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item Dataset used:  Berkeley Adobe Perceptual Patch Similarity (BAPPS) dataset~\citep{zhang2018perceptual}
+            \end{itemize} 
+        \vspace{+0.1cm}
+        \item Feature attribution. 
+            \begin{itemize}
+            \addtolength{\itemsep}{-1ex}
+            \item Dataset used: ImageNet~\citep{deng2009imagenet}.
+            \end{itemize} 
+    \end{itemize} 
+\end{itemize}  \vspace{-5pt} \\
+\midrule
+\multicolumn{1}{l|}{Evaluation Results} & All results are reported in ~\cref{sec:evaluation}.    \\ 
+\hline 
+\pagebreak  % depends on the actual start position and content of the table
+\toprule
+\multicolumn{2}{c}{\textbf{Model Usage \& Limitations}}      \\ \toprule
+\multicolumn{1}{l|}{Sensitive Use} & \chonk should not be used for any unacceptable vision model use cases. For example: for detecting demographic human features for non-ethical purposes, as a feature extractor used to condition on and generate toxic content, or for captcha-breaking. We also do not approve use of \chonk in applications like surveillance, law enforcement, healthcare, or hiring and employment, and self-driving cars without putting measures in place to mitigate the ethical risks.
+\\ \midrule
+\multicolumn{1}{l|}{Known Limitations} & \chonk is designed for research. The model has not been tested in settings outside of research that can affect performance, and it should not be used for downstream applications without further analysis on factors in the proposed downstream application.  
+\\ \midrule
+\multicolumn{1}{l|}{
+\begin{minipage}{0.2\textwidth}
+Ethical Considerations \\ \& Risks
+\end{minipage}
+} & 
+In order to train \chonk, we conducted an analysis of sensitive category associations on the JFT-4B dataset as described in \citet{aka2021measuring}. This process involved measuring the per label distribution of sensitive categories across the raw data, cleaned data, and models trained on this data, as well as labels verified by human raters. To further enhance the data quality, human raters also assisted in removing offensive content from the dataset. Our analysis using standard fairness benchmarks shows that \chonk increases performance for all subgroups while minimizing disparities among them. However, it is important to note that there may be situations where utilizing \chonk could pose ethical concerns. Therefore, we recommend conducting custom ethical evaluations for any new applications of \chonk.
+\\
+\bottomrule
+\end{longtable}
+}
+\newpage  % The model card is well-suited for its own set of pages
+
+

@@ -1,0 +1,63 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkviolet1270255}{RGB}{127,0,255}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{sandybrown25517896}{RGB}{255,178,96}
+\definecolor{turquoise64236211}{RGB}{64,236,211}
+
+\begin{axis}[
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204,at={(0.02,0.98)},anchor=north west},
+log basis x={10},
+tick align=outside,
+tick pos=left,
+title={STEM},
+x grid style={darkgray176},
+xlabel={Parameters},
+xmin=58012079.6447931, xmax=254672107396.429,
+xmode=log,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Accuracy},
+ymin=0.2, ymax=0.4,
+ytick style={color=black},
+yticklabel={\pgfmathprintnumber{\tick}\%},
+scaled y ticks=false,
+y coord trafo/.code={\pgfmathparse{#1*100}\pgfmathresult}
+]
+
+\addplot [semithick, black, dotted]
+table {%
+58012079.644793 0.25
+254672107396.429 0.25
+};
+%\addlegendentry{Random}
+\addplot [semithick, darkviolet1270255, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+5637144576 0.255629559150016
+19900000000 0.268965517241379
+};
+%\addlegendentry{EleutherAI}
+\addplot [semithick, turquoise64236211, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+301989888 0.241991753885189
+1207959552 0.257849666983825
+6442450944 0.240723120837298
+173946175488 0.290834126228988
+};
+%\addlegendentry{OpenAI}
+\addplot [semithick, sandybrown25517896, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+84934656 0.238820171265461
+301989888 0.23279416428798
+1207959552 0.247383444338725
+2516582400 0.241357437361243
+6442450944 0.260704091341579
+12681408000 0.237234379955598
+};
+%\addlegendentry{FairSeq}
+\end{axis}
+
+\end{tikzpicture}

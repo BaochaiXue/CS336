@@ -1,0 +1,438 @@
+============================================================
+CS336 Paper Fetch Pipeline
+  Manifest: papers/manifest.csv
+  Mode: DOWNLOAD
+  Scope: All papers
+============================================================
+
+Processing 116 papers...
+
+[1/116] [MiniMax M2.5]
+  ⬇️  Downloading: https://www.minimax.io/news/minimax-m25
+[2/116] [Xiaomi MIMO v2]
+  ⬇️  Downloading: https://mimo.xiaomi.com/mimo-v2-pro
+[3/116] Alpaca
+  ⬇️  Downloading: https://crfm.stanford.edu/2023/03/13/alpaca.html
+[4/116] Arcee Trinity
+  ⬇️  Downloading: https://arxiv.org/e-print/2602.17004
+  📦 Extracting: papers/raw_archives/arcee_trinity.tar.gz
+  ✅ Extracted to: papers/extracted/arcee_trinity
+[5/116] Deepseek Math
+  ⬇️  Downloading: https://arxiv.org/e-print/2402.03300
+  📦 Extracting: papers/raw_archives/deepseek_math.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_math
+[6/116] Deepseek R1
+  ⬇️  Downloading: https://arxiv.org/e-print/2501.12948
+  📦 Extracting: papers/raw_archives/deepseek_r1.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_r1
+[7/116] DPO
+  ⬇️  Downloading: https://arxiv.org/e-print/2305.18290
+  📦 Extracting: papers/raw_archives/dpo.tar.gz
+  ✅ Extracted to: papers/extracted/dpo
+[8/116] GLM 4 5
+  ⬇️  Downloading: https://arxiv.org/e-print/2508.06471
+  📦 Extracting: papers/raw_archives/glm_4_5.tar.gz
+  ✅ Extracted to: papers/extracted/glm_4_5
+[9/116] GLM 5
+  ⬇️  Downloading: https://arxiv.org/e-print/2602.15763
+  📦 Extracting: papers/raw_archives/glm_5.tar.gz
+  ✅ Extracted to: papers/extracted/glm_5
+[10/116] Hnet
+  ⬇️  Downloading: https://arxiv.org/e-print/2507.07955
+  📦 Extracting: papers/raw_archives/hnet.tar.gz
+  ✅ Extracted to: papers/extracted/hnet
+[11/116] Instruct GPT
+  ⬇️  Downloading: https://arxiv.org/e-print/2203.02155
+  📦 Extracting: papers/raw_archives/instruct_gpt.tar.gz
+  ✅ Extracted to: papers/extracted/instruct_gpt
+[12/116] Kimi 1 5
+  ⬇️  Downloading: https://arxiv.org/e-print/2501.12599
+  📦 Extracting: papers/raw_archives/kimi_1_5.tar.gz
+  ✅ Extracted to: papers/extracted/kimi_1_5
+[13/116] Kimi K2 5
+  ⬇️  Downloading: https://arxiv.org/e-print/2602.02276
+  📦 Extracting: papers/raw_archives/kimi_k2_5.tar.gz
+  ✅ Extracted to: papers/extracted/kimi_k2_5
+[14/116] Ling 2
+  ⬇️  Downloading: https://arxiv.org/e-print/2510.22115
+  📦 Extracting: papers/raw_archives/ling_2.tar.gz
+  ✅ Extracted to: papers/extracted/ling_2
+[15/116] PPO2017
+  ⬇️  Downloading: https://arxiv.org/e-print/1707.06347
+  📦 Extracting: papers/raw_archives/ppo2017.tar.gz
+  ✅ Extracted to: papers/extracted/ppo2017
+[16/116] QWEN 3 5
+  ⬇️  Downloading: https://qwen.ai/blog?id=qwen3.5
+[17/116] QWEN3
+  ⬇️  Downloading: https://arxiv.org/e-print/2505.09388
+  📦 Extracting: papers/raw_archives/qwen3.tar.gz
+  ✅ Extracted to: papers/extracted/qwen3
+[18/116] Auxfree
+  ⬇️  Downloading: https://arxiv.org/e-print/2408.15664
+  📦 Extracting: papers/raw_archives/auxfree.tar.gz
+  ✅ Extracted to: papers/extracted/auxfree
+[19/116] BAHDANAU2015 Attention
+  ⬇️  Downloading: https://arxiv.org/e-print/1409.0473
+  📦 Extracting: papers/raw_archives/bahdanau2015_attention.tar.gz
+  ✅ Extracted to: papers/extracted/bahdanau2015_attention
+[20/116] Deepseek V2
+  ⬇️  Downloading: https://arxiv.org/e-print/2405.04434
+  📦 Extracting: papers/raw_archives/deepseek_v2.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_v2
+[21/116] GQA
+  ⬇️  Downloading: https://arxiv.org/e-print/2305.13245
+  📦 Extracting: papers/raw_archives/gqa.tar.gz
+  ✅ Extracted to: papers/extracted/gqa
+[22/116] Layernorm
+  ⬇️  Downloading: https://arxiv.org/e-print/1607.06450
+  📦 Extracting: papers/raw_archives/layernorm.tar.gz
+  ✅ Extracted to: papers/extracted/layernorm
+[23/116] Linear Attention
+  ⬇️  Downloading: https://arxiv.org/e-print/2006.16236
+  📦 Extracting: papers/raw_archives/linear_attention.tar.gz
+  ✅ Extracted to: papers/extracted/linear_attention
+[24/116] Long Short-Term Memory
+  ⬇️  Downloading: https://www.bioinf.jku.at/publications/older/2604.pdf
+[25/116] Longformer
+  ⬇️  Downloading: https://arxiv.org/e-print/2004.05150
+  📦 Extracting: papers/raw_archives/longformer.tar.gz
+  ✅ Extracted to: papers/extracted/longformer
+[26/116] Mamba 2
+  ⬇️  Downloading: https://arxiv.org/e-print/2405.21060
+  📦 Extracting: papers/raw_archives/mamba_2.tar.gz
+  ✅ Extracted to: papers/extracted/mamba_2
+[27/116] Mamba 3
+  ⬇️  Downloading: https://arxiv.org/e-print/2603.15569
+  📦 Extracting: papers/raw_archives/mamba_3.tar.gz
+  ✅ Extracted to: papers/extracted/mamba_3
+[28/116] Mistral 7B
+  ⬇️  Downloading: https://arxiv.org/e-print/2310.06825
+  📦 Extracting: papers/raw_archives/mistral_7b.tar.gz
+  ✅ Extracted to: papers/extracted/mistral_7b
+[29/116] Mixtral
+  ⬇️  Downloading: https://arxiv.org/e-print/2401.04088
+  📦 Extracting: papers/raw_archives/mixtral.tar.gz
+  ✅ Extracted to: papers/extracted/mixtral
+[30/116] Moe
+  ⬇️  Downloading: https://arxiv.org/e-print/1701.06538
+  📦 Extracting: papers/raw_archives/moe.tar.gz
+  ✅ Extracted to: papers/extracted/moe
+[31/116] Qk Norm
+  ⬇️  Downloading: https://arxiv.org/e-print/2302.05442
+  📦 Extracting: papers/raw_archives/qk_norm.tar.gz
+  ✅ Extracted to: papers/extracted/qk_norm
+[32/116] Rms Norm
+  ⬇️  Downloading: https://arxiv.org/e-print/1910.07467
+  📦 Extracting: papers/raw_archives/rms_norm.tar.gz
+  ✅ Extracted to: papers/extracted/rms_norm
+[33/116] ROPE
+  ⬇️  Downloading: https://arxiv.org/e-print/2104.09864
+  📦 Extracting: papers/raw_archives/rope.tar.gz
+  ✅ Extracted to: papers/extracted/rope
+[34/116] Sparse Transformer
+  ⬇️  Downloading: https://arxiv.org/e-print/1904.10509
+  📦 Extracting: papers/raw_archives/sparse_transformer.tar.gz
+  ✅ Extracted to: papers/extracted/sparse_transformer
+[35/116] SUSKETVER2014
+  ⬇️  Downloading: https://arxiv.org/e-print/1409.3215
+  📦 Extracting: papers/raw_archives/susketver2014.tar.gz
+  ✅ Extracted to: papers/extracted/susketver2014
+[36/116] Switch Transformers
+  ⬇️  Downloading: https://arxiv.org/e-print/2101.03961
+  📦 Extracting: papers/raw_archives/switch_transformers.tar.gz
+  ✅ Extracted to: papers/extracted/switch_transformers
+[37/116] The FLOPs Calculus of Language Model Training
+  ⬇️  Downloading: https://medium.com/@dzmitrybahdanau/the-flops-calculus-of-language-model-training-3b19c1f025e4
+  ❌ Download failed: HTTP Error 403: Forbidden
+[38/116] Transformer
+  ⬇️  Downloading: https://arxiv.org/e-print/1706.03762
+  📦 Extracting: papers/raw_archives/transformer.tar.gz
+  ✅ Extracted to: papers/extracted/transformer
+[39/116] Transformer Math 101
+  ⬇️  Downloading: https://blog.eleuther.ai/transformer-math/
+[40/116] Gopher
+  ⬇️  Downloading: https://arxiv.org/e-print/2112.11446
+  📦 Extracting: papers/raw_archives/gopher.tar.gz
+  ✅ Extracted to: papers/extracted/gopher
+[41/116] GPT4
+  ⬇️  Downloading: https://arxiv.org/e-print/2303.08774
+  📦 Extracting: papers/raw_archives/gpt4.tar.gz
+  ✅ Extracted to: papers/extracted/gpt4
+[42/116] Lima
+  ⬇️  Downloading: https://arxiv.org/e-print/2305.11206
+  📦 Extracting: papers/raw_archives/lima.tar.gz
+  ✅ Extracted to: papers/extracted/lima
+[43/116] Mmlu
+  ⬇️  Downloading: https://arxiv.org/e-print/2009.03300
+  📦 Extracting: papers/raw_archives/mmlu.tar.gz
+  ✅ Extracted to: papers/extracted/mmlu
+[44/116] A Neural Probabilistic Language Model
+  ⬇️  Downloading: https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf
+[45/116] Bert
+  ⬇️  Downloading: https://arxiv.org/e-print/1810.04805
+  📦 Extracting: papers/raw_archives/bert.tar.gz
+  ✅ Extracted to: papers/extracted/bert
+[46/116] Elmo
+  ⬇️  Downloading: https://arxiv.org/e-print/1802.05365
+  📦 Extracting: papers/raw_archives/elmo.tar.gz
+  ✅ Extracted to: papers/extracted/elmo
+[47/116] Gdn
+  ⬇️  Downloading: https://arxiv.org/e-print/2412.06464
+  📦 Extracting: papers/raw_archives/gdn.tar.gz
+  ✅ Extracted to: papers/extracted/gdn
+[48/116] Language Models in Machine Translation
+  ⬇️  Downloading: https://aclanthology.org/D07-1090.pdf
+[49/116] MTP
+  ⬇️  Downloading: https://arxiv.org/e-print/2404.19737
+  📦 Extracting: papers/raw_archives/mtp.tar.gz
+  ✅ Extracted to: papers/extracted/mtp
+[50/116] Olmix
+  ⬇️  Downloading: https://arxiv.org/e-print/2602.12237
+  📦 Extracting: papers/raw_archives/olmix.tar.gz
+  ✅ Extracted to: papers/extracted/olmix
+[51/116] Pre Post Norm
+  ⬇️  Downloading: https://arxiv.org/e-print/2002.04745
+  📦 Extracting: papers/raw_archives/pre_post_norm.tar.gz
+  ✅ Extracted to: papers/extracted/pre_post_norm
+[52/116] Shazeer
+  ⬇️  Downloading: https://arxiv.org/e-print/2002.05202
+  📦 Extracting: papers/raw_archives/shazeer.tar.gz
+  ✅ Extracted to: papers/extracted/shazeer
+[53/116] SMOLLM2
+  ⬇️  Downloading: https://arxiv.org/e-print/2502.02737
+  📦 Extracting: papers/raw_archives/smollm2.tar.gz
+  ✅ Extracted to: papers/extracted/smollm2
+[54/116] Tfree
+  ⬇️  Downloading: https://arxiv.org/e-print/2406.19223
+  📦 Extracting: papers/raw_archives/tfree.tar.gz
+  ✅ Extracted to: papers/extracted/tfree
+[55/116] [Marin 32B retro]
+  ⬇️  Downloading: https://marin.readthedocs.io/en/latest/reports/marin-32b-retro/
+[56/116] [Marin 8B retro]
+  ⬇️  Downloading: https://marin.readthedocs.io/en/latest/reports/marin-8b-retro/
+[57/116] Deepseek 67B
+  ⬇️  Downloading: https://arxiv.org/e-print/2401.02954
+  📦 Extracting: papers/raw_archives/deepseek_67b.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_67b
+[58/116] Deepseek V3
+  ⬇️  Downloading: https://arxiv.org/e-print/2412.19437
+  📦 Extracting: papers/raw_archives/deepseek_v3.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_v3
+[59/116] Deepseek V3 2
+  ⬇️  Downloading: https://arxiv.org/e-print/2512.02556
+  📦 Extracting: papers/raw_archives/deepseek_v3_2.tar.gz
+  ✅ Extracted to: papers/extracted/deepseek_v3_2
+[60/116] Gemma
+  ⬇️  Downloading: https://arxiv.org/e-print/2403.08295
+  📦 Extracting: papers/raw_archives/gemma.tar.gz
+  ✅ Extracted to: papers/extracted/gemma
+[61/116] GPT 3
+  ⬇️  Downloading: https://arxiv.org/e-print/2005.14165
+  📦 Extracting: papers/raw_archives/gpt_3.tar.gz
+  ✅ Extracted to: papers/extracted/gpt_3
+[62/116] GPT Neox
+  ⬇️  Downloading: https://arxiv.org/e-print/2204.06745
+  📦 Extracting: papers/raw_archives/gpt_neox.tar.gz
+  ✅ Extracted to: papers/extracted/gpt_neox
+[63/116] GPT-J
+  ⬇️  Downloading: https://arankomatsuzaki.wordpress.com/2021/06/04/gpt-j/
+[64/116] Huanyuan Large
+  ⬇️  Downloading: https://arxiv.org/e-print/2411.02265
+  📦 Extracting: papers/raw_archives/huanyuan_large.tar.gz
+  ✅ Extracted to: papers/extracted/huanyuan_large
+[65/116] Language Models are Unsupervised Multitask Learners
+  ⬇️  Downloading: https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
+[66/116] LLAMA
+  ⬇️  Downloading: https://arxiv.org/e-print/2302.13971
+  📦 Extracting: papers/raw_archives/llama.tar.gz
+  ✅ Extracted to: papers/extracted/llama
+[67/116] Llama 4
+  ⬇️  Downloading: https://ai.meta.com/blog/llama-4-multimodal-intelligence/
+[68/116] LLAMA2
+  ⬇️  Downloading: https://arxiv.org/e-print/2307.09288
+  📦 Extracting: papers/raw_archives/llama2.tar.gz
+  ✅ Extracted to: papers/extracted/llama2
+[69/116] LLAMA3
+  ⬇️  Downloading: https://arxiv.org/e-print/2407.21783
+  📦 Extracting: papers/raw_archives/llama3.tar.gz
+  ✅ Extracted to: papers/extracted/llama3
+[70/116] Minicpm
+  ⬇️  Downloading: https://arxiv.org/e-print/2404.06395
+  📦 Extracting: papers/raw_archives/minicpm.tar.gz
+  ✅ Extracted to: papers/extracted/minicpm
+[71/116] OLMo 2 (32B)
+  ⬇️  Downloading: https://allenai.org/blog/olmo2-32B
+[72/116] OLMO 3
+  ⬇️  Downloading: https://arxiv.org/e-print/2512.13961
+  📦 Extracting: papers/raw_archives/olmo_3.tar.gz
+  ✅ Extracted to: papers/extracted/olmo_3
+[73/116] OLMO 7B
+  ⬇️  Downloading: https://arxiv.org/e-print/2402.00838
+  📦 Extracting: papers/raw_archives/olmo_7b.tar.gz
+  ✅ Extracted to: papers/extracted/olmo_7b
+[74/116] OLMO2
+  ⬇️  Downloading: https://arxiv.org/e-print/2501.00656
+  📦 Extracting: papers/raw_archives/olmo2.tar.gz
+  ✅ Extracted to: papers/extracted/olmo2
+[75/116] QWEN 2 5
+  ⬇️  Downloading: https://arxiv.org/e-print/2412.15115
+  📦 Extracting: papers/raw_archives/qwen_2_5.tar.gz
+  ✅ Extracted to: papers/extracted/qwen_2_5
+[76/116] Yi 34B
+  ⬇️  Downloading: https://arxiv.org/e-print/2403.04652
+  📦 Extracting: papers/raw_archives/yi_34b.tar.gz
+  ✅ Extracted to: papers/extracted/yi_34b
+[77/116] Adagrad
+  ⬇️  Downloading: https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf
+[78/116] ADAM2014
+  ⬇️  Downloading: https://arxiv.org/e-print/1412.6980
+  📦 Extracting: papers/raw_archives/adam2014.tar.gz
+  ✅ Extracted to: papers/extracted/adam2014
+[79/116] ADAMW2017
+  ⬇️  Downloading: https://arxiv.org/e-print/1711.05101
+  📦 Extracting: papers/raw_archives/adamw2017.tar.gz
+  ✅ Extracted to: papers/extracted/adamw2017
+[80/116] Chinchilla
+  ⬇️  Downloading: https://arxiv.org/e-print/2203.15556
+  📦 Extracting: papers/raw_archives/chinchilla.tar.gz
+  ✅ Extracted to: papers/extracted/chinchilla
+[81/116] Cosine Learning Rate
+  ⬇️  Downloading: https://arxiv.org/e-print/1608.03983
+  📦 Extracting: papers/raw_archives/cosine_learning_rate.tar.gz
+  ✅ Extracted to: papers/extracted/cosine_learning_rate
+[82/116] Kaplan Scaling Laws
+  ⬇️  Downloading: https://arxiv.org/e-print/2001.08361
+  📦 Extracting: papers/raw_archives/kaplan_scaling_laws.tar.gz
+  ✅ Extracted to: papers/extracted/kaplan_scaling_laws
+[83/116] Large Batch Training
+  ⬇️  Downloading: https://arxiv.org/e-print/1812.06162
+  📦 Extracting: papers/raw_archives/large_batch_training.tar.gz
+  ✅ Extracted to: papers/extracted/large_batch_training
+[84/116] Muon: An optimizer for hidden layers in neural networks
+  ⬇️  Downloading: https://kellerjordan.github.io/posts/muon/
+[85/116] MUP
+  ⬇️  Downloading: https://arxiv.org/e-print/2203.03466
+  📦 Extracting: papers/raw_archives/mup.tar.gz
+  ✅ Extracted to: papers/extracted/mup
+[86/116] Overtrained Scaling Laws
+  ⬇️  Downloading: https://arxiv.org/e-print/2403.08540
+  📦 Extracting: papers/raw_archives/overtrained_scaling_laws.tar.gz
+  ✅ Extracted to: papers/extracted/overtrained_scaling_laws
+[87/116] Soap
+  ⬇️  Downloading: https://arxiv.org/e-print/2409.11321
+  📦 Extracting: papers/raw_archives/soap.tar.gz
+  ✅ Extracted to: papers/extracted/soap
+[88/116] Understanding the difficulty of training deep feedforward neural networks
+  ⬇️  Downloading: https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf
+[89/116] Wrap
+  ⬇️  Downloading: https://arxiv.org/e-print/2401.16380
+  📦 Extracting: papers/raw_archives/wrap.tar.gz
+  ✅ Extracted to: papers/extracted/wrap
+[90/116] Bloom
+  ⬇️  Downloading: https://arxiv.org/e-print/2211.05100
+  📦 Extracting: papers/raw_archives/bloom.tar.gz
+  ✅ Extracted to: papers/extracted/bloom
+[91/116] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning
+  ⬇️  Downloading: https://arxiv.org/e-print/2307.08691
+  📦 Extracting: papers/raw_archives/flashattention-2_faster_attention_with_better_parallelism_and_work_partitioning.tar.gz
+  ✅ Extracted to: papers/extracted/flashattention-2_faster_attention_with_better_parallelism_and_work_partitioning
+[92/116] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness
+  ⬇️  Downloading: https://arxiv.org/e-print/2205.14135
+  📦 Extracting: papers/raw_archives/flashattention_fast_and_memory-efficient_exact_attention_with_io-awareness.tar.gz
+  ✅ Extracted to: papers/extracted/flashattention_fast_and_memory-efficient_exact_attention_with_io-awareness
+[93/116] Gpipe
+  ⬇️  Downloading: https://arxiv.org/e-print/1811.06965
+  📦 Extracting: papers/raw_archives/gpipe.tar.gz
+  ✅ Extracted to: papers/extracted/gpipe
+[94/116] Longcat Flash
+  ⬇️  Downloading: https://arxiv.org/e-print/2509.01322
+  📦 Extracting: papers/raw_archives/longcat_flash.tar.gz
+  ✅ Extracted to: papers/extracted/longcat_flash
+[95/116] Megascale
+  ⬇️  Downloading: https://arxiv.org/e-print/2402.15627
+  📦 Extracting: papers/raw_archives/megascale.tar.gz
+  ✅ Extracted to: papers/extracted/megascale
+[96/116] Megatron Lm
+  ⬇️  Downloading: https://arxiv.org/e-print/1909.08053
+  📦 Extracting: papers/raw_archives/megatron_lm.tar.gz
+  ✅ Extracted to: papers/extracted/megatron_lm
+[97/116] Megatron Parallelism
+  ⬇️  Downloading: https://arxiv.org/e-print/2104.04473
+  📦 Extracting: papers/raw_archives/megatron_parallelism.tar.gz
+  ✅ Extracted to: papers/extracted/megatron_parallelism
+[98/116] Nemotron 15B
+  ⬇️  Downloading: https://arxiv.org/e-print/2402.16819
+  📦 Extracting: papers/raw_archives/nemotron_15b.tar.gz
+  ✅ Extracted to: papers/extracted/nemotron_15b
+[99/116] Nemotron 3
+  ⬇️  Downloading: https://arxiv.org/e-print/2512.20856
+  📦 Extracting: papers/raw_archives/nemotron_3.tar.gz
+  ✅ Extracted to: papers/extracted/nemotron_3
+[100/116] Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning
+  ⬇️  Downloading: https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf
+[101/116] Nemotron Cc
+  ⬇️  Downloading: https://arxiv.org/e-print/2412.02595
+  📦 Extracting: papers/raw_archives/nemotron_cc.tar.gz
+  ✅ Extracted to: papers/extracted/nemotron_cc
+[102/116] Opt 175B
+  ⬇️  Downloading: https://arxiv.org/e-print/2205.01068
+  📦 Extracting: papers/raw_archives/opt_175b.tar.gz
+  ✅ Extracted to: papers/extracted/opt_175b
+[103/116] Palm
+  ⬇️  Downloading: https://arxiv.org/e-print/2204.02311
+  📦 Extracting: papers/raw_archives/palm.tar.gz
+  ✅ Extracted to: papers/extracted/palm
+[104/116] Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations
+  ⬇️  Downloading: https://www.eecs.harvard.edu/~htk/publication/2019-mapl-tillet-kung-cox.pdf
+[105/116] Zero
+  ⬇️  Downloading: https://arxiv.org/e-print/1910.02054
+  📦 Extracting: papers/raw_archives/zero.tar.gz
+  ✅ Extracted to: papers/extracted/zero
+[106/116] BLT
+  ⬇️  Downloading: https://arxiv.org/e-print/2412.09871
+  📦 Extracting: papers/raw_archives/blt.tar.gz
+  ✅ Extracted to: papers/extracted/blt
+[107/116] BYT5
+  ⬇️  Downloading: https://arxiv.org/e-print/2105.13626
+  📦 Extracting: papers/raw_archives/byt5.tar.gz
+  ✅ Extracted to: papers/extracted/byt5
+[108/116] DCLM
+  ⬇️  Downloading: https://arxiv.org/e-print/2406.11794
+  📦 Extracting: papers/raw_archives/dclm.tar.gz
+  ✅ Extracted to: papers/extracted/dclm
+[109/116] Dolma
+  ⬇️  Downloading: https://arxiv.org/e-print/2402.00159
+  📦 Extracting: papers/raw_archives/dolma.tar.gz
+  ✅ Extracted to: papers/extracted/dolma
+[110/116] Megabyte
+  ⬇️  Downloading: https://arxiv.org/e-print/2305.07185
+  📦 Extracting: papers/raw_archives/megabyte.tar.gz
+  ✅ Extracted to: papers/extracted/megabyte
+[111/116] OpenWebText
+  ⬇️  Downloading: https://skylion007.github.io/OpenWebTextCorpus/
+[112/116] Prediction and Entropy of Printed English
+  ⬇️  Downloading: https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf
+[113/116] Regmix
+  ⬇️  Downloading: https://arxiv.org/e-print/2407.01492
+  📦 Extracting: papers/raw_archives/regmix.tar.gz
+  ✅ Extracted to: papers/extracted/regmix
+[114/116] Sennrich
+  ⬇️  Downloading: https://arxiv.org/e-print/1508.07909
+  📦 Extracting: papers/raw_archives/sennrich.tar.gz
+  ✅ Extracted to: papers/extracted/sennrich
+[115/116] T5
+  ⬇️  Downloading: https://arxiv.org/e-print/1910.10683
+  📦 Extracting: papers/raw_archives/t5.tar.gz
+  ✅ Extracted to: papers/extracted/t5
+[116/116] The Pile
+  ⬇️  Downloading: https://arxiv.org/e-print/2101.00027
+  📦 Extracting: papers/raw_archives/the_pile.tar.gz
+  ✅ Extracted to: papers/extracted/the_pile
+
+============================================================
+Summary:
+  extracted: 94
+  pdf_only: 21
+  download_failed: 1
+  failures logged: 1
+============================================================

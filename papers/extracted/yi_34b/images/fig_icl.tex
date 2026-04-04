@@ -1,0 +1,13 @@
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/icl.pdf}
+	\end{center}
+	\caption{Evaluating language model's in-context learning capability by inferring the linear coefficients of a weighted sum.
+        Considering the discussions of whether emergent ability is an artifact of measurement~\citep{schaeffer2024emergent}, we use 
+        difference to the target (target number - model prediction) as a continuous measure, 
+        and exact match (target number == model prediction) as a discontinuous measure.
+        A: when there is two linear coefficients, Yi-34B performs the best when measuring by the difference to the target number. 
+        B: increasing the number of linear coefficients to 5, only models that are large enough (LLaMA2 70B and Mixtral 8x7B) can achieve meaningful exact match, showing that in-context learning complex functions is an emergent ability.
+        } %
+	\label{fig:icl}
+\end{figure}

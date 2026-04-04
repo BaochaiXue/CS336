@@ -1,0 +1,57 @@
+\section{Introduction}
+Similar to natural language processing, transfer of pre-trained vision backbones has improved performance on a wide variety of vision tasks~\citep{pan2009survey,zhai2019large,kolesnikov2020big}.
+Larger datasets, scalable architectures, and new training methods~\citep{mahajan2018exploring,dosovitskiy2020image,clip,zhai2022scaling} have accelerated this growth. Despite this, vision models have trailed far behind language models, which have demonstrated emergent capabilities at massive scales~\citep{chowdhery2022palm, wei2022emergent}. Specifically, the largest dense vision model to date is a mere $4$B parameter ViT~\citep{chen2022pali}, while a modestly parameterized model for an entry-level competitive language model typically contains over 10B parameters~\citep{t5paper,tay2022unifying,chung2022scaling}, and the largest dense language model has 540B parameters~\citep{chowdhery2022palm}. Sparse models demonstrate the same trend, where language models go beyond a trillion parameters~\citep{fedus2021switch} but the largest reported sparse vision models are only 15B~\citep{riquelme2021scaling}.
+
+%% Numbers extracted from the experiments.
+% 1) 89.5 imagenet linear
+% 2) 85.9 zero-shot (frozen image tower)
+% 3) 88 kinetics400
+% 4) 88.6 vit/b distilled,  89.3 for vit/l
+% 5) shape/texture: 87/13
+
+This paper presents~\chonk{}, the largest dense ViT model to date. En route to 22B parameters, we uncover pathological training instabilities which prevent scaling the default recipe, and demonstrate architectural changes which make it possible. Further, we carefully engineer the model to enable model-parallel training at unprecedented efficiency.
+\chonk{}'s quality is assessed via a comprehensive evaluation suite of tasks, ranging from (few-shot) classification to dense output tasks, where it reaches or advances the current state-of-the-art.
+% , including fine-grained visual classification, calibration, robustness \& reliability, video classification, contrastive image-text modelling, dense prediction, distillation, fairness and human alignment.
+For example, even when used as a frozen visual feature extractor, \chonk achieves an accuracy of 89.5\% on ImageNet.
+With a text tower trained to match these visual features~\citep{lit}, it achieves 85.9\% accuracy on ImageNet in the zero-shot setting.
+The model is furthermore a great teacher --- used as a distillation target, we train a ViT-B student that achieves 88.6\% on ImageNet, state-of-the-art at this scale.
+
+This performance comes with improved out of distribution behaviour, reliability, uncertainty estimation and fairness tradeoffs.
+Finally, the model's features are better aligned with humans perception, achieving previously unseen shape bias of 87\%.
+
+
+% We find benefits from this scale on numerous fronts, such as remarkable improvements in tradeoffs between accuracy and calibration, the highest ever recorded shape bias (improved alignment to human visual object recognition), state-of-the-art distillation to image classification models, and SOTA or near-SOTA performance across multiple visual tasks with completely frozen representations, ranging from classification to dense output tasks.
+% Specifically, we present a comprehensive suite of evaluations predominately using simple models (e.g.\ linear) on frozen representations.
+% With such a simple construction, \chonk achieves or gets close to SOTA on many tasks, demonstrating the capabilities of visual representation learning at scale. 
+%
+% This is currently just copied from the abstract, should be improved.
+% We further observe other interesting benefits of scale, including an improved trade-off between bias and performance, an improved alignment to human visual perception in terms of shape/texture bias, and improved robustness.
+
+
+% However, going to larger scale comes at the cost of dealing with stability, danger of going for sub-optimal hps (like learning rates), ....
+
+% Moreover, we also show that \chonk demonstrates evidence of emergent abilities (e.g., abilities that are non-present at smaller models but become strongly apparent at large-scale). For the first time, we show that emergent abilities are unlocked for large-scale vision models, paving the way for a new era of billion parameter vision models.
+% BOOKKEEPING HERE:
+
+\iffalse
+Things to highlight
+\begin{itemize}
+    \item Excellent linear eval (as good or better than full fintuning smaller models)
+    \item Significantly better than existing models in learning general features for out of distribution classification (IN1k --> ObjectNet).
+    \item Video classification --- small model on top of per-frame representations.
+    \item Contrastive zero-shot --- gains over -e and -g, a bit worse than CoCa, but that's a different training paradigm.
+    \item Competitive results on dense prediction (few-shot semantic segmentation, monocular depth), while the pretraining objective is per image classification. 
+    \item Fairness: favorable tradeoff between bias and performance for all tested metrics
+    \item Human alignment: highest ever recorded shape bias, improves alignment to human visual object recognition
+    \item Calibration: remarkably improves the trade-off between accuracy and calibration. 
+    \item Reliability (PLEX), gains on all metrics.
+    \item Distillation: New state of the art at those sizes. 
+\end{itemize}
+\fi
+
+% \todo{Update abstract and intro with
+% - more focus on the outcome of the research.
+% - highlights areas where ViT22B shines and in general what scaling offers (e.g., a more favorable trade-off between bias and performance, better out-of-distribution generalization, more human alignments, good transfer as frozen feature extractor in video and image classification).
+% - added zeroshot examples to showcase the complex image understanding when using ViT-22B as a backbone.
+% - A tiny bit about stability and efficiency.
+% }

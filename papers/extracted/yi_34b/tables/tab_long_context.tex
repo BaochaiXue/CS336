@@ -1,0 +1,17 @@
+\begin{table}[t!]
+  \centering
+  \begin{tabular}{@{}lccccc@{}}
+\toprule
+Model   & \bf Average  & \bf Humanity & \bf STEM  & \bf Social Science & \bf Other \\
+\midrule
+Yi-6B 4K       & 63.24 & 59.10   & 53.15 & 73.83          & 69.26 \\
+Yi-6B 200K     & 61.73 & 56.17   & 52.36 & 72.54          & 68.94 \\
+Yi-34B 4K      & 76.32 & 73.17   & 68.03 & 85.11          & 80.78 \\
+Yi-34B 200K    & 75.56 & 72.20   & 66.83 & 84.76          & 80.40 \\
+\bottomrule
+
+  \end{tabular}
+   \caption{Performance on MMLU after 200K adaptation. Extending the context length to 200K does not significantly change the short context capability. 
+   }
+  \label{tab:long_context_mmlu}
+\end{table}

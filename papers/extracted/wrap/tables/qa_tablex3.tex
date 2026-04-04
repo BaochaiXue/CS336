@@ -1,0 +1,46 @@
+
+
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lcccccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-E & BoolQ & Wino. & PIQA & HellaSwag & TruthfulQA & OBQA & LogiQA & Avg \\
+        \midrule
+        Half C4 (85B) & 61.2  &  59.1  &  57.3  &  74.9  &  46.5  &  34.1  &  22.4  &  23.5  &  47.4 \\
+        Full C4 (170B) & 61.6  &  54.2  &  59.0  &  74.9  &  46.8  &  33.5  &  25.0  &  23.4  &  47.3 \\
+        RW (160B) &  61.6  &  60.7  &  57.5  &  74.3  &  45.2  &  36.8  &  21.8  &  23.2  &  47.6 \\
+        RW (320B) & 60.7  &  61.1  &  57.1  &  74.4  &  45.6  &  36.0  &  22.6  &  22.5  &  47.5 \\
+        Pythia-Pile (300B) &   60.5  &  63.3  &  57.5  &  70.8  &  40.4  &  38.9  &  22.2  &  22.2  &  47.0 \\
+        TinyLlama (1T) & 60.3  &  57.8  &  59.1  &  73.3  &  45.0  &  37.6  &  21.8  &  24.5  &  47.4 \\
+        \midrule
+        Synthetic (85B) &63.9  &  60.0  &  58.8  &  76.1  &  45.2  &  44.0  &  23.0  &  24.1  &  49.4\\
+        Synthetic+C4 (85B) & 64.1  &  62.2  &  58.9  &  75.4  &  46.2 &  40.6  &  24.1  &  23.9  &  49.4 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Evaluation of $\sim1.3$B parameter LLMs on `General Understanding Tasks'  on datasets focusing on general reasoning, language understanding, and common sense. Results for \ours are averaged over 3 runs}
+    \label{tab:general_understanding}
+\end{table*}
+
+
+\begin{table*}[t]
+    \centering
+    \scalebox{0.8}{
+    \begin{tabular}{lccccc>{\columncolor{LightCyan}}c}
+        \toprule
+        Dataset (Real Tok.) & ARC-C & SciQ & PubMedQA & MathQA & MMLU & Avg \\
+        \midrule
+        Half C4 (85B) & 26.3  &  84.5  &  57.2  &  23.4  &  24.2  &  43.1 \\
+        Full C4 (170B) & 26.8  &  85.0  &  57.4  &  24.3  &  23.9  &  43.5 \\
+        RW (160B) & 27.2  &  87.2  &  56.2  &  24.1  &  25.9  &  44.1 \\
+        RW (320B) & 27.8  &  88.0  &  57.4  &  23.0  &  25.4  &  44.3 \\
+        Pythia-Pile (300B) &  26.1  &  86.6  &  60.6  &  25.2  &  24.3  &  44.6 \\
+        TinyLlama (1T) & 27.8  &  88.9  &  61.4  &  24.1  &  25.8  &  45.6 \\
+        \midrule
+        Synthetic (85B) & 29.7  &  87.0  &  60.2  &  23.4  &  24.6  &  45.0 \\
+        Synthetic+C4 (85B) & 29.9  &  87.6  &  61.5  &  23.9  &  24.8  &  45.5 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Evaluation of $\sim1.3$B parameter LLMs on `Specialized Knowledge Tasks'  that require specific domain knowledge such as science, medicine, mathematics, and logic. Results for \ours are averaged over 3 runs.}
+    \label{tab:specialized_knowledge}
+\end{table*}

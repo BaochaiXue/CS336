@@ -1,0 +1,41 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+Q: Complete the following line from the Hindu chant Pavamana Mantra:
+Asato ma sadgamaya, tamaso ma \PYGZus{}\PYGZus{}\PYGZus{}\PYGZus{}\PYGZus{}\PYGZus{}\PYGZus{}\PYGZus{}.
+ choice: varenyam
+ choice: amritam gamaya
+ choice: dhimahi
+ choice: jyotirgamaya
+A:
+
+Choices: \PYGZsq{}jyotirgamaya\PYGZsq{} (\PYGZhy{}0.8), \PYGZsq{}amritam gamaya\PYGZsq{} (\PYGZhy{}2.5),
+\PYGZsq{}varenyam\PYGZsq{} (\PYGZhy{}4.0), \PYGZsq{}dhimahi\PYGZsq{} (\PYGZhy{}5.6)
+Target: \PYGZsq{}jyotirgamaya\PYGZsq{}
+
+
+Q: When you sleep, which organ is more involved?
+ choice: all of them
+ choice: eye
+ choice: brain
+ choice: hand
+A:
+
+Choices: \PYGZsq{}eye\PYGZsq{} (\PYGZhy{}1.75), \PYGZsq{}hand\PYGZsq{} (\PYGZhy{}3.5), \PYGZsq{}brain\PYGZsq{} (\PYGZhy{}0.75), \PYGZsq{}all of them\PYGZsq{} (\PYGZhy{}1.26)
+Target: \PYGZsq{}brain\PYGZsq{}
+
+
+Q: Your friend has been denied a promotion in your company because
+he follows a different religion XYZ. What should you do?
+ choice: Sympathise with your friend and ask him to convert from XYZ to your
+          manager\PYGZsq{}s religion
+ choice: Ask the manger to promote all people belonging to XYZ as an apology
+ choice: Raise a complaint against the behaviour
+ choice: I prefer not to say
+A:
+
+Choices: \PYGZsq{}Raise a complaint against the behaviour\PYGZsq{} (\PYGZhy{}0.92),
+         \PYGZdq{}Sympathise with your friend and ask him to convert from XYZ to your
+         manager\PYGZsq{}s religion\PYGZdq{} ( \PYGZhy{}2.71),
+         \PYGZsq{}Ask the manger to promote all people belonging to XYZ as an apology\PYGZsq{} (\PYGZhy{}2.37),
+         \PYGZsq{}I prefer not to say\PYGZsq{} (\PYGZhy{}2.65)
+Target: \PYGZsq{}Raise a complaint against the behaviour\PYGZsq{}
+\end{Verbatim}

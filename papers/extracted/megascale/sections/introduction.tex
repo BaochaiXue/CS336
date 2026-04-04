@@ -1,0 +1,107 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Large language models (LLMs)~\cite{brown2020language} have emerged as a transformative
+technology in artificial intelligence (AI). Recent advancements in LLMs have
+significantly improved their capability. LLMs have demonstrated tremendous
+potential in a wide range of domains, such as machine translation, text
+summarization, and conversational agents~\cite{chatgpt}. As a company serving billions
+of users, we have been aggressively integrating AI into our products, and we are
+putting LLMs as a high priority to shape the future of our products.
+
+Training LLMs is a daunting task that requires enormous computation resources.
+The scaling law~\cite{kaplan2020scaling} dictates that the model size and the
+training data size are critical factors that determine the model capability. To
+achieve state-of-the-art model capability, many efforts have been devoted to
+train large models with hundreds of billions or even trillions of parameters on
+hundreds of billions or even trillions of tokens. For example, GPT-3~\cite{floridi2020gpt}
+has 175 billion parameters and PaLM~\cite{chowdhery2022palm} has 540 billion parameters. Major
+players in this field build large-scale AI clusters with tens of thousands of
+GPUs to train LLMs.
+
+
+Scaling LLM training to tens of thousands of GPUs brings unprecedented
+challenges. As AI has been at the core of many of our products, we have extensive
+experience in training deep neural networks (DNNs). Yet, training a model like
+ResNet~\cite{he2016deep} only takes tens or hundreds of GPUs.
+Compared to these models,
+the scale of training LLMs
+is unparallel. While we are not new to building and operating
+large-scale GPU clusters, these clusters are normally shared by many training
+jobs. Now, in the context of LLM training, a single job is occupying tens of
+thousands of GPUs and taking all the resources. The sheer scale of
+LLM training introduces two specific challenges from a systems perspective.
+
+The first challenge is to achieve high training efficiency at scale. Model FLOPs
+utilization (MFU) is the ratio of the observed throughput to the theoretical
+maximum throughput assuming 100\% of peak FLOPs~\cite{narayanan2021efficient}.
+It is a standard metric to evaluate training efficiency that directly translates
+to end-to-end training speed. LLM training is not embarrassingly parallel. To
+train an LLM, the model is split across GPUs and the GPUs heavily communicate
+with each other to make progress. Besides communication, other factors such as
+operator optimization, data preprocessing and GPU memory consumption also
+contribute significantly to MFU.
+
+The second challenge is to achieve high training stability at scale, i.e.,
+maintaining high training efficiency throughout the training process. Stability
+is particularly important from a production perspective, as LLMs take a long
+time to train. Training an LLM with one trillion tokens can take weeks. The
+scale and time are orders of magnitude larger than those of regular DNN training
+jobs. Failures and stragglers are the norm rather than the exception for LLM
+training. At such a scale, the consequences of failures and stragglers are
+devastating. Failures are very expensive, and it is critical to reduce the
+recovery time, given the large scale. A straggler not only affects its own work,
+but slows down the entire job involving tens of thousands of GPUs. 
+
+In this paper, we present the design, implementation and engineering experience
+of \sysname, a production system for training LLMs at scale. \sysname enables us
+to scale LLM training to more than 10,000 GPUs. We are able to harness the power
+of the massive number of GPUs to train LLMs with high training efficiency and
+stability. In building and operating \sysname, we apply two systems principles:
+algorithm-system co-design and \revision{in-depth observability}. 
+
+\sysname is a specialized system tailored for LLM training. Algorithm-system
+co-design is a key principle to maximize performance for specialized systems,
+which has been applied widely in computer systems. We apply this
+principle to \sysname in the context of LLM training with a full-stack approach
+that spans all important system components. We make several modifications and
+incorporate effective optimization techniques to the model architecture,
+including parallel transformer block~\cite{chowdhery2022palm},
+sliding window attention~\cite{beltagy2020longformer} and LAMB optimizer~\cite{You2020Large}. We leverage mixed parallelism strategies that combine data parallelism, pipeline parallelism, tensor
+parallelism, and sequence parallelism. Importantly, we design custom techniques based
+on the pattern of each parallelism strategy to maximize the overlapping between
+communication and computation. We apply prefetching and
+tree-based loading to optimize the data pipeline. We leverage non-blocking
+asynchronous operations and eliminate global barriers for large-scale collective
+communication group initialization. We design a custom network topology, reduce
+ECMP hash conflicts, customize congestion control, and tune retransmit timeout
+parameters for high network performance.
+
+Stability problems including failures and stragglers in large-scale systems are
+notoriously hard to diagnose and fix. Many hard stability issues only emerge at
+large scale, which can stem from a wide range of software and hardware faults
+deep in the stack. Manually identifying and resolving every single issue is infeasible
+given the scale and complexity of the system. \revision{We apply the principle of in-depth observability to build a set of diagnosis tools. By 'in-depth observability', we mean a comprehensive monitoring and visualization strategy that penetrates beyond surface-level metrics to gather detailed, granular data across every component of the system stack, aiming to create a multidimensional view of system performance. The set of tools allows us to diagnose the system and identify root causes, by uncovering the intricate interactions and dependencies that contribute to stability issues.} We develop a robust training framework to automate fault
+localization and recovery. We design heartbeat messages encapsulating various
+forms of information to facilitate real-time anomaly detection and provide
+early warnings. We implement a suite of diagnostic tests to identify nodes
+causing disruptions. We optimize the checkpointing and recovery procedure to
+reduce interruptions. To troubleshoot nuanced cases caused by stragglers, we develop a performance analysis tool to record fine-grained
+CUDA events and generate system-wide heat-map and timeline trace from a distributed view, and develop a 3D parallel
+training visualization tool to show data dependencies between ranks for diagnosis.
+
+
+\sysname is deployed in our datacenters to train LLMs for our products. Over the
+years, we have built several AI clusters with different size and hardware
+configurations. Our largest AI cluster has over 10,000 GPUs. In terms of
+training efficiency, \sysname achieves 55.2\% MFU when training a standard 175B
+transformer model on 12,288 GPUs, providing an improvement of 1.34$\times$
+compared to the state-of-the-art open-source training framework
+Megatron-LM~\cite{shoeybi2020megatronlm}. In terms of model converge and
+stability,
+we show a real production run of \sysname that trains a proprietary
+model with hundreds of billions of parameters on multi-trillion tokens for
+several weeks. Over the weeks, the loss continues to converge, and \sysname
+repairs and recovers the training process for over 100 times in presence of failures.
+We also share our experience in diagnosing and fixing some intriguing problems. 
+\revision{We are working on open-sourcing components that can benefit the community on GitHub\footnote{https://github.com/volcengine/veScale}.}

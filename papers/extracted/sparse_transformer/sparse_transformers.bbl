@@ -1,0 +1,188 @@
+\begin{thebibliography}{28}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Al-Rfou et~al.(2018)Al-Rfou, Choe, Constant, Guo, and
+  Jones]{al2018character}
+Al-Rfou, R., Choe, D., Constant, N., Guo, M., and Jones, L.
+\newblock Character-level language modeling with deeper self-attention.
+\newblock \emph{arXiv preprint arXiv:1808.04444}, 2018.
+
+\bibitem[Ba et~al.(2016)Ba, Kiros, and Hinton]{ba2016layer}
+Ba, J.~L., Kiros, J.~R., and Hinton, G.~E.
+\newblock Layer normalization.
+\newblock \emph{arXiv preprint arXiv:1607.06450}, 2016.
+
+\bibitem[Britz et~al.(2017)Britz, Guan, and Luong]{britz2017efficient}
+Britz, D., Guan, M.~Y., and Luong, M.-T.
+\newblock Efficient attention using a fixed-size memory representation.
+\newblock \emph{arXiv preprint arXiv:1707.00110}, 2017.
+
+\bibitem[Chen et~al.(2016)Chen, Xu, Zhang, and Guestrin]{chen2016training}
+Chen, T., Xu, B., Zhang, C., and Guestrin, C.
+\newblock Training deep nets with sublinear memory cost.
+\newblock \emph{arXiv preprint arXiv:1604.06174}, 2016.
+
+\bibitem[Chen et~al.(2017)Chen, Mishra, Rohaninejad, and
+  Abbeel]{chen2017pixelsnail}
+Chen, X., Mishra, N., Rohaninejad, M., and Abbeel, P.
+\newblock Pixelsnail: An improved autoregressive generative model.
+\newblock \emph{arXiv preprint arXiv:1712.09763}, 2017.
+
+\bibitem[Chiu \& Raffel(2017)Chiu and Raffel]{chiu2017monotonic}
+Chiu, C.-C. and Raffel, C.
+\newblock Monotonic chunkwise attention.
+\newblock \emph{arXiv preprint arXiv:1712.05382}, 2017.
+
+\bibitem[Dai et~al.(2018)Dai, Yang, Yang, Cohen, Carbonell, Le, and
+  Salakhutdinov]{dai2018transformer}
+Dai, Z., Yang, Z., Yang, Y., Cohen, W.~W., Carbonell, J., Le, Q.~V., and
+  Salakhutdinov, R.
+\newblock Transformer-xl: Language modeling with longer-term dependency.
+\newblock 2018.
+
+\bibitem[Dieleman et~al.(2018)Dieleman, van~den Oord, and
+  Simonyan]{dieleman2018challenge}
+Dieleman, S., van~den Oord, A., and Simonyan, K.
+\newblock The challenge of realistic music generation: modelling raw audio at
+  scale.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  8000--8010, 2018.
+
+\bibitem[Gehring et~al.(2017)Gehring, Auli, Grangier, Yarats, and
+  Dauphin]{gehring2017convolutional}
+Gehring, J., Auli, M., Grangier, D., Yarats, D., and Dauphin, Y.~N.
+\newblock Convolutional sequence to sequence learning.
+\newblock \emph{arXiv preprint arXiv:1705.03122}, 2017.
+
+\bibitem[Gruslys et~al.(2016)Gruslys, Munos, Danihelka, Lanctot, and
+  Graves]{gruslys2016memory}
+Gruslys, A., Munos, R., Danihelka, I., Lanctot, M., and Graves, A.
+\newblock Memory-efficient backpropagation through time.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  4125--4133, 2016.
+
+\bibitem[He et~al.(2016)He, Zhang, Ren, and Sun]{He2016}
+He, K., Zhang, X., Ren, S., and Sun, J.
+\newblock Identity mappings in deep residual networks.
+\newblock \emph{arXiv preprint arXiv:1603.05027}, 2016.
+
+\bibitem[Hendrycks \& Gimpel(2016)Hendrycks and Gimpel]{hendrycks2016bridging}
+Hendrycks, D. and Gimpel, K.
+\newblock Bridging nonlinearities and stochastic regularizers with gaussian
+  error linear units.
+\newblock \emph{arXiv preprint arXiv:1606.08415}, 2016.
+
+\bibitem[Huang et~al.(2018)Huang, Vaswani, Uszkoreit, Shazeer, Hawthorne, Dai,
+  Hoffman, and Eck]{huang2018improved}
+Huang, C.-Z.~A., Vaswani, A., Uszkoreit, J., Shazeer, N., Hawthorne, C., Dai,
+  A.~M., Hoffman, M.~D., and Eck, D.
+\newblock An improved relative self-attention mechanism for transformer with
+  application to music generation.
+\newblock \emph{arXiv preprint arXiv:1809.04281}, 2018.
+
+\bibitem[Jozefowicz et~al.(2016)Jozefowicz, Vinyals, Schuster, Shazeer, and
+  Wu]{jozefowicz2016exploring}
+Jozefowicz, R., Vinyals, O., Schuster, M., Shazeer, N., and Wu, Y.
+\newblock Exploring the limits of language modeling.
+\newblock \emph{arXiv preprint arXiv:1602.02410}, 2016.
+
+\bibitem[Kingma \& Dhariwal(2018)Kingma and Dhariwal]{kingma2018glow}
+Kingma, D.~P. and Dhariwal, P.
+\newblock Glow: Generative flow with invertible 1x1 convolutions.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  10236--10245, 2018.
+
+\bibitem[Koutnik et~al.(2014)Koutnik, Greff, Gomez, and
+  Schmidhuber]{koutnik2014clockwork}
+Koutnik, J., Greff, K., Gomez, F., and Schmidhuber, J.
+\newblock A clockwork rnn.
+\newblock \emph{arXiv preprint arXiv:1402.3511}, 2014.
+
+\bibitem[Liu et~al.(2018)Liu, Saleh, Pot, Goodrich, Sepassi, Kaiser, and
+  Shazeer]{liu2018generating}
+Liu, P.~J., Saleh, M., Pot, E., Goodrich, B., Sepassi, R., Kaiser, L., and
+  Shazeer, N.
+\newblock Generating wikipedia by summarizing long sequences.
+\newblock \emph{arXiv preprint arXiv:1801.10198}, 2018.
+
+\bibitem[Mehri et~al.(2016)Mehri, Kumar, Gulrajani, Kumar, Jain, Sotelo,
+  Courville, and Bengio]{mehri2016samplernn}
+Mehri, S., Kumar, K., Gulrajani, I., Kumar, R., Jain, S., Sotelo, J.,
+  Courville, A., and Bengio, Y.
+\newblock Samplernn: An unconditional end-to-end neural audio generation model.
+\newblock \emph{arXiv preprint arXiv:1612.07837}, 2016.
+
+\bibitem[Menick \& Kalchbrenner(2018)Menick and
+  Kalchbrenner]{menick2018generating}
+Menick, J. and Kalchbrenner, N.
+\newblock Generating high fidelity images with subscale pixel networks and
+  multidimensional upscaling.
+\newblock \emph{arXiv preprint arXiv:1812.01608}, 2018.
+
+\bibitem[Micikevicius et~al.(2017)Micikevicius, Narang, Alben, Diamos, Elsen,
+  Garcia, Ginsburg, Houston, Kuchaev, Venkatesh, et~al.]{micikevicius2017mixed}
+Micikevicius, P., Narang, S., Alben, J., Diamos, G., Elsen, E., Garcia, D.,
+  Ginsburg, B., Houston, M., Kuchaev, O., Venkatesh, G., et~al.
+\newblock Mixed precision training.
+\newblock \emph{arXiv preprint arXiv:1710.03740}, 2017.
+
+\bibitem[Oord et~al.(2016)Oord, Kalchbrenner, and Kavukcuoglu]{oord2016pixel}
+Oord, A. v.~d., Kalchbrenner, N., and Kavukcuoglu, K.
+\newblock Pixel recurrent neural networks.
+\newblock \emph{arXiv preprint arXiv:1601.06759}, 2016.
+
+\bibitem[Parmar et~al.(2018)Parmar, Vaswani, Uszkoreit, Kaiser, Shazeer, and
+  Ku]{parmar2018image}
+Parmar, N., Vaswani, A., Uszkoreit, J., Kaiser, {\L}., Shazeer, N., and Ku, A.
+\newblock Image transformer.
+\newblock \emph{arXiv preprint arXiv:1802.05751}, 2018.
+
+\bibitem[Radford et~al.(2018)Radford, Narasimhan, Salimans, and
+  Sutskever]{radford2018}
+Radford, A., Narasimhan, K., Salimans, T., and Sutskever, I.
+\newblock Improving language understanding by generative pre-training.
+\newblock \emph{URL https://s3-us-west-2. amazonaws.
+  com/openai-assets/research-covers/language-unsupervised/language\_
+  understanding\_paper. pdf}, 2018.
+
+\bibitem[Reed et~al.(2017)Reed, Oord, Kalchbrenner, Colmenarejo, Wang, Belov,
+  and de~Freitas]{reed2017parallel}
+Reed, S., Oord, A. v.~d., Kalchbrenner, N., Colmenarejo, S.~G., Wang, Z.,
+  Belov, D., and de~Freitas, N.
+\newblock Parallel multiscale autoregressive density estimation.
+\newblock \emph{arXiv preprint arXiv:1703.03664}, 2017.
+
+\bibitem[Salimans et~al.(2017)Salimans, Karpathy, Chen, and
+  Kingma]{salimans2017pixelcnn++}
+Salimans, T., Karpathy, A., Chen, X., and Kingma, D.~P.
+\newblock Pixelcnn++: Improving the pixelcnn with discretized logistic mixture
+  likelihood and other modifications.
+\newblock \emph{arXiv preprint arXiv:1701.05517}, 2017.
+
+\bibitem[Sukhbaatar et~al.(2015)Sukhbaatar, Weston, Fergus,
+  et~al.]{sukhbaatar2015end}
+Sukhbaatar, S., Weston, J., Fergus, R., et~al.
+\newblock End-to-end memory networks.
+\newblock In \emph{Advances in neural information processing systems}, pp.\
+  2440--2448, 2015.
+
+\bibitem[Van Den~Oord et~al.(2016)Van Den~Oord, Dieleman, Zen, Simonyan,
+  Vinyals, Graves, Kalchbrenner, Senior, and Kavukcuoglu]{van2016wavenet}
+Van Den~Oord, A., Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A.,
+  Kalchbrenner, N., Senior, A., and Kavukcuoglu, K.
+\newblock Wavenet: A generative model for raw audio.
+\newblock \emph{CoRR abs/1609.03499}, 2016.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, {\L}., and Polosukhin, I.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
+  5998--6008, 2017.
+
+\end{thebibliography}

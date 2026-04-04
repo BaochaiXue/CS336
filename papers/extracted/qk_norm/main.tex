@@ -1,0 +1,305 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage{float}
+
+\usepackage{enumitem}
+\usepackage{tablefootnote}
+\usepackage[round,semicolon]{natbib}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{textcomp}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{lscape} 
+\usepackage{siunitx}
+
+\setlength{\columnsep}{2em}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.7em}
+
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{scrextend}
+
+\usepackage{array}
+\usepackage{tgpagella}
+% \usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\definecolor{mydarkblue}{rgb}{0,0.08,0.45}
+\usepackage[colorlinks,citecolor=mydarkblue,urlcolor=mydarkblue,linkcolor=mydarkblue]{hyperref}
+\usepackage{url}            % simple URL typesetting
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{changepage}
+\usepackage{xargs}          % Use more than one optional parameter in a new commands
+\usepackage{wrapfig,lipsum,booktabs}
+\usepackage{longtable}
+% \usepackage{subcaption}
+% \usepackage[symbol]{footmisc}
+\usepackage{endnotes}
+% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.groupplots}
+\pgfplotsset{compat=1.3}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\usepackage[most]{tcolorbox}
+
+\usepackage[capitalize,noabbrev]{cleveref}
+\crefname{section}{Section}{\S\S}
+\Crefname{section}{Section}{\S\S}
+\crefname{table}{Table}{Tables}
+\crefname{figure}{Figure}{Figures}
+\crefname{algorithm}{Algorithm}{}
+\crefname{equation}{eq.}{}
+\crefname{appendix}{Appendix}{}
+\crefformat{section}{Section #2#1#3}
+\usepackage{multicol}
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage{minitoc}
+
+% Make the "Part I" text invisible
+\renewcommand \thepart{}
+\renewcommand \partname{}
+\title{
+% \vspace{-2em}%
+%   \hrule height 4pt%
+%   \vskip 0.25in%
+%   \vskip -\parskip%
+\vspace{-10mm}
+\textbf{
+Scaling Vision Transformers to 22 Billion Parameters
+}
+\vspace{-3mm}
+%   \vskip 0.2in%
+%   \vskip -\parskip%
+%   \hrule height 1pt%
+%   \vskip 0.09in
+  }
+
+
+
+% \author{
+% \normalsize{}
+% \textbf{Mostafa Dehghani\thanks{Core contributors. Correspondence: \url{dehghani@google.com}, ...}} \hspace{5mm} 
+% \textbf{Josip Djolonga\footnotemark[1]} \hspace{4mm} 
+% \textbf{Basil Mustafa\footnotemark[1]} \hspace{4mm} 
+% \textbf{Piotr Padlewski\footnotemark[1]} \hspace{4mm} 
+% \textbf{Jonathan Heek\footnotemark[1]}
+% \\
+% \normalsize{}
+% \textbf{Justin Gilmer} \hspace{4mm} 
+% \textbf{Andreas Steiner} \hspace{4mm} 
+% \textbf{Mathilde Caron} \hspace{4mm} 
+% \textbf{Robert Geirhos}
+% \\
+% \normalsize{}
+% \textbf{Ibrahim  Alabdulmohsin} \hspace{4mm} 
+% \textbf{Rodolphe Jenatton} \hspace{4mm} 
+% \textbf{Lucas Beyer} \hspace{4mm} 
+% \textbf{Michael Tschannen}
+% \\
+% \normalsize{}
+% \textbf{Anurag Arnab} \hspace{4mm} 
+% \textbf{Xiao Wang} \hspace{4mm} 
+% \textbf{Carlos Riquelme} \hspace{4mm} 
+% \textbf{Matthias Minderer}
+% \\
+% \normalsize{}
+% \textbf{Joan Puigcerver} \hspace{4mm} 
+% \textbf{Utku Evci} \hspace{4mm} 
+% \textbf{Manoj Kumar} \hspace{4mm} 
+% \textbf{Sjoerd van Steenkiste}
+% \\
+% \normalsize{}
+% \textbf{Gamaleldin Fathy Elsayed} \hspace{4mm} 
+% \textbf{Aravindh Mahendran} \hspace{4mm} 
+% \textbf{Fisher Yu} \hspace{4mm} 
+% \textbf{Avital Oliver}
+% \\
+% \normalsize{}
+% \textbf{Fantine Huot} \hspace{4mm} 
+% \textbf{Jasmijn Bastings} \hspace{4mm} 
+% \textbf{Mark Patrick Collier} \hspace{4mm} 
+% \textbf{Alexey A. Gritsenko}
+% \\
+% \normalsize{}
+% \textbf{Vighnesh Birodkar} \hspace{4mm} 
+% \textbf{Cristina Vasconcelos} \hspace{4mm} 
+% \textbf{Yi Tay} \hspace{4mm} 
+% \textbf{Thomas Mensink}
+% \\
+% \normalsize{}
+% \textbf{Alexander Kolesnikov} \hspace{4mm} 
+% \textbf{Filip Pavetić} \hspace{4mm} 
+% \textbf{Dustin Tran} \hspace{4mm} 
+% \textbf{Thomas Kipf} \hspace{4mm} 
+% \textbf{Mario Lučić}
+% \\
+% \normalsize{}
+% \textbf{Xiaohua Zhai} \hspace{4mm} 
+% \textbf{Daniel Keysers} \hspace{4mm} 
+% \textbf{Jeremiah Harmsen} \hspace{4mm} 
+% \textbf{Neil Houlsby\footnotemark[1]}
+% \\ 
+% \normalsize{}
+% Google
+% \vspace{-7mm}
+% }
+
+% Correspondence: \texttt{\{dehghani,josipd,basilm,prazek,jheek,neilhoulsby\}@google.com}}}
+
+\author{
+\normalsize{}
+\textbf{Mostafa Dehghani\thanks{Core contributors. Correspondence: \url{dehghani@google.com}}} \hspace{5mm} 
+\textbf{Josip Djolonga\footnotemark[1]} \hspace{3mm} 
+\textbf{Basil Mustafa\footnotemark[1]} \hspace{3mm} 
+\textbf{Piotr Padlewski\footnotemark[1]} \hspace{3mm} 
+\textbf{Jonathan Heek\footnotemark[1]} 
+\\
+\normalsize{}
+\textbf{Justin Gilmer} \hspace{3mm} 
+\textbf{Andreas Steiner} \hspace{3mm} 
+\textbf{Mathilde Caron} \hspace{3mm} 
+\textbf{Robert Geirhos} \hspace{3mm} 
+\textbf{Ibrahim  Alabdulmohsin}
+
+\\
+\normalsize{}
+\textbf{Rodolphe Jenatton} \hspace{3mm} 
+\textbf{Lucas Beyer} \hspace{3mm} 
+\textbf{Michael Tschannen} \hspace{3mm} 
+\textbf{Anurag Arnab} \hspace{3mm} 
+\textbf{Xiao Wang}
+\\
+\normalsize{}
+\textbf{Carlos Riquelme} \hspace{3mm} 
+\textbf{Matthias Minderer} \hspace{3mm} 
+\textbf{Joan Puigcerver} \hspace{3mm} 
+\textbf{Utku Evci} \hspace{3mm} 
+\textbf{Manoj Kumar}
+\\
+\normalsize{}
+\textbf{Sjoerd van Steenkiste} \hspace{3mm} 
+\textbf{Gamaleldin F. Elsayed} \hspace{3mm} 
+\textbf{Aravindh Mahendran} \hspace{3mm} 
+\textbf{Fisher Yu}
+\\
+\normalsize{}
+\textbf{Avital Oliver} \hspace{3mm} 
+\textbf{Fantine Huot} \hspace{3mm} 
+\textbf{Jasmijn Bastings} \hspace{3mm} 
+\textbf{Mark Patrick Collier} \hspace{3mm} 
+\textbf{Alexey A. Gritsenko}
+\\
+\normalsize{}
+\textbf{Vighnesh Birodkar} \hspace{3mm} 
+\textbf{Cristina Vasconcelos} \hspace{3mm} 
+\textbf{Yi Tay} \hspace{3mm} 
+\textbf{Thomas Mensink} \hspace{3mm} 
+\textbf{Alexander Kolesnikov}
+\\
+\normalsize{}
+\textbf{Filip Pavetić} \hspace{3mm} 
+\textbf{Dustin Tran} \hspace{3mm} 
+\textbf{Thomas Kipf} \hspace{3mm} 
+\textbf{Mario Lučić} \hspace{3mm} 
+\textbf{Xiaohua Zhai} \hspace{3mm} 
+\textbf{Daniel Keysers}
+\\
+\normalsize{}
+\textbf{Jeremiah Harmsen} \hspace{3mm} 
+\textbf{Neil Houlsby\footnotemark[1]}
+\\ 
+\vspace{7mm}
+\normalsize{}
+Google Research
+\vspace{-7mm}
+}
+
+
+\date{}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs} % for professional tables
+\usepackage{hyperref}
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{fontawesome5}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{subfigure}
+\usepackage{caption}
+\usepackage{xfrac}
+\usepackage{setspace}
+
+
+% wrap table
+\usepackage{wrapfig}
+\usepackage{tabulary}
+\usepackage{tabularx}
+\usepackage[export]{adjustbox}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\newcommand{\todo}[1]{\textcolor{purple!70!black}{[TODO: #1]}}
+\newcommand{\chonk}{\mbox{ViT-22B}\xspace}
+\usepackage{xspace}
+\usepackage{xcolor}
+
+
+\begin{document}
+% Reduce space before and after  align/formulas:
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\doparttoc % Tell to minitoc to generate a toc for the parts
+\faketableofcontents % Run a fake tableofcontents command for the partocs
+% \part{} % Start the document part
+% \parttoc % Insert the document TOC
+\maketitle
+
+\input{arxiv/text/0-abstract}
+\input{arxiv/text/1-introduction}
+\input{arxiv/text/2-model}
+\input{arxiv/text/3-infrastructure}
+\input{arxiv/text/4-0-evaluation}
+\input{arxiv/text/5-conclusion}
+
+\section*{Acknowledgment}
+We would like to thank Jasper Uijlings, Jeremy Cohen, Arushi Goel, Radu Soricut, Xingyi Zhou, Lluis Castrejon, Adam Paszke, Joelle Barral, Federico Lebron, Blake Hechtman, and Peter Hawkins. Their expertise and unwavering support played a crucial role in the completion of this paper. We also acknowledge the collaboration and dedication of the talented researchers and engineers at Google Research.
+
+\bibliography{ref}
+\bibliographystyle{plainnat}
+
+\input{arxiv/text/6-appendix}
+
+
+\end{document}

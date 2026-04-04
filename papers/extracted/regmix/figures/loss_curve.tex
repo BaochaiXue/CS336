@@ -1,0 +1,163 @@
+\begin{figure}[!t]
+\centering
+\small
+\begin{tikzpicture}
+\begin{axis}[
+at={(0em,0)},
+width=.4\textwidth, height=.3\textwidth ,
+xtick={1,5,...,25},
+ytick={2.75, 3.0, ..., 4.5},
+grid style=dashed,
+ylabel={Validation\ \ Loss},
+xlabel={{Training Tokens (B)}},
+xlabel style={align=center,yshift=0em},
+ylabel style={yshift=0},
+y tick style={opacity=0},
+ymajorgrids=true,
+xmajorgrids=true,
+tick align=inside,
+legend pos=outer north east,
+yticklabel style={/pgf/number format/precision=2,/pgf/number format/fixed zerofill},
+legend style={yshift=-0.5em,xshift=-9.7em,legend cell align=left,legend plot pos=right,draw=none},
+xmin=-1,
+xmax=26,
+ymin=2.7,
+ymax=4.0]
+    \addplot[
+        red!60,mark=pentagon*,mark size=1.2pt,thick,mark options={fill=white,draw=red,line width=0.5pt}
+        ]
+        coordinates {
+(1, 3.820050001)
+(3, 3.443202972)
+(5, 3.316340208)
+(7, 3.238892794)
+(9, 3.184519053)
+(11, 3.141363859)
+(13, 3.104880571)
+(15, 3.072213173)
+(17, 3.04462266)
+(19, 3.021899939)
+(21, 3.00503087)
+(23, 2.994301796)
+(25, 2.989006996)
+        };
+      \addplot[
+        blue!60,mark=square*,mark size=1.2pt,thick,mark options={fill=white,draw=blue,line width=0.5pt}
+        ]
+        coordinates {
+(1, 3.564236641)
+(3, 3.212352514)
+(5, 3.092962027)
+(7, 3.025346518)
+(9, 2.975091696)
+(11, 2.93320632)
+(13, 2.89994359)
+(15, 2.869195461)
+(17, 2.844691038)
+(19, 2.824284554)
+(21, 2.808733463)
+(23, 2.798743486)
+(25, 2.793961763)
+        };
+      \addplot[
+        orange!60,mark=triangle*,mark size=1.2pt,thick,mark options={fill=white,draw=orange,line width=0.5pt}
+        ]
+        coordinates {
+(1, 3.575109243)
+(3, 3.201750994)
+(5, 3.07610321)
+(7, 3.006507158)
+(9, 2.955598593)
+(11, 2.911984682)
+(13, 2.876117468)
+(15, 2.846674204)
+(17, 2.820066452)
+(19, 2.798643112)
+(21, 2.782349825)
+(23, 2.771711111)
+(25, 2.76705265)
+        };
+\end{axis}
+\begin{axis}[
+at={(20em,0)},
+width=.4\textwidth, height=.3\textwidth ,
+xtick={1,5,...,25},
+ytick={2.75, 3.0, ..., 4.5},
+grid style=dashed,
+ylabel={Validation\ \ Loss},
+xlabel={{Training Tokens (B)}},
+xlabel style={align=center,yshift=0em},
+ylabel style={yshift=0},
+y tick style={opacity=0},
+ymajorgrids=true,
+xmajorgrids=true,
+tick align=inside,
+legend pos=outer north east,
+yticklabel style={/pgf/number format/precision=2,/pgf/number format/fixed zerofill},
+legend style={yshift=-2em,xshift=0.5em,legend cell align=left,legend plot pos=right,draw=none},
+xmin=-1,
+xmax=26,
+ymin=3.0,
+ymax=4.50]
+    \addplot[
+        red!60,mark=pentagon*,mark size=1.2pt,thick,mark options={fill=white,draw=red,line width=0.5pt}
+        ]
+        coordinates {
+(1, 4.305472374)
+(3, 3.702566862)
+(5, 3.542406321)
+(7, 3.463979483)
+(9, 3.402868032)
+(11, 3.355190039)
+(13, 3.315196753)
+(15, 3.28206563)
+(17, 3.254812002)
+(19, 3.230043173)
+(21, 3.213106632)
+(23, 3.201158285)
+(25, 3.196551085)
+        };
+      \addplot[
+        blue!60,mark=square*,mark size=1.2pt,thick,mark options={fill=white,draw=blue,line width=0.5pt}
+        ]
+        coordinates {
+(1, 4.17596674)
+(3, 3.586002111)
+(5, 3.438609838)
+(7, 3.364253044)
+(9, 3.311367512)
+(11, 3.271058083)
+(13, 3.238744497)
+(15, 3.212095261)
+(17, 3.186464071)
+(19, 3.167378426)
+(21, 3.153804779)
+(23, 3.14490509)
+(25, 3.140860558)
+        };
+      \addplot[
+        orange!60,mark=triangle*,mark size=1.2pt,thick,mark options={fill=white,draw=orange,line width=0.5pt}
+        ]
+        coordinates {
+(1, 4.119034767)
+(3, 3.535004854)
+(5, 3.393175602)
+(7, 3.316093445)
+(9, 3.265641689)
+(11, 3.225485563)
+(13, 3.195032358)
+(15, 3.166511536)
+(17, 3.141429901)
+(19, 3.121953964)
+(21, 3.107906342)
+(23, 3.099808216)
+(25, 3.095982313)
+        };
+        \legend{{Human},{DoReMi},{\ourmethod}}
+\end{axis}
+\end{tikzpicture}
+\vspace{-4mm}
+\caption{\textbf{Left}: The validation loss on Pile-CC of different methods with Pile-CC in the pre-training corpus. \textbf{Right}: The validation loss on Pile-CC excluding Pile-CC in the pre-training.}
+\label{fig:loss_curve}
+\vspace{-1mm}
+\end{figure}

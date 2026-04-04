@@ -1,0 +1,21 @@
+\begin{table}
+  \centering
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{lccccccccccccc}
+    \toprule
+    \multicolumn{2}{c}{Context Window} & \multicolumn{2}{c}{1K} & \multicolumn{2}{c}{4K} & \multicolumn{2}{c}{8K} & \multicolumn{2}{c}{16K} & \multicolumn{2}{c}{32K} & \multicolumn{2}{c}{64K}\\
+    \midrule
+    Model & Size & PG19 & PR & PG19 & PR & PG19 & PR & PG19 & PR & PG19 & PR & PG19 & PR\\
+    \midrule
+    Yi & 6B & 0.88 & 1.0 & 0.839 & 1.0 & 0.836 & 1.0 & 0.842 & 1.0 & 0.861& 1.0 & 0.981 & 0.0\\
+    Yi & 34B & 0.788 & 1.0 & 0.745 & 1.0 & 0.736 & 1.0 & 0.734 & 1.0 & 0.869 & 1.0 & 1.357 & 0.945\\
+    \bottomrule
+    
+      \end{tabular}
+  }
+   \caption{Yi with different context window in PG19 and Passkey Retrieval (PR) test. The PG19 are reported BPB with test set, and the EM score with 5 random digits passkey for the Passkey Retrieval.
+   % \qj{EM score, remove the first column?}
+   % \alex{Why the Yi6B model has 0 PR on 64K?}
+   }
+  \label{tab:context_window}
+\end{table}

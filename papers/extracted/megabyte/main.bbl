@@ -1,0 +1,349 @@
+\begin{thebibliography}{49}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Baines et~al.(2021)Baines, Bhosale, Caggiano, Goyal, Goyal, Ott,
+  Lefaudeux, Liptchinsky, Rabbat, Sheiffer, Sridhar, and Xu]{fairscale}
+Baines, M., Bhosale, S., Caggiano, V., Goyal, N., Goyal, S., Ott, M.,
+  Lefaudeux, B., Liptchinsky, V., Rabbat, M., Sheiffer, S., Sridhar, A., and
+  Xu, M.
+\newblock {FairScale}: A general purpose modular {PyTorch} library for high
+  performance and large scale training.
+\newblock \url{https://github.com/facebookresearch/fairscale}, 2021.
+
+\bibitem[Beltagy et~al.(2020)Beltagy, Peters, and Cohan]{longformer}
+Beltagy, I., Peters, M.~E., and Cohan, A.
+\newblock Longformer: The long-document transformer.
+\newblock \emph{arXiv preprint arXiv:2004.05150}, 2020.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
+  Neelakantan, Shyam, Sastry, Askell, et~al.]{gpt3}
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.~D., Dhariwal, P.,
+  Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et~al.
+\newblock Language models are few-shot learners.
+\newblock \emph{Advances in neural information processing systems},
+  33:\penalty0 1877--1901, 2020.
+
+\bibitem[Child et~al.(2019)Child, Gray, Radford, and
+  Sutskever]{sparsetransformer}
+Child, R., Gray, S., Radford, A., and Sutskever, I.
+\newblock Generating long sequences with sparse transformers.
+\newblock \emph{arXiv preprint arXiv:1904.10509}, 2019.
+
+\bibitem[Choromanski et~al.(2020)Choromanski, Likhosherstov, Dohan, Song, Gane,
+  Sarlos, Hawkins, Davis, Mohiuddin, Kaiser, et~al.]{performer}
+Choromanski, K., Likhosherstov, V., Dohan, D., Song, X., Gane, A., Sarlos, T.,
+  Hawkins, P., Davis, J., Mohiuddin, A., Kaiser, L., et~al.
+\newblock Rethinking attention with performers.
+\newblock \emph{arXiv preprint arXiv:2009.14794}, 2020.
+
+\bibitem[Chowdhery et~al.(2022)Chowdhery, Narang, Devlin, Bosma, Mishra,
+  Roberts, Barham, Chung, Sutton, Gehrmann, et~al.]{palm}
+Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A.,
+  Barham, P., Chung, H.~W., Sutton, C., Gehrmann, S., et~al.
+\newblock Palm: Scaling language modeling with pathways.
+\newblock \emph{arXiv preprint arXiv:2204.02311}, 2022.
+
+\bibitem[Clark et~al.(2022)Clark, Garrette, Turc, and Wieting]{canine}
+Clark, J.~H., Garrette, D., Turc, I., and Wieting, J.
+\newblock Canine: Pre-training an efficient tokenization-free encoder for
+  language representation.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  10:\penalty0 73--91, 2022.
+
+\bibitem[Dai et~al.(2019)Dai, Yang, Yang, Carbonell, Le, and
+  Salakhutdinov]{xfmxl}
+Dai, Z., Yang, Z., Yang, Y., Carbonell, J., Le, Q.~V., and Salakhutdinov, R.
+\newblock Transformer-xl: Attentive language models beyond a fixed-length
+  context, 2019.
+\newblock URL \url{https://arxiv.org/abs/1901.02860}.
+
+\bibitem[Didolkar et~al.(2022)Didolkar, Gupta, Goyal, Gundavarapu, Lamb, Ke,
+  and Bengio]{temporalbottleneck}
+Didolkar, A., Gupta, K., Goyal, A., Gundavarapu, N.~B., Lamb, A., Ke, N.~R.,
+  and Bengio, Y.
+\newblock Temporal latent bottleneck: Synthesis of fast and slow processing
+  mechanisms in sequence learning, 2022.
+
+\bibitem[Dosovitskiy et~al.(2020)Dosovitskiy, Beyer, Kolesnikov, Weissenborn,
+  Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly, et~al.]{vit}
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X.,
+  Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock \emph{arXiv preprint arXiv:2010.11929}, 2020.
+
+\bibitem[Edman et~al.(2022)Edman, Toral, and van Noord]{subword}
+Edman, L., Toral, A., and van Noord, G.
+\newblock Subword-delimited downsampling for better character-level
+  translation, 2022.
+
+\bibitem[Gao et~al.(2020)Gao, Biderman, Black, Golding, Hoppe, Foster, Phang,
+  He, Thite, Nabeshima, Presser, and Leahy]{pile}
+Gao, L., Biderman, S., Black, S., Golding, L., Hoppe, T., Foster, C., Phang,
+  J., He, H., Thite, A., Nabeshima, N., Presser, S., and Leahy, C.
+\newblock The pile: An 800gb dataset of diverse text for language modeling,
+  2020.
+
+\bibitem[Gu et~al.(2021)Gu, Goel, and R{\'e}]{s4}
+Gu, A., Goel, K., and R{\'e}, C.
+\newblock Efficiently modeling long sequences with structured state spaces.
+\newblock \emph{arXiv preprint arXiv:2111.00396}, 2021.
+
+\bibitem[Hawthorne et~al.(2022)Hawthorne, Jaegle, Cangea, Borgeaud, Nash,
+  Malinowski, Dieleman, Vinyals, Botvinick, Simon, et~al.]{perceiverar}
+Hawthorne, C., Jaegle, A., Cangea, C., Borgeaud, S., Nash, C., Malinowski, M.,
+  Dieleman, S., Vinyals, O., Botvinick, M., Simon, I., et~al.
+\newblock General-purpose, long-context autoregressive modeling with perceiver
+  ar.
+\newblock In \emph{International Conference on Machine Learning}, pp.\
+  8535--8558. PMLR, 2022.
+
+\bibitem[Hoffmann et~al.(2022)Hoffmann, Borgeaud, Mensch, Buchatskaya, Cai,
+  Rutherford, Casas, Hendricks, Welbl, Clark, et~al.]{Chinchilla}
+Hoffmann, J., Borgeaud, S., Mensch, A., Buchatskaya, E., Cai, T., Rutherford,
+  E., Casas, D. d.~L., Hendricks, L.~A., Welbl, J., Clark, A., et~al.
+\newblock Training compute-optimal large language models.
+\newblock \emph{arXiv preprint arXiv:2203.15556}, 2022.
+
+\bibitem[Hsu et~al.(2021)Hsu, Bolte, Tsai, Lakhotia, Salakhutdinov, and
+  Mohamed]{hubert}
+Hsu, W.-N., Bolte, B., Tsai, Y.-H.~H., Lakhotia, K., Salakhutdinov, R., and
+  Mohamed, A.
+\newblock Hubert: Self-supervised speech representation learning by masked
+  prediction of hidden units.
+\newblock \emph{IEEE/ACM Transactions on Audio, Speech, and Language
+  Processing}, 29:\penalty0 3451--3460, 2021.
+
+\bibitem[Hutchins et~al.(2022)Hutchins, Schlag, Wu, Dyer, and
+  Neyshabur]{blockrecurrent}
+Hutchins, D., Schlag, I., Wu, Y., Dyer, E., and Neyshabur, B.
+\newblock Block-recurrent transformers.
+\newblock \emph{arXiv preprint arXiv:2203.07852}, 2022.
+
+\bibitem[Jaegle et~al.(2021)Jaegle, Gimeno, Brock, Vinyals, Zisserman, and
+  Carreira]{perceiver}
+Jaegle, A., Gimeno, F., Brock, A., Vinyals, O., Zisserman, A., and Carreira, J.
+\newblock Perceiver: General perception with iterative attention.
+\newblock In \emph{International conference on machine learning}, pp.\
+  4651--4664. PMLR, 2021.
+
+\bibitem[Kalchbrenner et~al.(2018)Kalchbrenner, Elsen, Simonyan, Noury,
+  Casagrande, Lockhart, Stimberg, van~den Oord, Dieleman, and
+  Kavukcuoglu]{wavernn}
+Kalchbrenner, N., Elsen, E., Simonyan, K., Noury, S., Casagrande, N., Lockhart,
+  E., Stimberg, F., van~den Oord, A., Dieleman, S., and Kavukcuoglu, K.
+\newblock Efficient neural audio synthesis.
+\newblock \emph{CoRR}, abs/1802.08435, 2018.
+\newblock URL \url{http://arxiv.org/abs/1802.08435}.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei]{kaplan2020scaling}
+Kaplan, J., McCandlish, S., Henighan, T., Brown, T.~B., Chess, B., Child, R.,
+  Gray, S., Radford, A., Wu, J., and Amodei, D.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv preprint arXiv:2001.08361}, 2020.
+
+\bibitem[Katharopoulos et~al.(2020)Katharopoulos, Vyas, Pappas, and
+  Fleuret]{lineartransformer}
+Katharopoulos, A., Vyas, A., Pappas, N., and Fleuret, F.
+\newblock Transformers are rnns: Fast autoregressive transformers with linear
+  attention.
+\newblock In \emph{International Conference on Machine Learning}, pp.\
+  5156--5165. PMLR, 2020.
+
+\bibitem[Kingma \& Ba(2015)Kingma and Ba]{ADAM}
+Kingma, D.~P. and Ba, J.
+\newblock Adam: A method for stochastic optimization.
+\newblock In \emph{ICLR}, 2015.
+
+\bibitem[Kitaev et~al.(2020)Kitaev, Kaiser, and Levskaya]{reformer}
+Kitaev, N., Kaiser, {\L}., and Levskaya, A.
+\newblock Reformer: The efficient transformer.
+\newblock \emph{arXiv preprint arXiv:2001.04451}, 2020.
+
+\bibitem[Kudo \& Richardson(2018)Kudo and Richardson]{sentencepiece}
+Kudo, T. and Richardson, J.
+\newblock Sentencepiece: A simple and language independent subword tokenizer
+  and detokenizer for neural text processing.
+\newblock \emph{arXiv preprint arXiv:1808.06226}, 2018.
+
+\bibitem[Ma et~al.(2022)Ma, Zhou, Kong, He, Gui, Neubig, May, and
+  Zettlemoyer]{mega}
+Ma, X., Zhou, C., Kong, X., He, J., Gui, L., Neubig, G., May, J., and
+  Zettlemoyer, L.
+\newblock Mega: moving average equipped gated attention.
+\newblock \emph{arXiv preprint arXiv:2209.10655}, 2022.
+
+\bibitem[Micikevicius et~al.(2017)Micikevicius, Narang, Alben, Diamos, Elsen,
+  Garcia, Ginsburg, Houston, Kuchaiev, Venkatesh, et~al.]{mixedprecision}
+Micikevicius, P., Narang, S., Alben, J., Diamos, G., Elsen, E., Garcia, D.,
+  Ginsburg, B., Houston, M., Kuchaiev, O., Venkatesh, G., et~al.
+\newblock Mixed precision training.
+\newblock \emph{arXiv preprint arXiv:1710.03740}, 2017.
+
+\bibitem[Oord et~al.(2016)Oord, Kalchbrenner, and
+  Kavukcuoglu]{Oord2016PixelNetworks}
+Oord, A. v.~d., Kalchbrenner, N., and Kavukcuoglu, K.
+\newblock {Pixel Recurrent Neural Networks}.
+\newblock \emph{ICML}, 4:\penalty0 2611--2620, 1 2016.
+\newblock \doi{10.48550/arxiv.1601.06759}.
+\newblock URL \url{https://arxiv.org/abs/1601.06759v3}.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, et~al.]{pytorch}
+Paszke, A., Gross, S., Massa, F., Lerer, A., Bradbury, J., Chanan, G., Killeen,
+  T., Lin, Z., Gimelshein, N., Antiga, L., et~al.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In \emph{NeurIPS}, 2019.
+
+\bibitem[Press et~al.(2020)Press, Smith, and Lewis]{shortformer}
+Press, O., Smith, N.~A., and Lewis, M.
+\newblock Shortformer: Better language modeling using shorter inputs.
+\newblock \emph{arXiv preprint arXiv:2012.15832}, 2020.
+
+\bibitem[Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever]{gpt2}
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and Sutskever, I.
+\newblock Language models are unsupervised multitask learners.
+\newblock 2019.
+
+\bibitem[Rae et~al.(2019{\natexlab{a}})Rae, Potapenko, Jayakumar, and
+  Lillicrap]{compressive}
+Rae, J.~W., Potapenko, A., Jayakumar, S.~M., and Lillicrap, T.~P.
+\newblock Compressive transformers for long-range sequence modelling.
+\newblock \emph{arXiv preprint arXiv:1911.05507}, 2019{\natexlab{a}}.
+
+\bibitem[Rae et~al.(2019{\natexlab{b}})Rae, Potapenko, Jayakumar, and
+  Lillicrap]{pg19}
+Rae, J.~W., Potapenko, A., Jayakumar, S.~M., and Lillicrap, T.~P.
+\newblock Compressive transformers for long-range sequence modelling.
+\newblock \emph{arXiv preprint arXiv:1911.05507}, 2019{\natexlab{b}}.
+
+\bibitem[Ramesh et~al.(2021)Ramesh, Pavlov, Goh, Gray, Voss, Radford, Chen, and
+  Sutskever]{dalle}
+Ramesh, A., Pavlov, M., Goh, G., Gray, S., Voss, C., Radford, A., Chen, M., and
+  Sutskever, I.
+\newblock Zero-shot text-to-image generation.
+\newblock In \emph{International Conference on Machine Learning}, pp.\
+  8821--8831. PMLR, 2021.
+
+\bibitem[Ren et~al.(2021)Ren, Dai, Dai, Yang, Leskovec, Schuurmans, and
+  Dai]{combiner}
+Ren, H., Dai, H., Dai, Z., Yang, M., Leskovec, J., Schuurmans, D., and Dai, B.
+\newblock Combiner: Full attention transformer with sparse computation cost,
+  2021.
+\newblock URL \url{https://arxiv.org/abs/2107.05768}.
+
+\bibitem[Roy et~al.(2020)Roy, Saffar, Vaswani, and Grangier]{routing}
+Roy, A., Saffar, M., Vaswani, A., and Grangier, D.
+\newblock Efficient content-based sparse attention with routing transformers,
+  2020.
+\newblock URL \url{https://arxiv.org/abs/2003.05997}.
+
+\bibitem[Salimans et~al.(2017)Salimans, Karpathy, Chen, and
+  Kingma]{pixcelcnn++}
+Salimans, T., Karpathy, A., Chen, X., and Kingma, D.~P.
+\newblock Pixelcnn++: Improving the pixelcnn with discretized logistic mixture
+  likelihood and other modifications.
+\newblock \emph{CoRR}, abs/1701.05517, 2017.
+\newblock URL \url{http://arxiv.org/abs/1701.05517}.
+
+\bibitem[Schlag et~al.(2021)Schlag, Irie, and Schmidhuber]{linear}
+Schlag, I., Irie, K., and Schmidhuber, J.
+\newblock Linear transformers are secretly fast weight programmers.
+\newblock In Meila, M. and Zhang, T. (eds.), \emph{Proceedings of the 38th
+  International Conference on Machine Learning}, volume 139 of
+  \emph{Proceedings of Machine Learning Research}, pp.\  9355--9366. PMLR,
+  18--24 Jul 2021.
+\newblock URL \url{https://proceedings.mlr.press/v139/schlag21a.html}.
+
+\bibitem[Sennrich et~al.(2015)Sennrich, Haddow, and Birch]{bpe}
+Sennrich, R., Haddow, B., and Birch, A.
+\newblock Neural machine translation of rare words with subword units.
+\newblock \emph{arXiv preprint arXiv:1508.07909}, 2015.
+
+\bibitem[Sharami et~al.(2023)Sharami, Shterionov, and
+  Spronck]{sharami2023systematic}
+Sharami, J., Shterionov, D., and Spronck, P.
+\newblock A systematic analysis of vocabulary and bpe settings for optimal
+  fine-tuning of nmt: A case study of in-domain translation.
+\newblock \emph{arXiv preprint arXiv:2303.00722}, 2023.
+
+\bibitem[Smith et~al.(2022)Smith, Warrington, and Linderman]{s5}
+Smith, J.~T., Warrington, A., and Linderman, S.~W.
+\newblock Simplified state space layers for sequence modeling.
+\newblock \emph{arXiv preprint arXiv:2208.04933}, 2022.
+
+\bibitem[Su et~al.(2021)Su, Lu, Pan, Murtadha, Wen, and Liu]{rotary}
+Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., and Liu, Y.
+\newblock Roformer: Enhanced transformer with rotary position embedding.
+\newblock \emph{arXiv preprint arXiv:2104.09864}, 2021.
+
+\bibitem[Sun et~al.(2021)Sun, Krishna, Mattarella-Micke, and
+  Iyyer]{sun2021long}
+Sun, S., Krishna, K., Mattarella-Micke, A., and Iyyer, M.
+\newblock Do long-range language models actually use long-range context?
+\newblock \emph{arXiv preprint arXiv:2109.09115}, 2021.
+
+\bibitem[Touvron et~al.(2023)Touvron, Lavril, Izacard, Martinet, Lachaux,
+  Lacroix, Rozi{\`e}re, Goyal, Hambro, Azhar, et~al.]{llama}
+Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix,
+  T., Rozi{\`e}re, B., Goyal, N., Hambro, E., Azhar, F., et~al.
+\newblock Llama: Open and efficient foundation language models.
+\newblock \emph{arXiv preprint arXiv:2302.13971}, 2023.
+
+\bibitem[Trinh \& Le(2018)Trinh and Le]{stories}
+Trinh, T.~H. and Le, Q.~V.
+\newblock A simple method for commonsense reasoning.
+\newblock \emph{arXiv preprint arXiv:1806.02847}, 2018.
+
+\bibitem[van~den Oord et~al.(2016)van~den Oord, Dieleman, Zen, Simonyan,
+  Vinyals, Graves, Kalchbrenner, Senior, and Kavukcuoglu]{wavenet}
+van~den Oord, A., Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A.,
+  Kalchbrenner, N., Senior, A.~W., and Kavukcuoglu, K.
+\newblock Wavenet: {A} generative model for raw audio.
+\newblock \emph{CoRR}, abs/1609.03499, 2016.
+\newblock URL \url{http://arxiv.org/abs/1609.03499}.
+
+\bibitem[van~den Oord et~al.(2017)van~den Oord, Li, Babuschkin, Simonyan,
+  Vinyals, Kavukcuoglu, van~den Driessche, Lockhart, Cobo, Stimberg,
+  Casagrande, Grewe, Noury, Dieleman, Elsen, Kalchbrenner, Zen, Graves, King,
+  Walters, Belov, and Hassabis]{parawavenet}
+van~den Oord, A., Li, Y., Babuschkin, I., Simonyan, K., Vinyals, O.,
+  Kavukcuoglu, K., van~den Driessche, G., Lockhart, E., Cobo, L.~C., Stimberg,
+  F., Casagrande, N., Grewe, D., Noury, S., Dieleman, S., Elsen, E.,
+  Kalchbrenner, N., Zen, H., Graves, A., King, H., Walters, T., Belov, D., and
+  Hassabis, D.
+\newblock Parallel wavenet: Fast high-fidelity speech synthesis.
+\newblock \emph{CoRR}, abs/1711.10433, 2017.
+\newblock URL \url{http://arxiv.org/abs/1711.10433}.
+
+\bibitem[Wu et~al.(2022)Wu, Rabe, Hutchins, and Szegedy]{memorizing}
+Wu, Y., Rabe, M.~N., Hutchins, D., and Szegedy, C.
+\newblock Memorizing transformers.
+\newblock \emph{arXiv preprint arXiv:2203.08913}, 2022.
+
+\bibitem[Zhang et~al.(2022{\natexlab{a}})Zhang, Roller, Goyal, Artetxe, Chen,
+  Chen, Dewan, Diab, Li, Lin, Mihaylov, Ott, Shleifer, Shuster, Simig, Koura,
+  Sridhar, Wang, Zettlemoyer, and Ai]{Zhang2022OPT:Models}
+Zhang, S., Roller, S., Goyal, N., Artetxe, M., Chen, M., Chen, S., Dewan, C.,
+  Diab, M., Li, X., Lin, V., Mihaylov, T., Ott, M., Shleifer, S., Shuster, K.,
+  Simig, D., Koura, S., Sridhar, A., Wang, T., Zettlemoyer, L., and Ai, M.
+\newblock {OPT: Open Pre-trained Transformer Language Models}.
+\newblock 5 2022{\natexlab{a}}.
+\newblock \doi{10.48550/arxiv.2205.01068}.
+\newblock URL \url{https://arxiv.org/abs/2205.01068v4}.
+
+\bibitem[Zhang et~al.(2022{\natexlab{b}})Zhang, Roller, Goyal, Artetxe, Chen,
+  Chen, Dewan, Diab, Li, Lin, et~al.]{OPT}
+Zhang, S., Roller, S., Goyal, N., Artetxe, M., Chen, M., Chen, S., Dewan, C.,
+  Diab, M., Li, X., Lin, X.~V., et~al.
+\newblock Opt: Open pre-trained transformer language models.
+\newblock \emph{arXiv preprint arXiv:2205.01068}, 2022{\natexlab{b}}.
+
+\end{thebibliography}

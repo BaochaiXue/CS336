@@ -1,0 +1,31 @@
+In the burgeoning field of multimodal research, the integration of image understanding capabilities into large language models has become increasingly viable. 
+Drawing inspiration from the open-sourced LLaVA~\citep{liu2023visual,liu2023improved}, we present Yi Vision Language (Yi-VL) models, \textit{i.e.}, Yi-VL-6B and Yi-VL-34B, based on Yi-6B-Chat and Yi-34B-Chat language models. 
+The architecture of Yi-VL models, as illustrated in Figure \ref{fig:yi-vl}, comprises three primary modules. The Vision Transformer (ViT), used for image encoding, is initialized with CLIP ViT-H/14 model~\citep{ilharco_gabriel_2021_5143773}. A Projection Module, designed to align image features with text feature spcae, consists of a two-layer Multilayer Perceptron (MLP) with layer normalizations. Finally, the large language model, initialized with the Yi-Chat models, demonstrating exceptional proficiency in understanding and generating both English and Chinese. To enhance the performance of Yi-VL models in bilingual multimodal understanding and generation, we leverage a rich dataset of bilingual image-text pairs.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.98\textwidth]{images/yi-vl-cmmmu-1.pdf}
+    \caption{Architecture of Yi-VL models. Symbols are used to denote the training status of various modules at three training stages: a fire icon (\includegraphics[width=1em]{images/fire.png}) indicates the parameters of the module are trainable, while a snowflake icon (\includegraphics[width=0.9em]{images/snow.png}) signifies that parameters are frozen. The image resolution used in ViT at each stage, either $224^2$ or $448^2$, is also marked.}
+    \label{fig:yi-vl}
+\end{figure}
+
+Yi-VL models undergo a three-stage training process: 
+\begin{description}[leftmargin=0.2in]
+    \item[Stage 1:] we train the parameters of the ViT and the projection module using an image resolution of $224^2$. The training leverages a substantial dataset comprising $100$ million image-text pairs from LAION-400M~\citep{schuhmann2021laion}. The primary objective is to enhance the ViT's knowledge acquisition within our specified architecture and to achieve better alignment between the ViT and the LLM. 
+    \item[Stage 2:] we scale up the image resolution of ViT to $448^2$, aiming to further boost the model's capability for discerning intricate visual details. The dataset used in this stage includes $20$ million image-text pairs derived from LAION-400M. Additionally, we incorporate around $4.8$ million image-text pairsn from diverse sources, \textit{e.g.}, CLLaVA~\citep{linksoulai2023chinesellava}, LLaVAR~\citep{zhang2023llavar}, Flickr~\citep{young2014image}, VQAv2~\citep{goyal2017making}, RefCOCO~\citep{kazemzadeh2014referitgame}, Visual7w~\citep{zhu2016visual7w} and so on.
+    \item[Stage 3:] the parameters of the entire model are trained. The primary goal is to enhance the model's proficiency in multimodal chat interactions, thereby endowing it with the ability to seamlessly integrate and interpret visual and linguistic inputs. To this end, the training dataset encompasses a diverse range of sources, totalling approximately $1$ million image-text pairs, including GQA~\citep{hudson2019gqa}, VizWiz VQA~\citep{gurari2018vizwiz}, TextCaps~\citep{sidorov2020textcaps}, OCR-VQA~\citep{mishra2019ocr}, Visual Genome~\citep{krishna2017visual}, ShareGPT4V~\citep{chen2023sharegpt4v} and so on. To ensure data balancing, we impose a cap on the maximum data contribution from any single source, restricting it to no more than $50,000$ pairs. 
+\end{description}
+
+% \begin{itemize}
+% \item In Stage 1, we train the parameters of the ViT and the projection module using an image resolution of $224^2$. The training leverages a substantial dataset comprising $100$ million image-text pairs from LAION-400M~\citep{schuhmann2021laion}. The primary objective is to enhance the ViT's knowledge acquisition within our specified architecture and to achieve better alignment between the ViT and the LLM. 
+
+% \item In Stage 2, we scale up the image resolution of ViT to $448^2$, aiming to further boost the model's capability for discerning intricate visual details. The dataset used in this stage includes $20$ million image-text pairs derived from LAION-400M. Additionally, we incorporate around $4.8$ million image-text pairsn from diverse sources, \textit{e.g.},CLLaVA~\citep{linksoulai2023chinesellava}, LLaVAR~\citep{zhang2023llavar}, Flickr~\citep{young2014image}, VQAv2~\citep{goyal2017making}, RefCOCO~\citep{kazemzadeh2014referitgame}, Visual7w~\citep{zhu2016visual7w} and so on.
+
+% \item In Stage 3, the parameters of the entire model are trained. The primary goal is to enhance the model's proficiency in multimodal chat interactions, thereby endowing it with the ability to seamlessly integrate and interpret visual and linguistic inputs. To this end, the training dataset encompasses a diverse range of sources, totalling approximately $1$ million image-text pairs, including GQA~\citep{hudson2019gqa}, VizWiz VQA~\citep{gurari2018vizwiz}, TextCaps~\citep{sidorov2020textcaps}, OCR-VQA~\citep{mishra2019ocr}, Visual Genome~\citep{krishna2017visual}, ShareGPT4V~\citep{chen2023sharegpt4v} and so on. to ensure data balancing, we impose a cap on the maximum data contribution from any single source, restricting it to no more than $50,000$ pairs. 
+% \end{itemize}
+
+In Stage 1 and 2, we set the global batch size, the learning rate, the gradient clip and the number of epoch to $4096$, $1$e$-4$, $0.5$ and $1$, respectively. In Stage 3, these parameters are adjusted to $256$, $2$e$-5$, $1.0$ and $2$. The training consumes $128$ NVIDIA A100 GPUs. The total training time amounted to approximately $3$ days for Yi-VL-6B and $10$ days for Yi-VL-34B. %We have made the Yi-VL models publicly available at \url{https://huggingface.co/01-ai/Yi-VL-6B} and \url{https://huggingface.co/01-ai/Yi-VL-34B}.
+
+\input{tables/tab_yi_vl}
+
+Table~\ref{tab:yi_vl_mmmu} shows the MMMU test set leaderboard by Yi-VL's release. We note that this area is currently actively under research, aligning with the community's advances, we will continuously improve the update Yi-VL's performance. 

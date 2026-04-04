@@ -1,0 +1,38 @@
+\begin{table}[t]
+\centering
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+\caption{
+\textbf{\dclm competition scales.} \dclm{} contains five competition scales, enabling research in varying compute regimes.
+Each scale specifies the model size (`Model parameters', $N$), the number of tokens seen during training (`Train tokens', $D$), and the size of the original pool that can be used for filtering (`Pool size'). We provide an estimate of the compute required for training (`Train FLOPs'$=6ND$) and GPU hours (`Train H100 hours') using the OpenLM training framework~\citep{open_lm}.}
+%
+\begin{tabular}{lccccc}
+
+\toprule
+Scale & \makecell{Model\\ parameters} & Train tokens & Train FLOPs & \makecell{Train\\ H100 hours} & Pool size\\ 
+%
+\midrule
+\xstrack & 412M & 8.2B & 2.0e19 & 26 & 469B \\ 
+\strack & 1.4B & 28.8B & 2.4e20 & 240 & 1.64T\\ 
+\mtrack & 2.8B & 55.9B & 9.4e20 & 740 & 3.18T \\ 
+\ltrack & 6.9B & 138B & 5.7e21 & 3,700 & 7.85T\\ 
+\xltrack & 6.9B & 276B & 1.1e22 & 7,300 & 15.7T\\ 
+\bottomrule
+\end{tabular}
+%
+%
+%
+
+%
+%
+\label{tab:models}
+\end{table}

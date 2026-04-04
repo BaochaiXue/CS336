@@ -1,0 +1,264 @@
+\begin{thebibliography}{51}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Al-Rfou et~al.(2019)Al-Rfou, Choe, Constant, Guo, and Jones]{al2019character}
+Rami Al-Rfou, Dokook Choe, Noah Constant, Mandy Guo, and Llion Jones.
+\newblock Character-level language modeling with deeper self-attention.
+\newblock In \emph{Association for the Advancement of Artificial Intelligence}, volume~33, pages 3159--3166, 2019.
+
+\bibitem[Austin et~al.(2021)Austin, Odena, Nye, Bosma, Michalewski, Dohan, Jiang, Cai, Terry, Le, and Sutton]{Eval_MBPP}
+Jacob Austin, Augustus Odena, Maxwell Nye, Maarten Bosma, Henryk Michalewski, David Dohan, Ellen Jiang, Carrie Cai, Michael Terry, Quoc Le, and Charles Sutton.
+\newblock Program synthesis with large language models, 2021.
+
+\bibitem[Bai et~al.(2010)Bai, Weston, Grangier, Collobert, Sadamasa, Qi, Chapelle, and Weinberger]{bai2010learning}
+Bing Bai, Jason Weston, David Grangier, Ronan Collobert, Kunihiko Sadamasa, Yanjun Qi, Olivier Chapelle, and Kilian Weinberger.
+\newblock Learning to rank with (a lot of) word features.
+\newblock \emph{Information retrieval}, 13:\penalty0 291--314, 2010.
+
+\bibitem[Bisk et~al.(2020)Bisk, Zellers, Gao, Choi, et~al.]{Eval_piqa}
+Yonatan Bisk, Rowan Zellers, Jianfeng Gao, Yejin Choi, et~al.
+\newblock Piqa: Reasoning about physical commonsense in natural language.
+\newblock In \emph{Association for the Advancement of Artificial Intelligence}, pages 7432--7439, 2020.
+
+\bibitem[Casson(2023)]{casson2023flops}
+Adam Casson.
+\newblock Transformer flops, 2023.
+\newblock \url{https://www.adamcasson.com/posts/transformer-flops}.
+
+\bibitem[Chen et~al.(2021)Chen, Tworek, Jun, Yuan, Pinto, Kaplan, Edwards, Burda, Joseph, Brockman, Ray, Puri, Krueger, Petrov, Khlaaf, Sastry, Mishkin, Chan, Gray, Ryder, Pavlov, Power, Kaiser, Bavarian, Winter, Tillet, Such, Cummings, Plappert, Chantzis, Barnes, Herbert-Voss, Guss, Nichol, Paino, Tezak, Tang, Babuschkin, Balaji, Jain, Saunders, Hesse, Carr, Leike, Achiam, Misra, Morikawa, Radford, Knight, Brundage, Murati, Mayer, Welinder, McGrew, Amodei, McCandlish, Sutskever, and Zaremba]{Eval_HumanEval}
+Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de~Oliveira Pinto, Jared Kaplan, Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, Alex Ray, Raul Puri, Gretchen Krueger, Michael Petrov, Heidy Khlaaf, Girish Sastry, Pamela Mishkin, Brooke Chan, Scott Gray, Nick Ryder, Mikhail Pavlov, Alethea Power, Lukasz Kaiser, Mohammad Bavarian, Clemens Winter, Philippe Tillet, Felipe~Petroski Such, Dave Cummings, Matthias Plappert, Fotios Chantzis, Elizabeth Barnes, Ariel Herbert-Voss, William~Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang, Igor Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher Hesse, Andrew~N. Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa, Alec Radford, Matthew Knight, Miles Brundage, Mira Murati, Katie Mayer, Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish, Ilya Sutskever, and Wojciech Zaremba.
+\newblock Evaluating large language models trained on code, 2021.
+
+\bibitem[Choe et~al.(2019)Choe, Al-Rfou, Guo, Lee, and Constant]{Choe2019BridgingTG}
+Dokook Choe, Rami Al-Rfou, Mandy Guo, Heeyoung Lee, and Noah Constant.
+\newblock Bridging the gap for tokenizer-free language models.
+\newblock \emph{arXiv}, abs/1908.10322, 2019.
+
+\bibitem[Chung et~al.(2019)Chung, Ahn, and Bengio]{chung2019hierarchical}
+Junyoung Chung, Sungjin Ahn, and Yoshua Bengio.
+\newblock Hierarchical multiscale recurrent neural networks.
+\newblock In \emph{Proceedings of the International Conference on Learning Representations}, 2019.
+
+\bibitem[Clark et~al.(2022)Clark, Garrette, Turc, and Wieting]{clark2022canine}
+Jonathan~H Clark, Dan Garrette, Iulia Turc, and John Wieting.
+\newblock Canine: Pre-training an efficient tokenization-free encoder for language representation.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 10:\penalty0 73--91, 2022.
+
+\bibitem[Clark et~al.(2018)Clark, Cowhey, Etzioni, Khot, Sabharwal, Schoenick, and Tafjord]{Eval_ARC}
+Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord.
+\newblock Think you have solved question answering? {T}ry {ARC}, the {AI2} reasoning challenge.
+\newblock \emph{arXiv}, 2018.
+
+\bibitem[Dagan et~al.(2024)Dagan, Synnaeve, and Roziere]{dagangetting}
+Gautier Dagan, Gabriel Synnaeve, and Baptiste Roziere.
+\newblock Getting the most out of your tokenizer for pre-training and domain adaptation.
+\newblock In \emph{Forty-first International Conference on Machine Learning}, 2024.
+
+\bibitem[Dao et~al.(2022)Dao, Fu, Ermon, Rudra, and R{\'e}]{dao2022flashattention}
+Tri Dao, Dan Fu, Stefano Ermon, Atri Rudra, and Christopher R{\'e}.
+\newblock Flash{A}ttention: Fast and memory-efficient exact attention with io-awareness.
+\newblock \emph{Proceedings of Advances in Neural Information Processing Systems}, 35, 2022.
+
+\bibitem[Dubey et~al.(2024)Dubey, Jauhri, Pandey, Kadian, Al-Dahle, Letman, Mathur, Schelten, Yang, Fan, et~al.]{dubey2024llama}
+Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan, et~al.
+\newblock The llama 3 herd of models.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Edman et~al.(2024)Edman, Schmid, and Fraser]{edman2024cute}
+Lukas Edman, Helmut Schmid, and Alexander Fraser.
+\newblock {CUTE}: Measuring llms' understanding of their tokens.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[El~Boukkouri et~al.(2020)El~Boukkouri, Ferret, Lavergne, Noji, Zweigenbaum, and Tsujii]{el2020characterbert}
+Hicham El~Boukkouri, Olivier Ferret, Thomas Lavergne, Hiroshi Noji, Pierre Zweigenbaum, and Jun’ichi Tsujii.
+\newblock {CharacterBERT}: Reconciling elmo and bert for word-level open-vocabulary representations from characters.
+\newblock In \emph{Proceedings of International Conference on Computational Linguistics}, 2020.
+
+\bibitem[Gage(1994)]{gage1994new}
+Philip Gage.
+\newblock A new algorithm for data compression.
+\newblock \emph{The C Users Journal}, 12\penalty0 (2):\penalty0 23--38, 1994.
+
+\bibitem[Goyal et~al.(2022)Goyal, Gao, Chaudhary, Chen, Wenzek, Ju, Krishnan, Ranzato, Guzm{\'a}n, and Fan]{goyal2022flores}
+Naman Goyal, Cynthia Gao, Vishrav Chaudhary, Peng-Jen Chen, Guillaume Wenzek, Da~Ju, Sanjana Krishnan, Marc{'}Aurelio Ranzato, Francisco Guzm{\'a}n, and Angela Fan.
+\newblock The {F}lores-101 evaluation benchmark for low-resource and multilingual machine translation.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 10:\penalty0 522--538, 2022.
+\newblock \doi{10.1162/tacl_a_00474}.
+\newblock \url{https://aclanthology.org/2022.tacl-1.30}.
+
+\bibitem[Graves(2013)]{graves2013generating}
+Alex Graves.
+\newblock Generating sequences with recurrent neural networks.
+\newblock \emph{arXiv}, 2013.
+
+\bibitem[Gu and Dao(2023)]{gu2023mamba}
+Albert Gu and Tri Dao.
+\newblock Mamba: Linear-time sequence modeling with selective state spaces.
+\newblock \emph{arXiv}, 2023.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Burns, Basart, Zou, Mazeika, Song, and Steinhardt]{hendrycks2020measuring}
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and Jacob Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock In \emph{Proceedings of the International Conference on Learning Representations}, 2020.
+
+\bibitem[Hoffmann et~al.(2022)Hoffmann, Borgeaud, Mensch, Buchatskaya, Cai, Rutherford, de~Las~Casas, Hendricks, Welbl, Clark, et~al.]{hoffmann2022training}
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de~Las~Casas, Lisa~Anne Hendricks, Johannes Welbl, Aidan Clark, et~al.
+\newblock Training compute-optimal large language models.
+\newblock In \emph{Proceedings of Advances in Neural Information Processing Systems}, 2022.
+
+\bibitem[Jaegle et~al.(2021)Jaegle, Gimeno, Brock, Vinyals, Zisserman, and Carreira]{jaegle2021perceiver}
+Andrew Jaegle, Felix Gimeno, Andy Brock, Oriol Vinyals, Andrew Zisserman, and Joao Carreira.
+\newblock Perceiver: General perception with iterative attention.
+\newblock In \emph{Proceedings of the International Conference of Machine Learning}. PMLR, 2021.
+
+\bibitem[Kalchbrenner et~al.(2016)Kalchbrenner, Espeholt, Simonyan, van~den Oord, Graves, and Kavukcuoglu]{kalchbrenner2016neural}
+Nal Kalchbrenner, Lasse Espeholt, Karen Simonyan, Aäron van~den Oord, Alexander Graves, and Koray Kavukcuoglu.
+\newblock Neural machine translation in linear time.
+\newblock \emph{arXiv}, 2016.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child, Gray, Radford, Wu, and Amodei]{kaplan2020scaling}
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom~B Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv}, 2020.
+
+\bibitem[Kenter et~al.(2018)Kenter, Jones, and Hewlett]{kenter2018byte}
+Tom Kenter, Llion Jones, and Daniel Hewlett.
+\newblock Byte-level machine reading across morphologically varied languages.
+\newblock In \emph{Association for the Advancement of Artificial Intelligence}, 2018.
+
+\bibitem[Kim et~al.(2016)Kim, Jernite, Sontag, and Rush]{kim2016character}
+Yoon Kim, Yacine Jernite, David Sontag, and Alexander Rush.
+\newblock Character-aware neural language models.
+\newblock In \emph{Association for the Advancement of Artificial Intelligence}, 2016.
+
+\bibitem[Lester et~al.(2024)Lester, Lee, Alemi, Pennington, Roberts, Sohl-Dickstein, and Constant]{lester2024training}
+Brian Lester, Jaehoon Lee, Alex Alemi, Jeffrey Pennington, Adam Roberts, Jascha Sohl-Dickstein, and Noah Constant.
+\newblock Training llms over neurally compressed text.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Li et~al.(2024)Li, Fang, Smyrnis, Ivgi, Jordan, Gadre, Bansal, Guha, Keh, Arora, et~al.]{li2024datacomp}
+Jeffrey Li, Alex Fang, Georgios Smyrnis, Maor Ivgi, Matt Jordan, Samir Gadre, Hritik Bansal, Etash Guha, Sedrick Keh, Kushal Arora, et~al.
+\newblock Datacomp-lm: In search of the next generation of training sets for language models.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Liang et~al.(2023)Liang, Gonen, Mao, Hou, Goyal, Ghazvininejad, Zettlemoyer, and Khabsa]{liang2023xlm}
+Davis Liang, Hila Gonen, Yuning Mao, Rui Hou, Naman Goyal, Marjan Ghazvininejad, Luke Zettlemoyer, and Madian Khabsa.
+\newblock Xlm-v: Overcoming the vocabulary bottleneck in multilingual masked language models.
+\newblock In \emph{Proceedings of Empirical Methods in Natural Language Processing}, 2023.
+
+\bibitem[Limisiewicz et~al.(2024)Limisiewicz, Blevins, Gonen, Ahia, and Zettlemoyer]{limisiewicz2024myte}
+Tomasz Limisiewicz, Terra Blevins, Hila Gonen, Orevaoghene Ahia, and Luke Zettlemoyer.
+\newblock Myte: Morphology-driven byte encoding for better and fairer multilingual language modeling.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Loshchilov and Hutter(2017)]{adamw}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock \emph{arXiv}, 2017.
+
+\bibitem[Mikolov et~al.(2012)Mikolov, Sutskever, Deoras, Le, Kombrink, and Cernocky]{mikolov2012subword}
+Tom{\'a}{\v{s}} Mikolov, Ilya Sutskever, Anoop Deoras, Hai-Son Le, Stefan Kombrink, and Jan Cernocky.
+\newblock Subword language modeling with neural networks.
+\newblock \emph{preprint (http://www. fit. vutbr. cz/imikolov/rnnlm/char. pdf)}, 8\penalty0 (67), 2012.
+
+\bibitem[Nawrot et~al.(2022)Nawrot, Tworkowski, Tyrolski, Kaiser, Wu, Szegedy, and Michalewski]{nawrot-etal-2022-hierarchical}
+Piotr Nawrot, Szymon Tworkowski, Micha{\l} Tyrolski, Lukasz Kaiser, Yuhuai Wu, Christian Szegedy, and Henryk Michalewski.
+\newblock Hierarchical transformers are more efficient language models.
+\newblock In \emph{Conference of the North American Chapter of the Association for Computational Linguistics}. Association for Computational Linguistics, 2022.
+
+\bibitem[Nawrot et~al.(2023)Nawrot, Chorowski, Lancucki, and Ponti]{nawrot-etal-2023-efficient}
+Piotr Nawrot, Jan Chorowski, Adrian Lancucki, and Edoardo~Maria Ponti.
+\newblock Efficient transformers with dynamic token pooling.
+\newblock In \emph{Proceedings of the Association for Computational Linguistics}. Association for Computational Linguistics, 2023.
+
+\bibitem[Petrov et~al.(2024)Petrov, La~Malfa, Torr, and Bibi]{petrov2024language}
+Aleksandar Petrov, Emanuele La~Malfa, Philip Torr, and Adel Bibi.
+\newblock Language model tokenizers introduce unfairness between languages.
+\newblock \emph{Proceedings of Advances in Neural Information Processing Systems}, 2024.
+
+\bibitem[Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, Sutskever, et~al.]{radfordgpt2}
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et~al.
+\newblock Language models are unsupervised multitask learners.
+\newblock \emph{OpenAI blog}, 1\penalty0 (8):\penalty0 9, 2019.
+
+\bibitem[Sennrich et~al.(2016)Sennrich, Haddow, and Birch]{sennrich-etal-2016-neural}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock In \emph{Proceedings of the Association for Computational Linguistics}. Association for Computational Linguistics, 2016.
+
+\bibitem[Shazeer(2020)]{swiglu}
+Noam Shazeer.
+\newblock {GLU} variants improve transformer.
+\newblock \emph{arXiv}, 2020.
+
+\bibitem[Slagle(2024)]{slagle2024spacebyte}
+Kevin Slagle.
+\newblock Spacebyte: Towards deleting tokenization from large language modeling.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Su et~al.(2021)Su, Lu, Pan, Murtadha, Wen, and Liu]{RoPe}
+Jianlin Su, Yu~Lu, Shengfeng Pan, Ahmed Murtadha, Bo~Wen, and Yunfeng Liu.
+\newblock {RoFormer}: Enhanced transformer with rotary position embedding. arxiv e-prints, art.
+\newblock \emph{arXiv}, 2021.
+
+\bibitem[Sutskever et~al.(2011)Sutskever, Martens, and Hinton]{sutskever2011generating}
+Ilya Sutskever, James Martens, and Geoffrey~E Hinton.
+\newblock Generating text with recurrent neural networks.
+\newblock In \emph{Proceedings of the International Conference of Machine Learning}, pages 1017--1024, 2011.
+
+\bibitem[Suvarna et~al.(2024)Suvarna, Khandelwal, and Peng]{suvarna2024phonologybench}
+Ashima Suvarna, Harshita Khandelwal, and Nanyun Peng.
+\newblock Phonologybench: Evaluating phonological skills of large language models.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Touvron et~al.(2023)Touvron, Martin, Stone, Albert, Almahairi, Babaei, Bashlykov, Batra, Bhargava, Bhosale, et~al.]{touvron2023llama}
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, et~al.
+\newblock Llama 2: Open foundation and fine-tuned chat models.
+\newblock \emph{arXiv}, 2023.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin]{vaswani2017attention}
+Ashish Vaswani, Noam~M. Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Neural Information Processing Systems}, 2017.
+
+\bibitem[Wang et~al.(2024)Wang, Gangavarapu, Yan, and Rush]{wang2024mambabyte}
+Junxiong Wang, Tushaar Gangavarapu, Jing~Nathan Yan, and Alexander~M Rush.
+\newblock Mambabyte: Token-free selective state space model.
+\newblock \emph{arXiv}, 2024.
+
+\bibitem[Xiong et~al.(2024)Xiong, Liu, Molybog, Zhang, Bhargava, Hou, Martin, Rungta, Sankararaman, Oguz, et~al.]{xiong2024effective}
+Wenhan Xiong, Jingyu Liu, Igor Molybog, Hejia Zhang, Prajjwal Bhargava, Rui Hou, Louis Martin, Rashi Rungta, Karthik~Abinav Sankararaman, Barlas Oguz, et~al.
+\newblock Effective long-context scaling of foundation models.
+\newblock In \emph{Conference of the North American Chapter of the Association for Computational Linguistics}, 2024.
+
+\bibitem[Xue et~al.(2022)Xue, Barua, Constant, Al-Rfou, Narang, Kale, Roberts, and Raffel]{xue2022byt5}
+Linting Xue, Aditya Barua, Noah Constant, Rami Al-Rfou, Sharan Narang, Mihir Kale, Adam Roberts, and Colin Raffel.
+\newblock Byt5: Towards a token-free future with pre-trained byte-to-byte models.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 10:\penalty0 291--306, 2022.
+
+\bibitem[Yu et~al.(2023)Yu, Simig, Flaherty, Aghajanyan, Zettlemoyer, and Lewis]{yu2023megabyte}
+Lili Yu, D{\'a}niel Simig, Colin Flaherty, Armen Aghajanyan, Luke Zettlemoyer, and Mike Lewis.
+\newblock Megabyte: Predicting million-byte sequences with multiscale transformers.
+\newblock \emph{Proceedings of Advances in Neural Information Processing Systems}, 2023.
+
+\bibitem[Zellers et~al.(2019)Zellers, Holtzman, Bisk, Farhadi, and Choi]{Eval_hellaswag}
+Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi.
+\newblock Hellaswag: Can a machine really finish your sentence?
+\newblock \emph{arXiv}, 2019.
+
+\bibitem[Zhang and Sennrich(2019)]{RMSNorm}
+Biao Zhang and Rico Sennrich.
+\newblock Root mean square layer normalization.
+\newblock \emph{Proceedings of Advances in Neural Information Processing Systems}, 32, 2019.
+
+\bibitem[Zhang et~al.(2015)Zhang, Zhao, and LeCun]{zhang2015character}
+Xiang Zhang, Junbo Zhao, and Yann LeCun.
+\newblock Character-level convolutional networks for text classification.
+\newblock In C.~Cortes, N.~Lawrence, D.~Lee, M.~Sugiyama, and R.~Garnett, editors, \emph{Proceedings of Advances in Neural Information Processing Systems}, volume~28. Curran Associates, Inc., 2015.
+\newblock \url{https://proceedings.neurips.cc/paper_files/paper/2015/file/250cf8b51c773f3f8dc8b4be867a9a02-Paper.pdf}.
+
+\end{thebibliography}

@@ -1,0 +1,101 @@
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/all_pile_style_1.3B_300k.pdf}
+\caption{\textbf{\ours~(C4 + QA-85B) v/s C4}: Comparison of perplexity on the Pile  for a 1.3B LLM trained for 300B tokens shows that WRAP outperforms models trained on 2x real data.}
+\label{fig:pile_wavg}
+\end{figure}
+
+
+\section{Perplexity Evaluation}
+\label{sec:results}
+
+
+
+
+
+
+We evaluate the perplexity of the pre-trained model on the validation set of multiple out-of-distribution datasets.  
+All models are either trained on the C4 dataset~\citep{raffel2020exploring}, or a particular stylistic rephrase of the same. All the evaluations are done on 21 sub-domains of the Pile~\citep{gao2020pile}.
+These subsets
+are created from the first 10,000 documents from each domain of the Pile dataset. We then evaluate the perplexity of the model on these subsets.  Additional evaluation details are provided in Appendix~\ref{app_eval}.
+It is important to note that we evaluate perplexities on the Pile instead of C4.
+Training on multiple distributions of text (synthetic and real web) does come at a small cost of less than 1 perplexity on the C4 validation set.  To understand our choice of evaluation, and why we observe this perplexity increase, we note that training over the C4 corpus corresponds to minimizing the objective 
+\begin{equation}
+    \theta_{c4}   = \min_{\theta} \mathbb{E}_{x \sim D_{c4}}\left[ \mathcal{L}(\theta; x) \right], 
+    \label{eq:theta}
+\end{equation}
+that attempts to exactly model the C4 web text.  In contrast, training over multiple styles corresponds to minimizing the risk over a different distribution,
+
+\begin{equation}
+    \theta_{\ours}   = \min_{\theta} \mathbb{E}_{x \sim D_{c4}\cup D_{syn}}\left[ \mathcal{L}(\theta; x) \right] .
+    \label{eq:theta_syn}
+\end{equation}
+
+Solving for \eqref{eq:theta_syn} does not minimize the risk over C4-only, and hence it is unfair to compare
+$\theta_{c4}$ and
+$\theta_{\ours}$ on the C4.
+For meaningfully comparing models trained on the C4 and on its synthetic rephrases, we evaluate their generalization capability on 21 different domains of the Pile~\citep{gao2020pile}. 
+Results for each domain are presented in Figure~\ref{fig:pile_wavg}.
+
+
+
+
+\paragraph{Data Complexity}
+In Figure~\ref{fig:lower_right_image}, we show that models trained for fewer tokens (150B) and even smaller 350M models outperform training on the full C4 for 300B tokens indicating faster learning with synthetic rephrases.  
+On some domains such as ArXiv and HackerNews, we observe that training with synthetic data allows reducing the perplexity by nearly 3x of the perplexity of models trained on real data alone. This suggests that in many cases 
+it may not be possible to offset 
+the performance advantage of pre-training on synthetic data
+by merely training on more real data.
+Overall, on an average of multiple subsets of the Pile,
+our models improve perplexity by 50\% over models trained on real data alone. 
+
+\paragraph{Learning Speed}
+We observe that even at the first checkpoint (10B tokens) of \ours~training, the average perplexity of the LLM on the Pile is lower than that achieved by pre-training on C4 for 15 checkpoints. This suggests a 15x pre-training speed-up. We defer the discussion on learning speed to  `zero-shot' tasks in order to make more meaningful comparisons. 
+
+
+
+
+
+
+\section{Zero-shot Tasks}
+We now evaluate our pre-trained language models on various zero-shot question answering (QA) benchmarks
+using the LLM Evaluation Harness\footnote{We use git commit - \texttt{89618bf8} for consistency across all experiments with a batch size of 32.}~\citep{eval-harness}.
+
+\subsection{Datasets}
+We evaluate our models on a total of 13 different zero-shot benchmarks to assess their abilities across various natural language tasks like common sense reasoning, language and knowledge understanding and mathematical reasoning.
+
+\paragraph{General Understanding}
+The General Understanding category comprises datasets testing broader cognitive skills and language comprehension. \textbf{ARC Easy (ARC-E)}~\citep{allenai:arc} is the less challenging counterpart of ARC-C, featuring questions that require basic reasoning skills. \textbf{BoolQ}~\citep{clark-etal-2019-boolq} includes boolean questions that focus on reading comprehension and general language understanding. \textbf{Winogrande (Wino.)}~\citep{ai2:winogrande} challenges models with common sense reasoning in language, particularly in pronoun disambiguation. \textbf{PIQA}~\citep{Bisk2020} assesses understanding of physical processes, an essential part of practical common sense. \textbf{HellaSwag}~\citep{zellers2019hellaswag} tests the ability to complete scenarios coherently, demanding both language understanding and common sense. \textbf{TruthfulQA}~\citep{lin2021truthfulqa} is centered on generating truthful, accurate answers, thus testing the model's factual correctness. \textbf{OpenBookQA (OBQA)}~\citep{OpenBookQA2018} evaluates the understanding of a broad range of facts and concepts. Finally, \textbf{LogiQA-2}~\citep{logiqa2} assesses the model's capacity to comprehend and apply logical principles.
+
+\paragraph{Specialized Knowledge}
+In the Specialized Knowledge category, we include datasets that demand expertise in specific domains. The \textbf{ARC Challenge (ARC-C)}~\citep{allenai:arc} contains challenging science exam questions from grades 3 to 9, demanding advanced knowledge. \textbf{SciQ}~\citep{SciQ} provides science exam questions to test models' understanding and reasoning in the scientific domain. \textbf{PubMedQA}~\citep{jin2019pubmedqa} focuses on biomedical literature, assessing comprehension in medical and health-related information. 
+\textbf{MathQA}~\citep{amini-etal-2019-mathqa} tests mathematical problem-solving, requiring both numerical comprehension and reasoning. Lastly, \textbf{MMLU}~\citep{hendryckstest2021} spans multiple domains, from professional to academic, testing the model on specialized subjects.
+
+
+
+\input{tables/qa_tablex3}
+\subsection{Results}
+We compare the performance of a model trained on a mixture of real and synthetic data with models trained on various splits of real data. In all our experiments, we use the C4~\citep{raffel2020exploring} dataset for rephrasing and producing splits of synthetic data. 
+We use the abbreviation `Real Tok.' to denote the number of tokens of web data available for pre-training. In the `Synthetic + Real' experiments, we augment the same number of synthetic rephrases. We choose `Real Tokens' as the metric of comparison because we can potentially rephrase the same document multiple times, implying that the total corpus size is not meaningful, and corpus `knowledge' is the actual currency of interest.
+
+\paragraph{Baselines Methods}
+We pre-train LLMs of 
+(i) Half of C4, and the (ii) Full C4 corresponding to approximately
+85 Billion and 170 Billion real tokens respectively~\citep{raffel2020exploring}. We also pre-train our own models on (iii) 160 Billion and (iv) 320 Billion tokens of the RefinedWeb Dataset~\citep{penedo2023refinedweb}. Additionally, we also compare with the (iv) Pythia-1.4B model that was trained on the Pile~\citep{gao2020pile}. This dataset is no longer publicly available, hence we utilize a pre-trained model. Finally, we also compare with the recent (v) TinyLlama model~\citep{zhang2024tinyllama} that was trained for 3 epochs  on 1 Trillion tokens of data from 
+SlimPajama \citep{shen2023slimpajama} and StarCoder \citep{li2023starcoder}.
+
+
+\paragraph{General Improvements}
+Across all tasks in Table~\ref{tab:general_understanding}, we observe that models trained on synthetic data combined with the C4 dataset (Synthetic+C4) exhibit an overall higher average performance of 49.4\% as compared to those trained solely on the real C4 dataset with a 85B token split, which scored an average of 47.4\%. This shows that the inclusion of synthetic data can enhance the general understanding capabilities of NLP models. Moreover, even the TinyLLama model trained for 10x compute and data, performs comparably to the other models trained on real data. This suggests that the gains from filtering out, or adding more real data are very low. As opposed to this, \ours~shows that pre-training on even small amounts of synthetic data can contribute to large performance gains.
+
+\paragraph{Specialized Knowledge Tasks} 
+The key message from the results
+in Table~\ref{tab:specialized_knowledge} is that synthetic data can not impart `new knowledge'. It can only help pre-train faster, which was also the premise of our work. In particular, we note several key findings:
+\begin{enumerate}
+    \item Pre-training on larger datasets helps improve performance, by presumably exposing the LLM to more ``knowledge''. For instance, the Pythia (300B) model achieves an average score of 44.6\%, outperforming the smaller C4 (85B) dataset's score of 43.5\%.
+    \item Despite the advantages of a larger dataset, the improvements saturate. For example, RefinedWeb (320B) model outperforms the RefinedWeb (160B) model by only 0.2\%. Similarly, the TinyLlama model (1T tokens) performs comparably to the \ours~ model, which only had 85B tokens of raw web data.
+\end{enumerate}
+
+\paragraph{Specific Improvements} 
+We see maximum improvement in the TruthfulQA dataset, with the Synthetic (85B) model scoring 44.0\%, which is significantly higher than any other model's performance on this dataset. This is potentially because instruction-tuned LLMs already correct potential misconceptions while rephrasing the text. Interestingly, we notice how adding real data to the synthetic model (Synthetic+C4) reduces the performance on TruthfulQA by 4\%, down to 40.5\%, indicating a potential dilution of the benefits gained from synthetic data when combined with real data. Other datasets such as HellaSwag, and BoolQ, for which C4 trained models do well, continue to show the benefits of incorporating combinations of C4 and synthetic rephrases.
+

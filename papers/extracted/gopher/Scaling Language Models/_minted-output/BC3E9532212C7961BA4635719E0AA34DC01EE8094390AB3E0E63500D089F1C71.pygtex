@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+ Claim: Damon Albarn\PYGZsq{}s debut album was released in 2011.
+ Evidence: His debut solo studio album Everyday Robots \PYGZhy{}\PYGZhy{} co\PYGZhy{}produced by XL Recordings
+           CEO Richard Russell \PYGZhy{}\PYGZhy{} was released on 28 April 2014 and featured collaborations
+           with Brian Eno, Natasha Khan and the Leytonstone City Pentecostal Mission Church
+           Choir as well as sampling several rants by Lord Buckley.
+ Target: REFUTED
+
+ Claim: Aristotle spent time in Athens.
+ Evidence: At seventeen or eighteen years of age, he joined Plato\PYGZsq{}s Academy in Athens
+           and remained there until the age of thirty\PYGZhy{}seven (c. 347 BC).
+ Target: SUPPORTED
+
+ Claim: John DiMaggio had a role on Justice League.
+ Evidence: \PYGZhy{}
+ Target: NOTENOUGHINFO
+\end{Verbatim}

@@ -1,0 +1,153 @@
+\documentclass[table]{gtech}
+\PassOptionsToPackage{table, usenames, dvipsnames}{xcolor}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{bigdelim}
+\usepackage{longtable}
+\usepackage{tabularray}
+\usepackage{wrapfig}
+\usepackage[most]{tcolorbox}
+\usepackage{url}
+\usepackage{float}
+\usepackage{datatool}
+\usepackage{enumitem}
+\usepackage{subcaption} %
+\usepackage[justification=centering]{caption}
+\let\comment\undefined
+
+\RequirePackage{tgpagella} %
+\RequirePackage{mathpazo}  %
+\RequirePackage{inconsolata} %
+\usepackage{makecell}
+
+\usepackage{adjustbox}
+\usepackage{tablefootnote}
+\usepackage{threeparttable}
+
+\usepackage{booktabs} %
+\usepackage{array}    %
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\splitcell}[2][c]{\makecell[#1]{#2}}
+
+\usepackage[utf8]{inputenc} %
+\usepackage[T1]{fontenc}    %
+\usepackage{hyperref}       %
+\usepackage{url}            %
+\usepackage{booktabs}       %
+\usepackage{amsfonts}       %
+\usepackage{nicefrac}       %
+\usepackage{microtype}      %
+\usepackage{xcolor}         %
+\usepackage{xspace}
+\usepackage{amsthm}   %
+\usepackage{amsmath}  %
+\usepackage{amssymb}  %
+\usepackage{bm}       %
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\renewcommand{\title}[1]{\newcommand{\titlelist}{{\huge\fontfamily{optimistic}\selectfont #1}}}
+
+\newcommand{\paratitle}[1]{\vspace{1.5ex}\noindent\textbf{#1}}
+\newcommand{\ie}{\emph{i.e.,}\xspace}
+\newcommand{\aka}{\emph{a.k.a.,}\xspace}
+\newcommand{\eg}{\emph{e.g.,}\xspace}
+\newcommand{\etal}{\emph{et al.}\xspace}
+\newcommand{\ignore}[1]{}
+\newcommand{\changed}[1]{\textcolor{blue}{#1}}
+\newcommand{\remove}[1]{\sout{\textcolor{orange}{#1}}}
+\newcommand{\replace}[2]{\remove{#1}/\changed{#2}}
+\newcommand\mathbox[1]{\mbox{$#1$}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\newcommand{\todo}[1]{\noindent\textcolor{blue}{\textbf{[{ToDo: }#1]}}}
+
+\newcommand{\mini}{\texttt{Ling-mini-beta}\xspace}
+\newcommand{\dense}{\texttt{Dense-6.1B}\xspace}
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\usepackage{arydshln}
+\definecolor{CQColor}{rgb}{0.0,0.0,1.0} %
+\newcommand{\gb}[1]{{\color{CQColor}#1}}
+
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{booktabs,multirow}
+\usepackage{makecell}
+\usepackage{tabulary}
+\usepackage{fontawesome5}
+\usepackage{bbding}
+\usepackage{multicol}
+\newcommand \blfootnote[1]{
+    \begingroup
+        \renewcommand
+        \thefootnote{}\footnote{#1}
+        \addtocounter{footnote}{-1}
+        \vspace{-1ex}
+    \endgroup
+}
+\newlength\savewidth\newcommand\shline{\noalign{\global\savewidth\arrayrulewidth
+  \global\arrayrulewidth 1pt}\hline\noalign{\global\arrayrulewidth\savewidth}}
+\newcommand\hshline{\noalign{\global\savewidth\arrayrulewidth
+  \global\arrayrulewidth 0.6pt}\hline\noalign{\global\arrayrulewidth\savewidth}}
+\newcommand{\tablestyle}[2]{\setlength{\tabcolsep}{#1}\renewcommand{\arraystretch}{#2}\centering\footnotesize}
+\newcommand{\placeholder}[2]{%
+  \noindent
+  \fbox{%
+    \rule{0pt}{#2}%
+    \makebox[#1][c]{}
+  }%
+}
+
+
+\title{
+\Large{\textcolor[HTML]{0369ff}{Ling 2.0} Technical Report} \\ [0.5em]
+\huge{\textcolor[HTML]{0369ff}{Every Activation Boosted}: Scaling General Reasoner to 1 Trillion Open Language Foundation}
+}
+
+\author[*]{Ling Team, Inclusion AI}
+
+\contribution[*]{See Contributions section (Sec.~\ref{sec:contri}) for full author list.}
+
+
+
+
+
+\abstract{
+We introduce \textbf{Ling 2.0}, a series reasoning-oriented language foundation built upon the principle that \textit{every activation boosts} reasoning capability. Designed to scale from tens of billions to one trillion parameters under a unified Mixture-of-Experts (MoE) paradigm, Ling 2.0 emphasizes high sparsity, cross-scale consistency, and efficiency guided by empirical scaling laws. The series includes three non-thinking (instruct) models—\textbf{\texttt{Ling-mini-2.0}}, \textbf{\texttt{Ling-flash-2.0}}, and \textbf{\texttt{Ling-1T}}—ranging from 16B to 1T total parameters and achieving up to 7× active-compute efficiency compared with dense counterparts.  
+Ling 2.0 integrates coordinated innovations across model architecture, pre-training, post-training, and infrastructure: a high-sparsity MoE with MTP for efficient reasoning, reasoning-oriented data and mid-training CoT activation, reinforcement-based fine-tuning (DFT, Evo-CoT), and full-scale FP8 training with fine-grained heterogeneous pipelines.  
+At the trillion scale, \textbf{\texttt{Ling-1T}} establishes a new Pareto frontier of reasoning accuracy versus computational efficiency, demonstrating that sparse activation, when properly aligned with reasoning objectives, enables scalable and efficient intelligence. Collectively, Ling 2.0 provides a coherent, open, and efficient foundation for advancing future reasoning and thinking models, including the \textbf{Ring} series built upon the same base.
+}
+
+\date{Oct 24, 2025\vspace{-1mm}}
+\gtechdata[Code]{\url{https://github.com/inclusionAI/Ling-V2}\vspace{-1mm}}
+\gtechdata[Model]{\url{https://huggingface.co/collections/inclusionAI/ling-v2}}
+
+
+\begin{document}
+\maketitle
+
+\input{sections/1-intro}
+\input{sections/2-arch}
+\input{sections/3.pre-training}
+\clearpage
+\input{sections/4.post-training}
+\clearpage
+\input{sections/5.infrastructure}
+
+
+\input{sections/8-conclusion}
+
+
+\input{sections/author}
+
+\bibliographystyle{assets/plainnat}
+\bibliography{main}
+
+\input{sections/9-appendix}
+
+\end{document}

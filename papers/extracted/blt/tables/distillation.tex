@@ -1,0 +1,19 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3\\ 8B \\ (220B tokens)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{}\\ 8B\\ (220B tokens)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}\model{}  from \llama{} 3.1 \\ 8B\\ (220B tokens)\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}} Llama 3.1 \\ 8B\\ (15T tokens)\end{tabular}} \\ \midrule
+\textbf{Arc-E} & 67.4 & 66.8 & 66.6 & 83.4 \\
+\textbf{Arc-C} & 40.4 & 38.8 & 45.8 & 55.2 \\
+\textbf{HellaSwag} & 71.2 & 72.2 & 76.1 & 80.7 \\
+\textbf{PIQA} & 77.0 & 78.2 & 77.4 & 80.7 \\ 
+\textbf{MMLU} & 26.5 & 25.2 & 63.7 & 66.3\\ 
+\textbf{MBPP} & 11.8 & 10.0 & 38.2 & 47.2 \\ 
+\textbf{HumanEval} & 9.2 & 7.3 & 34.2 & 37.2 \\ 
+\bottomrule
+\end{tabular}
+\caption{Initializing the global transformer model of \model{} from the non-embedding parameters of Llama 3 improves performance on several benchmark tasks. First three models trained on the \llama{} 2 data for compute-optimal steps.}
+\label{tab:distill}
+\end{table}

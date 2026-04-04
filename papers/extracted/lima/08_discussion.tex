@@ -1,0 +1,20 @@
+\section{Discussion}
+
+We show that fine-tuning a strong pretrained language model on 1,000 carefully curated examples can produce remarkable, competitive results on a wide range of prompts.
+However, there are limitations to this approach.
+Primarily, the mental effort in constructing such examples is significant and difficult to scale up.
+Secondly, LIMA is not as robust as product-grade models; while LIMA typically generates good responses, an unlucky sample during decoding or an adversarial prompt can often lead to a weak response.
+That said, the evidence presented in this work demonstrates the potential of tackling the complex issues of alignment with a simple approach.
+
+
+
+
+
+% While LIMA has demonstrated remarkable capabilities in a variety of question-answering and text generation tasks, we observe that LIMA still exhibits limitations in math and coding tasks. 
+% One possible reason is that we only have a very small number of well-aligned math ($\sim$10) and coding ($\sim$25) examples in our 1,000 training data with limited diversity.
+% Thus we expect a stronger model by augmenting or swapping a portion of the data set with more aligned math and coding examples.
+% This also raises the question that how we can automatically and effectively discover new scenarios to expand dataset and increase the diversity of supervised fine-tuning dataset.
+% At the same time, we found that it is very hard to train a preference model that can rank different responses adequately, it is necessary to reflect on the efficacy of performing REINFORCEMENT learning to align with human or model judgement and where it is potentially most useful. 
+
+% In addition, LIMA can hallucinate new facts and generate dangerous answers, and we highlight the challenges of performing systematic evaluation with either humans or preference models, 
+% which is critical to both model selection and development, 

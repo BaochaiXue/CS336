@@ -1,0 +1,81 @@
+
+\section{Introduction}
+
+Large language models (LLMs) such as GPT-5~\citep{openai2025gpt5}, Gemini-2.5~\citep{comanici2025gemini}, Qwen-3~\citep{qwen3}, and DeepSeek-V3~\citep{deepseekai2024deepseekv3technicalreport} have evolved into the core infrastructure of modern AI. 
+Yet as scaling reaches hundreds of billions of parameters, performance gains increasingly depend on a model’s ability to \textbf{reason}—to decompose problems, infer hidden relations, and make consistent multi-step deductions. 
+We believe that \textbf{reasoning capability is the essence of intelligence} and the foundation for building \textit{general-purpose agents} that can understand, decide, and act autonomously.
+
+Recent open models highlight this trend. Kimi-K2~\citep{kimiK2}, an open trillion-scale model, focuses primarily on enhancing agentic capability, while DeepSeek-V3~\citep{deepseekai2024deepseekv3technicalreport}, though smaller at 671B parameters, achieves outstanding reasoning performance under efficient sparse scaling. 
+{\textbf{Ling~2.0}} is designed to push beyond: \textbf{scaling} a trillion-parameter \textbf{reasoning-oriented} foundation model that maximizes reasoning accuracy and efficiency under sparse activation, establishing a scalable blueprint for next-generation open intelligent systems.
+
+Scaling general reasoning capability to the trillion-parameter level is a central challenge in the evolution of LLMs. 
+The key difficulty lies in achieving both \textbf{efficient scaling}—maintaining computational efficiency, stability, and predictability under extreme scale—and \textbf{reasoning enhancement}—ensuring that expanded capacity leads to more consistent and reliable reasoning.
+
+From the scaling perspective, dense architectures incur prohibitive cost, motivating \textbf{high-sparsity designs} that preserve expressiveness while reducing computation. 
+Reliable \textbf{scaling prediction} becomes essential to anticipate trillion-scale performance (beyond $1e25$ FLOPs) from smaller-scale experiments. 
+In addition, effective \textbf{algorithm-infrastructure co-design} is required to align precision, parallelism, and communication for efficient large-scale execution. 
+From the reasoning perspective, maintaining improvement across \textbf{pre-training}, \textbf{mid-training}, and \textbf{post-training} remains difficult. 
+Constructing reasoning-centric corpora is resource-intensive, while transferring learned reasoning behaviors across these stages can introduce instability. 
+Achieving sustained progress thus requires innovations in both data and training pipeline to balance reasoning accuracy and efficiency. 
+
+
+To address the intertwined challenges of efficient scaling and sustained reasoning enhancement, Ling 2.0 introduces systematic innovations across four dimensions: model architecture, pre-training, post-training, and infrastructure.
+
+
+\paratitle{Model Architecture.} 
+\begin{itemize}
+  \item \textbf{Ling Scaling Laws.} 
+  Our unified Ling Scaling Laws, derived from over a \textit{thousand experiments}, guide the hyperparameter and architectural design for trillion-parameter models, ensuring stable and near-optimal training. Crucially, the framework establishes a ``wind tunnel'' for \textit{low-cost, high-fidelity extrapolation} from small-scale trials to trillion-parameter models, cutting validation costs to under 1\% of a full training run and greatly accelerating innovation cycle.
+  
+  \item \textbf{High-Sparsity MoE with MTP.} 
+  Ling 2.0 scales our ``\textit{high-sparsity, fine-grained}'' architecture from 16B to 1T parameters. All models use 256 routed experts, activating 8 experts plus one shared expert per token ($\approx$ 3.5\% activation), realizing \textit{7× efficiency leverage} per the Ling Scaling Law. With aux-loss-free load balancing and MTP, Ling 2.0 maintains high training efficiency while improving logical reasoning, leading to significant math and coding performance gains.
+  
+\end{itemize}
+
+\paratitle{Pre-Training.} 
+\begin{itemize}
+  \item \textbf{Reasoning-oriented Data Composition.} 
+  Our pre-training corpus prioritizes the \textit{Ling Math} and \textit{Ling Code} datasets, which are tailored for mathematical reasoning and code generation, respectively, yielding a 5-8\% average gain on reasoning benchmarks. Throughout the 20T-token pre-training process, we progressively increase the proportion of reasoning data from 32\% to 46\%, establishing Ling 2.0's inherent reasoning strengths.
+    
+  \item \textbf{Reasoning Pre-Activation in Mid-Training.} 
+  In the mid-training phase, we extend the effective context window and introduce \textit{Chain-of-Thought (CoT) data} to pre-activate reasoning abilities. This strategy raises the ceiling on reasoning performance, and provides a more stable foundation for subsequent fine-tuning and reinforcement learning (RL). 
+  
+  \item \textbf{Warmup-Stable-Merge (WSM) Scheduler.} 
+  To enable a more flexible and effective pre-training process, the Ling 2.0 series adopts the novel WSM (warmup-stable-merge) scheduler, which replaces learning-rate decay with checkpoint merging and delivers 1-2\% average gains across benchmarks. Notably, this advantage persists through subsequent post-training stages. 
+\end{itemize}
+
+\paratitle{Post-Training.} 
+\begin{itemize}
+  \item \textbf{DFT Initialization with Progressive Reasoning Evolution.} Through \textit{Decoupled Fine-Tuning (DFT)} with differentiated system prompts, we establish a diverse, reasoning-focused initialization. Building on this foundation, the \textit{Evolutionary Chain-of-Thought (Evo-CoT)} paradigm progressively deepens reasoning capabilities—enabling Ling 2.0 to surpass state-of-the-art models on competition-level mathematical reasoning benchmark, while requiring 25\% fewer training tokens to reach comparable or better performance.
+  \item \textbf{Sentence-Level Policy Optimization.} Introduces \textit{Linguistic-unit Policy Optimization (LPO)}, treating sentences as the fundamental action units for RL updates. This fine-grained optimization strategy shows higher training stability and delivers around 10\% improvements on complex reasoning benchmarks compared to token-level and sequence-level baselines. 
+  \item  \textbf{Group-Based Human Preference Alignment.} The \textit{Group Arena Reward (GAR)} mechanism ensures precise intra-group preference alignment in RLHF, better reflecting nuanced human judgments, yielding 2-10\% higher consistency scores in open-ended evaluations.
+\end{itemize}
+
+\paratitle{Infrastructure.} 
+\begin{itemize}
+  \item \textbf{Full-scale FP8 training.} Ling 2.0 represents the largest open-source model trained entirely in FP8 precision. Fine-grained quantization (activations/gradients [1,128]; weights [128,128]) achieves near-lossless accuracy ($\leq$ 0.25 \% gap to BF16 after 900 B tokens) while improving utilization and reducing memory use by over 15 \%.  
+  \item \textbf{Heterogeneous fine-grained pipeline.} Interleaved 1F1B scheduling with partial recomputation mitigates pipeline bubbles from heterogeneous modules such as MTP and First-K-Dense, improving throughput by around 40 \%.  
+  \item \textbf{Software Engineering for Foundation LLMs.} Guiding a software-engineering-oriented LLMs framework with the 4C (Correct, Consistent, Complete, and Co-Design) principle, incorporating efficient automated iteration, algorithm-system co-design and cross-platform reproducibility to jointly ensures robust trillion-scale development.
+\end{itemize}
+
+Based on the above innovations, we release three models of different scales in the Ling 2.0 family:
+\begin{itemize}
+    \item \texttt{\textbf{Ling-mini-2.0}}: 16B total parameters with 1.4B activated.
+    \item \texttt{\textbf{Ling-flash-2.0}}: 103B total parameters with 6.1B activated.
+    \item \texttt{\textbf{Ling-1T}}: 1 trillion total parameters with 51B activated.
+\end{itemize}
+
+
+Ling 2.0 is comprehensively evaluated across a wide range of benchmarks spanning mathematics, coding, reasoning, knowledge, alignment, and agentic tasks. The results exhibit a consistent scaling trajectory: as model capacity expands from \texttt{Ling-mini-2.0} to \texttt{Ling-flash-2.0} and \texttt{Ling-1T}, performance across all tasks improve steadily in accordance with the Ling Scaling Law.  
+
+At smaller scales, \texttt{Ling-mini-2.0} achieves performance on par with or exceeding dense models below 10B parameters, while \texttt{Ling-flash-2.0} matches or surpasses dense models below 40B. These findings confirm that Ling 2.0 provides an approximate \textbf{7× efficiency leverage}, delivering dense-level capability with substantially lower active computation.  
+
+
+At the trillion-parameter scale, \texttt{Ling-1T} establishes a new Pareto frontier of reasoning accuracy versus efficiency, demonstrating “efficient thinking and precise reasoning” on competition-level benchmarks such as AIME 2025. Collectively, these results validate that Ling 2.0 effectively scales reasoning capability with both architectural efficiency and algorithmic alignment, advancing the frontier of open-source language foundation models.
+
+This report focuses on three reflex-grade non-thinking (instruct) models in the Ling 2.0 family—\texttt{Ling-mini-2.0}, \texttt{Ling-flash-2.0}, and \texttt{Ling-1T}. 
+These models emphasize general reasoning and instruction-following capability, while the \texttt{\textbf{Ring}} series~\citep{lingteam2025stepevolvesscalingreinforcement}, built upon the same Ling 2.0 base, extends toward deep thinking models.
+The remainder of this report introduces the core model architecture, pre-training and post-training methodology, as well as the infrastructure optimizations of Ling 2.0.
+
+
+

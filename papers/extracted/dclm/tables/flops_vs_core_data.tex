@@ -1,0 +1,50 @@
+\begingroup
+\renewcommand{\arraystretch}{1.2}%
+\rowcolors{2}{gray!10}{white}
+\begin{tabular}{lcccccc}
+\toprule
+Model & Params & Tokens & Open dataset? & \lowvar & MMLU & \aggscore \\
+\midrule
+C4 & 412M & 8B & \textcolor{nicergreen}{\cmark} & 13.1 & 24.9 & 8.0 \\
+Dolma v1 & 412M & 8B & \textcolor{nicergreen}{\cmark} & 13.6 & 25.2 & 9.0 \\
+RefinedWeb & 412M & 8B & \textcolor{nicergreen}{\cmark} & 15.1 & 25.5 & 8.9 \\
+RedPajama & 412M & 8B & \textcolor{nicergreen}{\cmark} & 15.4 & 24.8 & 7.6 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 412M & 8B & \textcolor{nicergreen}{\cmark} & 18.0 & 25.5 & 9.8 \\
+FineWeb-Edu & 412M & 8B & \textcolor{nicergreen}{\cmark} & 18.3 & 25.5 & 10.1 \\
+C4 & 1B & 29B & \textcolor{nicergreen}{\cmark} & 23.7 & 25.4 & 12.5 \\
+RefinedWeb & 1B & 29B & \textcolor{nicergreen}{\cmark} & 25.1 & 24.0 & 12.9 \\
+RedPajama & 1B & 29B & \textcolor{nicergreen}{\cmark} & 25.7 & 24.3 & 13.5 \\
+Dolma v1 & 1B & 29B & \textcolor{nicergreen}{\cmark} & 25.8 & 24.3 & 13.5 \\
+FineWeb-Edu & 1B & 29B & \textcolor{nicergreen}{\cmark} & 26.6 & 26.3 & 13.5 \\
+OLMo & 1B & 2T & \textcolor{nicergreen}{\cmark} & 29.7 & 26.0 & 16.1 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 1B & 29B & \textcolor{nicergreen}{\cmark} & 30.2 & 23.8 & 15.4 \\
+C4 & 3B & 56B & \textcolor{nicergreen}{\cmark} & 30.5 & 26.3 & 16.0 \\
+Dolma v1 & 3B & 56B & \textcolor{nicergreen}{\cmark} & 31.5 & 27.6 & 16.7 \\
+RedPajama & 3B & 56B & \textcolor{nicergreen}{\cmark} & 31.6 & 25.3 & 16.6 \\
+RefinedWeb & 3B & 56B & \textcolor{nicergreen}{\cmark} & 33.2 & 25.2 & 17.3 \\
+C4 & 7B & 138B & \textcolor{nicergreen}{\cmark} & 37.1 & 25.5 & 19.8 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 3B & 56B & \textcolor{nicergreen}{\cmark} & 37.1 & 25.2 & 20.0 \\
+RedPajama & 7B & 138B & \textcolor{nicergreen}{\cmark} & 37.8 & 25.1 & 20.6 \\
+Dolma v1 & 7B & 138B & \textcolor{nicergreen}{\cmark} & 38.2 & 25.9 & 19.6 \\
+FineWeb-Edu & 7B & 138B & \textcolor{nicergreen}{\cmark} & 38.7 & 26.3 & 22.1 \\
+Together-RPJ & 7B & 1T & \textcolor{nicergreen}{\cmark} & 39.4 & 25.2 & 21.8 \\
+RefinedWeb & 7B & 138B & \textcolor{nicergreen}{\cmark} & 39.7 & 26.5 & 21.7 \\
+LLM360/Amber & 7B & 1T & \textcolor{nicergreen}{\cmark} & 39.8 & 27.9 & 22.3 \\
+FineWeb-Edu & 7B & 276B & \textcolor{nicergreen}{\cmark} & 41.9 & 37.3 & 24.5 \\
+OLMo & 7B & 2T & \textcolor{nicergreen}{\cmark} & 42.7 & 28.4 & 24.6 \\
+Gemma & 2B & 3T & \textcolor{red}{\xmark} & 43.3 & 40.8 & 26.6 \\
+Falcon & 7B & 1T & \textcolor{nicergreen}{\cmark} & 44.1 & 27.4 & 25.1 \\
+MPT & 7B & 1T & \textcolor{nicergreen}{\cmark} & 44.3 & 28.8 & 25.7 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 7B & 138B & \textcolor{nicergreen}{\cmark} & 44.8 & 42.2 & 0.0 \\
+Llama 1 & 7B & 1T & \textcolor{red}{\xmark} & 46.3 & 34.1 & 28.7 \\
+OLMo-1.7 & 7B & 2T & \textcolor{nicergreen}{\cmark} & 47.0 & 54.0 & 34.2 \\
+LLM360/CrystalCoder & 7B & 1T & \textcolor{nicergreen}{\cmark} & 48.1 & 48.2 & 33.2 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 7B & 276B & \textcolor{nicergreen}{\cmark} & 48.7 & 51.9 & 32.5 \\
+Llama 2 & 7B & 2T & \textcolor{red}{\xmark} & 49.2 & 45.8 & 34.1 \\
+MAP-Neo & 7B & 4T & \textcolor{nicergreen}{\cmark} & 50.2 & 57.1 & 40.4 \\
+DeepSeek & 7B & 2T & \textcolor{red}{\xmark} & 50.7 & 48.5 & 35.3 \\
+\textcolor{RoyalBlue}{DCLM-Baseline (ours)} & 7B & 3T & \textcolor{nicergreen}{\cmark} & 57.1 & 63.7 & 45.4 \\
+Llama 3 & 8B & 15T & \textcolor{red}{\xmark} & 57.6 & \textbf{66.2} & \textbf{46.3} \\
+Gemma & 8B & 6T & \textcolor{red}{\xmark} & \textbf{57.8} & 64.3 & 44.6 \\\bottomrule
+\end{tabular}
+\endgroup

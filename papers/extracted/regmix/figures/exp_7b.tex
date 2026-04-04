@@ -1,0 +1,396 @@
+\definecolor{myblue}{RGB}{255,165,0}
+\definecolor{myred}{RGB}{75,0,130}
+
+\begin{figure*}[htbp]
+    \begin{minipage}{0.265\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.42]
+            \begin{axis}[
+            xlabel={},
+            ylabel={Performance (\%)},
+            ylabel shift=10pt,
+            xmin=0, xmax=3,
+            ymin=52, ymax=62,
+            xtick={0,1,2,3},
+            xticklabels={25B,50B,75B,100B},
+            legend pos=south east,
+            ytick={52, 54, 56, 58, 60, 62},
+            yticklabels={, $54$, $56$, $58$, $60$, $62$},
+            grid=major,
+            title={\textbf{Winogrande}},
+            title style={font=\Large},
+            legend style={font=\Large},
+            tick label style={font=\Large},
+            label style={font=\Large},
+            height=5cm,    %
+            width=8cm,     %
+        ]
+        \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+            (0,56.14) (1,57.68) (2,60.33) (3,60.69)
+        };
+        \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+            (0,53.98) (1,55.98) (2,57.95) (3,58.64)
+        };
+        \legend{RegMix,Human}
+        \end{axis}
+        \end{tikzpicture}
+    \end{minipage}%
+    \begin{minipage}{0.245\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.42]
+           \begin{axis}[
+           xlabel={},
+           ylabel={},
+           xmin=0, xmax=3,
+           ymin=40, ymax=65,
+           ytick={40,45,50,55,60,65},
+           yticklabels={, $45$, $50$, $55$, $60$, $65$},
+           xtick={0,1,2,3},
+           xticklabels={25B,50B,75B,100B},
+           legend pos=south east,
+           grid=major,
+           title={\textbf{QQP}},
+           title style={font=\Large},
+           legend style={font=\Large},
+           tick label style={font=\Large},
+           label style={font=\Large},
+            height=5cm,    %
+            width=8cm,     %
+       ]
+       \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,54.81) (1,50.63) (2,51.44) (3,56.08)
+       };
+       \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,53.97) (1,53.75) (2,57.24) (3,58.86)
+       };
+       \legend{RegMix,Human}
+       \end{axis}
+       \end{tikzpicture}
+    \end{minipage}%
+    \begin{minipage}{0.245\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.42]
+   \begin{axis}[
+       xlabel={},
+       ylabel={},
+       xmin=0, xmax=3,
+       ymin=30, ymax=38,
+       xtick={0,1,2,3},
+       xticklabels={25B,50B,75B,100B},
+       legend pos=south east,
+       grid=major,
+       title={\textbf{RACE}},
+        title style={font=\Large},
+       legend style={font=\Large},
+       tick label style={font=\Large},
+       label style={font=\Large},
+       height=5cm,    %
+       width=8cm,     %
+       ytick={30, 32, 34, 36, 38},
+       yticklabels={, $32$, $34$, $36$, $38$},
+    ]
+   \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+       (0,33.61) (1,34.81) (2,35.86) (3,36.65)
+   };
+    \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+       (0,31.41) (1,33.22) (2,34.05) (3,35.13)
+   };
+   \legend{RegMix,Human}
+   \end{axis}
+   \end{tikzpicture}
+    \end{minipage}%
+    \begin{minipage}{0.245\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.42]
+           \begin{axis}[
+           xlabel={},
+           ylabel={},
+           xmin=0, xmax=3,
+           ymin=28, ymax=38,
+           xtick={0,1,2,3},
+           xticklabels={25B,50B,75B,100B},
+           legend pos=south east,
+           grid=major,
+           legend style={font=\Large},
+           tick label style={font=\Large},
+           label style={font=\Large},
+           title={\textbf{OpenBookQA}},
+           title style={font=\Large},
+            height=5cm,    %
+            width=8cm,     %
+           ytick={28, 30, 32, 34, 36, 38},
+           yticklabels={, $30$, $32$, $34$, $36$, $38$},
+       ]
+       \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,31.83) (1,35.10) (2,35.80) (3,36.73)
+       };
+       \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,29.96) (1,32.30) (2,33.36) (3,34.13)
+       };
+       \legend{RegMix,Human}
+       \end{axis}
+       \end{tikzpicture}
+    \end{minipage}%
+
+    \begin{minipage}{0.26\textwidth}
+        \centering
+       \begin{tikzpicture}[scale=0.42]
+       \begin{axis}[
+           xlabel={},
+           ylabel={Performance (\%)},
+           ylabel shift=10pt,
+           xmin=0, xmax=3,
+           ymin=38, ymax=46,
+           ytick={38,40,42,44,46},
+           yticklabels={,$40$,$42$,$44$,$46$},
+           xtick={0,1,2,3},
+           xticklabels={25B,50B,75B,100B},
+           legend pos=south east,
+           grid=major,
+           legend style={font=\Large},
+           tick label style={font=\Large},
+           label style={font=\Large},
+           title={\textbf{Social IQA}},
+           title style={font=\Large},
+            height=5cm,    %
+            width=8cm,     %
+       ]
+       \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,41.48) (1,44.03) (2,43.84) (3,43.27)
+       };
+       \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,39.23) (1,40.60) (2,41.12) (3,41.64)
+       };
+       \legend{RegMix,Human}
+       \end{axis}
+       \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.42]
+           \begin{axis}[
+           xlabel={},
+           ylabel={},
+           xmin=0, xmax=3,
+           ymin=42, ymax=65,
+           xtick={0,1,2,3},
+           xticklabels={25B,50B,75B,100B},
+           legend pos=south east,
+           grid=major,
+           legend style={font=\Large},
+           tick label style={font=\Large},
+           label style={font=\Large},
+           title={\textbf{HellaSwag}},
+           title style={font=\Large},
+           height=5cm,    %
+           width=8cm,     %
+           ytick={45, 50, 55, 60, 65},
+           yticklabels={$45$, $50$, $55$, $60$, $65$},
+       ]
+       \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,52.14) (1,57.88) (2,61.71) (3,63.28)
+       };
+       \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+           (0,43.91) (1,50.06) (2,53.68) (3,55.03)
+       };
+       \legend{RegMix,Human}
+       \end{axis}
+       \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.42]
+        \begin{axis}[
+        xlabel={},
+        ylabel={},
+        xmin=0, xmax=3,
+        ymin=30, ymax=52,
+        xtick={0,1,2,3},
+        xticklabels={25B,50B,75B,100B},
+        legend pos=south east,
+        grid=major,
+        legend style={font=\Large},
+        tick label style={font=\Large},
+        label style={font=\Large},
+        title={\textbf{Lambada}},
+        title style={font=\Large},
+        height=5cm,    %
+        width=8cm,     %
+        ytick={30, 35, 40, 45, 50},
+        yticklabels={, $35$, $40$, $45$, $50$},
+        ]
+        \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+        (0,40.85) (1,46.32) (2,47.93) (3,51.02)
+        };
+        \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+        (0,31.69) (1,39.64) (2,43.22) (3,44.93)
+        };
+        \legend{RegMix,Human}
+        \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+    \centering
+\begin{tikzpicture}[scale=0.42]
+\begin{axis}[
+xlabel={},
+ylabel={},
+xmin=0, xmax=3,
+ymin=67, ymax=76,
+xtick={0,1,2,3},
+xticklabels={25B,50B,75B,100B},
+legend pos=south east,
+grid=major,
+legend style={font=\Large},
+tick label style={font=\Large},
+label style={font=\Large},
+title={\textbf{PiQA}},
+title style={font=\Large},
+height=5cm,    %
+width=8cm,     %
+ytick={68, 70, 72, 74, 76},
+yticklabels={$68$, $70$, $72$, $74$, $76$},
+]
+\addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+(0,72.17) (1,73.63) (2,74.85) (3,75.25)
+};
+\addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+(0,67.81) (1,70.16) (2,71.58) (3,72.36)
+};
+\legend{RegMix,Human}
+\end{axis}
+\end{tikzpicture}
+    \end{minipage}
+
+    \begin{minipage}{0.26\textwidth}
+    \centering
+\begin{tikzpicture}[scale=0.42]
+\begin{axis}[
+xlabel={},
+ylabel={Performance (\%)},
+ylabel shift=10pt,
+xmin=0, xmax=3,
+ymin=66, ymax=84,
+xtick={0,1,2,3},
+xticklabels={25B,50B,75B,100B},
+legend pos=south east,
+grid=major,
+legend style={font=\Large},
+tick label style={font=\Large},
+label style={font=\Large},
+title={\textbf{COPA}},
+title style={font=\Large},
+height=5cm,    %
+width=8cm,     %
+ytick={68, 72, 76, 80, 84},
+yticklabels={$68$, $72$, $76$, $80$, $84$},
+]
+\addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+(0,75.60) (1,77.33) (2,78.33) (3,80.16)
+};
+\addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+(0,70.16) (1,73.33) (2,73.66) (3,75.00)
+};
+\legend{RegMix,Human}
+\end{axis}
+\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+        \centering
+    \begin{tikzpicture}[scale=0.42]
+    \begin{axis}[
+        xlabel={},
+        ylabel={},
+        xmin=0, xmax=3,
+        ymin=70, ymax=95,
+        xtick={0,1,2,3},
+        xticklabels={25B,50B,75B,100B},
+        legend pos=south east,
+        grid=major,
+        legend style={font=\Large},
+        tick label style={font=\Large},
+        label style={font=\Large},
+        title={\textbf{SciQ}},
+        title style={font=\Large},
+        height=5cm,    %
+        width=8cm,     %
+        ytick={70, 75, 80, 85, 90, 95},
+        yticklabels={, $75$, $80$, $85$, $90$, $95$},
+    ]
+    \addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+        (0,85.40) (1,88.98) (2,90.05) (3,91.16)
+    };
+    \addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+        (0,86.38) (1,89.16) (2,90.95) (3,91.68)
+    };
+    \legend{RegMix,Human}
+\end{axis}
+\end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+        \centering
+\begin{tikzpicture}[scale=0.42]
+\begin{axis}[
+    xlabel={},
+    ylabel={},
+    xmin=0, xmax=3,
+    ymin=40, ymax=65,
+    xtick={0,1,2,3},
+    xticklabels={25B,50B,75B,100B},
+    legend pos=south east,
+    grid=major,
+    legend style={font=\Large},
+    tick label style={font=\Large},
+    label style={font=\Large},
+    title={\textbf{MultiRC}},
+    title style={font=\Large},
+    height=5cm,    %
+    width=8cm,
+    ytick={40, 45, 50, 55, 60, 65},
+    yticklabels={, $45$, $50$, $55$, $60$, $65$},
+]
+\addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+    (0,52.57) (1,49.98) (2,52.84) (3,50.99)
+};
+\addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+    (0,54.79) (1,56.47) (2,52.84) (3,52.55)
+};
+\legend{RegMix,Human}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.24\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.42]
+\begin{axis}[
+    xlabel={},
+    ylabel={},
+    xmin=0, xmax=3,
+    ymin=52, ymax=68,
+    xtick={0,1,2,3},
+    xticklabels={25B,50B,75B,100B},
+    legend pos=south east,
+    grid=major,
+    legend style={font=\Large},
+    tick label style={font=\Large},
+    label style={font=\Large},
+    title={\textbf{ARC-Easy}},
+    title style={font=\Large},
+    height=5cm,    %
+    width=8cm,
+    ytick={52, 56, 60, 64, 68},
+    yticklabels={, $56$, $60$, $64$, $68$},
+]
+\addplot[myred,mark=square*, mark size=3pt, line width=1.5pt] coordinates {
+    (0,57.02) (1,61.74) (2,64.54) (3,65.36)
+};
+\addplot[myblue,mark=*, mark size=3pt, line width=1.5pt] coordinates {
+    (0,53.50) (1,58.94) (2,62.02) (3,63.52)
+};
+\legend{RegMix,Human}
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\caption{Performance comparison on 7B parameter models between Human selection and \ourmethod across various tasks and training token quantities (e.g., up to 100B). \ourmethod demonstrates consistent performance improvements over Human across varying data scales for the majority of tasks evaluated. In particular, for tasks exhibiting positive scaling behavior, the performance benefit is preserved with increased training data, suggesting robust scaling properties of \ourmethod.}
+\label{fig:regmix_human_7b}
+\end{figure*}

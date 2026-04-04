@@ -1,0 +1,484 @@
+\begin{thebibliography}{56}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Almazrouei et~al.(2023)Almazrouei, Alobeidli, Alshamsi, Cappelli,
+  Cojocaru, Debbah, Étienne Goffinet, Hesslow, Launay, Malartic, Mazzotta,
+  Noune, Pannier, and Penedo]{falcon}
+E.~Almazrouei, H.~Alobeidli, A.~Alshamsi, A.~Cappelli, R.~Cojocaru, M.~Debbah,
+  Étienne Goffinet, D.~Hesslow, J.~Launay, Q.~Malartic, D.~Mazzotta, B.~Noune,
+  B.~Pannier, and G.~Penedo.
+\newblock The falcon series of open language models, 2023.
+
+\bibitem[Amodei et~al.(2016)Amodei, Olah, Steinhardt, Christiano, Schulman, and
+  Man{\'e}]{amodei2016concrete}
+D.~Amodei, C.~Olah, J.~Steinhardt, P.~Christiano, J.~Schulman, and D.~Man{\'e}.
+\newblock Concrete problems in {AI} safety.
+\newblock \emph{arXiv preprint}, 2016.
+
+\bibitem[Anil et~al.(2023)Anil, Dai, Firat, Johnson, Lepikhin, Passos, Shakeri,
+  Taropa, Bailey, Chen, et~al.]{anil2023palm}
+R.~Anil, A.~M. Dai, O.~Firat, M.~Johnson, D.~Lepikhin, A.~Passos, S.~Shakeri,
+  E.~Taropa, P.~Bailey, Z.~Chen, et~al.
+\newblock Palm 2 technical report.
+\newblock \emph{arXiv preprint arXiv:2305.10403}, 2023.
+
+\bibitem[Austin et~al.(2021)Austin, Odena, Nye, Bosma, Michalewski, Dohan,
+  Jiang, Cai, Terry, Le, and Sutton]{mbpp}
+J.~Austin, A.~Odena, M.~I. Nye, M.~Bosma, H.~Michalewski, D.~Dohan, E.~Jiang,
+  C.~J. Cai, M.~Terry, Q.~V. Le, and C.~Sutton.
+\newblock Program synthesis with large language models.
+\newblock \emph{CoRR}, abs/2108.07732, 2021.
+\newblock URL \url{https://arxiv.org/abs/2108.07732}.
+
+\bibitem[Bai et~al.(2022)Bai, Kadavath, Kundu, Askell, Kernion, Jones, Chen,
+  Goldie, Mirhoseini, McKinnon, Chen, Olsson, Olah, Hernandez, Drain, Ganguli,
+  Li, Tran-Johnson, Perez, Kerr, Mueller, Ladish, Landau, Ndousse, Lukosuite,
+  Lovitt, Sellitto, Elhage, Schiefer, Mercado, DasSarma, Lasenby, Larson,
+  Ringer, Johnston, Kravec, Showk, Fort, Lanham, Telleen-Lawton, Conerly,
+  Henighan, Hume, Bowman, Hatfield-Dodds, Mann, Amodei, Joseph, McCandlish,
+  Brown, and Kaplan]{bai2022constitutional}
+Y.~Bai, S.~Kadavath, S.~Kundu, A.~Askell, J.~Kernion, A.~Jones, A.~Chen,
+  A.~Goldie, A.~Mirhoseini, C.~McKinnon, C.~Chen, C.~Olsson, C.~Olah,
+  D.~Hernandez, D.~Drain, D.~Ganguli, D.~Li, E.~Tran-Johnson, E.~Perez,
+  J.~Kerr, J.~Mueller, J.~Ladish, J.~Landau, K.~Ndousse, K.~Lukosuite,
+  L.~Lovitt, M.~Sellitto, N.~Elhage, N.~Schiefer, N.~Mercado, N.~DasSarma,
+  R.~Lasenby, R.~Larson, S.~Ringer, S.~Johnston, S.~Kravec, S.~E. Showk,
+  S.~Fort, T.~Lanham, T.~Telleen-Lawton, T.~Conerly, T.~Henighan, T.~Hume,
+  S.~R. Bowman, Z.~Hatfield-Dodds, B.~Mann, D.~Amodei, N.~Joseph,
+  S.~McCandlish, T.~Brown, and J.~Kaplan.
+\newblock Constitutional ai: Harmlessness from ai feedback, 2022.
+
+\bibitem[Barham et~al.(2022)Barham, Chowdhery, Dean, Ghemawat, Hand, Hurt,
+  Isard, Lim, Pang, Roy, Saeta, Schuh, Sepassi, Shafey, Thekkath, and
+  Wu]{barham2022pathways}
+P.~Barham, A.~Chowdhery, J.~Dean, S.~Ghemawat, S.~Hand, D.~Hurt, M.~Isard,
+  H.~Lim, R.~Pang, S.~Roy, B.~Saeta, P.~Schuh, R.~Sepassi, L.~E. Shafey, C.~A.
+  Thekkath, and Y.~Wu.
+\newblock Pathways: Asynchronous distributed dataflow for ml, 2022.
+
+\bibitem[Bisk et~al.(2019)Bisk, Zellers, Bras, Gao, and Choi]{piqa}
+Y.~Bisk, R.~Zellers, R.~L. Bras, J.~Gao, and Y.~Choi.
+\newblock {PIQA:} reasoning about physical commonsense in natural language.
+\newblock \emph{CoRR}, abs/1911.11641, 2019.
+\newblock URL \url{http://arxiv.org/abs/1911.11641}.
+
+\bibitem[Bradley and Terry(1952)]{bradley1952rank}
+R.~A. Bradley and M.~E. Terry.
+\newblock Rank analysis of incomplete block designs: I. the method of paired
+  comparisons.
+\newblock \emph{Biometrika}, 39, 1952.
+
+\bibitem[Carlini et~al.(2022)Carlini, Ippolito, Jagielski, Lee, Tramer, and
+  Zhang]{carlini2022quantifying}
+N.~Carlini, D.~Ippolito, M.~Jagielski, K.~Lee, F.~Tramer, and C.~Zhang.
+\newblock Quantifying memorization across neural language models.
+\newblock \emph{arXiv preprint arXiv:2202.07646}, 2022.
+
+\bibitem[Chen et~al.(2021)Chen, Tworek, Jun, Yuan, de~Oliveira~Pinto, Kaplan,
+  Edwards, Burda, Joseph, Brockman, Ray, Puri, Krueger, Petrov, Khlaaf, Sastry,
+  Mishkin, Chan, Gray, Ryder, Pavlov, Power, Kaiser, Bavarian, Winter, Tillet,
+  Such, Cummings, Plappert, Chantzis, Barnes, Herbert{-}Voss, Guss, Nichol,
+  Paino, Tezak, Tang, Babuschkin, Balaji, Jain, Saunders, Hesse, Carr, Leike,
+  Achiam, Misra, Morikawa, Radford, Knight, Brundage, Murati, Mayer, Welinder,
+  McGrew, Amodei, McCandlish, Sutskever, and Zaremba]{humaneval}
+M.~Chen, J.~Tworek, H.~Jun, Q.~Yuan, H.~P. de~Oliveira~Pinto, J.~Kaplan,
+  H.~Edwards, Y.~Burda, N.~Joseph, G.~Brockman, A.~Ray, R.~Puri, G.~Krueger,
+  M.~Petrov, H.~Khlaaf, G.~Sastry, P.~Mishkin, B.~Chan, S.~Gray, N.~Ryder,
+  M.~Pavlov, A.~Power, L.~Kaiser, M.~Bavarian, C.~Winter, P.~Tillet, F.~P.
+  Such, D.~Cummings, M.~Plappert, F.~Chantzis, E.~Barnes, A.~Herbert{-}Voss,
+  W.~H. Guss, A.~Nichol, A.~Paino, N.~Tezak, J.~Tang, I.~Babuschkin, S.~Balaji,
+  S.~Jain, W.~Saunders, C.~Hesse, A.~N. Carr, J.~Leike, J.~Achiam, V.~Misra,
+  E.~Morikawa, A.~Radford, M.~Knight, M.~Brundage, M.~Murati, K.~Mayer,
+  P.~Welinder, B.~McGrew, D.~Amodei, S.~McCandlish, I.~Sutskever, and
+  W.~Zaremba.
+\newblock Evaluating large language models trained on code.
+\newblock \emph{CoRR}, abs/2107.03374, 2021.
+\newblock URL \url{https://arxiv.org/abs/2107.03374}.
+
+\bibitem[Chowdhery et~al.(2022)Chowdhery, Narang, Devlin, Bosma, Mishra,
+  Roberts, Barham, Chung, Sutton, Gehrmann, Schuh, Shi, Tsvyashchenko, Maynez,
+  Rao, Barnes, Tay, Shazeer, Prabhakaran, Reif, Du, Hutchinson, Pope, Bradbury,
+  Austin, Isard, Gur-Ari, Yin, Duke, Levskaya, Ghemawat, Dev, Michalewski,
+  Garcia, Misra, Robinson, Fedus, Zhou, Ippolito, Luan, Lim, Zoph, Spiridonov,
+  Sepassi, Dohan, Agrawal, Omernick, Dai, Pillai, Pellat, Lewkowycz, Moreira,
+  Child, Polozov, Lee, Zhou, Wang, Saeta, Diaz, Firat, Catasta, Wei,
+  Meier-Hellstern, Eck, Dean, Petrov, and Fiedel]{chowdhery2022palm}
+A.~Chowdhery, S.~Narang, J.~Devlin, M.~Bosma, G.~Mishra, A.~Roberts, P.~Barham,
+  H.~W. Chung, C.~Sutton, S.~Gehrmann, P.~Schuh, K.~Shi, S.~Tsvyashchenko,
+  J.~Maynez, A.~Rao, P.~Barnes, Y.~Tay, N.~Shazeer, V.~Prabhakaran, E.~Reif,
+  N.~Du, B.~Hutchinson, R.~Pope, J.~Bradbury, J.~Austin, M.~Isard, G.~Gur-Ari,
+  P.~Yin, T.~Duke, A.~Levskaya, S.~Ghemawat, S.~Dev, H.~Michalewski, X.~Garcia,
+  V.~Misra, K.~Robinson, L.~Fedus, D.~Zhou, D.~Ippolito, D.~Luan, H.~Lim,
+  B.~Zoph, A.~Spiridonov, R.~Sepassi, D.~Dohan, S.~Agrawal, M.~Omernick, A.~M.
+  Dai, T.~S. Pillai, M.~Pellat, A.~Lewkowycz, E.~Moreira, R.~Child, O.~Polozov,
+  K.~Lee, Z.~Zhou, X.~Wang, B.~Saeta, M.~Diaz, O.~Firat, M.~Catasta, J.~Wei,
+  K.~Meier-Hellstern, D.~Eck, J.~Dean, S.~Petrov, and N.~Fiedel.
+\newblock Palm: Scaling language modeling with pathways, 2022.
+
+\bibitem[Christiano et~al.(2017)Christiano, Leike, Brown, Martic, Legg, and
+  Amodei]{christiano2017deep}
+P.~F. Christiano, J.~Leike, T.~Brown, M.~Martic, S.~Legg, and D.~Amodei.
+\newblock Deep reinforcement learning from human preferences.
+\newblock \emph{Advances in Neural Information Processing Systems}, 30, 2017.
+
+\bibitem[Clark et~al.(2019)Clark, Lee, Chang, Kwiatkowski, Collins, and
+  Toutanova]{boolq}
+C.~Clark, K.~Lee, M.~Chang, T.~Kwiatkowski, M.~Collins, and K.~Toutanova.
+\newblock Boolq: Exploring the surprising difficulty of natural yes/no
+  questions.
+\newblock \emph{CoRR}, abs/1905.10044, 2019.
+\newblock URL \url{http://arxiv.org/abs/1905.10044}.
+
+\bibitem[Clark et~al.(2018)Clark, Cowhey, Etzioni, Khot, Sabharwal, Schoenick,
+  and Tafjord]{arc}
+P.~Clark, I.~Cowhey, O.~Etzioni, T.~Khot, A.~Sabharwal, C.~Schoenick, and
+  O.~Tafjord.
+\newblock Think you have solved question answering? try arc, the ai2 reasoning
+  challenge, 2018.
+
+\bibitem[Cobbe et~al.(2021)Cobbe, Kosaraju, Bavarian, Chen, Jun, Kaiser,
+  Plappert, Tworek, Hilton, Nakano, Hesse, and Schulman]{gsm8k}
+K.~Cobbe, V.~Kosaraju, M.~Bavarian, M.~Chen, H.~Jun, L.~Kaiser, M.~Plappert,
+  J.~Tworek, J.~Hilton, R.~Nakano, C.~Hesse, and J.~Schulman.
+\newblock Training verifiers to solve math word problems.
+\newblock \emph{CoRR}, abs/2110.14168, 2021.
+\newblock URL \url{https://arxiv.org/abs/2110.14168}.
+
+\bibitem[Dean et~al.(2012)Dean, Corrado, Monga, Chen, Devin, Mao, Ranzato,
+  Senior, Tucker, Yang, Le, and Ng]{NIPS2012_6aca9700}
+J.~Dean, G.~Corrado, R.~Monga, K.~Chen, M.~Devin, M.~Mao, M.~a. Ranzato,
+  A.~Senior, P.~Tucker, K.~Yang, Q.~Le, and A.~Ng.
+\newblock Large scale distributed deep networks.
+\newblock In F.~Pereira, C.~Burges, L.~Bottou, and K.~Weinberger, editors,
+  \emph{Advances in Neural Information Processing Systems}, volume~25. Curran
+  Associates, Inc., 2012.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper_files/paper/2012/file/6aca97005c68f1206823815f66102863-Paper.pdf}.
+
+\bibitem[Devlin et~al.(2018)Devlin, Chang, Lee, and Toutanova]{bert}
+J.~Devlin, M.~Chang, K.~Lee, and K.~Toutanova.
+\newblock {BERT:} pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock \emph{CoRR}, abs/1810.04805, 2018.
+\newblock URL \url{http://arxiv.org/abs/1810.04805}.
+
+\bibitem[{Gemini Team}(2023)]{geminiteam2023gemini}
+{Gemini Team}.
+\newblock Gemini: A family of highly capable multimodal models, 2023.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Burns, Basart, Zou, Mazeika, Song,
+  and Steinhardt]{mmlu}
+D.~Hendrycks, C.~Burns, S.~Basart, A.~Zou, M.~Mazeika, D.~Song, and
+  J.~Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock \emph{CoRR}, abs/2009.03300, 2020.
+\newblock URL \url{https://arxiv.org/abs/2009.03300}.
+
+\bibitem[Hendrycks et~al.(2021)Hendrycks, Burns, Kadavath, Arora, Basart, Tang,
+  Song, and Steinhardt]{hendrycksmath2021}
+D.~Hendrycks, C.~Burns, S.~Kadavath, A.~Arora, S.~Basart, E.~Tang, D.~Song, and
+  J.~Steinhardt.
+\newblock Measuring mathematical problem solving with the math dataset.
+\newblock \emph{NeurIPS}, 2021.
+
+\bibitem[Ippolito et~al.(2022)Ippolito, Tram{\`e}r, Nasr, Zhang, Jagielski,
+  Lee, Choquette-Choo, and Carlini]{ippolito2022preventing}
+D.~Ippolito, F.~Tram{\`e}r, M.~Nasr, C.~Zhang, M.~Jagielski, K.~Lee, C.~A.
+  Choquette-Choo, and N.~Carlini.
+\newblock Preventing verbatim memorization in language models gives a false
+  sense of privacy.
+\newblock \emph{arXiv preprint arXiv:2210.17546}, 2022.
+
+\bibitem[Jiang et~al.(2023)Jiang, Sablayrolles, Mensch, Bamford, Chaplot,
+  de~las Casas, Bressand, Lengyel, Lample, Saulnier, Lavaud, Lachaux, Stock,
+  Scao, Lavril, Wang, Lacroix, and Sayed]{mistral}
+A.~Q. Jiang, A.~Sablayrolles, A.~Mensch, C.~Bamford, D.~S. Chaplot, D.~de~las
+  Casas, F.~Bressand, G.~Lengyel, G.~Lample, L.~Saulnier, L.~R. Lavaud, M.-A.
+  Lachaux, P.~Stock, T.~L. Scao, T.~Lavril, T.~Wang, T.~Lacroix, and W.~E.
+  Sayed.
+\newblock Mistral 7b, 2023.
+
+\bibitem[Joshi et~al.(2017)Joshi, Choi, Weld, and Zettlemoyer]{triviaqa}
+M.~Joshi, E.~Choi, D.~S. Weld, and L.~Zettlemoyer.
+\newblock Triviaqa: {A} large scale distantly supervised challenge dataset for
+  reading comprehension.
+\newblock \emph{CoRR}, abs/1705.03551, 2017.
+\newblock URL \url{http://arxiv.org/abs/1705.03551}.
+
+\bibitem[Kavukcuoglu et~al.(2022)Kavukcuoglu, Kohli, Ibrahim, Bloxwich, and
+  Brown]{alphafoldRelease}
+K.~Kavukcuoglu, P.~Kohli, L.~Ibrahim, D.~Bloxwich, and S.~Brown.
+\newblock How our principles helped define alphafold’s release, 2022.
+
+\bibitem[Kudo and Richardson(2018)]{kudo-richardson-2018-sentencepiece}
+T.~Kudo and J.~Richardson.
+\newblock {S}entence{P}iece: A simple and language independent subword
+  tokenizer and detokenizer for neural text processing.
+\newblock In E.~Blanco and W.~Lu, editors, \emph{Proceedings of the 2018
+  Conference on Empirical Methods in Natural Language Processing: System
+  Demonstrations}, pages 66--71, Brussels, Belgium, Nov. 2018. Association for
+  Computational Linguistics.
+\newblock \doi{10.18653/v1/D18-2012}.
+\newblock URL \url{https://aclanthology.org/D18-2012}.
+
+\bibitem[Kudugunta et~al.(2023)Kudugunta, Caswell, Zhang, Garcia,
+  Choquette-Choo, Lee, Xin, Kusupati, Stella, Bapna,
+  et~al.]{kudugunta2023madlad}
+S.~Kudugunta, I.~Caswell, B.~Zhang, X.~Garcia, C.~A. Choquette-Choo, K.~Lee,
+  D.~Xin, A.~Kusupati, R.~Stella, A.~Bapna, et~al.
+\newblock Madlad-400: A multilingual and document-level large audited dataset.
+\newblock \emph{arXiv preprint arXiv:2309.04662}, 2023.
+
+\bibitem[Kwiatkowski et~al.(2019)Kwiatkowski, Palomaki, Redfield, Collins,
+  Parikh, Alberti, Epstein, Polosukhin, Devlin, Lee, Toutanova, Jones, Kelcey,
+  Chang, Dai, Uszkoreit, Le, and Petrov]{natural-questions}
+T.~Kwiatkowski, J.~Palomaki, O.~Redfield, M.~Collins, A.~Parikh, C.~Alberti,
+  D.~Epstein, I.~Polosukhin, J.~Devlin, K.~Lee, K.~Toutanova, L.~Jones,
+  M.~Kelcey, M.-W. Chang, A.~M. Dai, J.~Uszkoreit, Q.~Le, and S.~Petrov.
+\newblock Natural questions: A benchmark for question answering research.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  7:\penalty0 452--466, 2019.
+\newblock \doi{10.1162/tacl_a_00276}.
+\newblock URL \url{https://aclanthology.org/Q19-1026}.
+
+\bibitem[LeCun et~al.(2015)LeCun, Bengio, and Hinton]{deeplearningLeCun}
+Y.~LeCun, Y.~Bengio, and G.~Hinton.
+\newblock Deep learning.
+\newblock \emph{nature}, 521\penalty0 (7553):\penalty0 436--444, 2015.
+
+\bibitem[Mikolov et~al.(2013)Mikolov, Chen, Corrado, and Dean]{word2vec}
+T.~Mikolov, K.~Chen, G.~Corrado, and J.~Dean.
+\newblock Efficient estimation of word representations in vector space.
+\newblock In Y.~Bengio and Y.~LeCun, editors, \emph{1st International
+  Conference on Learning Representations, {ICLR} 2013, Scottsdale, Arizona,
+  USA, May 2-4, 2013, Workshop Track Proceedings}, 2013.
+\newblock URL \url{http://arxiv.org/abs/1301.3781}.
+
+\bibitem[Nasr et~al.(2023)Nasr, Carlini, Hayase, Jagielski, Cooper, Ippolito,
+  Choquette-Choo, Wallace, Tram{\`e}r, and Lee]{nasr2023scalable}
+M.~Nasr, N.~Carlini, J.~Hayase, M.~Jagielski, A.~F. Cooper, D.~Ippolito, C.~A.
+  Choquette-Choo, E.~Wallace, F.~Tram{\`e}r, and K.~Lee.
+\newblock Scalable extraction of training data from (production) language
+  models.
+\newblock \emph{arXiv preprint arXiv:2311.17035}, 2023.
+
+\bibitem[Ouyang et~al.(2022)Ouyang, Wu, Jiang, Almeida, Wainwright, Mishkin,
+  Zhang, Agarwal, Slama, Ray, et~al.]{ouyang2022training}
+L.~Ouyang, J.~Wu, X.~Jiang, D.~Almeida, C.~Wainwright, P.~Mishkin, C.~Zhang,
+  S.~Agarwal, K.~Slama, A.~Ray, et~al.
+\newblock Training language models to follow instructions with human feedback.
+\newblock \emph{Advances in Neural Information Processing Systems}, 35, 2022.
+
+\bibitem[Pacchiardi et~al.(2023)Pacchiardi, Chan, Mindermann, Moscovitz, Pan,
+  Gal, Evans, and Brauner]{evans}
+L.~Pacchiardi, A.~J. Chan, S.~Mindermann, I.~Moscovitz, A.~Y. Pan, Y.~Gal,
+  O.~Evans, and J.~Brauner.
+\newblock How to catch an ai liar: Lie detection in black-box llms by asking
+  unrelated questions, 2023.
+
+\bibitem[Paperno et~al.(2016)Paperno, Kruszewski, Lazaridou, Pham, Bernardi,
+  Pezzelle, Baroni, Boleda, and Fern{\'{a}}ndez]{lambada}
+D.~Paperno, G.~Kruszewski, A.~Lazaridou, Q.~N. Pham, R.~Bernardi, S.~Pezzelle,
+  M.~Baroni, G.~Boleda, and R.~Fern{\'{a}}ndez.
+\newblock The {LAMBADA} dataset: Word prediction requiring a broad discourse
+  context.
+\newblock \emph{CoRR}, abs/1606.06031, 2016.
+\newblock URL \url{http://arxiv.org/abs/1606.06031}.
+
+\bibitem[Raffel et~al.(2019)Raffel, Shazeer, Roberts, Lee, Narang, Matena,
+  Zhou, Li, and Liu]{t5}
+C.~Raffel, N.~Shazeer, A.~Roberts, K.~Lee, S.~Narang, M.~Matena, Y.~Zhou,
+  W.~Li, and P.~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer.
+\newblock \emph{CoRR}, abs/1910.10683, 2019.
+\newblock URL \url{http://arxiv.org/abs/1910.10683}.
+
+\bibitem[Roberts et~al.(2022)Roberts, Chung, Levskaya, Mishra, Bradbury, Andor,
+  Narang, Lester, Gaffney, Mohiuddin, Hawthorne, Lewkowycz, Salcianu, van Zee,
+  Austin, Goodman, Soares, Hu, Tsvyashchenko, Chowdhery, Bastings, Bulian,
+  Garcia, Ni, Chen, Kenealy, Clark, Lee, Garrette, Lee-Thorp, Raffel, Shazeer,
+  Ritter, Bosma, Passos, Maitin-Shepard, Fiedel, Omernick, Saeta, Sepassi,
+  Spiridonov, Newlan, and Gesmundo]{t5x}
+A.~Roberts, H.~W. Chung, A.~Levskaya, G.~Mishra, J.~Bradbury, D.~Andor,
+  S.~Narang, B.~Lester, C.~Gaffney, A.~Mohiuddin, C.~Hawthorne, A.~Lewkowycz,
+  A.~Salcianu, M.~van Zee, J.~Austin, S.~Goodman, L.~B. Soares, H.~Hu,
+  S.~Tsvyashchenko, A.~Chowdhery, J.~Bastings, J.~Bulian, X.~Garcia, J.~Ni,
+  A.~Chen, K.~Kenealy, J.~H. Clark, S.~Lee, D.~Garrette, J.~Lee-Thorp,
+  C.~Raffel, N.~Shazeer, M.~Ritter, M.~Bosma, A.~Passos, J.~Maitin-Shepard,
+  N.~Fiedel, M.~Omernick, B.~Saeta, R.~Sepassi, A.~Spiridonov, J.~Newlan, and
+  A.~Gesmundo.
+\newblock Scaling up models and data with $\texttt{t5x}$ and $\texttt{seqio}$,
+  2022.
+
+\bibitem[Roberts et~al.(2023)Roberts, Chung, Mishra, Levskaya, Bradbury, Andor,
+  Narang, Lester, Gaffney, Mohiuddin, et~al.]{bradburyJAX}
+A.~Roberts, H.~W. Chung, G.~Mishra, A.~Levskaya, J.~Bradbury, D.~Andor,
+  S.~Narang, B.~Lester, C.~Gaffney, A.~Mohiuddin, et~al.
+\newblock Scaling up models and data with t5x and seqio.
+\newblock \emph{Journal of Machine Learning Research}, 24\penalty0
+  (377):\penalty0 1--8, 2023.
+
+\bibitem[Sakaguchi et~al.(2019)Sakaguchi, Bras, Bhagavatula, and
+  Choi]{winogrande}
+K.~Sakaguchi, R.~L. Bras, C.~Bhagavatula, and Y.~Choi.
+\newblock {WINOGRANDE:} an adversarial winograd schema challenge at scale.
+\newblock \emph{CoRR}, abs/1907.10641, 2019.
+\newblock URL \url{http://arxiv.org/abs/1907.10641}.
+
+\bibitem[Sap et~al.(2019)Sap, Rashkin, Chen, Bras, and Choi]{siqa}
+M.~Sap, H.~Rashkin, D.~Chen, R.~L. Bras, and Y.~Choi.
+\newblock Socialiqa: Commonsense reasoning about social interactions.
+\newblock \emph{CoRR}, abs/1904.09728, 2019.
+\newblock URL \url{http://arxiv.org/abs/1904.09728}.
+
+\bibitem[Shazeer(2019)]{mqa}
+N.~Shazeer.
+\newblock Fast transformer decoding: One write-head is all you need.
+\newblock \emph{CoRR}, abs/1911.02150, 2019.
+\newblock URL \url{http://arxiv.org/abs/1911.02150}.
+
+\bibitem[Shazeer(2020)]{geglu}
+N.~Shazeer.
+\newblock {GLU} variants improve transformer.
+\newblock \emph{CoRR}, abs/2002.05202, 2020.
+\newblock URL \url{https://arxiv.org/abs/2002.05202}.
+
+\bibitem[Skalse et~al.(2022)Skalse, Howe, Krasheninnikov, and
+  Krueger]{skalse2022defining}
+J.~M.~V. Skalse, N.~H.~R. Howe, D.~Krasheninnikov, and D.~Krueger.
+\newblock Defining and characterizing reward gaming.
+\newblock In \emph{NeurIPS}, 2022.
+
+\bibitem[Su et~al.(2021)Su, Lu, Pan, Wen, and Liu]{rope}
+J.~Su, Y.~Lu, S.~Pan, B.~Wen, and Y.~Liu.
+\newblock Roformer: Enhanced transformer with rotary position embedding.
+\newblock \emph{CoRR}, abs/2104.09864, 2021.
+\newblock URL \url{https://arxiv.org/abs/2104.09864}.
+
+\bibitem[Sutskever et~al.(2014)Sutskever, Vinyals, and
+  Le]{DBLP:journals/corr/SutskeverVL14}
+I.~Sutskever, O.~Vinyals, and Q.~V. Le.
+\newblock Sequence to sequence learning with neural networks.
+\newblock \emph{CoRR}, abs/1409.3215, 2014.
+\newblock URL \url{http://arxiv.org/abs/1409.3215}.
+
+\bibitem[Suzgun et~al.(2022)Suzgun, Scales, Schärli, Gehrmann, Tay, Chung,
+  Chowdhery, Le, Chi, Zhou, and Wei]{bbhard}
+M.~Suzgun, N.~Scales, N.~Schärli, S.~Gehrmann, Y.~Tay, H.~W. Chung,
+  A.~Chowdhery, Q.~V. Le, E.~H. Chi, D.~Zhou, and J.~Wei.
+\newblock Challenging big-bench tasks and whether chain-of-thought can solve
+  them, 2022.
+
+\bibitem[Talmor et~al.(2019)Talmor, Herzig, Lourie, and Berant]{commonsenseqa}
+A.~Talmor, J.~Herzig, N.~Lourie, and J.~Berant.
+\newblock Commonsenseqa: A question answering challenge targeting commonsense
+  knowledge, 2019.
+
+\bibitem[Touvron et~al.(2023{\natexlab{a}})Touvron, Lavril, Izacard, Martinet,
+  Lachaux, Lacroix, Rozière, Goyal, Hambro, Azhar, Rodriguez, Joulin, Grave,
+  and Lample]{llama1}
+H.~Touvron, T.~Lavril, G.~Izacard, X.~Martinet, M.-A. Lachaux, T.~Lacroix,
+  B.~Rozière, N.~Goyal, E.~Hambro, F.~Azhar, A.~Rodriguez, A.~Joulin,
+  E.~Grave, and G.~Lample.
+\newblock Llama: Open and efficient foundation language models,
+  2023{\natexlab{a}}.
+
+\bibitem[Touvron et~al.(2023{\natexlab{b}})Touvron, Martin, Stone, Albert,
+  Almahairi, Babaei, Bashlykov, Batra, Bhargava, Bhosale, Bikel, Blecher,
+  Ferrer, Chen, Cucurull, Esiobu, Fernandes, Fu, Fu, Fuller, Gao, Goswami,
+  Goyal, Hartshorn, Hosseini, Hou, Inan, Kardas, Kerkez, Khabsa, Kloumann,
+  Korenev, Koura, Lachaux, Lavril, Lee, Liskovich, Lu, Mao, Martinet, Mihaylov,
+  Mishra, Molybog, Nie, Poulton, Reizenstein, Rungta, Saladi, Schelten, Silva,
+  Smith, Subramanian, Tan, Tang, Taylor, Williams, Kuan, Xu, Yan, Zarov, Zhang,
+  Fan, Kambadur, Narang, Rodriguez, Stojnic, Edunov, and Scialom]{llama2}
+H.~Touvron, L.~Martin, K.~Stone, P.~Albert, A.~Almahairi, Y.~Babaei,
+  N.~Bashlykov, S.~Batra, P.~Bhargava, S.~Bhosale, D.~Bikel, L.~Blecher, C.~C.
+  Ferrer, M.~Chen, G.~Cucurull, D.~Esiobu, J.~Fernandes, J.~Fu, W.~Fu,
+  B.~Fuller, C.~Gao, V.~Goswami, N.~Goyal, A.~Hartshorn, S.~Hosseini, R.~Hou,
+  H.~Inan, M.~Kardas, V.~Kerkez, M.~Khabsa, I.~Kloumann, A.~Korenev, P.~S.
+  Koura, M.-A. Lachaux, T.~Lavril, J.~Lee, D.~Liskovich, Y.~Lu, Y.~Mao,
+  X.~Martinet, T.~Mihaylov, P.~Mishra, I.~Molybog, Y.~Nie, A.~Poulton,
+  J.~Reizenstein, R.~Rungta, K.~Saladi, A.~Schelten, R.~Silva, E.~M. Smith,
+  R.~Subramanian, X.~E. Tan, B.~Tang, R.~Taylor, A.~Williams, J.~X. Kuan,
+  P.~Xu, Z.~Yan, I.~Zarov, Y.~Zhang, A.~Fan, M.~Kambadur, S.~Narang,
+  A.~Rodriguez, R.~Stojnic, S.~Edunov, and T.~Scialom.
+\newblock Llama 2: Open foundation and fine-tuned chat models,
+  2023{\natexlab{b}}.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{DBLP:journals/corr/VaswaniSPUJGKP17}
+A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
+  L.~Kaiser, and I.~Polosukhin.
+\newblock Attention is all you need.
+\newblock \emph{CoRR}, abs/1706.03762, 2017.
+\newblock URL \url{http://arxiv.org/abs/1706.03762}.
+
+\bibitem[Wei et~al.(2022)Wei, Wang, Schuurmans, Bosma, Chi, Le, and
+  Zhou]{chain-of-thought}
+J.~Wei, X.~Wang, D.~Schuurmans, M.~Bosma, E.~H. Chi, Q.~Le, and D.~Zhou.
+\newblock Chain of thought prompting elicits reasoning in large language
+  models.
+\newblock \emph{CoRR}, abs/2201.11903, 2022.
+\newblock URL \url{https://arxiv.org/abs/2201.11903}.
+
+\bibitem[Weidinger et~al.(2021)Weidinger, Mellor, Rauh, Griffin, Uesato, Huang,
+  Cheng, Glaese, Balle, Kasirzadeh, Kenton, Brown, Hawkins, Stepleton, Biles,
+  Birhane, Haas, Rimell, Hendricks, Isaac, Legassick, Irving, and
+  Gabriel]{weidinger}
+L.~Weidinger, J.~Mellor, M.~Rauh, C.~Griffin, J.~Uesato, P.~Huang, M.~Cheng,
+  M.~Glaese, B.~Balle, A.~Kasirzadeh, Z.~Kenton, S.~Brown, W.~Hawkins,
+  T.~Stepleton, C.~Biles, A.~Birhane, J.~Haas, L.~Rimell, L.~A. Hendricks,
+  W.~Isaac, S.~Legassick, G.~Irving, and I.~Gabriel.
+\newblock Ethical and social risks of harm from language models.
+\newblock \emph{CoRR}, abs/2112.04359, 2021.
+\newblock URL \url{https://arxiv.org/abs/2112.04359}.
+
+\bibitem[XLA(2019)]{xla}
+XLA.
+\newblock Xla: Optimizing compiler for tensorflow, 2019.
+\newblock URL \url{https://www.tensorflow.org/xla}.
+
+\bibitem[Xu et~al.(2021)Xu, Lee, Chen, Hechtman, Huang, Joshi, Krikun,
+  Lepikhin, Ly, Maggioni, Pang, Shazeer, Wang, Wang, Wu, and Chen]{gspmd}
+Y.~Xu, H.~Lee, D.~Chen, B.~A. Hechtman, Y.~Huang, R.~Joshi, M.~Krikun,
+  D.~Lepikhin, A.~Ly, M.~Maggioni, R.~Pang, N.~Shazeer, S.~Wang, T.~Wang,
+  Y.~Wu, and Z.~Chen.
+\newblock {GSPMD:} general and scalable parallelization for {ML} computation
+  graphs.
+\newblock \emph{CoRR}, abs/2105.04663, 2021.
+\newblock URL \url{https://arxiv.org/abs/2105.04663}.
+
+\bibitem[Zhang and Sennrich(2019)]{rmsnorm}
+B.~Zhang and R.~Sennrich.
+\newblock Root mean square layer normalization.
+\newblock \emph{CoRR}, abs/1910.07467, 2019.
+\newblock URL \url{http://arxiv.org/abs/1910.07467}.
+
+\bibitem[Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li,
+  Li, Xing, Zhang, Gonzalez, and Stoica]{zheng2023judging}
+L.~Zheng, W.-L. Chiang, Y.~Sheng, S.~Zhuang, Z.~Wu, Y.~Zhuang, Z.~Lin, Z.~Li,
+  D.~Li, E.~P. Xing, H.~Zhang, J.~E. Gonzalez, and I.~Stoica.
+\newblock Judging llm-as-a-judge with mt-bench and chatbot arena, 2023.
+
+\bibitem[Zhong et~al.(2023)Zhong, Cui, Guo, Liang, Lu, Wang, Saied, Chen, and
+  Duan]{zhong2023agieval}
+W.~Zhong, R.~Cui, Y.~Guo, Y.~Liang, S.~Lu, Y.~Wang, A.~Saied, W.~Chen, and
+  N.~Duan.
+\newblock Agieval: A human-centric benchmark for evaluating foundation models,
+  2023.
+
+\bibitem[Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin,
+  Mazeika, Dombrowski, Goel, Li, Byun, Wang, Mallen, Basart, Koyejo, Song,
+  Fredrikson, Kolter, and Hendrycks]{hendrycks}
+A.~Zou, L.~Phan, S.~Chen, J.~Campbell, P.~Guo, R.~Ren, A.~Pan, X.~Yin,
+  M.~Mazeika, A.-K. Dombrowski, S.~Goel, N.~Li, M.~J. Byun, Z.~Wang, A.~Mallen,
+  S.~Basart, S.~Koyejo, D.~Song, M.~Fredrikson, J.~Z. Kolter, and D.~Hendrycks.
+\newblock Representation engineering: A top-down approach to ai transparency,
+  2023.
+
+\end{thebibliography}

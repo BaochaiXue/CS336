@@ -1,0 +1,92 @@
+\section{Discussion}
+\label{sec: discussion}
+
+\paragraph{Related Work.}
+\cref{tab: related} summarizes related models, particularly those motivated by byte-level language modeling.
+These methods are described in detail in \cref{sec: background}, which provides an extended related work.
+
+\paragraph{Distillation.}
+For new architectures,
+showing that they can be distilled from standard pretrained Transformers can  result in stronger new models with substantially reduced training~\citep{MOHAWK}.
+In \cref{sec: distill}, we investigate this for H-Net by initializing the main network from a pretrained Llama checkpoint and learning the encoder and decoder networks.
+With less than 200B bytes of training, the resulting model shows strong performance much better than if it were trained from scratch, although still worse than the teacher model.
+Our distillation procedure is perhaps currently the most efficient way of creating an end-to-end byte-level model, but we expect that it can be further improved.
+
+\paragraph{Efficiency.}
+
+Because of the dynamic nature of our model, it requires different considerations in making both the training pass and inference step efficient.
+Our implementation incorporates several engineering techniques already, such as handling variable sequence lengths within a mini-batch using specialized kernels provided by \citet{FlashAttention2, Mamba2}.
+Because of the different architectural considerations, it is difficult to compare to more standard pipelines;
+our current implementation may be approximately up to $2\times$ slower than an isotropic model during training.
+
+Note that the memory usage of our model is also dynamic, unlike standard sequence models, so other edge cases may happen, such as unlucky batches of sequences that are too long and overflow the device memory.
+Relatedly, one difficulty with stepping \model{} in batched mode is that different tokens in the batch may require different amounts of compute.
+
+We believe that such considerations are not fundamental and will be an important subject of future work;
+just as how related dynamic sparsity and conditional compute methods such as Mixture-of-Experts and speculative decoding~\citep{SpeculativeDecoding, SpeculativeSampling} benefited from years of dedicated engineering improvements.
+
+
+
+\paragraph{Deeper Hierarchies.}
+H-Net is the first \emph{dynamic} hierarchical model that can \emph{recursively} nest its chunking strategy (see \cref{tab: related} and \cref{sec: background}).
+In this paper, we showed that iterating H-Net from 0 stages (i.e. an isotropic model) to 1 stage and from 1 stage to 2 stages  consistently improves performance.
+We did not attempt a 3-stage H-Net at all for simplicity. Testing if H-Net can be iterated even deeper remains an immediate direction to explore. 
+
+
+
+\paragraph{Global Sequence Model Considerations.}
+Much research on sequence model architectures has focused on individual layers, where the tradeoffs are often quite direct.
+For example, recurrent models such as state space models ~\citep{gu2023thesis, Mamba} and linear attention variants ~\citep{LA, GLA, DeltaNet, GatedDeltaNet} compress arbitrarily long sequences into fixed-size hidden states, offering higher efficiency at the expense of precise retrieval of information (e.g. struggling with recall~\citep{RepeatAfterMe}).
+
+H-Net, however, is a \emph{global} architectural design that is simultaneously orthogonal to, but may have interactive effects with, the choice of individual layers.
+For example, using deeper hierarchies with exclusively recurrent layers would preserve linear computation (in sequence length) but \emph{logarithmic} state size, resembling newer sequence model layers such as log-linear attention \citep{LogLinearAttn} and Prefix Scannable Models \citep{PrefixScannableModels}, but with dynamic hierarchies.
+Similarly, the recursive compression of sequence length may alleviate their limitations in retrieval on long sequences.
+This may be considered a form of \emph{dynamic state allocation}.
+This paper has not focused on such implications, which would be a possible direction for future research.
+
+\paragraph{Long Context.}
+Similarly, an effect of the global hierarchical structure may be improved long context abilities, which is a common motivation for hierarchical models~\citep{CW-RNN, DilatedRNN}.
+Much research on sequence models again focuses on long context at the layer level~\citep{hyena, Mamba, Transformer}, and we hypothesize that H-Nets may provide general long context improvements in an orthogonal direction.
+
+\paragraph{Latent Test-Time Compute.}
+Test-time compute techniques, exemplified by Chain-of-Thought \citep{CoT}, have been shown to improve model performance on a variety of reasoning benchmarks \citep{S1,o1preview}. 
+Recent work has explored including latent representations (as opposed to just tokens) in the reasoning process \citep{coconut}, culminating in ``recurrent depth" models that 
+roll out an RNN for as many steps as needed before emitting a token \citep{ReccurentDepth}.
+As discussed in \cref{sec: Method-Autoregressive-Training-and-Inference}, \model{} is also capable of dynamically changing compute per output generated;
+thus, it can be viewed as a model that can dynamically allocate latent test-time compute as well.
+Additionally, as the motivation of H-Net is to recursively build higher-order abstractions, we hypothesize that it would be more effective as a reasoning model that operates over its own learned concepts instead of arbitrary token inputs.
+
+\paragraph{Sparsity.}
+H-Net can be viewed as a form of dynamic sparsity or conditional computation, and is related to concepts such as mixture-of-experts (MoE)~\citep{MoE, Original-MoE} and mixture-of-depths~\citep{Mixture-of-Depths}.
+We showed that at the byte level, DC is much more effective than MoE when controlled for parameters and compute (\cref{fig: moe}), and leave fleshing out further connections and comparisons for future work.
+We also note that H-Net can be viewed as orthogonal to MoE, which can be applied to sparsify any MLP layers within an H-Net. 
+
+
+\paragraph{Scale.}
+The largest models in this paper were FLOP-matched to the equivalent of a 1.3B parameter Transformer.
+While we believe that this provides sufficient evidence for the effectiveness of this approach, it remains to validate H-Net at larger model sizes of 3B, 7B, and beyond. 
+We note that while we observed no instabilities at our model sizes, the added complexity of H-Net and inherent difficulties of learning end-to-end discrete selection problems may require more serious investigation of potential stability challenges at larger scale.
+
+\paragraph{Scaling Laws.}
+
+Formally estimating the scaling behavior of a model requires calculating scaling law coefficients that sweep across a large range of model sizes and compute horizons~\citep{Kaplan2020,, Chinchilla}.
+We did not pursue this formal approach in this paper due to resource constraints.
+
+Instead, we used a simpler heuristic for the scaling behavior of our models, at least with respect to data.
+We note that
+\begin{itemize}
+    \item essentially all modern models live in the ``overtrained" regime (with respect to the formal scaling laws) due to inference considerations at deployment~\citep{Llama2}; and
+    \item these overtrained models often use modern schedulers that have extended periods of constant learning rates~\citep{WSD, DeepSeek-V3}.
+\end{itemize}
+Thus, we decided to use the models' losses during the constant phase as a proxy for how quickly they improve with data.
+We believe this still provides useful insight into scaling behaviors, and a more dedicated analysis of formal scaling laws remains an important topic for future work.
+
+\paragraph{BPB Calculation.}
+
+For baseline BPE tokenized models throughout this work, we used the standard bits-per-byte (BPB) calculation of simply rescaling the negative log-likelihood (or log perplexity) by the average number of bytes per token \citep{pile, MambaByte, SpaceByte}.
+However, this is not strictly speaking a correct BPB estimate for tokenized models, as it assumes that the probability the model outputs a string is equal to the probability of the model outputting the greedy tokenization of the string. 
+
+Depending on how the model is trained, it is possible the model can output other tokenization sequences with nonzero probability. 
+There are an exponential number of these, so computing the exact BPB is intractable; however, concurrent work \citep{vieira2024language} shows that the standard BPB calculation 
+indeed overestimates BPB. 
+Due to the high computational overhead of estimating the true BPB, we only provide the standard (inexact) value; nevertheless, \model{}'s superior performance on downstreams provides supporting evidence that it scales better than BPE models.

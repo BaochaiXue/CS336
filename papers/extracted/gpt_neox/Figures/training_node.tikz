@@ -1,0 +1,52 @@
+\usetikzlibrary{graphs,arrows.meta,calc}
+\begin{tikzpicture}[new set=cpus,new set=plxs,new set=hcas,new set=gpus,new set=nvls]
+	\begin{scope}[nodes=draw,align=center,shape=rectangle]
+		\draw (0,0) foreach \cpui/\poscpu in {0/left,1/right} {
+			+(\poscpu:0.25*\textwidth) node[set=cpus,minimum width=03/16*\textwidth,fill=blue!30](cpu\cpui) {\Large CPU{$_\cpui$}} 
+			child[edge from parent/.style={draw=none},level distance=0.625in,sibling distance=0.125*\textwidth] foreach \plxi in {0,1} {
+				node[set=plxs,fill=gray!30](plx\cpui\plxi) {\large PLX}
+			}
+		};
+		\draw foreach \cpui/\plxi/\pos/\hcai in {0/0/left/0,0/1/right/1,1/0/left/2,1/1/right/3} {
+			({plx\cpui\plxi}.south) ++(0,-0.125in) ++(\pos:0.125*\textwidth) node[set=hcas,fill=orange!30](hca\cpui\plxi) {\large HCA{$_\hcai$}}
+		};
+		\draw (-0.4375*\textwidth,-1.5in) foreach \gpui in {0,...,7} {
+			+(\gpui*0.125*\textwidth,0)node[set=gpus,fill=green!30](gpu\gpui) {\large GPU{$_\gpui$}}
+		};
+		\foreach \gpui/\alias in {0/gpu000,1/gpu001,2/gpu011,3/gpu010,4/gpu100,5/gpu101,6/gpu111,7/gpu110}
+			\pgfnodealias{\alias}{gpu\gpui};
+		\draw (-0.416666667*\textwidth,-2.125in) foreach \nvli in {0,...,5} {
+			+(\nvli*0.166666667*\textwidth,0) node[set=nvls,fill=green!50!gray!30](nvl\nvli) {NVSwitch{$_\nvli$}}
+		};
+	\end{scope}
+	\begin{scope}[infiniband/.style={color=violet,arrows={{Triangle[]}-{Triangle[]}},thick,auto},pciexpress/.style={arrows={{Latex[]}-{Latex[]}},auto},xgmi2/.style={color=blue!50!black,arrows={{Latex[]}-{Latex[]}},auto},nvlink/.style={color=green!50!black,line cap=round}]
+		\foreach \gpui[count=\gpuj] in {0,...,7}
+			\foreach \nvli[count=\nvlj] in {0,...,5}
+				\draw[nvlink] ($ ({gpu\gpui}.south west)!\nvlj/7!({gpu\gpui}.south east) + (0,-0.2pt)$) to node(nvlink\gpui\nvli) {} ($ ({nvl\nvli}.north west)!\gpuj/9!({nvl\nvli}.north east) + (0,+0.2pt)$);
+		\draw[nvlink,right] (nvlink00) node[right](nvlinktext) {\footnotesize 2x};
+		\begin{scope}[pciexpress]
+			\foreach \cpui in {0,1}
+				\foreach \plxi/\pos/\posi in {0/west/east,1/east/west}
+					\draw ($ ({cpu\cpui}.south)!1/3!({cpu\cpui}.south \pos)$) --  +(0,-0.2in) -| node[anchor=\posi]{\footnotesize 16x} ({plx\cpui\plxi}.north);
+			\foreach \cpui/\plxi/\pos in {0/0/east,0/1/west,1/0/east,1/1/west}
+				\draw ($ ({plx\cpui\plxi}.south)!-1/2!({plx\cpui\plxi}.south \pos)$) |- node[ near end, below]{\footnotesize 16x} ({hca\cpui\plxi}.{\pos});
+			\foreach \cpui/\plxi/\pos in {0/0/left,0/1/right,1/0/left,1/1/right}
+				\draw[infiniband] ({hca\cpui\plxi}.north) -- node(ib\cpui\plxi){\footnotesize 4x} ++(0,0.375in) node[anchor=south](switch\cpui\plxi){\footnotesize Switch{$_\plxi$}};
+			\foreach \cpui in {0,1}
+				\foreach \plxi/\pos in {0/east,1/west}
+					\draw ({plx\cpui\plxi}.south) -- ++(0,-0.375in) -| node[ near start, below]{\footnotesize 16x} ({gpu\cpui\plxi0}.north);
+			\foreach \cpui in {0,1}
+				\foreach \plxi/\pos/\posi in {0/east/west,1/west/east}
+					\draw ($ ({plx\cpui\plxi}.south)!1/2!({plx\cpui\plxi}.south \pos)$) -- node[near end, anchor=\posi]{\footnotesize 16x} ++(0,-0.5in) -| ({gpu\cpui\plxi1}.north) ;
+			\draw[xgmi2] ($ (cpu0.north east)!1/5!(cpu0.south east) $) -- node(xgmi) {\footnotesize 16x} ($ (cpu1.north west)!1/5!(cpu1.south west)$);%
+			\foreach \xgmii in {2,...,4} 
+			    \draw[xgmi2] ($ (cpu0.north east)!\xgmii/5!(cpu0.south east) $) -- node(xgmi\xgmii){} ($ (cpu1.north west)!\xgmii/5!(cpu1.south west) $);%xGMI-2
+		\end{scope}
+		\draw[infiniband] (-7/16*\textwidth,0.5in) -- +(1/16*\textwidth,0) node[yshift=0.125in](ib) {\small\strut HDR InfiniBand} node[yshift=-0.125in](ibspeed) {\scriptsize\strut 50 GT/s per lane} -- +(1/8*\textwidth,0);
+		\draw[pciexpress] (-3/16*\textwidth,0.5in) -- +(1/16*\textwidth,0) node[centered,yshift=0.125in](pcie) {\small\strut PCI Express 4.0} node[yshift=-0.125in](pciespeed) {\scriptsize\strut 16 GT/s per lane} -- +(1/8*\textwidth,0);
+		\draw[xgmi2] (1/16*\textwidth,0.5in) -- +(1/16*\textwidth,0) node[yshift=0.125in](xgmi) {\small\strut xGMI-2} node[yshift=-0.125in](xgmispeed) {\scriptsize\strut 16 GT/s per lane}
+		-- +(1/8*\textwidth,0);%
+		\draw[nvlink] (5/16*\textwidth,0.5in) -- +(1/16*\textwidth,0) node[yshift=0.125in](nvlink) {\small\strut NVLink 3.0} node[yshift=-0.125in](nvlinkspeed) {\scriptsize\strut 400 GT/s per lane}
+		-- +(1/8*\textwidth,0);
+	\end{scope}
+\end{tikzpicture}

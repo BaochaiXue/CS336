@@ -1,0 +1,37 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tokenization}[2022-02-08]
+
+\RequirePackage{xcolor}
+
+\definecolor{tokenBlue}{HTML}{377eb8}
+\definecolor{tokenOrange}{HTML}{ff7f00}
+\definecolor{tokenGreen}{HTML}{4daf4a}
+\definecolor{tokenPink}{HTML}{f781bf}
+\definecolor{tokenBrown}{HTML}{a65628}
+\definecolor{tokenPurple}{HTML}{984ea3}
+\definecolor{tokenGray}{HTML}{999999}
+\definecolor{tokenRed}{HTML}{e41a1c}
+\definecolor{tokenYellow}{HTML}{dede00}
+
+\newcounter{colrot}
+\newcommand{\tokencolor}{%
+    \stepcounter{colrot}%
+    \ifcase\value{colrot}\relax% 0 ignored
+    \or\color{tokenBlue}% 1
+    \or\color{tokenOrange}% 2
+    \or\color{tokenGreen}
+    \or\color{tokenPink}
+    \or\color{tokenBrown}
+    \or\color{tokenPurple}
+    \or\color{tokenGray}
+    \or\color{tokenRed}
+    \or\color{tokenYellow}\setcounter{colrot}{0}% 3
+  \fi%
+}
+\def\tokentext{\setcounter{colrot}{0}\setlength{\fboxrule}{0.5pt}%
+\setlength{\fboxsep}{-\fboxrule}%
+\setlength{\parindent}{0pt}%
+\setlength{\parskip}{0pt}%
+\setlength{\baselineskip}{0pt}\ttfamily\everypar=\expandafter{\the\everypar\noindent}}
+\newcommand{\tokenbox}[1]{{\tokencolor\fbox{\strut\normalcolor{#1}}}}
+\newenvironment{tokenized}{\tokentext}{}

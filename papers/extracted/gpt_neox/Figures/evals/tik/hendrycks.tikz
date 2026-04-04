@@ -1,0 +1,143 @@
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{calc}
+\begin{tikzpicture}
+
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkviolet1270255}{RGB}{127,0,255}
+\definecolor{sandybrown25517896}{RGB}{255,178,96}
+\definecolor{turquoise64236211}{RGB}{64,236,211}
+
+\begin{axis}[
+log basis x={10},
+tick align=outside,
+tick pos=left,
+title={Social Science},
+x grid style={darkgray176},
+xlabel={Parameters},
+xmin=58012079.6447931, xmax=254672107396.429,
+xmode=log,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={Accuracy},
+ymin=0.2, ymax=0.4,
+ytick style={color=black}
+]
+\path [draw=darkviolet1270255, semithick]
+(axis cs:5637144576,0.283366406404368)
+--(axis cs:5637144576,0.284069407700279);
+
+\path [draw=darkviolet1270255, semithick]
+(axis cs:19900000000,0.308174182977906)
+--(axis cs:19900000000,0.308660396157616);
+
+\addplot [semithick, darkviolet1270255, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+5637144576 0.283366406404368
+19900000000 0.308174182977906
+};
+\addplot [semithick, darkviolet1270255, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+5637144576 0.284069407700279
+19900000000 0.308660396157616
+};
+\path [draw=turquoise64236211, semithick]
+(axis cs:301989888,0.26262696508843)
+--(axis cs:301989888,0.263209888990218);
+
+\path [draw=turquoise64236211, semithick]
+(axis cs:1207959552,0.260347100445951)
+--(axis cs:1207959552,0.260939867379853);
+
+\path [draw=turquoise64236211, semithick]
+(axis cs:6442450944,0.27659825274452)
+--(axis cs:6442450944,0.277187902601596);
+
+\path [draw=turquoise64236211, semithick]
+(axis cs:173946175488,0.347107516509407)
+--(axis cs:173946175488,0.347725112674863);
+
+\addplot [semithick, turquoise64236211, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+301989888 0.26262696508843
+1207959552 0.260347100445951
+6442450944 0.27659825274452
+173946175488 0.347107516509407
+};
+\addplot [semithick, turquoise64236211, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+301989888 0.263209888990218
+1207959552 0.260939867379853
+6442450944 0.277187902601596
+173946175488 0.347725112674863
+};
+\path [draw=sandybrown25517896, semithick]
+(axis cs:84934656,0.2447613824708)
+--(axis cs:84934656,0.245326365335505);
+
+\path [draw=sandybrown25517896, semithick]
+(axis cs:301989888,0.272764707223202)
+--(axis cs:301989888,0.27322164311804);
+
+\path [draw=sandybrown25517896, semithick]
+(axis cs:1207959552,0.260030982267504)
+--(axis cs:1207959552,0.260606001807894);
+
+\path [draw=sandybrown25517896, semithick]
+(axis cs:2516582400,0.269413648466519)
+--(axis cs:2516582400,0.270072864370661);
+
+\path [draw=sandybrown25517896, semithick]
+(axis cs:6442450944,0.281786857031406)
+--(axis cs:6442450944,0.28239903832121);
+
+\path [draw=sandybrown25517896, semithick]
+(axis cs:12681408000,0.269519754239791)
+--(axis cs:12681408000,0.269966758597388);
+
+\addplot [semithick, sandybrown25517896, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+84934656 0.2447613824708
+301989888 0.272764707223202
+1207959552 0.260030982267504
+2516582400 0.269413648466519
+6442450944 0.281786857031406
+12681408000 0.269519754239791
+};
+\addplot [semithick, sandybrown25517896, mark=-, mark size=2, mark options={solid}, only marks]
+table {%
+84934656 0.245326365335505
+301989888 0.27322164311804
+1207959552 0.260606001807894
+2516582400 0.270072864370661
+6442450944 0.28239903832121
+12681408000 0.269966758597388
+};
+\addplot [semithick, black, dotted]
+table {%
+58012079.644793 0.25
+254672107396.429 0.25
+};
+\addplot [semithick, darkviolet1270255, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+5637144576 0.283717907052324
+19900000000 0.308417289567761
+};
+\addplot [semithick, turquoise64236211, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+301989888 0.262918427039324
+1207959552 0.260643483912902
+6442450944 0.276893077673058
+173946175488 0.347416314592135
+};
+\addplot [semithick, sandybrown25517896, mark=*, mark size=3, mark options={solid}, only marks]
+table {%
+84934656 0.245043873903152
+301989888 0.272993175170621
+1207959552 0.260318492037699
+2516582400 0.26974325641859
+6442450944 0.282092947676308
+12681408000 0.26974325641859
+};
+\end{axis}
+
+\end{tikzpicture}

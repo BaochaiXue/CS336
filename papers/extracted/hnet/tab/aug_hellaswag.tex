@@ -1,0 +1,47 @@
+\begin{table*}[t!]
+\caption{
+\textbf{Robustness evaluation on HellaSwag with textual perturbations, all data-/FLOP-matched.}
+Zero-shot accuracy on five different perturbation types (AntSpeak, Drop, RandomCase, Repeat, UpperCase) for models trained exclusively on clean data without noise augmentation.
+Best and second best results in each column are denoted using bolded and underlined texts, respectively.
+The Robustness Score metric show that all byte-level models are more robust to adversarial text inputs than tokenizer-based Transformer.
+\model{} (2-stage) shows significantly enhanced robustness in textual perturbations, with the highest average accuracy across all noise types and highest robustness score.
+See \cref{tab: architecture} for architectural details, and \cref{sec: appendix-robustness_score} for the definition of Robustness Score.
+}
+\centering
+\small
+{ 
+\begin{tabular}{lccccccccccccc} 
+\toprule
+\multirow{2}{*}{\textsc{Model}} & \multirow{2}{*}{\textsc{Input}} & \multicolumn{5}{c}{\textsc{HellaSwag}} & \multirow{2}{*}{\textsc{Average} $\uparrow$} & \multirowcell{2}{\textsc{Robustness}\\\textsc{Score} $\uparrow$}\\
+\cmidrule{3-7}
+ & & \textsc{AntSpeak} & \textsc{Drop} & \textsc{RandomCase} & \textsc{Repeat} & \textsc{UpperCase}\\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{Large}}}\\
+\cellcolor{Gray7!20}{Transformer} & Token & \second{31.1} & 29.9 & 27.1 & 27.8 & 38.9 & 30.9 & 20.2\\
+\addlinespace[-0.15em]
+\cmidrule{1-9}
+\addlinespace[-0.25em]
+\cellcolor{Grape7!10}{LlamaByte (W1024)} & & 30.4 & 28.1 & 29.3 & 27.2 & 38.5 & 30.7 & 36.9\\
+\cellcolor{Violet7!10}{LlamaByte (Global)} & & \second{31.1} & 28.1 & 29.7 & 27.3 & 39.0 & 31.0 & 36.6\\
+\cellcolor{Blue7!10}{MambaByte} & & 29.8 & 27.9 & 29.9 & 27.1 & 39.6 & 30.9 & 34.5\\
+\cellcolor{Cyan7!10}{SpaceByte} & & 30.7 & 29.8 & 33.5 & 29.5 & 47.8 & 34.3 & 38.1\\
+\cellcolor{Cyan7!10}{SpaceByte++} & Byte & 31.0 & 30.9 & 35.8 & 29.3 & 54.0 & 36.2 & 36.4\\
+\cellcolor{Green7!10}{H-Net (pool)} & & 30.5 & \second{31.2} & 35.4 & 29.6 & 53.4 & 36.1 & 37.3\\
+\cellcolor{Green7!10}{H-Net (space)} & & 30.8 & \second{31.2} & \second{38.6} & 29.4 & 54.0 & \second{36.8} & \second{38.2}\\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & & \best{31.2} & 31.1 & 35.4 & \second{29.9} & \second{54.1} & 36.4 & 37.2\\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & 30.8 & \best{32.1} & \best{39.3} & \best{30.4} & \best{57.1} & \best{38.0} & \best{39.0}\\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{XL}}}\\
+\cellcolor{Gray7!20}{Transformer} & Token & \best{31.6} & 30.7 & 28.0 & 28.5 & 43.0 & 32.3 & 22.2\\
+\addlinespace[-0.15em]
+\cmidrule{1-9}
+\addlinespace[-0.25em]
+\cellcolor{Cyan7!10}{SpaceByte++} & & 30.9 & 32.1 & 40.3 & 30.6 & 58.5 & 38.5 & 38.5\\
+\cellcolor{Green7!10}{H-Net (space)} & & \second{31.2} & \second{33.2} & \second{41.9} & \second{31.8} & \second{60.7} & \second{39.8} & \second{40.5} \\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & \multirow{-2}{*}{Byte} & 30.9 & 32.7 & 39.2 & 31.2 & 58.4 & 38.6 & 39.5\\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & 31.1 & \best{34.7} & \best{44.1} & \best{33.0} & \best{61.7} & \best{40.9} & \best{42.8}\\
+\bottomrule
+\end{tabular}
+} 
+\label{tab: aug_hellaswag}
+\end{table*}

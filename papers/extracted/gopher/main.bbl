@@ -1,0 +1,1407 @@
+\begin{thebibliography}{189}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abadi et~al.(2016)Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar,
+  and Zhang]{abadi2016deep}
+M.~Abadi, A.~Chu, I.~Goodfellow, H.~B. McMahan, I.~Mironov, K.~Talwar, and
+  L.~Zhang.
+\newblock Deep learning with differential privacy.
+\newblock In \emph{Proceedings of the 2016 ACM SIGSAC conference on computer
+  and communications security}, pages 308--318, 2016.
+
+\bibitem[Abubakar(2021)]{abubakar2021copilot}
+M.~Abubakar.
+\newblock {GitHub} {C}opilot {AI} is generating and giving out functional {API}
+  keys.
+\newblock
+  \url{https://fossbytes.com/github-copilot-generating-functional-api-keys},
+  2021.
+\newblock Accessed: 2021-10-7.
+
+\bibitem[Adiwardana et~al.(2020)Adiwardana, Luong, So, Hall, Fiedel, Thoppilan,
+  Yang, Kulshreshtha, Nemade, Lu, et~al.]{adiwardana2020towards}
+D.~Adiwardana, M.-T. Luong, D.~R. So, J.~Hall, N.~Fiedel, R.~Thoppilan,
+  Z.~Yang, A.~Kulshreshtha, G.~Nemade, Y.~Lu, et~al.
+\newblock Towards a human-like open-domain chatbot.
+\newblock \emph{arXiv preprint arXiv:2001.09977}, 2020.
+
+\bibitem[Anil et~al.(2021)Anil, Ghazi, Gupta, Kumar, and
+  Manurangsi]{anil2021large}
+R.~Anil, B.~Ghazi, V.~Gupta, R.~Kumar, and P.~Manurangsi.
+\newblock Large-scale differentially private {BERT}.
+\newblock \emph{arXiv preprint arXiv:2108.01624}, 2021.
+
+\bibitem[Askell et~al.(2021)Askell, Bai, Chen, Drain, Ganguli, Henighan, Jones,
+  Joseph, Mann, DasSarma, et~al.]{askell2021general}
+A.~Askell, Y.~Bai, A.~Chen, D.~Drain, D.~Ganguli, T.~Henighan, A.~Jones,
+  N.~Joseph, B.~Mann, N.~DasSarma, et~al.
+\newblock A general language assistant as a laboratory for alignment.
+\newblock \emph{arXiv preprint arXiv:2112.00861}, 2021.
+
+\bibitem[Augenstein et~al.(2019)Augenstein, Lioma, Wang, Lima, Hansen, and
+  Christian~Hansen]{Augenstein:etal:2019}
+I.~Augenstein, C.~Lioma, D.~Wang, L.~C. Lima, C.~Hansen, and J.~G.~S.
+  Christian~Hansen.
+\newblock Multifc: a real-world multi-domain dataset for evidence-based fact
+  checking.
+\newblock In \emph{Transactions of the Association for Computational
+  Linguistics (TACL), 2021}, Online, Nov. 2019. Association for Computational
+  Linguistics.
+\newblock URL \url{https://arxiv.org/abs/1909.03242}.
+
+\bibitem[Ba et~al.(2016)Ba, Kiros, and Hinton]{ba2016layer}
+J.~L. Ba, J.~R. Kiros, and G.~E. Hinton.
+\newblock Layer normalization.
+\newblock \emph{arXiv preprint arXiv:1607.06450}, 2016.
+
+\bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and Bengio]{bahdanau2014neural}
+D.~Bahdanau, K.~Cho, and Y.~Bengio.
+\newblock Neural machine translation by jointly learning to align and
+  translate.
+\newblock \emph{arXiv preprint arXiv:1409.0473}, 2014.
+
+\bibitem[Ben~Zaken et~al.(2021)Ben~Zaken, Ravfogel, and
+  Goldberg]{ben2021bitfit}
+E.~Ben~Zaken, S.~Ravfogel, and Y.~Goldberg.
+\newblock Bitfit: Simple parameter-efficient fine-tuning for transformer-based
+  masked language-models.
+\newblock \emph{arXiv e-prints}, pages arXiv--2106, 2021.
+
+\bibitem[Bender et~al.(2021)Bender, Gebru, McMillan-Major, and
+  Shmitchell]{bender2021dangers}
+E.~M. Bender, T.~Gebru, A.~McMillan-Major, and S.~Shmitchell.
+\newblock On the dangers of stochastic parrots: Can language models be too big?
+\newblock In \emph{Proceedings of the 2021 ACM Conference on Fairness,
+  Accountability, and Transparency}, pages 610--623, 2021.
+
+\bibitem[Bengio et~al.(2003)Bengio, Ducharme, Vincent, and
+  Janvin]{bengio2003neural}
+Y.~Bengio, R.~Ducharme, P.~Vincent, and C.~Janvin.
+\newblock A neural probabilistic language model.
+\newblock \emph{Journal of Machine Learning Research}, 3:\penalty0 1137--1155,
+  2003.
+
+\bibitem[{BIG-bench collaboration}(2021)]{bigbench}
+{BIG-bench collaboration}.
+\newblock Beyond the imitation game: Measuring and extrapolating the
+  capabilities of language models.
+\newblock \emph{In preparation}, 2021.
+\newblock URL \url{https://github.com/google/BIG-bench/}.
+
+\bibitem[Bisk et~al.(2020)Bisk, Zellers, Gao, Choi, et~al.]{piqa}
+Y.~Bisk, R.~Zellers, J.~Gao, Y.~Choi, et~al.
+\newblock {PIQA}: Reasoning about physical commonsense in natural language.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~34, pages 7432--7439, 2020.
+
+\bibitem[Blalock et~al.(2020)Blalock, Ortiz, Frankle, and
+  Guttag]{stateofnnpruning}
+D.~W. Blalock, J.~J.~G. Ortiz, J.~Frankle, and J.~V. Guttag.
+\newblock What is the state of neural network pruning?
+\newblock \emph{CoRR}, abs/2003.03033, 2020.
+\newblock URL \url{https://arxiv.org/abs/2003.03033}.
+
+\bibitem[Blodgett et~al.(2016)Blodgett, Green, and O'Connor]{twitteraae}
+S.~L. Blodgett, L.~Green, and B.~O'Connor.
+\newblock Demographic dialectal variation in social media: {A} case study of
+  african-american english.
+\newblock \emph{CoRR}, abs/1608.08868, 2016.
+\newblock URL \url{http://arxiv.org/abs/1608.08868}.
+
+\bibitem[Blodgett et~al.(2020)Blodgett, Barocas, Daum{\'e}~III, and
+  Wallach]{blodgett2020language}
+S.~L. Blodgett, S.~Barocas, H.~Daum{\'e}~III, and H.~Wallach.
+\newblock Language (technology) is power: A critical survey of "bias" in {NLP}.
+\newblock \emph{ACL}, 2020.
+
+\bibitem[Blodgett et~al.(2021)Blodgett, Lopez, Olteanu, Sim, and
+  Wallach]{blodgett2021stereotyping}
+S.~L. Blodgett, G.~Lopez, A.~Olteanu, R.~Sim, and H.~Wallach.
+\newblock Stereotyping norwegian salmon: an inventory of pitfalls in fairness
+  benchmark datasets.
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 1004--1015, 2021.
+
+\bibitem[B{\"o}hm et~al.(2019)B{\"o}hm, Gao, Meyer, Shapira, Dagan, and
+  Gurevych]{bohm2019better}
+F.~B{\"o}hm, Y.~Gao, C.~M. Meyer, O.~Shapira, I.~Dagan, and I.~Gurevych.
+\newblock Better rewards yield better summaries: Learning to summarise without
+  references.
+\newblock \emph{arXiv preprint arXiv:1909.01214}, 2019.
+
+\bibitem[Borgeaud et~al.(2021)Borgeaud, Mensch, Hoffmann, Cai, Rutherford,
+  Millican, van~den Driessche, Lespiau, Damoc, Clark, de~Las~Casas, Guy,
+  Menick, Ring, Hennigan, Huang, Maggiore, Jones, Cassirer, Brock, Paganini,
+  Irving, Vinyals, Osindero, Simonyan, Rae, Elsen, and
+  Sifre]{borgeaud2021retrieval}
+S.~Borgeaud, A.~Mensch, J.~Hoffmann, T.~Cai, E.~Rutherford, K.~Millican,
+  G.~van~den Driessche, J.-B. Lespiau, B.~Damoc, A.~Clark, D.~de~Las~Casas,
+  A.~Guy, J.~Menick, R.~Ring, T.~Hennigan, S.~Huang, L.~Maggiore, C.~Jones,
+  A.~Cassirer, A.~Brock, M.~Paganini, G.~Irving, O.~Vinyals, S.~Osindero,
+  K.~Simonyan, J.~W. Rae, E.~Elsen, and L.~Sifre.
+\newblock Improving language models by retrieving from trillions of tokens.
+\newblock \emph{arXiv submission}, 2021.
+
+\bibitem[Borkan et~al.(2019)Borkan, Dixon, Sorensen, Thain, and
+  Vasserman]{nuanced_metrics}
+D.~Borkan, L.~Dixon, J.~Sorensen, N.~Thain, and L.~Vasserman.
+\newblock Nuanced metrics for measuring unintended bias with real data for text
+  classification.
+\newblock \emph{CoRR}, abs/1903.04561, 2019.
+\newblock URL \url{http://arxiv.org/abs/1903.04561}.
+
+\bibitem[Bradbury et~al.(2018)Bradbury, Frostig, Hawkins, Johnson, Leary,
+  Maclaurin, Necula, Paszke, Vander{P}las, Wanderman-{M}ilne, and
+  Zhang]{jax2018github}
+J.~Bradbury, R.~Frostig, P.~Hawkins, M.~J. Johnson, C.~Leary, D.~Maclaurin,
+  G.~Necula, A.~Paszke, J.~Vander{P}las, S.~Wanderman-{M}ilne, and Q.~Zhang.
+\newblock {JAX}: composable transformations of {P}ython+{N}um{P}y programs.
+\newblock 2018.
+\newblock URL \url{http://github.com/google/jax}.
+
+\bibitem[Brants et~al.(2007)Brants, Popat, Xu, Och, and Dean]{brants2007large}
+T.~Brants, A.~C. Popat, P.~Xu, F.~J. Och, and J.~Dean.
+\newblock Large language models in machine translation.
+\newblock In \emph{Proceedings of the 2007 Joint Conference on Empirical
+  Methods in Natural Language Processing and Computational Natural Language
+  Learning ({EMNLP}-{C}o{NLL})}, pages 858--867, Prague, Czech Republic, June
+  2007. Association for Computational Linguistics.
+\newblock URL \url{https://aclanthology.org/D07-1090}.
+
+\bibitem[Brill and Moore(2000)]{brill2000improved}
+E.~Brill and R.~C. Moore.
+\newblock An improved error model for noisy channel spelling correction.
+\newblock In \emph{Proceedings of the 38th annual meeting of the association
+  for computational linguistics}, pages 286--293, 2000.
+
+\bibitem[Brown et~al.(1990)Brown, Cocke, Della~Pietra, Della~Pietra, Jelinek,
+  Lafferty, Mercer, and Roossin]{brown1990statistical}
+P.~F. Brown, J.~Cocke, S.~A. Della~Pietra, V.~J. Della~Pietra, F.~Jelinek,
+  J.~Lafferty, R.~L. Mercer, and P.~S. Roossin.
+\newblock A statistical approach to machine translation.
+\newblock \emph{Computational linguistics}, 16\penalty0 (2):\penalty0 79--85,
+  1990.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
+  Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan,
+  Child, Ramesh, Ziegler, Wu, Winter, Hesse, Chen, Sigler, Litwin, Gray, Chess,
+  Clark, Berner, McCandlish, Radford, Sutskever, and Amodei]{gpt3}
+T.~Brown, B.~Mann, N.~Ryder, M.~Subbiah, J.~D. Kaplan, P.~Dhariwal,
+  A.~Neelakantan, P.~Shyam, G.~Sastry, A.~Askell, S.~Agarwal, A.~Herbert-Voss,
+  G.~Krueger, T.~Henighan, R.~Child, A.~Ramesh, D.~Ziegler, J.~Wu, C.~Winter,
+  C.~Hesse, M.~Chen, E.~Sigler, M.~Litwin, S.~Gray, B.~Chess, J.~Clark,
+  C.~Berner, S.~McCandlish, A.~Radford, I.~Sutskever, and D.~Amodei.
+\newblock Language models are few-shot learners.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
+  editors, \emph{Advances in Neural Information Processing Systems}, volume~33,
+  pages 1877--1901. Curran Associates, Inc., 2020.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf}.
+
+\bibitem[Buckman()]{buckman2021problematic}
+J.~Buckman.
+\newblock Fair {ML} tools require problematic {ML} models.
+\newblock
+  \url{https://jacobbuckman.com/2021-02-15-fair-ml-tools-require-problematic-ml-models}.
+\newblock Accessed: 2021-10-7.
+
+\bibitem[Burgess et~al.(2019)Burgess, Milanovic, Stephens, Monachopoulos, and
+  Mansell]{burgess2019bfloat16}
+N.~Burgess, J.~Milanovic, N.~Stephens, K.~Monachopoulos, and D.~Mansell.
+\newblock Bfloat16 processing for neural networks.
+\newblock In \emph{2019 IEEE 26th Symposium on Computer Arithmetic (ARITH)},
+  pages 88--91. IEEE, 2019.
+
+\bibitem[Caliskan et~al.(2017)Caliskan, Bryson, and
+  Narayanan]{caliskan2017semantics}
+A.~Caliskan, J.~J. Bryson, and A.~Narayanan.
+\newblock Semantics derived automatically from language corpora contain
+  human-like biases.
+\newblock \emph{Science}, 356\penalty0 (6334):\penalty0 183--186, 2017.
+
+\bibitem[Camburu et~al.(2018)Camburu, Rockt{\"a}schel, Lukasiewicz, and
+  Blunsom]{camburu2018snli}
+O.-M. Camburu, T.~Rockt{\"a}schel, T.~Lukasiewicz, and P.~Blunsom.
+\newblock e-{SNLI}: Natural language inference with natural language
+  explanations.
+\newblock \emph{arXiv preprint arXiv:1812.01193}, 2018.
+
+\bibitem[Cao and Daum{\'e}(2021)]{cao2021toward}
+Y.~T. Cao and H.~Daum{\'e}.
+\newblock Toward gender-inclusive coreference resolution: An analysis of gender
+  and bias throughout the machine learning lifecyle.
+\newblock \emph{Computational Linguistics}, pages 1--47, 2021.
+
+\bibitem[Carlini et~al.(2019)Carlini, Liu, Erlingsson, Kos, and
+  Song]{carlini2019secret}
+N.~Carlini, C.~Liu, {\'U}.~Erlingsson, J.~Kos, and D.~Song.
+\newblock The secret sharer: Evaluating and testing unintended memorization in
+  neural networks.
+\newblock In \emph{28th USENIX Security Symposium (USENIX Security 19)}, pages
+  267--284, 2019.
+
+\bibitem[Carlini et~al.(2021)Carlini, Tramer, Wallace, Jagielski, Herbert-Voss,
+  Lee, Roberts, Brown, Song, Erlingsson, Oprea, and
+  Raffel]{carlini2021extracting}
+N.~Carlini, F.~Tramer, E.~Wallace, M.~Jagielski, A.~Herbert-Voss, K.~Lee,
+  A.~Roberts, T.~Brown, D.~Song, U.~Erlingsson, A.~Oprea, and C.~Raffel.
+\newblock Extracting training data from large language models, 2021.
+
+\bibitem[Chater(1999)]{chater1999search}
+N.~Chater.
+\newblock The search for simplicity: A fundamental cognitive principle?
+\newblock \emph{The Quarterly Journal of Experimental Psychology Section A},
+  52\penalty0 (2):\penalty0 273--302, 1999.
+
+\bibitem[Chen et~al.(2017)Chen, Liu, Yin, and Tang]{chen2017survey}
+H.~Chen, X.~Liu, D.~Yin, and J.~Tang.
+\newblock A survey on dialogue systems: Recent advances and new frontiers.
+\newblock \emph{Acm Sigkdd Explorations Newsletter}, 19\penalty0 (2):\penalty0
+  25--35, 2017.
+
+\bibitem[Chen et~al.(2015)Chen, Goodfellow, and Shlens]{chen2015net2net}
+T.~Chen, I.~Goodfellow, and J.~Shlens.
+\newblock Net2net: Accelerating learning via knowledge transfer.
+\newblock \emph{arXiv preprint arXiv:1511.05641}, 2015.
+
+\bibitem[Christiano et~al.(2018)Christiano, Shlegeris, and
+  Amodei]{christiano2018amplification}
+P.~Christiano, B.~Shlegeris, and D.~Amodei.
+\newblock Supervising strong learners by amplifying weak experts.
+\newblock \emph{arXiv preprint arXiv:1810.08575}, 2018.
+
+\bibitem[Coyle and Weller(2020)]{coyle2020explaining}
+D.~Coyle and A.~Weller.
+\newblock ``{E}xplaining'' machine learning reveals policy challenges.
+\newblock \emph{Science}, 368\penalty0 (6498):\penalty0 1433--1434, 2020.
+
+\bibitem[Curation(2020)]{curationcorpusbase2020}
+Curation.
+\newblock Curation corpus base, 2020.
+\newblock URL \url{https://github.com/CurationCorp/curation-corpus}.
+
+\bibitem[Dagan et~al.(2005)Dagan, Glickman, and Magnini]{Dagan:2005}
+I.~Dagan, O.~Glickman, and B.~Magnini.
+\newblock The {PASCAL} recognising textual entailment challenge.
+\newblock In \emph{Proceedings of the PASCAL Challenges Workshop on Recognising
+  Textual Entailment}, 2005.
+\newblock URL \url{http://www.cs.biu.ac.il/~glikmao/rte05/}.
+
+\bibitem[Dai et~al.(2019)Dai, Yang, Yang, Carbonell, Le, and
+  Salakhutdinov]{dai2019transformer}
+Z.~Dai, Z.~Yang, Y.~Yang, J.~Carbonell, Q.~V. Le, and R.~Salakhutdinov.
+\newblock Transformer-{XL}: Attentive language models beyond a fixed-length
+  context.
+\newblock \emph{arXiv preprint arXiv:1901.02860}, 2019.
+
+\bibitem[Dastin(2018)]{dastin2018Amazon}
+J.~Dastin.
+\newblock Amazon scraps secret {AI} recruiting tool that showed bias against
+  women.
+\newblock 2018.
+
+\bibitem[Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and
+  Fei-Fei]{deng2009imagenet}
+J.~Deng, W.~Dong, R.~Socher, L.-J. Li, K.~Li, and L.~Fei-Fei.
+\newblock Image{N}et: A large-scale hierarchical image database.
+\newblock In \emph{2009 IEEE conference on computer vision and pattern
+  recognition}, pages 248--255. IEEE, 2009.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{devlin2019bert}
+J.~Devlin, M.-W. Chang, K.~Lee, and K.~Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In \emph{NAACL-HLT (1)}, 2019.
+
+\bibitem[Dewey(1923)]{dewey1923relativ}
+G.~Dewey.
+\newblock \emph{Relativ [sic] frequency of English speech sounds}.
+\newblock Harvard UP, 1923.
+
+\bibitem[Dixon et~al.(2018)Dixon, Li, Sorensen, Thain, and
+  Vasserman]{Dixon2018Measuring}
+L.~Dixon, J.~Li, J.~Sorensen, N.~Thain, and L.~Vasserman.
+\newblock Measuring and mitigating unintended bias in text classification.
+\newblock 2018.
+
+\bibitem[Dodge et~al.(2021)Dodge, Sap, Marasovic, Agnew, Ilharco, Groeneveld,
+  and Gardner]{dodge2021documenting}
+J.~Dodge, M.~Sap, A.~Marasovic, W.~Agnew, G.~Ilharco, D.~Groeneveld, and
+  M.~Gardner.
+\newblock Documenting the english colossal clean crawled corpus.
+\newblock \emph{CoRR}, abs/2104.08758, 2021.
+\newblock URL \url{https://arxiv.org/abs/2104.08758}.
+
+\bibitem[Elsen et~al.(2019)Elsen, Dukhan, Gale, and
+  Simonyan]{fastsparseconvnets}
+E.~Elsen, M.~Dukhan, T.~Gale, and K.~Simonyan.
+\newblock Fast sparse convnets.
+\newblock \emph{CoRR}, abs/1911.09723, 2019.
+\newblock URL \url{http://arxiv.org/abs/1911.09723}.
+
+\bibitem[Evci et~al.(2020)Evci, Gale, Menick, Castro, and
+  Elsen]{evci2020rigging}
+U.~Evci, T.~Gale, J.~Menick, P.~S. Castro, and E.~Elsen.
+\newblock Rigging the lottery: Making all tickets winners.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  2943--2952. PMLR, 2020.
+
+\bibitem[Fedus et~al.(2021)Fedus, Zoph, and Shazeer]{fedus2021switch}
+W.~Fedus, B.~Zoph, and N.~Shazeer.
+\newblock Switch transformers: Scaling to trillion parameter models with simple
+  and efficient sparsity.
+\newblock \emph{arXiv preprint arXiv:2101.03961}, 2021.
+
+\bibitem[Frankle and Carbin(2019)]{frankle2018lottery}
+J.~Frankle and M.~Carbin.
+\newblock The lottery ticket hypothesis: Finding sparse, trainable neural
+  networks.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+\newblock URL \url{https://openreview.net/forum?id=rJl-b3RcF7}.
+
+\bibitem[Gale et~al.(2019)Gale, Elsen, and Hooker]{stateofsparsity}
+T.~Gale, E.~Elsen, and S.~Hooker.
+\newblock The state of sparsity in deep neural networks.
+\newblock \emph{CoRR}, abs/1902.09574, 2019.
+\newblock URL \url{http://arxiv.org/abs/1902.09574}.
+
+\bibitem[Gale et~al.(2020)Gale, Zaharia, Young, and Elsen]{gpusparsematmul}
+T.~Gale, M.~Zaharia, C.~Young, and E.~Elsen.
+\newblock Sparse {GPU} kernels for deep learning.
+\newblock \emph{CoRR}, abs/2006.10901, 2020.
+\newblock URL \url{https://arxiv.org/abs/2006.10901}.
+
+\bibitem[Gao et~al.(2020)Gao, Biderman, Black, Golding, Hoppe, Foster, Phang,
+  He, Thite, Nabeshima, Presser, and Leahy]{pile}
+L.~Gao, S.~Biderman, S.~Black, L.~Golding, T.~Hoppe, C.~Foster, J.~Phang,
+  H.~He, A.~Thite, N.~Nabeshima, S.~Presser, and C.~Leahy.
+\newblock The {P}ile: An 800gb dataset of diverse text for language modeling.
+\newblock \emph{arXiv preprint arXiv:2101.00027}, 2020.
+
+\bibitem[Gebru et~al.(2018)Gebru, Morgenstern, Vecchione, Vaughan, Wallach,
+  Daum{\'e}~III, and Crawford]{gebru2018datasheets}
+T.~Gebru, J.~Morgenstern, B.~Vecchione, J.~W. Vaughan, H.~Wallach,
+  H.~Daum{\'e}~III, and K.~Crawford.
+\newblock Datasheets for datasets.
+\newblock \emph{arXiv preprint arXiv:1803.09010}, 2018.
+
+\bibitem[Gehman et~al.(2020)Gehman, Gururangan, Sap, Choi, and
+  Smith]{gehman2020realtoxicityprompts}
+S.~Gehman, S.~Gururangan, M.~Sap, Y.~Choi, and N.~A. Smith.
+\newblock {R}eal{T}oxicity{P}rompts: Evaluating neural toxic degeneration in
+  language models.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 3356--3369, Online, Nov. 2020. Association for
+  Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.findings-emnlp.301}.
+\newblock URL \url{https://aclanthology.org/2020.findings-emnlp.301}.
+
+\bibitem[Graves(2013)]{graves2013generating}
+A.~Graves.
+\newblock Generating sequences with recurrent neural networks.
+\newblock \emph{arXiv preprint arXiv:1308.0850}, 2013.
+
+\bibitem[Griewank and Walther(2000)]{griewank2000algorithm}
+A.~Griewank and A.~Walther.
+\newblock Algorithm 799: revolve: an implementation of checkpointing for the
+  reverse or adjoint mode of computational differentiation.
+\newblock \emph{ACM Transactions on Mathematical Software (TOMS)}, 26\penalty0
+  (1):\penalty0 19--45, 2000.
+
+\bibitem[Gupta et~al.(2015)Gupta, Agrawal, Gopalakrishnan, and
+  Narayanan]{gupta2015deep}
+S.~Gupta, A.~Agrawal, K.~Gopalakrishnan, and P.~Narayanan.
+\newblock Deep learning with limited numerical precision.
+\newblock In \emph{International conference on machine learning}, pages
+  1737--1746. PMLR, 2015.
+
+\bibitem[Guu et~al.(2020)Guu, Lee, Tung, Pasupat, and Chang]{guu2020realm}
+K.~Guu, K.~Lee, Z.~Tung, P.~Pasupat, and M.-W. Chang.
+\newblock {REALM}: Retrieval-augmented language model pre-training, 2020.
+
+\bibitem[Hadfield-Menell et~al.(2016)Hadfield-Menell, Russell, Abbeel, and
+  Dragan]{hadfield2016cooperative}
+D.~Hadfield-Menell, S.~J. Russell, P.~Abbeel, and A.~Dragan.
+\newblock Cooperative inverse reinforcement learning.
+\newblock \emph{Advances in neural information processing systems},
+  29:\penalty0 3909--3917, 2016.
+
+\bibitem[Han et~al.(2016)Han, Mao, and Dally]{han2015deep}
+S.~Han, H.~Mao, and W.~J. Dally.
+\newblock Deep compression: Compressing deep neural network with pruning,
+  trained quantization and huffman coding.
+\newblock In Y.~Bengio and Y.~LeCun, editors, \emph{4th International
+  Conference on Learning Representations, {ICLR} 2016, San Juan, Puerto Rico,
+  May 2-4, 2016, Conference Track Proceedings}, 2016.
+\newblock URL \url{http://arxiv.org/abs/1510.00149}.
+
+\bibitem[Hanna et~al.(2020)Hanna, Denton, Smart, and Smith-Loud]{Hanna_2020}
+A.~Hanna, E.~Denton, A.~Smart, and J.~Smith-Loud.
+\newblock Towards a critical race methodology in algorithmic fairness.
+\newblock \emph{Proceedings of the 2020 Conference on Fairness, Accountability,
+  and Transparency}, Jan 2020.
+\newblock \doi{10.1145/3351095.3372826}.
+\newblock URL \url{http://dx.doi.org/10.1145/3351095.3372826}.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Burns, Basart, Zou, Mazeika, Song,
+  and Steinhardt]{hendrycks2020measuring}
+D.~Hendrycks, C.~Burns, S.~Basart, A.~Zou, M.~Mazeika, D.~Song, and
+  J.~Steinhardt.
+\newblock Measuring massive multitask language understanding.
+\newblock \emph{arXiv preprint arXiv:2009.03300}, 2020.
+
+\bibitem[Hennigan et~al.(2020)Hennigan, Cai, Norman, and
+  Babuschkin]{haiku2020github}
+T.~Hennigan, T.~Cai, T.~Norman, and I.~Babuschkin.
+\newblock {H}aiku: {S}onnet for {JAX}.
+\newblock 2020.
+\newblock URL \url{http://github.com/deepmind/dm-haiku}.
+
+\bibitem[Hinton et~al.(2015)Hinton, Vinyals, and Dean]{hinton2015distilling}
+G.~Hinton, O.~Vinyals, and J.~Dean.
+\newblock Distilling the knowledge in a neural network.
+\newblock \emph{arXiv preprint arXiv:1503.02531}, 2015.
+
+\bibitem[Hochreiter and Schmidhuber(1997)]{hochreiter1997long}
+S.~Hochreiter and J.~Schmidhuber.
+\newblock Long short-term memory.
+\newblock \emph{Neural computation}, 9\penalty0 (8):\penalty0 1735--1780, 1997.
+
+\bibitem[Holtzman et~al.(2019)Holtzman, Buys, Du, Forbes, and
+  Choi]{holtzman2019curious}
+A.~Holtzman, J.~Buys, L.~Du, M.~Forbes, and Y.~Choi.
+\newblock The curious case of neural text degeneration.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+
+\bibitem[Huang et~al.(2020)Huang, Zhang, Jiang, Stanforth, Welbl, Rae, Maini,
+  Yogatama, and Kohli]{huang2020reducing}
+P.-S. Huang, H.~Zhang, R.~Jiang, R.~Stanforth, J.~Welbl, J.~Rae, V.~Maini,
+  D.~Yogatama, and P.~Kohli.
+\newblock Reducing sentiment bias in language models via counterfactual
+  evaluation.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 65--83, Online, Nov. 2020. Association for Computational
+  Linguistics.
+\newblock \doi{10.18653/v1/2020.findings-emnlp.7}.
+\newblock URL \url{https://aclanthology.org/2020.findings-emnlp.7}.
+
+\bibitem[Huang et~al.(2019)Huang, Cheng, Bapna, Firat, Chen, Chen, Lee, Ngiam,
+  Le, Wu, et~al.]{huang2019gpipe}
+Y.~Huang, Y.~Cheng, A.~Bapna, O.~Firat, D.~Chen, M.~Chen, H.~Lee, J.~Ngiam,
+  Q.~V. Le, Y.~Wu, et~al.
+\newblock Gpipe: Efficient training of giant neural networks using pipeline
+  parallelism.
+\newblock \emph{Advances in neural information processing systems},
+  32:\penalty0 103--112, 2019.
+
+\bibitem[Irving and Askell(2019)]{irving2019social}
+G.~Irving and A.~Askell.
+\newblock {AI} safety needs social scientists.
+\newblock \emph{Distill}, 2019.
+\newblock \doi{10.23915/distill.00014}.
+\newblock https://distill.pub/2019/safety-needs-social-scientists.
+
+\bibitem[Irving et~al.(2018)Irving, Christiano, and Amodei]{irving2018debate}
+G.~Irving, P.~Christiano, and D.~Amodei.
+\newblock {AI} safety via debate.
+\newblock \emph{arXiv preprint arXiv:1805.00899}, 2018.
+
+\bibitem[Jaques et~al.(2020)Jaques, Shen, Ghandeharioun, Ferguson, Lapedriza,
+  Jones, Gu, and Picard]{jaques2020human}
+N.~Jaques, J.~H. Shen, A.~Ghandeharioun, C.~Ferguson, A.~Lapedriza, N.~Jones,
+  S.~S. Gu, and R.~Picard.
+\newblock Human-centric dialog training via offline reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2010.05848}, 2020.
+
+\bibitem[Jayakumar et~al.(2020)Jayakumar, Pascanu, Rae, Osindero, and
+  Elsen]{jayakumar2021top}
+S.~Jayakumar, R.~Pascanu, J.~Rae, S.~Osindero, and E.~Elsen.
+\newblock Top-{KAST}: Top-{K} {A}lways {S}parse {T}raining.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
+  editors, \emph{Advances in Neural Information Processing Systems}, volume~33,
+  pages 20744--20754. Curran Associates, Inc., 2020.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2020/file/ee76626ee11ada502d5dbf1fb5aae4d2-Paper.pdf}.
+
+\bibitem[Jelinek(1997)]{jelinek1997statistical}
+F.~Jelinek.
+\newblock \emph{Statistical methods for speech recognition}.
+\newblock MIT press, 1997.
+
+\bibitem[Jiang et~al.(2020)Jiang, Wu, Gong, Cheng, Meng, Lin, Chen, and
+  Li]{race-sota}
+Y.~Jiang, S.~Wu, J.~Gong, Y.~Cheng, P.~Meng, W.~Lin, Z.~Chen, and M.~Li.
+\newblock Improving machine reading comprehension with single-choice decision
+  and transfer learning.
+\newblock \emph{arXiv preprint arXiv:2011.03292}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2011.03292}.
+
+\bibitem[Jiao et~al.(2020)Jiao, Yin, Shang, Jiang, Chen, Li, Wang, and
+  Liu]{jiao2019tinybert}
+X.~Jiao, Y.~Yin, L.~Shang, X.~Jiang, X.~Chen, L.~Li, F.~Wang, and Q.~Liu.
+\newblock {T}iny{BERT}: Distilling {BERT} for natural language understanding.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 4163--4174, Online, Nov. 2020. Association for
+  Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.findings-emnlp.372}.
+\newblock URL \url{https://aclanthology.org/2020.findings-emnlp.372}.
+
+\bibitem[{Joshi} et~al.(2017){Joshi}, {Choi}, {Weld}, and
+  {Zettlemoyer}]{triviaqa}
+M.~{Joshi}, E.~{Choi}, D.~{Weld}, and L.~{Zettlemoyer}.
+\newblock {{T}rivia{QA}: A Large Scale Distantly Supervised Challenge Dataset
+  for Reading Comprehension}.
+\newblock \emph{arXiv e-prints}, art. arXiv:1705.03551, 2017.
+
+\bibitem[Jouppi et~al.(2020)Jouppi, Yoon, Kurian, Li, Patil, Laudon, Young, and
+  Patterson]{tpuacm}
+N.~P. Jouppi, D.~H. Yoon, G.~Kurian, S.~Li, N.~Patil, J.~Laudon, C.~Young, and
+  D.~Patterson.
+\newblock A domain-specific supercomputer for training deep neural networks.
+\newblock \emph{Commun. ACM}, 63\penalty0 (7):\penalty0 67–78, June 2020.
+\newblock ISSN 0001-0782.
+\newblock \doi{10.1145/3360307}.
+\newblock URL \url{https://doi.org/10.1145/3360307}.
+
+\bibitem[Jozefowicz et~al.(2016)Jozefowicz, Vinyals, Schuster, Shazeer, and
+  Wu]{jozefowicz2016exploring}
+R.~Jozefowicz, O.~Vinyals, M.~Schuster, N.~Shazeer, and Y.~Wu.
+\newblock Exploring the limits of language modeling.
+\newblock \emph{arXiv preprint arXiv:1602.02410}, 2016.
+
+\bibitem[Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei]{kaplan2020scaling}
+J.~Kaplan, S.~McCandlish, T.~Henighan, T.~B. Brown, B.~Chess, R.~Child,
+  S.~Gray, A.~Radford, J.~Wu, and D.~Amodei.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv preprint arXiv:2001.08361}, 2020.
+
+\bibitem[Kasirzadeh(2021)]{kasirzadeh2021reasons}
+A.~Kasirzadeh.
+\newblock Reasons, values, stakeholders: a philosophical framework for
+  explainable artificial intelligence.
+\newblock \emph{arXiv preprint arXiv:2103.00752}, 2021.
+
+\bibitem[Kay et~al.(2015)Kay, Matuszek, and Munson]{kay2015unequal}
+M.~Kay, C.~Matuszek, and S.~A. Munson.
+\newblock Unequal representation and gender stereotypes in image search results
+  for occupations.
+\newblock In \emph{Proceedings of the 33rd Annual ACM Conference on Human
+  Factors in Computing Systems}, pages 3819--3828, 2015.
+
+\bibitem[Kenton et~al.(2021)Kenton, Everitt, Weidinger, Gabriel, Mikulik, and
+  Irving]{kenton2021alignment}
+Z.~Kenton, T.~Everitt, L.~Weidinger, I.~Gabriel, V.~Mikulik, and G.~Irving.
+\newblock Alignment of language agents.
+\newblock \emph{arXiv preprint arXiv:2103.14659}, 2021.
+
+\bibitem[Khandelwal et~al.(2020)Khandelwal, Levy, Jurafsky, Zettlemoyer, and
+  Lewis]{Khandelwal2020Generalization}
+U.~Khandelwal, O.~Levy, D.~Jurafsky, L.~Zettlemoyer, and M.~Lewis.
+\newblock Generalization through memorization: Nearest neighbor language
+  models.
+\newblock In \emph{International Conference on Learning Representations}, 2020.
+\newblock URL \url{https://openreview.net/forum?id=HklBjCEKvH}.
+
+\bibitem[Kharya and Alvi(2021)]{Megatron-Turing}
+P.~Kharya and A.~Alvi.
+\newblock {Using {D}eep{S}peed and {M}egatron to {T}rain {M}egatron-{T}uring
+  {NLG} 530{B}, the {W}orld’s {L}argest and {M}ost {P}owerful {G}enerative
+  {L}anguage {M}odel}.
+\newblock
+  \url{https://developer.nvidia.com/blog/using-deepspeed-and-megatron-to-train-megatron-turing-nlg-530b-the-worlds-largest-and-most-powerful-generative-language-model/},
+  2021.
+
+\bibitem[Khashabi et~al.(2020)Khashabi, Min, Khot, Sabharwal, Tafjord, Clark,
+  and Hajishirzi]{khashabi2020unifiedqa}
+D.~Khashabi, S.~Min, T.~Khot, A.~Sabharwal, O.~Tafjord, P.~Clark, and
+  H.~Hajishirzi.
+\newblock {UnifiedQA}: Crossing format boundaries with a single {QA} system.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 1896--1907, Online, Nov. 2020. Association for
+  Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.findings-emnlp.171}.
+\newblock URL \url{https://aclanthology.org/2020.findings-emnlp.171}.
+
+\bibitem[Kim et~al.(2021)Kim, Awan, Muzio, Salinas, Lu, Hendy, Rajbhandari, He,
+  and Awadalla]{kim2021scalable}
+Y.~J. Kim, A.~A. Awan, A.~Muzio, A.~F.~C. Salinas, L.~Lu, A.~Hendy,
+  S.~Rajbhandari, Y.~He, and H.~H. Awadalla.
+\newblock Scalable and efficient moe training for multitask multilingual
+  models, 2021.
+
+\bibitem[Kingma and Ba(2014)]{kingma2014adam}
+D.~P. Kingma and J.~Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock \emph{arXiv preprint arXiv:1412.6980}, 2014.
+
+\bibitem[Kiritchenko and Mohammad(2018)]{kiritchenko2018sentiment}
+S.~Kiritchenko and S.~M. Mohammad.
+\newblock Examining gender and race bias in two hundred sentiment analysis
+  systems.
+\newblock \emph{CoRR}, abs/1805.04508, 2018.
+\newblock URL \url{http://arxiv.org/abs/1805.04508}.
+
+\bibitem[Kruengkrai et~al.(2021)Kruengkrai, Yamagishi, and
+  Wang]{kruengkrai2021multi}
+C.~Kruengkrai, J.~Yamagishi, and X.~Wang.
+\newblock A multi-level attention model for evidence-based fact checking.
+\newblock \emph{arXiv preprint arXiv:2106.00950}, 2021.
+
+\bibitem[Kudo and Richardson(2018)]{kudo2018sentencepiece}
+T.~Kudo and J.~Richardson.
+\newblock Sentence{P}iece: A simple and language independent subword tokenizer
+  and detokenizer for neural text processing.
+\newblock \emph{arXiv preprint arXiv:1808.06226}, 2018.
+
+\bibitem[Kwiatkowski et~al.(2019)Kwiatkowski, Palomaki, Redfield, Collins,
+  Parikh, Alberti, Epstein, Polosukhin, Kelcey, Devlin, Lee, Toutanova, Jones,
+  Chang, Dai, Uszkoreit, Le, and Petrov]{naturalquestions}
+T.~Kwiatkowski, J.~Palomaki, O.~Redfield, M.~Collins, A.~Parikh, C.~Alberti,
+  D.~Epstein, I.~Polosukhin, M.~Kelcey, J.~Devlin, K.~Lee, K.~N. Toutanova,
+  L.~Jones, M.-W. Chang, A.~Dai, J.~Uszkoreit, Q.~Le, and S.~Petrov.
+\newblock Natural questions: a benchmark for question answering research.
+\newblock \emph{Transactions of the Association of Computational Linguistics},
+  2019.
+
+\bibitem[Lai et~al.(2017)Lai, Xie, Liu, Yang, and Hovy]{race}
+G.~Lai, Q.~Xie, H.~Liu, Y.~Yang, and E.~Hovy.
+\newblock {RACE}: Large-scale {R}e{A}ding comprehension dataset from
+  examinations.
+\newblock In \emph{Proceedings of the 2017 Conference on Empirical Methods in
+  Natural Language Processing}, pages 785--794, Copenhagen, Denmark, Sept.
+  2017. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/D17-1082}.
+\newblock URL \url{https://aclanthology.org/D17-1082}.
+
+\bibitem[Lazaridou et~al.(2021)Lazaridou, Kuncoro, Gribovskaya, Agrawal, Liska,
+  Terzi, Gimenez, d'Autume, Ruder, Yogatama, et~al.]{lazaridou2021pitfalls}
+A.~Lazaridou, A.~Kuncoro, E.~Gribovskaya, D.~Agrawal, A.~Liska, T.~Terzi,
+  M.~Gimenez, C.~d.~M. d'Autume, S.~Ruder, D.~Yogatama, et~al.
+\newblock Pitfalls of static language modelling.
+\newblock \emph{arXiv preprint arXiv:2102.01951}, 2021.
+
+\bibitem[Lee et~al.(2019)Lee, Chang, and Toutanova]{lee_latent_2019}
+K.~Lee, M.-W. Chang, and K.~Toutanova.
+\newblock Latent {Retrieval} for {Weakly} {Supervised} {Open} {Domain}
+  {Question} {Answering}.
+\newblock In \emph{ACL}, 2019.
+
+\bibitem[Lee et~al.(2021{\natexlab{a}})Lee, Ippolito, Nystrom, Zhang, Eck,
+  Callison{-}Burch, and Carlini]{lee2021dedup}
+K.~Lee, D.~Ippolito, A.~Nystrom, C.~Zhang, D.~Eck, C.~Callison{-}Burch, and
+  N.~Carlini.
+\newblock Deduplicating training data makes language models better.
+\newblock \emph{CoRR}, abs/2107.06499, 2021{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2107.06499}.
+
+\bibitem[Lee et~al.(2020)Lee, Li, Wang, tau Yih, Ma, and
+  Khabsa]{lee2020language}
+N.~Lee, B.~Z. Li, S.~Wang, W.~tau Yih, H.~Ma, and M.~Khabsa.
+\newblock Language models as fact checkers?, 2020.
+
+\bibitem[Lee et~al.(2021{\natexlab{b}})Lee, Bang, Madotto, and
+  Fung]{Lee:etal:2021}
+N.~Lee, Y.~Bang, A.~Madotto, and P.~Fung.
+\newblock Towards few-shot fact-checking via perplexity.
+\newblock In \emph{Proceedings of the 2021 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 1971--1981, Online, June 2021{\natexlab{b}}. Association
+  for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.naacl-main.158}.
+\newblock URL \url{https://aclanthology.org/2021.naacl-main.158}.
+
+\bibitem[Legg and Hutter(2007)]{legg2007universal}
+S.~Legg and M.~Hutter.
+\newblock Universal intelligence: A definition of machine intelligence.
+\newblock \emph{Minds and machines}, 17\penalty0 (4):\penalty0 391--444, 2007.
+
+\bibitem[Leike et~al.(2018)Leike, Krueger, Everitt, Martic, Maini, and
+  Legg]{leike2018scalable}
+J.~Leike, D.~Krueger, T.~Everitt, M.~Martic, V.~Maini, and S.~Legg.
+\newblock Scalable agent alignment via reward modeling: a research direction.
+\newblock \emph{arXiv preprint arXiv:1811.07871}, 2018.
+
+\bibitem[Lepikhin et~al.(2021)Lepikhin, Lee, Xu, Chen, Firat, Huang, Krikun,
+  Shazeer, and Chen]{lepikhin2020gshard}
+D.~Lepikhin, H.~Lee, Y.~Xu, D.~Chen, O.~Firat, Y.~Huang, M.~Krikun, N.~Shazeer,
+  and Z.~Chen.
+\newblock {\{}GS{\}}hard: Scaling giant models with conditional computation and
+  automatic sharding.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=qrwe7XHTmYb}.
+
+\bibitem[Lewis et~al.(2021)Lewis, Bhosale, Dettmers, Goyal, and
+  Zettlemoyer]{lewis2021base}
+M.~Lewis, S.~Bhosale, T.~Dettmers, N.~Goyal, and L.~Zettlemoyer.
+\newblock {BASE} layers: Simplifying training of large, sparse models.
+\newblock In M.~Meila and T.~Zhang, editors, \emph{Proceedings of the 38th
+  International Conference on Machine Learning}, volume 139 of
+  \emph{Proceedings of Machine Learning Research}, pages 6265--6274. PMLR,
+  18--24 Jul 2021.
+\newblock URL \url{https://proceedings.mlr.press/v139/lewis21a.html}.
+
+\bibitem[Li et~al.(2021)Li, Kuncoro, d'Autume, Blunsom, and
+  Nematzadeh]{li2021systematic}
+X.~L. Li, A.~Kuncoro, C.~d.~M. d'Autume, P.~Blunsom, and A.~Nematzadeh.
+\newblock A systematic investigation of commonsense understanding in large
+  language models.
+\newblock \emph{arXiv preprint arXiv:2111.00607}, 2021.
+
+\bibitem[Lieber et~al.(2021)Lieber, Sharir, Lenz, and Shoham]{jurassic}
+O.~Lieber, O.~Sharir, B.~Lenz, and Y.~Shoham.
+\newblock Jurassic-1: Technical details and evaluation.
+\newblock \emph{White Paper. AI21 Labs}, 2021.
+
+\bibitem[Lin et~al.(2021{\natexlab{a}})Lin, Yang, Bai, Zhou, Jiang, Jia, Wang,
+  Zhang, Li, Lin, Zhou, and Yang]{lin2021m610t}
+J.~Lin, A.~Yang, J.~Bai, C.~Zhou, L.~Jiang, X.~Jia, A.~Wang, J.~Zhang, Y.~Li,
+  W.~Lin, J.~Zhou, and H.~Yang.
+\newblock M6-10t: A sharing-delinking paradigm for efficient multi-trillion
+  parameter pretraining.
+\newblock 2021{\natexlab{a}}.
+
+\bibitem[Lin et~al.(2021{\natexlab{b}})Lin, Hilton, and Evans]{truthfulqa}
+S.~Lin, J.~Hilton, and O.~Evans.
+\newblock Truthfulqa: Measuring how models mimic human falsehoods.
+\newblock \emph{arXiv preprint arXiv:2109.07958}, 2021{\natexlab{b}}.
+
+\bibitem[Liu et~al.(2020)Liu, Zhou, Wang, Zhao, Deng, and Ju]{liu2020fastbert}
+W.~Liu, P.~Zhou, Z.~Wang, Z.~Zhao, H.~Deng, and Q.~Ju.
+\newblock Fastbert: a self-distilling {BERT} with adaptive inference time.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 6035--6044, 2020.
+
+\bibitem[Loper and Bird(2002)]{loper2002nltk}
+E.~Loper and S.~Bird.
+\newblock {NLTK}: The natural language toolkit.
+\newblock \emph{ArXiv}, abs/0205028, 2002.
+
+\bibitem[Marcus et~al.(1993)Marcus, Santorini, and Marcinkiewicz]{ptb}
+M.~P. Marcus, B.~Santorini, and M.~A. Marcinkiewicz.
+\newblock Building a large annotated corpus of {E}nglish: The {P}enn
+  {T}reebank.
+\newblock \emph{Computational Linguistics}, 19\penalty0 (2):\penalty0 313--330,
+  1993.
+\newblock URL \url{https://aclanthology.org/J93-2004}.
+
+\bibitem[Merity et~al.(2017)Merity, Xiong, Bradbury, and Socher]{wikitext103}
+S.~Merity, C.~Xiong, J.~Bradbury, and R.~Socher.
+\newblock Pointer sentinel mixture models.
+\newblock \emph{International Conference on Learning Representations}, 2017.
+
+\bibitem[Micikevicius et~al.(2018)Micikevicius, Narang, Alben, Diamos, Elsen,
+  Garcia, Ginsburg, Houston, Kuchaiev, Venkatesh, and
+  Wu]{micikevicius2017mixed}
+P.~Micikevicius, S.~Narang, J.~Alben, G.~Diamos, E.~Elsen, D.~Garcia,
+  B.~Ginsburg, M.~Houston, O.~Kuchaiev, G.~Venkatesh, and H.~Wu.
+\newblock Mixed precision training.
+\newblock In \emph{International Conference on Learning Representations}, 2018.
+\newblock URL \url{https://openreview.net/forum?id=r1gs9JgRZ}.
+
+\bibitem[Mikolov et~al.(2010)Mikolov, Karafi{\'a}t, Burget, Cernock{\`y}, and
+  Khudanpur]{mikolov2010recurrent}
+T.~Mikolov, M.~Karafi{\'a}t, L.~Burget, J.~Cernock{\`y}, and S.~Khudanpur.
+\newblock Recurrent neural network based language model.
+\newblock In \emph{Interspeech}, volume~2, pages 1045--1048. Makuhari, 2010.
+
+\bibitem[Mikolov et~al.(2011)Mikolov, Deoras, Kombrink, Burget, and
+  \v{C}ernock\'{y}]{mikolov2011empirical}
+T.~Mikolov, A.~Deoras, S.~Kombrink, L.~Burget, and J.~H. \v{C}ernock\'{y}.
+\newblock Empirical evaluation and combination of advanced language modeling
+  techniques.
+\newblock In \emph{Interspeech}, 2011.
+
+\bibitem[Mikolov et~al.(2013)Mikolov, Chen, Corrado, and
+  Dean]{mikolov2013efficient}
+T.~Mikolov, K.~Chen, G.~Corrado, and J.~Dean.
+\newblock Efficient estimation of word representations in vector space.
+\newblock \emph{arXiv preprint arXiv:1301.3781}, 2013.
+
+\bibitem[Mishra et~al.(2021)Mishra, Latorre, Pool, Stosic, Stosic, Venkatesh,
+  Yu, and Micikevicius]{mishra2021accelerating}
+A.~Mishra, J.~A. Latorre, J.~Pool, D.~Stosic, D.~Stosic, G.~Venkatesh, C.~Yu,
+  and P.~Micikevicius.
+\newblock Accelerating sparse deep neural networks, 2021.
+
+\bibitem[Mitchell et~al.(2019)Mitchell, Wu, Zaldivar, Barnes, Vasserman,
+  Hutchinson, Spitzer, Raji, and Gebru]{mitchell2019model}
+M.~Mitchell, S.~Wu, A.~Zaldivar, P.~Barnes, L.~Vasserman, B.~Hutchinson,
+  E.~Spitzer, I.~D. Raji, and T.~Gebru.
+\newblock Model cards for model reporting.
+\newblock In \emph{Proceedings of the conference on fairness, accountability,
+  and transparency}, pages 220--229, 2019.
+
+\bibitem[Mohamed et~al.(2020)Mohamed, Png, and Isaac]{decolonialai}
+S.~Mohamed, M.~Png, and W.~Isaac.
+\newblock Decolonial {AI:} decolonial theory as sociotechnical foresight in
+  artificial intelligence.
+\newblock \emph{CoRR}, abs/2007.04068, 2020.
+\newblock URL \url{https://arxiv.org/abs/2007.04068}.
+
+\bibitem[Moore et~al.(1965)]{moore1965cramming}
+G.~E. Moore et~al.
+\newblock Cramming more components onto integrated circuits, 1965.
+
+\bibitem[Narang et~al.(2017)Narang, Diamos, Sengupta, and
+  Elsen]{exploringsparsityrnns}
+S.~Narang, G.~F. Diamos, S.~Sengupta, and E.~Elsen.
+\newblock Exploring sparsity in recurrent neural networks.
+\newblock \emph{CoRR}, abs/1704.05119, 2017.
+\newblock URL \url{http://arxiv.org/abs/1704.05119}.
+
+\bibitem[Ney et~al.(1994)Ney, Essen, and Kneser]{ney1994structuring}
+H.~Ney, U.~Essen, and R.~Kneser.
+\newblock On structuring probabilistic dependences in stochastic language
+  modelling.
+\newblock \emph{Computer Speech \& Language}, 8\penalty0 (1):\penalty0 1--38,
+  1994.
+
+\bibitem[Paperno et~al.(2016)Paperno, Kruszewski, Lazaridou, Pham, Bernardi,
+  Pezzelle, Baroni, Boleda, and Fernández]{paperno2016lambada}
+D.~Paperno, G.~Kruszewski, A.~Lazaridou, Q.~N. Pham, R.~Bernardi, S.~Pezzelle,
+  M.~Baroni, G.~Boleda, and R.~Fernández.
+\newblock The {LAMBADA} dataset: Word prediction requiring a broad discourse
+  context, 2016.
+
+\bibitem[Parikh et~al.(2016)Parikh, T{\"a}ckstr{\"o}m, Das, and
+  Uszkoreit]{parikh2016decomposable}
+A.~Parikh, O.~T{\"a}ckstr{\"o}m, D.~Das, and J.~Uszkoreit.
+\newblock A decomposable attention model for natural language inference.
+\newblock In \emph{Proceedings of the 2016 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2249--2255, Austin, Texas, Nov. 2016.
+  Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/D16-1244}.
+\newblock URL \url{https://aclanthology.org/D16-1244}.
+
+\bibitem[Patterson et~al.(2021)Patterson, Gonzalez, Le, Liang, Munguia,
+  Rothchild, So, Texier, and Dean]{patterson2021carbon}
+D.~A. Patterson, J.~Gonzalez, Q.~V. Le, C.~Liang, L.~Munguia, D.~Rothchild,
+  D.~R. So, M.~Texier, and J.~Dean.
+\newblock Carbon emissions and large neural network training.
+\newblock \emph{CoRR}, abs/2104.10350, 2021.
+\newblock URL \url{https://arxiv.org/abs/2104.10350}.
+
+\bibitem[Perez et~al.(2019)Perez, Karamcheti, Fergus, Weston, Kiela, and
+  Cho]{perez2019finding}
+E.~Perez, S.~Karamcheti, R.~Fergus, J.~Weston, D.~Kiela, and K.~Cho.
+\newblock Finding generalizable evidence by learning to convince {Q}{\&}{A}
+  models.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing (EMNLP-IJCNLP)}, pages 2402--2411, Hong Kong,
+  China, Nov. 2019. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/D19-1244}.
+\newblock URL \url{https://aclanthology.org/D19-1244}.
+
+\bibitem[Perez et~al.(2022)Perez, Huang, Song, Cai, Ring, Aslanides, Glaese,
+  McAleese, and Irving]{perez2021redteaming}
+E.~Perez, S.~Huang, F.~Song, T.~Cai, R.~Ring, J.~Aslanides, A.~Glaese,
+  N.~McAleese, and G.~Irving.
+\newblock Red teaming language models with language models.
+\newblock To appear, 2022.
+
+\bibitem[Peste et~al.(2021)Peste, Iofinova, Vladu, and Alistarh]{acdctraining}
+A.~Peste, E.~Iofinova, A.~Vladu, and D.~Alistarh.
+\newblock {AC/DC:} alternating compressed/decompressed training of deep neural
+  networks.
+\newblock \emph{CoRR}, abs/2106.12379, 2021.
+\newblock URL \url{https://arxiv.org/abs/2106.12379}.
+
+\bibitem[Press et~al.(2021)Press, Smith, and Lewis]{press2021train}
+O.~Press, N.~A. Smith, and M.~Lewis.
+\newblock Train short, test long: Attention with linear biases enables input
+  length extrapolation.
+\newblock \emph{arXiv preprint arXiv:2108.12409}, 2021.
+
+\bibitem[Radford et~al.(2018)Radford, Narasimhan, Salimans, and
+  Sutskever]{radford2018improving}
+A.~Radford, K.~Narasimhan, T.~Salimans, and I.~Sutskever.
+\newblock Improving language understanding by generative pre-training.
+\newblock 2018.
+
+\bibitem[Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever]{radford2019language}
+A.~Radford, J.~Wu, R.~Child, D.~Luan, D.~Amodei, and I.~Sutskever.
+\newblock Language models are unsupervised multitask learners.
+\newblock 2019.
+
+\bibitem[Rae et~al.(2020)Rae, Potapenko, Jayakumar, Lillicrap, Choromanski,
+  Likhosherstov, Dohan, Song, Gane, Sarlos, et~al.]{rae2020compressive}
+J.~W. Rae, A.~Potapenko, S.~M. Jayakumar, T.~P. Lillicrap, K.~Choromanski,
+  V.~Likhosherstov, D.~Dohan, X.~Song, A.~Gane, T.~Sarlos, et~al.
+\newblock Compressive transformers for long-range sequence modelling.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 6154--6158, 2020.
+
+\bibitem[Raffel et~al.(2020{\natexlab{a}})Raffel, Shazeer, Roberts, Lee,
+  Narang, Matena, Zhou, Li, and Liu]{raffel2019exploring}
+C.~Raffel, N.~Shazeer, A.~Roberts, K.~Lee, S.~Narang, M.~Matena, Y.~Zhou,
+  W.~Li, and P.~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer.
+\newblock \emph{Journal of Machine Learning Research}, 21\penalty0
+  (140):\penalty0 1--67, 2020{\natexlab{a}}.
+\newblock URL \url{http://jmlr.org/papers/v21/20-074.html}.
+
+\bibitem[Raffel et~al.(2020{\natexlab{b}})Raffel, Shazeer, Roberts, Lee,
+  Narang, Matena, Zhou, Li, and Liu]{raffel2020exploring}
+C.~Raffel, N.~Shazeer, A.~Roberts, K.~Lee, S.~Narang, M.~Matena, Y.~Zhou,
+  W.~Li, and P.~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer.
+\newblock \emph{Journal of Machine Learning Research}, 21\penalty0
+  (140):\penalty0 1--67, 2020{\natexlab{b}}.
+
+\bibitem[Rajani et~al.(2019)Rajani, McCann, Xiong, and
+  Socher]{rajani2019explain}
+N.~F. Rajani, B.~McCann, C.~Xiong, and R.~Socher.
+\newblock Explain yourself! leveraging language models for commonsense
+  reasoning.
+\newblock \emph{arXiv preprint arXiv:1906.02361}, 2019.
+
+\bibitem[Rajbhandari et~al.(2020)Rajbhandari, Rasley, Ruwase, and
+  He]{rajbhandari2020zero}
+S.~Rajbhandari, J.~Rasley, O.~Ruwase, and Y.~He.
+\newblock Zero: Memory optimizations toward training trillion parameter models.
+\newblock In \emph{SC20: International Conference for High Performance
+  Computing, Networking, Storage and Analysis}, pages 1--16. IEEE, 2020.
+
+\bibitem[Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
+  Liang]{rajpurkar2016squad}
+P.~Rajpurkar, J.~Zhang, K.~Lopyrev, and P.~Liang.
+\newblock {SQ}u{AD}: 100,000+ questions for machine comprehension of text.
+\newblock In \emph{Proceedings of the 2016 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2383--2392, Austin, Texas, Nov. 2016.
+  Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/D16-1264}.
+\newblock URL \url{https://aclanthology.org/D16-1264}.
+
+\bibitem[Rajpurkar et~al.(2018)Rajpurkar, Jia, and Liang]{rajpurkar2018know}
+P.~Rajpurkar, R.~Jia, and P.~Liang.
+\newblock Know what you don{'}t know: Unanswerable questions for {SQ}u{AD}.
+\newblock In \emph{Proceedings of the 56th Annual Meeting of the Association
+  for Computational Linguistics (Volume 2: Short Papers)}, pages 784--789,
+  Melbourne, Australia, July 2018. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/P18-2124}.
+\newblock URL \url{https://aclanthology.org/P18-2124}.
+
+\bibitem[Roller et~al.(2021{\natexlab{a}})Roller, Dinan, Goyal, Ju, Williamson,
+  Liu, Xu, Ott, Smith, Boureau, and Weston]{roller2020recipes}
+S.~Roller, E.~Dinan, N.~Goyal, D.~Ju, M.~Williamson, Y.~Liu, J.~Xu, M.~Ott,
+  E.~M. Smith, Y.-L. Boureau, and J.~Weston.
+\newblock Recipes for building an open-domain chatbot.
+\newblock In \emph{Proceedings of the 16th Conference of the European Chapter
+  of the Association for Computational Linguistics: Main Volume}, pages
+  300--325, Online, Apr. 2021{\natexlab{a}}. Association for Computational
+  Linguistics.
+\newblock \doi{10.18653/v1/2021.eacl-main.24}.
+\newblock URL \url{https://aclanthology.org/2021.eacl-main.24}.
+
+\bibitem[Roller et~al.(2021{\natexlab{b}})Roller, Sukhbaatar, Szlam, and
+  Weston]{roller2021hash}
+S.~Roller, S.~Sukhbaatar, A.~Szlam, and J.~E. Weston.
+\newblock Hash layers for large sparse models.
+\newblock In \emph{Thirty-Fifth Conference on Neural Information Processing
+  Systems}, 2021{\natexlab{b}}.
+\newblock URL \url{https://openreview.net/forum?id=lMgDDWb1ULW}.
+
+\bibitem[Rosset(2020)]{rosset2020turing}
+C.~Rosset.
+\newblock Turing-{NLG}: A 17-billion-parameter language model by {M}icrosoft.
+\newblock \emph{Microsoft Blog}, 1:\penalty0 2, 2020.
+
+\bibitem[Rudinger et~al.(2018)Rudinger, Naradowsky, Leonard, and {Van
+  Durme}]{rudinger2018gender}
+R.~Rudinger, J.~Naradowsky, B.~Leonard, and B.~{Van Durme}.
+\newblock Gender bias in coreference resolution.
+\newblock In \emph{Proceedings of the 2018 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, New Orleans, Louisiana, June 2018. Association for
+  Computational Linguistics.
+
+\bibitem[Russell(2020)]{russell2020compatible}
+S.~Russell.
+\newblock \emph{Human Compatible}.
+\newblock Penguin, 2020.
+
+\bibitem[Röttger et~al.(2021)Röttger, Vidgen, Nguyen, Waseem, Margetts, and
+  Pierrehumbert]{rottgerhatecheck}
+P.~Röttger, B.~Vidgen, D.~Nguyen, Z.~Waseem, H.~Margetts, and
+  J.~Pierrehumbert.
+\newblock Hatecheck: Functional tests for hate speech detection models.
+\newblock \emph{Proceedings of the 59th Annual Meeting of the Association for
+  Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, 2021.
+\newblock \doi{10.18653/v1/2021.acl-long.4}.
+\newblock URL \url{http://dx.doi.org/10.18653/v1/2021.acl-long.4}.
+
+\bibitem[Sakaguchi et~al.(2020)Sakaguchi, Le~Bras, Bhagavatula, and
+  Choi]{winogrande}
+K.~Sakaguchi, R.~Le~Bras, C.~Bhagavatula, and Y.~Choi.
+\newblock Winogrande: An adversarial winograd schema challenge at scale.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~34, pages 8732--8740, 2020.
+
+\bibitem[Sanh et~al.(2019)Sanh, Debut, Chaumond, and Wolf]{sanh2019distilbert}
+V.~Sanh, L.~Debut, J.~Chaumond, and T.~Wolf.
+\newblock Distilbert, a distilled version of {BERT}: smaller, faster, cheaper
+  and lighter.
+\newblock \emph{CoRR}, abs/1910.01108, 2019.
+\newblock URL \url{http://arxiv.org/abs/1910.01108}.
+
+\bibitem[Sanh et~al.(2020)Sanh, Wolf, and Rush]{sanh2020movement}
+V.~Sanh, T.~Wolf, and A.~M. Rush.
+\newblock Movement pruning: Adaptive sparsity by fine-tuning.
+\newblock \emph{arXiv preprint arXiv:2005.07683}, 2020.
+
+\bibitem[Sanh et~al.(2021)Sanh, Webson, Raffel, Bach, Sutawika, Alyafeai,
+  Chaffin, Stiegler, Scao, Raja, Dey, Bari, Xu, Thakker, Sharma, Szczechla,
+  Kim, Chhablani, Nayak, Datta, Chang, Jiang, Wang, Manica, Shen, Yong, Pandey,
+  Bawden, Wang, Neeraj, Rozen, Sharma, Santilli, Fevry, Fries, Teehan,
+  Biderman, Gao, Bers, Wolf, and Rush]{sanh2021multitask}
+V.~Sanh, A.~Webson, C.~Raffel, S.~H. Bach, L.~Sutawika, Z.~Alyafeai,
+  A.~Chaffin, A.~Stiegler, T.~L. Scao, A.~Raja, M.~Dey, M.~S. Bari, C.~Xu,
+  U.~Thakker, S.~S. Sharma, E.~Szczechla, T.~Kim, G.~Chhablani, N.~Nayak,
+  D.~Datta, J.~Chang, M.~T.-J. Jiang, H.~Wang, M.~Manica, S.~Shen, Z.~X. Yong,
+  H.~Pandey, R.~Bawden, T.~Wang, T.~Neeraj, J.~Rozen, A.~Sharma, A.~Santilli,
+  T.~Fevry, J.~A. Fries, R.~Teehan, S.~Biderman, L.~Gao, T.~Bers, T.~Wolf, and
+  A.~M. Rush.
+\newblock Multitask prompted training enables zero-shot task generalization,
+  2021.
+
+\bibitem[Sap et~al.(2019)Sap, Rashkin, Chen, LeBras, and Choi]{socialiqa}
+M.~Sap, H.~Rashkin, D.~Chen, R.~LeBras, and Y.~Choi.
+\newblock Social{IQA}: Commonsense reasoning about social interactions.
+\newblock \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing}, 2019.
+
+\bibitem[Schaarschmidt et~al.(2021)Schaarschmidt, Grewe, Vytiniotis, Paszke,
+  Schmid, Norman, Molloy, Godwin, Rink, Nair, and Belov]{automap2021}
+M.~Schaarschmidt, D.~Grewe, D.~Vytiniotis, A.~Paszke, G.~Schmid, T.~Norman,
+  J.~Molloy, J.~Godwin, N.~A. Rink, V.~Nair, and D.~Belov.
+\newblock Automap: Towards ergonomic automated parallelism for ml models.
+\newblock In \emph{ML for Systems Workshop at NeurIPS 2021}, 2021.
+
+\bibitem[Schick et~al.(2021)Schick, Udupa, and Sch{\"{u}}tze]{selfdiagnosis}
+T.~Schick, S.~Udupa, and H.~Sch{\"{u}}tze.
+\newblock Self-diagnosis and self-debiasing: {A} proposal for reducing
+  corpus-based bias in {NLP}.
+\newblock \emph{CoRR}, abs/2103.00453, 2021.
+\newblock URL \url{https://arxiv.org/abs/2103.00453}.
+
+\bibitem[See et~al.(2016)See, Luong, and Manning]{mtpruning}
+A.~See, M.~Luong, and C.~D. Manning.
+\newblock Compression of neural machine translation models via pruning.
+\newblock \emph{CoRR}, abs/1606.09274, 2016.
+\newblock URL \url{http://arxiv.org/abs/1606.09274}.
+
+\bibitem[Selbst et~al.(2019)Selbst, Boyd, Friedler, Venkatasubramanian, and
+  Vertesi]{selbst2019fairness}
+A.~D. Selbst, D.~Boyd, S.~A. Friedler, S.~Venkatasubramanian, and J.~Vertesi.
+\newblock Fairness and abstraction in sociotechnical systems.
+\newblock In \emph{Proceedings of the conference on fairness, accountability,
+  and transparency}, pages 59--68, 2019.
+
+\bibitem[Shannon(1948)]{shannon1948mathematical}
+C.~E. Shannon.
+\newblock A mathematical theory of communication.
+\newblock \emph{The Bell system technical journal}, 27\penalty0 (3):\penalty0
+  379--423, 1948.
+
+\bibitem[Shazeer and Stern(2018)]{shazeer2018Adafactor}
+N.~Shazeer and M.~Stern.
+\newblock Adafactor: Adaptive learning rates with sublinear memory cost.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  4596--4604. PMLR, 2018.
+
+\bibitem[Sheng et~al.(2019)Sheng, Chang, Natarajan, and Peng]{sheng2019woman}
+E.~Sheng, K.-W. Chang, P.~Natarajan, and N.~Peng.
+\newblock The woman worked as a babysitter: On biases in language generation.
+\newblock \emph{EMNLP}, 2019.
+
+\bibitem[Sheng et~al.(2021)Sheng, Chang, Natarajan, and
+  Peng]{sheng2021societal}
+E.~Sheng, K.-W. Chang, P.~Natarajan, and N.~Peng.
+\newblock Societal biases in language generation: Progress and challenges.
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 4275--4293,
+  Online, Aug. 2021. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.acl-long.330}.
+\newblock URL \url{https://aclanthology.org/2021.acl-long.330}.
+
+\bibitem[Shoeybi et~al.(2019)Shoeybi, Patwary, Puri, LeGresley, Casper, and
+  Catanzaro]{shoeybi2019megatron}
+M.~Shoeybi, M.~Patwary, R.~Puri, P.~LeGresley, J.~Casper, and B.~Catanzaro.
+\newblock Megatron-{LM}: Training multi-billion parameter language models using
+  model parallelism.
+\newblock \emph{arXiv preprint arXiv:1909.08053}, 2019.
+
+\bibitem[Singh and Alistarh(2020)]{woodfisherprune}
+S.~P. Singh and D.~Alistarh.
+\newblock Woodfisher: Efficient second-order approximations for model
+  compression.
+\newblock \emph{CoRR}, abs/2004.14340, 2020.
+\newblock URL \url{https://arxiv.org/abs/2004.14340}.
+
+\bibitem[So et~al.(2019)So, Le, and Liang]{pmlr-v97-so19a}
+D.~So, Q.~Le, and C.~Liang.
+\newblock The evolved transformer.
+\newblock In K.~Chaudhuri and R.~Salakhutdinov, editors, \emph{Proceedings of
+  the 36th International Conference on Machine Learning}, volume~97 of
+  \emph{Proceedings of Machine Learning Research}, pages 5877--5886. PMLR,
+  09--15 Jun 2019.
+\newblock URL \url{https://proceedings.mlr.press/v97/so19a.html}.
+
+\bibitem[So et~al.(2021)So, Mańke, Liu, Dai, Shazeer, and Le]{so2021primer}
+D.~R. So, W.~Mańke, H.~Liu, Z.~Dai, N.~Shazeer, and Q.~V. Le.
+\newblock Primer: Searching for efficient transformers for language modeling,
+  2021.
+
+\bibitem[Soleimani et~al.(2020)Soleimani, Monz, and Worring]{soleimani2019bert}
+A.~Soleimani, C.~Monz, and M.~Worring.
+\newblock {BERT} for evidence retrieval and claim verification.
+\newblock In J.~M. Jose, E.~Yilmaz, J.~Magalh{\~a}es, P.~Castells, N.~Ferro,
+  M.~J. Silva, and F.~Martins, editors, \emph{Advances in Information
+  Retrieval}, pages 359--366, Cham, 2020. Springer International Publishing.
+\newblock ISBN 978-3-030-45442-5.
+
+\bibitem[Steinhardt(2021)]{forecast_blog}
+J.~Steinhardt.
+\newblock Updates and lessons from {AI} forecasting, 2021.
+\newblock URL \url{https://bounded-regret.ghost.io/ai-forecasting/}.
+
+\bibitem[Stiennon et~al.(2020)Stiennon, Ouyang, Wu, Ziegler, Lowe, Voss,
+  Radford, Amodei, and Christiano]{stiennon2020learning}
+N.~Stiennon, L.~Ouyang, J.~Wu, D.~Ziegler, R.~Lowe, C.~Voss, A.~Radford,
+  D.~Amodei, and P.~F. Christiano.
+\newblock Learning to summarize with human feedback.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.~F. Balcan, and H.~Lin,
+  editors, \emph{Advances in Neural Information Processing Systems}, volume~33,
+  pages 3008--3021. Curran Associates, Inc., 2020.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2020/file/1f89885d556929e98d3ef9b86448f951-Paper.pdf}.
+
+\bibitem[Sun et~al.(2021)Sun, Krishna, Mattarella-Micke, and
+  Iyyer]{sun2021long}
+S.~Sun, K.~Krishna, A.~Mattarella-Micke, and M.~Iyyer.
+\newblock Do long-range language models actually use long-range context?
+\newblock \emph{arXiv preprint arXiv:2109.09115}, 2021.
+
+\bibitem[Thorne et~al.(2018)Thorne, Vlachos, Christodoulopoulos, and
+  Mittal]{fever}
+J.~Thorne, A.~Vlachos, C.~Christodoulopoulos, and A.~Mittal.
+\newblock {FEVER}: a large-scale dataset for fact extraction and
+  {VER}ification.
+\newblock In \emph{Proceedings of the 2018 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long Papers)}, pages 809--819. Association for
+  Computational Linguistics, June 2018.
+\newblock URL \url{https://aclanthology.org/N18-1074}.
+
+\bibitem[Turing(1950)]{turing1950computing}
+A.~Turing.
+\newblock Computing machinery and intelligence.
+\newblock \emph{Mind}, 59\penalty0 (236):\penalty0 433--460, 1950.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+A.~Vaswani, N.~Shazeer, N.~Parmar, J.~Uszkoreit, L.~Jones, A.~N. Gomez,
+  {\L}.~Kaiser, and I.~Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  5998--6008, 2017.
+
+\bibitem[Wallace et~al.(2019)Wallace, Feng, Kandpal, Gardner, and
+  Singh]{wallace-etal-2019-universal}
+E.~Wallace, S.~Feng, N.~Kandpal, M.~Gardner, and S.~Singh.
+\newblock Universal adversarial triggers for attacking and analyzing {NLP}.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing (EMNLP-IJCNLP)}, pages 2153--2162, Hong Kong,
+  China, Nov. 2019. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/D19-1221}.
+\newblock URL \url{https://aclanthology.org/D19-1221}.
+
+\bibitem[Wang et~al.(2021)Wang, Choi, Xu, and Yang]{wang2021putting}
+Z.~J. Wang, D.~Choi, S.~Xu, and D.~Yang.
+\newblock Putting humans in the natural language processing loop: A survey.
+\newblock \emph{arXiv preprint arXiv:2103.04044}, 2021.
+
+\bibitem[Waugh(1982)]{waugh1982marked}
+L.~R. Waugh.
+\newblock Marked and unmarked: A choice between unequals in semiotic structure.
+\newblock 1982.
+
+\bibitem[Wei et~al.(2021)Wei, Bosma, Zhao, Guu, Yu, Lester, Du, Dai, and
+  Le]{wei2021finetuned}
+J.~Wei, M.~Bosma, V.~Y. Zhao, K.~Guu, A.~W. Yu, B.~Lester, N.~Du, A.~M. Dai,
+  and Q.~V. Le.
+\newblock Finetuned language models are zero-shot learners.
+\newblock \emph{arXiv preprint arXiv:2109.01652}, 2021.
+
+\bibitem[Weidinger et~al.(2021)Weidinger, Mellor, Rauh, Griffin, Uesato, Huang,
+  Cheng, Glaese, Balle, Kasirzadeh, Kenton, Brown, Hawkins, Stepleton, Biles,
+  Birhane, Haas, Rimell, Hendricks, Isaac, Legassick, Irving, and
+  Gabriel]{weidinger2021harms}
+L.~Weidinger, J.~Mellor, M.~Rauh, C.~Griffin, J.~Uesato, P.-S. Huang, M.~Cheng,
+  M.~Glaese, B.~Balle, A.~Kasirzadeh, Z.~Kenton, S.~Brown, W.~Hawkins,
+  T.~Stepleton, C.~Biles, A.~Birhane, J.~Haas, L.~Rimell, L.~A. Hendricks,
+  W.~Isaac, S.~Legassick, G.~Irving, and I.~Gabriel.
+\newblock Ethical and social risks of harm from language models.
+\newblock \emph{arXiv submission}, 2021.
+
+\bibitem[Welbl et~al.(2021)Welbl, Glaese, Uesato, Dathathri, Mellor, Hendricks,
+  Anderson, Kohli, Coppin, and Huang]{welbl2021challenges}
+J.~Welbl, A.~Glaese, J.~Uesato, S.~Dathathri, J.~Mellor, L.~A. Hendricks,
+  K.~Anderson, P.~Kohli, B.~Coppin, and P.-S. Huang.
+\newblock Challenges in detoxifying language models.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2021}, pages 2447--2469, Punta Cana, Dominican Republic, Nov. 2021.
+  Association for Computational Linguistics.
+\newblock URL \url{https://aclanthology.org/2021.findings-emnlp.210}.
+
+\bibitem[Williams et~al.(2018)Williams, Nangia, and
+  Bowman]{williams-etal-2018-broad}
+A.~Williams, N.~Nangia, and S.~Bowman.
+\newblock A broad-coverage challenge corpus for sentence understanding through
+  inference.
+\newblock In \emph{Proceedings of the 2018 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long Papers)}, pages 1112--1122, New Orleans,
+  Louisiana, June 2018. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/N18-1101}.
+\newblock URL \url{https://aclanthology.org/N18-1101}.
+
+\bibitem[Wolff(1982)]{wolff1982language}
+J.~G. Wolff.
+\newblock Language acquisition, data compression and generalization.
+\newblock \emph{Language \& Communication}, 2\penalty0 (1):\penalty0 57--89,
+  1982.
+
+\bibitem[Wu et~al.(2021)Wu, Ouyang, Ziegler, Stiennon, Lowe, Leike, and
+  Christiano]{wu2021recursively}
+J.~Wu, L.~Ouyang, D.~M. Ziegler, N.~Stiennon, R.~Lowe, J.~Leike, and
+  P.~Christiano.
+\newblock Recursively summarizing books with human feedback.
+\newblock \emph{arXiv preprint arXiv:2109.10862}, 2021.
+
+\bibitem[Xu et~al.(2021{\natexlab{a}})Xu, Pathak, Wallace, Gururangan, Sap, and
+  Klein]{xu2021detoxifying}
+A.~Xu, E.~Pathak, E.~Wallace, S.~Gururangan, M.~Sap, and D.~Klein.
+\newblock Detoxifying language models risks marginalizing minority voices.
+\newblock In \emph{Proceedings of the 2021 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 2390--2397, Online, June 2021{\natexlab{a}}. Association
+  for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.naacl-main.190}.
+\newblock URL \url{https://aclanthology.org/2021.naacl-main.190}.
+
+\bibitem[Xu et~al.(2021{\natexlab{b}})Xu, Ju, Li, Boureau, Weston, and
+  Dinan]{xu-etal-2021-bot}
+J.~Xu, D.~Ju, M.~Li, Y.-L. Boureau, J.~Weston, and E.~Dinan.
+\newblock Bot-adversarial dialogue for safe conversational agents.
+\newblock In \emph{Proceedings of the 2021 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 2950--2968, Online, June 2021{\natexlab{b}}. Association
+  for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.naacl-main.235}.
+\newblock URL \url{https://aclanthology.org/2021.naacl-main.235}.
+
+\bibitem[Xue et~al.(2020)Xue, Constant, Roberts, Kale, Al-Rfou, Siddhant,
+  Barua, and Raffel]{xue2020mt5}
+L.~Xue, N.~Constant, A.~Roberts, M.~Kale, R.~Al-Rfou, A.~Siddhant, A.~Barua,
+  and C.~Raffel.
+\newblock {MT5}: A massively multilingual pre-trained text-to-text transformer.
+\newblock \emph{arXiv preprint arXiv:2010.11934}, 2020.
+
+\bibitem[Yang et~al.(2019)Yang, Dai, Yang, Carbonell, Salakhutdinov, and
+  Le]{yang2019xlnet}
+Z.~Yang, Z.~Dai, Y.~Yang, J.~Carbonell, R.~R. Salakhutdinov, and Q.~V. Le.
+\newblock {XLN}et: Generalized autoregressive pretraining for language
+  understanding.
+\newblock \emph{Advances in neural information processing systems}, 32, 2019.
+
+\bibitem[Young et~al.(2018)Young, Cambria, Chaturvedi, Zhou, Biswas, and
+  Huang]{Young_Cambria_Chaturvedi_Zhou_Biswas_Huang_2018}
+T.~Young, E.~Cambria, I.~Chaturvedi, H.~Zhou, S.~Biswas, and M.~Huang.
+\newblock Augmenting end-to-end dialogue systems with commonsense knowledge.
+\newblock \emph{Proceedings of the AAAI Conference on Artificial Intelligence},
+  32\penalty0 (1), Apr. 2018.
+\newblock URL \url{https://ojs.aaai.org/index.php/AAAI/article/view/11923}.
+
+\bibitem[Yu and Sagae(2021)]{yu-sagae-2021-automatically}
+D.~Yu and K.~Sagae.
+\newblock Automatically exposing problems with neural dialog models.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 456--470, Online and Punta Cana,
+  Dominican Republic, Nov. 2021. Association for Computational Linguistics.
+\newblock URL \url{https://aclanthology.org/2021.emnlp-main.37}.
+
+\bibitem[Yu et~al.(2021)Yu, Naik, Backurs, Gopi, Inan, Kamath, Kulkarni, Lee,
+  Manoel, Wutschitz, et~al.]{yu2021differentially}
+D.~Yu, S.~Naik, A.~Backurs, S.~Gopi, H.~A. Inan, G.~Kamath, J.~Kulkarni, Y.~T.
+  Lee, A.~Manoel, L.~Wutschitz, et~al.
+\newblock Differentially private fine-tuning of language models.
+\newblock \emph{arXiv preprint arXiv:2110.06500}, 2021.
+
+\bibitem[Zafrir et~al.(2019)Zafrir, Boudoukh, Izsak, and Wasserblat]{q8bert}
+O.~Zafrir, G.~Boudoukh, P.~Izsak, and M.~Wasserblat.
+\newblock {Q8BERT:} quantized 8bit {BERT}.
+\newblock \emph{CoRR}, abs/1910.06188, 2019.
+\newblock URL \url{http://arxiv.org/abs/1910.06188}.
+
+\bibitem[Zellers et~al.(2019)Zellers, Holtzman, Bisk, Farhadi, and
+  Choi]{hellaswag}
+R.~Zellers, A.~Holtzman, Y.~Bisk, A.~Farhadi, and Y.~Choi.
+\newblock Hella{S}wag: Can a machine really finish your sentence?
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, 2019.
+
+\bibitem[Zhang and Sennrich(2019)]{zhang2019root}
+B.~Zhang and R.~Sennrich.
+\newblock Root mean square layer normalization.
+\newblock \emph{arXiv preprint arXiv:1910.07467}, 2019.
+
+\bibitem[Zhong et~al.(2020)Zhong, Xu, Tang, Xu, Duan, Zhou, Wang, and
+  Yin]{zhong2020reasoning}
+W.~Zhong, J.~Xu, D.~Tang, Z.~Xu, N.~Duan, M.~Zhou, J.~Wang, and J.~Yin.
+\newblock Reasoning over semantic-level graph for fact checking.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 6170--6180, Online, July 2020.
+  Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.acl-main.549}.
+\newblock URL \url{https://aclanthology.org/2020.acl-main.549}.
+
+\bibitem[Zhou et~al.(2018)Zhou, Young, Huang, Zhao, Xu, and
+  Zhu]{zhou-etal-2018-commonsense}
+H.~Zhou, T.~Young, M.~Huang, H.~Zhao, J.~Xu, and X.~Zhu.
+\newblock Commonsense knowledge aware conversation generation with graph
+  attention.
+\newblock In \emph{Proceedings of the Twenty-Seventh International Joint
+  Conference on Artificial Intelligence, {IJCAI-18}}, pages 4623--4629.
+  International Joint Conferences on Artificial Intelligence Organization, 7
+  2018.
+\newblock \doi{10.24963/ijcai.2018/643}.
+\newblock URL \url{https://doi.org/10.24963/ijcai.2018/643}.
+
+\bibitem[Zhu and Gupta(2017)]{zhu2017prune}
+M.~Zhu and S.~Gupta.
+\newblock To prune, or not to prune: exploring the efficacy of pruning for
+  model compression.
+\newblock \emph{arXiv preprint arXiv:1710.01878}, 2017.
+
+\bibitem[Ziegler et~al.(2019)Ziegler, Stiennon, Wu, Brown, Radford, Amodei,
+  Christiano, and Irving]{ziegler2019fine}
+D.~M. Ziegler, N.~Stiennon, J.~Wu, T.~B. Brown, A.~Radford, D.~Amodei,
+  P.~Christiano, and G.~Irving.
+\newblock Fine-tuning language models from human preferences.
+\newblock \emph{arXiv preprint arXiv:1909.08593}, 2019.
+
+\end{thebibliography}

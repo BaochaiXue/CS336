@@ -1,0 +1,17 @@
+\appendix
+
+\section*{Appendix: Floating-Point Operations}
+\label{sec:appendix}
+
+In this section, we describe how we calculate the number of floating-point operations (FLOPs) in a model. We consider a language model with $l$ transformer layers, hidden size $h$, sequence length $s$, vocabulary size $V$, and training batch size $B$.
+
+A $A_{m \times k} \times X_{k \times n}$ matrix multiplication requires $2m \times k \times n$ FLOPs (factor of 2 needed to account for multiplies and adds). 
+
+A transformer layer consists of an attention block followed by a 2-layer feed-forward network. For the attention block, the main FLOP contributors are the key, query, and value transformation ($6Bsh^2$ operations), attention matrix computation ($2Bs^2h$ operations), attention over values ($2Bs^2h$ operations), and post-attention linear projection ($2Bsh^2$ operations). The feed-forward network increases the hidden size to $4h$ and then reduces it back to $h$; this requires $16Bsh^2$ FLOPs. Summing these together, each transformer layer results in $24Bsh^2 + 4Bs^2h$ FLOPs for the forward pass. The backward pass requires double the number of FLOPs since we need to calculate the gradients with respect to both input and weight tensors. In addition, we are using activation recomputation, which requires an additional forward pass before the backward pass. As a result, the total number of FLOPs per transformer layer is
+$4 \times \left(24Bsh^2 + 4Bs^2h\right) = 96Bsh^2\left(1 + \dfrac{s}{6h}\right)$.
+
+The other main contributor to the FLOP count is the logit layer in the language model head, which transforms features of dimension $h$ to the vocabulary dimension $V$. The required FLOPs for this operation is $2BshV$ in the forward pass and $4BshV$ in the backward pass, resulting in $6BshV$ FLOPs in total.
+
+Thus, for a transformer model with $l$ transformer layers, the total number of floating-point operations is:
+$$96Bslh^2\left(1 + \dfrac{s}{6h} + \dfrac{V}{16lh}\right).$$
+

@@ -1,0 +1,18 @@
+\section{Introduction}
+\label{sec:intro}
+
+We announce NVIDIA Nemotron 3, the most efficient family of open models with leading accuracy for agentic AI applications. The Nemotron 3 family of models use a Mixture-of-Experts hybrid Mamba-Transformer architecture that pushes the accuracy-to-inference-throughput frontier~(\S\ref{subsec:hybridmoe}). State-of-the-art accuracy and high inference throughput enable developers to build and scale up complex multi-agent environments. Further, the Nemotron 3 family of models support a context length of up to 1M tokens which helps accelerate tasks that require long contexts like long slices of code, large conversation histories, and extensive documents for RAG pipelines~(\S\ref{subsec:lc}). Nemotron 3 models support inference-time reasoning budget control~(S\ref{subsec:budgetcontrol}) and are trained using a diverse set of RL environments. The diverse set of environments help Nemotron 3 models achieve superior accuracy across a broad range of tasks like competitive coding, competition math, and agentic tool use~(\S\ref{subsec:multienvRL}). 
+
+In addition to the above, Nemotron 3 Super and Ultra are trained with NVFP4~(\S\ref{subsec:nvfp4}). Super and Ultra utilize LatentMoE, a novel approach that helps gain accuracy without sacrificing inference throughput or latency~(\S\ref{subsec:latentmoe}). We also incorporate MTP layers in the two larger models to improve the efficiency of long-form text generation workloads~\citep{gloeckle2024better}. Additionally, training with MTP provides modest improvements in model quality~\citep{deepseekai2025deepseekv3technicalreport}~(\S\ref{subsec:mtp}).  % y We also ship the 2 larger models with MTP layers, which provide extreme speedups for long-form text generation use cases. Along with generation speedups, we observe a decent improvement in model quality by training the model with MTP
+% In the two larger models, MTP layers are incorporated to improve efficiency for long-form text generation workloads~\citep{gloeckle2024better}.
+
+
+The Nemotron 3 family of models are open and transparent. We will release all the model weights, over 10 trillion tokens of datasets, and training recipes.     
+
+In the following section, we discuss the key technologies used to build Nemotron 3.
+
+
+% Build upon marketing's input:
+
+% NVIDIA Nemotron 3 is the most efficient family of open models with leading accuracy for building agentic AI applications. By combining the new hybrid Mamba-Transformer MoE architecture with a 1M token context length, Nemotron 3 empowers developers to build reliable, high-throughput agents across complex, multi-document, and long-duration operations.
+

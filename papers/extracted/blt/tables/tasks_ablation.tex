@@ -1,0 +1,17 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Llama 3\\ BPE\end{tabular}} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Space Patching\\ \model{} \end{tabular}} & \multicolumn{1}{l}{\begin{tabular}[c]{@{}c@{}}Entropy\\ \model{}\end{tabular}} \\ \midrule
+\textbf{Arc-E} & 67.4 & 67.2 & 68.9 \\
+\textbf{Arc-C} & 40.5 & 37.6 & 38.3 \\
+\textbf{HellaSwag} & 71.3 & 70.8 & 72.7 \\
+\textbf{PIQA} & 77.0 & 76.5 & 77.6 \\
+\bottomrule
+\end{tabular}
+\caption{Benchmark evaluations of two patching schemes for 8b \model{} models and BPE \llama{3} baseline. These models are trained on the \llama{} 2 data for the optimal number of steps as determined by \cite{dubey2024llama}.
+}
+\label{tab:evals_ablation}
+\end{table}

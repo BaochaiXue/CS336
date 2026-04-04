@@ -1,0 +1,54 @@
+\def\thinmidrule{\noalign{\hrule height.8pt}}
+
+\begin{table}[t!]
+\caption{
+\textbf{Related architectures.} Comparison of related architectures, particularly those focused on byte-level modeling.
+\model{} is the first architecture that enables dynamic, multi-stage hierarchies.
+Extended discussion is provided in~\cref{sec: background}.
+}
+\centering
+\small
+{ 
+\begin{tabular}{@{}lllll@{}}
+\toprule
+\multirow{2}{*}{\textsc{Class}}                  & \multirow{2}{*}{\textsc{Autoregressive}} & \multirow{2}{*}{\textsc{Chunking Mechanism}}               & \textsc{Multi-stage}   & \multirow{2}{*}{\textsc{Example Architectures}} \\
+                                &                          &                                           & \textsc{Hierarchy}    &  \\
+\midrule
+\multirow{2}{*}{\vspace{-1mm}Isotropic}                       & \xmark                   & ---                                       & ---                    & ByT5 \\
+\cmidrule[0.05pt]{2-5}
+                                & \cmark                   & ---                                       & ---                    & MambaByte \\
+\midrule
+\multirow{9}{*}{Hierarchical (static)}           & \multirow{3}{*}{\xmark}                   & \multirow{3}{*}{$k$-width pooling}                         & \multirow{3}{*}{\cmark}                 & Funnel-Transformer \\
+                                &                          &                                           &                        & Canine \\
+                                &                          &                                           &                        & Charformer \\
+\cmidrule[0.05pt]{2-5}
+                                & \multirow{6}{*}{\cmark}                   & \multirow{6}{*}{$k$-width pooling}                         & \multirow{6}{*}{\cmark}                 & Hourglass Transformer \\
+                                &                          &                                           &                  & SaShiMi \\
+                                &                          &                                           &                 & MegaByte \\
+                                &                          &                                           &                 & Block Transformer \\
+                                &                          &                                           &                 & MBLM \\
+                                &                          &                                           &                 & AU-Net 3 \\
+\midrule
+\multirow{7}{*}{\vspace{-3mm}Hierarchical (external)}         & \multirow{2}{*}{\xmark}                   & \multirow{2}{*}{delimiters}                                & \multirow{2}{*}{\xmark}          & eByte \\
+                                &                          &                                           &                 & WSF \\
+\cmidrule[0.05pt]{2-5}                         
+                                & \multirow{5}{*}{\cmark}                   & \multirow{3}{*}{delimiters}                                & \multirow{3}{*}{\xmark}          & DPT (Whitespaces) \\
+                                &                          &                                           &                 & SpaceByte \\
+                                &                          &                                           &                 & AU-Net 2 \\
+\cmidrule[0.05pt]{3-5}    
+                                &                          & \multirow{2}{*}{entropy}                                   & \multirow{2}{*}{\xmark}          & DPT (Entropy) \\
+                                &                          &                                           &                 & BLT \\
+\midrule
+\multirow{3}{*}{\vspace{-2mm}Hierarchical (dynamic)}          & \multirow{3}{*}{\vspace{-2mm}\cmark}                   & soft matching                             & \xmark          & MANTa \\
+\cmidrule[0.05pt]{3-5}   
+                                &                          & soft gating                               & \xmark          & MrT5 \\
+\cmidrule[0.05pt]{3-5}  
+                                &                          & stochastic reparameterization             & \xmark          & DPT (Gumbel) \\
+\midrule
+\textbf{Hierarchical (dynamic)} & \cmark                   & \textbf{dynamic chunking}                 & \cmark          & \textbf{H-Net} \\
+\bottomrule
+\end{tabular}
+} 
+\label{tab: related}
+\end{table}
+

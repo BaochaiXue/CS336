@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{\textbf{Instruction tuning results on AlpacaEval2.0.} We see that \hqpool w/ \oh performs similarly to Mistral-7B finetuned also on \oh, indicating similar behavior during instruction tuning. Also, with better data, we see \itpool can be even better and can beat many existing models of similar scales. }
+\label{tab:sft}
+\begin{tabular}{lc}
+\toprule
+\textbf{Model} &       \textbf{AlpacaEval2.0 LC Win-rate (\%)} \\\midrule
+\textit{Our runs}\\\midrule
+  \itpool  &   \underline{16.6}        \\
+  %
+ Mistral-7B w/ \oh &    15.4  \\
+  \hqpool w/ \oh &    13.8 \\
+  %
+  \midrule
+  \textit{Reported from the leaderboard}\\\midrule
+  Llama-3-Instruct-8B & \textbf{22.9 }\\
+  Mistral-v0.2-7B & 17.1 \\
+  Mistral-7B w/ \oh &    16.2  \\
+  Zephyr-Beta-7B & 13.2 \\
+  Vicuna-v1.3-13B & 10.8\\
+  Gemma-Instruct-7B & 10.4\\
+  Nous-Hermes-13B & 9.7 \\
+  DaVinci001 & 9.0 \\
+  LLaMA-2-Chat-13B & 8.4 \\
+  Alpaca-7B & 5.9 \\ 
+  \bottomrule
+\end{tabular}
+\vspace{-1em}
+\end{table}

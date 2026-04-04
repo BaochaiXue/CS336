@@ -1,0 +1,46 @@
+\begin{table*}[t!]
+\caption{
+\textbf{Architectures for main language models, all data-/FLOP-matched.} \colorbox{EncDec0}{$\mathcal{E}^0,\mathcal{D}^0$}, \colorbox{EncDec1}{$\mathcal{E}^1,\mathcal{D}^1$}, \colorbox{Main}{$\mathcal{M}$}.
+T and M denote a \underline{T}ransformer and a \underline{M}amba-2 layer, respectively.
+For hierarchical byte-level models, the \textsc{Tokenizer} column lists the chunking mechanism.
+The numbers before DC indicate downsampling factor $N$ in equation \eqref{eq: ratio_loss}; for example, (3,3)-DC denotes $N^0=N^1=3$.
+The BPIC (Bytes-Per-Innermost-Chunk) measure shows that each chunk dynamically determined by our \onestage{} comprises similar number of bytes to the GPT-2 tokenizer, despite aiming for $N^0=6$.
+All Transformer layers in $\mathcal{E}$ or $\mathcal{D}$ networks, as well as LlamaByte, use Sliding Window Attention (SWA) with a window size of $1024$.
+}
+\centering
+\small
+\resizebox{\linewidth}{!}
+{ 
+\begin{tabular}{lccccccc} 
+\toprule
+\multirow{2}{*}{\textsc{Model}} & \multirow{2}{*}{\textsc{Input}} & \multirow{2}{*}{\textsc{Tokenizer}} & \multirow{2}{*}{$L^0$} & \multirowcell{2}{\textsc{BPIC}\\($L^S / L^0$)} & \multirow{2}{*}{\textsc{\#Params}} & \multirow{2}{*}{\textsc{Architecture}} & \multirow{2}{*}{\texttt{d\_model} (D)}\\
+\\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{Large}}}\\
+\cellcolor{Gray7!20}{Transformer} & {Token} & {GPT2} & {1792} & 4.6 & 760M & \colorbox{Main}{T24} & \colorbox{Main}{$1536$}\\
+\addlinespace[-0.15em]
+\cmidrule{1-8}
+\addlinespace[-0.25em]
+\cellcolor{Grape7!10}{LlamaByte} & & --- & & 1.0 & 210M & \colorbox{Main}{T16} & \colorbox{Main}{$1024$}\\
+\cellcolor{Blue7!10}{MambaByte} & & --- & & 1.0 & 190M & \colorbox{Main}{M28} & \colorbox{Main}{$1024$}\\
+\cellcolor{Cyan7!10}{SpaceByte} & & Spacelike & & 6.0 & 570M & \colorbox{EncDec0}{T8}+\colorbox{Main}{T16}+\colorbox{EncDec0}{T8} & \colorbox{EncDec0}{$768$}, \colorbox{Main}{$1536$}\\
+\cellcolor{Cyan7!10}{SpaceByte++} & & Spacelike & & 6.0 & 850M & \colorbox{EncDec0}{M4}+\colorbox{Main}{T28}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$1536$}\\
+\cellcolor{Green7!10}{H-Net (pool)} & \multirow{-2}{*}{Byte} & 6-Pool & \multirow{-2}{*}{8192} & 6.0 & 850M & \colorbox{EncDec0}{M4}+\colorbox{Main}{T28}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$1536$}\\
+\cellcolor{Green7!10}{H-Net (space)} & & Spacelike & & 6.0 & 850M & \colorbox{EncDec0}{M4}+\colorbox{Main}{T28}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$1536$}\\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & & 6-DC & & 4.8 & 680M & \colorbox{EncDec0}{M4}+\colorbox{Main}{T22}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$1536$}\\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & (3,3)-DC & & 7.0 & 870M & \colorbox{EncDec0}{M4}+\colorbox{EncDec1}{T1M4}+\colorbox{Main}{T26}+\colorbox{EncDec1}{M4T1}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{EncDec1}{$1024$}, \colorbox{Main}{$1536$}\\
+\midrule
+\multicolumn{3}{l}{\quad \textbf{\#FLOPs matched to GPT-3 \textit{XL}}}\\
+\cellcolor{Gray7!20}{Transformer} & {Token} & {GPT2} & {1792} & 4.6 & 1.3B & \colorbox{Main}{T24} & \colorbox{Main}{$2048$}\\
+\addlinespace[-0.15em]
+\cmidrule{1-8}
+\addlinespace[-0.25em]
+\cellcolor{Cyan7!10}{SpaceByte++} & & Spacelike & & 6.0 & 1.6B & \colorbox{EncDec0}{M4}+\colorbox{Main}{T31}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$2048$}\\
+\cellcolor{Green7!10}{H-Net (space)} & & Spacelike & & 6.0 & 1.6B & \colorbox{EncDec0}{M4}+\colorbox{Main}{T31}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$2048$}\\
+\cellcolor{Orange7!10}{\model{} (\onestage{})} & \multirow{-2}{*}{Byte} & 6-DC & \multirow{-2}{*}{8192} & 4.7 & 1.3B & \colorbox{EncDec0}{M4}+\colorbox{Main}{T24}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{Main}{$2048$}\\
+\cellcolor{Red7!10}{\model{} (\twostage{})} & & (3,3)-DC & & 6.9 & 1.6B & \colorbox{EncDec0}{M4}+\colorbox{EncDec1}{T1M4}+\colorbox{Main}{T27}+\colorbox{EncDec1}{M4T1}+\colorbox{EncDec0}{M4} & \colorbox{EncDec0}{$1024$}, \colorbox{EncDec1}{$1536$}, \colorbox{Main}{$2048$}\\
+\bottomrule
+\end{tabular}
+} 
+\label{tab: architecture}
+\end{table*}

@@ -1,0 +1,186 @@
+\documentclass{article} % For LaTeX2e
+\usepackage{iclr2021_conference, times}
+\maxdeadcycles=300
+
+% to avoid loading the natbib package, add option nonatbib:
+%\setcitestyle{authoryear, open={(},close={)}}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+% \usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+
+% \usepackage{times}
+% \usepackage[style=numeric,natbib=true,backend=bibtex]{biblatex}
+\usepackage[compact]{titlesec}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+% \usepackage{caption}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{diagbox}
+% \usepackage{booktabs}
+\usepackage{stfloats}
+\usepackage{multirow}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{fancyvrb}
+% \usepackage{hhline}
+% \usepackage{tabularx}
+% \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \newcolumntype{s}{>{\hsize=.8\hsize}Y}
+% \newcolumntype{t}{>{\hsize=.6\hsize}Y}
+% \newcolumntype{b}{X}
+% \newcolumntype{?}{!{\vrule width 1pt}}
+% \usepackage{multirow}
+% \usepackage{siunitx}
+% % complicated siunitx code
+% \begingroup
+% % Allow `_` and `:` in macro names (LaTeX3 style)
+% \catcode`\_=11
+% \catcode`\:=11
+% % Internal code of `S`
+% \gdef\tabularxcolumn#1{%
+%     >{\__siunitx_table_collect_begin:Nn S{} }%
+%     p{#1}%  <- this is different (is `c` in normal `S`)
+%     <{\__siunitx_table_print:}%
+% }
+% \endgroup
+% \sisetup{separate-uncertainty,
+%          table-figures-uncertainty=2,
+%          table-number-alignment = center,
+%         }
+% \restylefloat{table}
+
+\usepackage{arydshln}
+\usepackage{makecell}
+\usepackage{dsfont}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+
+% closed square rooot
+\usepackage{letltxmacro}
+\makeatletter
+\let\oldr@@t\r@@t
+\def\r@@t#1#2{%
+	\setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+	{\box0\lower0.4pt\box2}}
+\LetLtxMacro{\oldsqrt}{\sqrt}
+\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2}}
+\makeatother
+
+\makeatletter
+\newcommand{\thickhline}{%
+	\noalign {\ifnum 0=`}\fi \hrule height 1pt
+	\futurelet \reserved@a \@xhline
+}
+\newcolumntype{"}{@{\hskip\tabcolsep\vrule width 1pt\hskip\tabcolsep}}
+\makeatother
+
+
+\makeatletter
+\newcommand*{\defeq}{\mathrel{\rlap{%
+			\raisebox{0.3ex}{$\m@th\cdot$}}%
+		\raisebox{-0.3ex}{$\m@th\cdot$}}%
+	=}
+\makeatother
+
+% for arXiv have nohyperref; for other portals put it after
+
+% \usepackage{hyperref}
+\usepackage[breaklinks=true,colorlinks,citecolor=black,bookmarks=false,urlcolor=blue]{hyperref}
+\hypersetup{
+	pdfinfo={
+		Title={Measuring Massive Multitask Language Understanding},
+		Author={Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, Jacob Steinhardt},
+		Subject={Deep Learning, Transformers, NLP},
+		Keywords={multitask learning, GPT-3, law, bar exam, few-shot learning, zero-shot, meta-learning}
+	}
+}
+\usepackage{url}            % simple URL typesetting
+
+\usepackage{appendix}
+\usepackage{cleveref}
+\usepackage{adjustbox}
+\crefname{appsec}{Appendix}{Appendices}
+
+\definecolor{rightblue}{RGB}{63,169,245}
+
+\newcommand{\reviewer}[3]{
+	\expandafter\newcommand\csname #1\endcsname[1]{
+		\textcolor{#3}{[#2: ##1]}
+	}
+}
+\reviewer{collin}{Collin}{red}
+\reviewer{mantas}{Mantas}{orange}
+\definecolor{neonpurple}{rgb}{0.3,0,1}
+\reviewer{dan}{Dan}{neonpurple}
+\reviewer{js}{JS}{blue}
+
+
+\title{Measuring Massive Multitask\\Language Understanding}
+% \title{How Multipurpose Are Language Models?}
+
+\author{
+Dan Hendrycks\\UC Berkeley \And Collin Burns\\Columbia University \And Steven Basart\\UChicago \And Andy Zou\\UC Berkeley \AND Mantas Mazeika\\UIUC \And Dawn Song\\UC Berkeley \And Jacob Steinhardt\\UC Berkeley\AND
+}
+\iclrfinalcopy
+\begin{document}
+
+\maketitle
+
+\vspace{-35pt}
+\begin{abstract}
+We propose a new test to measure a text model's multitask accuracy. The test covers 57 tasks including elementary mathematics, US history, computer science, law, and more. To attain high accuracy on this test, models must possess extensive world knowledge and problem solving ability. We find that while most recent models have near random-chance accuracy, the very largest GPT-3 model improves over random chance by almost 20 percentage points on average. However, on every one of the 57 tasks, the best models still need substantial improvements before they can reach expert-level accuracy. Models also have lopsided performance and frequently do not know when they are wrong. Worse, they still have near-random accuracy on some socially important subjects such as morality and law. By comprehensively evaluating the breadth and depth of a model's academic and professional understanding, our test can be used to analyze models across many tasks and to identify important shortcomings.
+\end{abstract}
+% \vspace{-5pt}
+
+% The best model is still near random-chance levels on some tasks, including socially important tasks such as ethics and law.
+%find that they produce uncalibrated predictions on most tasks.
+% ...Some tasks still have near-random accuracy, including tasks that test procedural knowledge such as mathematics and socially important tasks like law.
+% Our massive multitask benchmark provides an aggregate measure of a model's ability to learn specialized subjects and can help researchers identify important blind spots.
+
+% Our results indicate that while recent advances have been impressive, state-of-the-art models are still weak at learning and applying knowledge acquired from pre-training.
+% Models have lopsided performance, including near-random accuracy on several important subjects, and are uncalibrated about what they know.
+% By comprehensively evaluating the breadth and depth of a model's academic and professional understanding, our benchmark can be used to analyze aggregate properties of models across tasks and to track important shortcomings.
+
+% % Moreover, our benchmark is exceptionally difficult, with state-of-the-art performance much lower than for other recently proposed datasets (see \Cref{fig:juxtaposition}).
+
+
+\input{sections/1-intro}
+\input{sections/2-related_work}
+\input{sections/3-dataset}
+\input{sections/4-experiments}
+\input{sections/5-discussion}
+\input{sections/6-conclusion}
+
+% \newpage
+\bibliography{main}
+\bibliographystyle{abbrvnat}
+
+% \onecolumn{
+% \bibliography{main}
+% % \bibliographystyle{plainnat}
+% \bibliographystyle{abbrvnat}
+% }
+
+\newpage
+
+\newpage
+\appendix
+\input{sections/7-appendix}
+
+\end{document}

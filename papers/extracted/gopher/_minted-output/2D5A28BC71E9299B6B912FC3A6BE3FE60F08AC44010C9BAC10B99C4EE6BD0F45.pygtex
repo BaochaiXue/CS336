@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+Q: An influential religion to enter china along the silk route during the han dynasty was?
+A: Buddhism
+Ground truth answers: \PYGZsq{}Buddhism\PYGZsq{}
+
+
+Q: An open\PYGZhy{}source clone of unix created in the early 1990s?
+A: Linux
+Ground truth answers: \PYGZsq{}GNU/Linux\PYGZsq{}, \PYGZsq{}Linux\PYGZsq{}
+
+
+Q: Describe the various uses of forests to human beings?
+A: Forests are used for various purposes like wood, paper, furniture, medicines, etc
+Ground truth answers: (\PYGZsq{}a source of lumber\PYGZsq{}, \PYGZsq{}acting as a carbon sink\PYGZsq{}, \PYGZsq{}aiding in regulating climate,\PYGZsq{}, \PYGZsq{}recreational areas\PYGZsq{}, \PYGZsq{}purifying water\PYGZsq{}, \PYGZsq{}serving as a genetic reserve\PYGZsq{})
+
+
+Q: Describe the three phases of the normal blood clotting process?
+A: Platelet plug formation, blood coagulation, and fibrinolysis
+Ground truth answers: (\PYGZsq{}blood coagulation\PYGZsq{}, \PYGZsq{}vasoconstriction,\PYGZsq{})
+
+
+Q: A single period of precession of earth\PYGZsq{}s axis is completed in about?
+A: 25,700 years
+Ground truth answers: (\PYGZsq{}approximately 26,000 years\PYGZsq{}, \PYGZsq{}26,000 years\PYGZsq{})
+\end{Verbatim}

@@ -1,0 +1,127 @@
+% \begin{table}
+%   \centering
+%   \begin{tabular}{lcccc}
+% \toprule
+%               \bf Model & \bf Size & \bf Avg & \bf GSM8k & \bf MATH \\
+% \midrule
+% \bf GPT-3.5 & - & 35.6 & 57.1 & 14.0 \\
+% \bf GPT-4 & - & \textbf{66.1} & \textbf{92} & \textbf{40.2} \\
+% \gmidrule
+% \bf Falcon & 180B & - & 54.4 & - \\
+% \gmidrule
+% \multirow{2}{*}{\bf Qwen}
+%  & 7B & 31.7 & 51.7 & 11.6 \\
+% & 14B & 43.1 & 61.3 & 24.8 \\
+%  \gmidrule
+% \multirow{2}{*}{\bf Baichuan 2}
+% & 7B & 15.1 & 24.5 & 5.6 \\
+% & 13B & 16.1 & 22.1 & 10.1 \\
+% % \midrule
+% % Open-L\textsmaller{LaMA} v2 & 7B & 9.7 & 2.1 \\
+% \gmidrule
+% \multirow{3}{*}{\bf L\textsmaller{LaMA} 2} 
+% & 7B & 10.0 & 16.7 & 3.3\\ 
+% & 34B & 24.2 & 42.2 & 6.2\\ 
+% & 70B & 35.2 & 56.8 & 13.5\\
+% \gmidrule
+% \bf Mistral & 7B & 29.4 & 47.5 & 11.3\\
+% \gmidrule
+% \bf InternLM & 20B & 36.9 & 62.9 & 10.9 \\
+% \gmidrule
+% \bf Skywork & 7B & 31.8 & 55.8 & 7.8 \\
+% \gmidrule
+% \multirow{2}{*}{\bf Yi}  
+% & 6B & 18.6 & 32.5 & 4.6 \\
+% & 34B & 40.8 & 67.2 & 14.4 \\
+% \bottomrule
+
+%   \end{tabular}
+%    \caption{Comparison between models on GSM8k and MATH.
+%    % \alex{what kind of prompt did we use? do we test the numbers of all these models on our own, or we copy the number from their papers?}
+%    }
+%   \label{tab:math}
+% \end{table}
+
+% \begin{table}
+%   \centering
+%   \begin{tabular}{lcccccc}
+% \toprule
+%               \bf Model & \bf Size & \bf Avg & \bf GSM8k & \bf MATH & \bf HumanEval & \bf MBPP\\
+% \midrule
+% \bf GPT-3.5 & - & 35.6 & 57.1 & 14.0 & 48.1 & 61.4\\
+% \bf GPT-4 & - & \textbf{66.1} & \textbf{92} & \textbf{40.2} & 67.0 & 63.6 \\
+% \gmidrule
+% \bf Falcon & 180B & - & 54.4 & - & 0.61 & 47.0\\
+% \gmidrule
+% \multirow{2}{*}{\bf Qwen}
+%  & 7B & 31.7 & 51.7 & 11.6 & 29.9 & 34.0\\
+% & 14B & 43.1 & 61.3 & 24.8 & 32.3 & 48.9 \\
+%  \gmidrule
+% \multirow{2}{*}{\bf Baichuan 2}
+% & 7B & 15.1 & 24.5 & 5.6 \\
+% & 13B & 16.1 & 22.1 & 10.1 \\
+% % \midrule
+% % Open-L\textsmaller{LaMA} v2 & 7B & 9.7 & 2.1 \\
+% \gmidrule
+% \multirow{3}{*}{\bf L\textsmaller{LaMA} 2} 
+% & 7B & 10.0 & 16.7 & 3.3\\ 
+% & 34B & 24.2 & 42.2 & 6.2\\ 
+% & 70B & 35.2 & 56.8 & 13.5\\
+% \gmidrule
+% \bf Mistral & 7B & 29.4 & 47.5 & 11.3\\
+% \gmidrule
+% \bf InternLM & 20B & 36.9 & 62.9 & 10.9 \\
+% \gmidrule
+% \bf Skywork & 7B & 31.8 & 55.8 & 7.8 \\
+% \gmidrule
+% \multirow{2}{*}{\bf Yi}  
+% & 6B & 18.6 & 32.5 & 4.6 \\
+% & 34B & 40.8 & 67.2 & 14.4 \\
+% \bottomrule
+
+%   \end{tabular}
+%    \caption{Comparison between models on GSM8k and MATH.
+%    % \alex{what kind of prompt did we use? do we test the numbers of all these models on our own, or we copy the number from their papers?}
+%    }
+%   \label{tab:math}
+% \end{table}
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    \bf Model & \bf Size & \bf GSM8k & \bf MATH & \bf Human-Eval pass@1 & \bf MBPP pass@1 \\
+    \midrule
+    \bf GPT-3.5 & - & 57.1 & 14.0 & 48.1 & 61.4 \\
+    \bf GPT-4 & - & \textbf{92.0} & \textbf{40.2} & \textbf{67.0} & \textbf{63.6} \\
+    \gmidrule
+    \bf Falcon & 180B  & 54.4 & - & 0.61 & 47.0 \\
+    \gmidrule
+    \multirow{2}{*}{\bf Qwen}
+    & 7B  & 51.7 & 11.6 & 29.9 & 34.0 \\
+    & 14B  & 61.3 & 24.8 & 32.3 & 48.9 \\
+    \gmidrule
+    \multirow{2}{*}{\bf Baichuan 2}
+    & 7B & 24.5 & 5.6 & 18.3 & 28.3 \\
+    & 13B & 22.1 & 10.1 & 20.7 & 26.1 \\
+    \gmidrule
+    \multirow{3}{*}{\bf L\textsmaller{LaMA} 2} 
+    & 7B  & 16.7 & 3.3 & 12.8 & 14.8\\ 
+    & 34B  & 42.2 & 6.2 & 22.6 & 33.0\\ 
+    & 70B  & 56.8 & 13.5 & 31.7 & 45.0\\
+    \gmidrule
+    \bf Mistral & 7B & 47.5 & 11.3 & 30.5 & 47.5 \\
+    \gmidrule
+    \bf InternLM & 20B & 62.9 & 10.9 & 28.1 & 41.4 \\
+    \gmidrule
+    \bf Skywork & 7B & 55.8 & 7.8 & 13.4 & 22.8 \\
+    \gmidrule
+    \multirow{2}{*}{\bf Yi}  
+    & 6B & 32.5 & 4.6 & 15.9 & 26.3 \\
+    & 34B & 67.2 & 14.4 & 23.2 & 41.0 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Comparison of models on GSM8k, MATH, Human-Eval, and MBPP.}
+  \label{tab:code_math}
+\end{table}

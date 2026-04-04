@@ -1,0 +1,12 @@
+\begin{table}[h]
+\centering
+\caption{\textbf{MMLU overlap removal comparison.} We remove overlaps detected with MMLU, in cases where a question and one of its options are detected in the text. For \dolmalatest \cite{soldaini2024dolma}, we sample 1/10th of the dataset for this analysis (roughly 230B tokens). For FineWeb-Edu \cite{lozhkov2024fineweb-edu}, we use the 10B token subset released by the authors. Note that because our flagging rule prioritizes recall over precision, these numbers are likely to be overestimates of the true contamination rates.}
+\label{tab:decontamination-appx-excision-stats}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Dataset                     & Percentage of samples flagged \\ \midrule
+\hqpool      & 0.007\%                       \\
+\dolmalatest & 0.001\%                       \\
+FineWeb-Edu     & 0.009\%                       \\ \bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,65 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [1][-]{section.3}{Method}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Models}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Training}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Infrastructure}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{Training Dataset}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Results}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Task Selection}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Comparisons with State of the Art}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{Performance Improvements with Scale}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Toxicity and Bias Analysis}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Toxicity}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Distributional Bias}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Dialogue}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Prompting For Dialogue}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.2}{ Fine-tuning for Dialogue }{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.3}{Dialogue \046 Toxicity }{section.6}% 18
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 19
+\BOOKMARK [2][-]{subsection.7.1}{Towards Efficient Architectures}{section.7}% 20
+\BOOKMARK [2][-]{subsection.7.2}{Challenges in Toxicity and Bias}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.3}{Safety benefits and safety risks}{section.7}% 22
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 23
+\BOOKMARK [1][-]{section.9}{Acknowledgements}{}% 24
+\BOOKMARK [1][-]{section.10}{Contributions}{}% 25
+\BOOKMARK [1][-]{appendix.A}{MassiveText}{}% 26
+\BOOKMARK [2][-]{subsection.A.1}{Dataset Pipeline}{appendix.A}% 27
+\BOOKMARK [2][-]{subsection.A.2}{Dataset Analysis}{appendix.A}% 28
+\BOOKMARK [2][-]{subsection.A.3}{Dataset Ablations}{appendix.A}% 29
+\BOOKMARK [2][-]{subsection.A.4}{Text normalisation}{appendix.A}% 30
+\BOOKMARK [2][-]{subsection.A.5}{MassiveText Datasheet}{appendix.A}% 31
+\BOOKMARK [1][-]{appendix.B}{Gopher Model Card}{}% 32
+\BOOKMARK [1][-]{appendix.C}{Lessons Learned}{}% 33
+\BOOKMARK [2][-]{subsection.C.1}{Adafactor}{appendix.C}% 34
+\BOOKMARK [2][-]{subsection.C.2}{Lower-Precision Training with bfloat16}{appendix.C}% 35
+\BOOKMARK [1][-]{appendix.D}{Results}{}% 36
+\BOOKMARK [2][-]{subsection.D.1}{Overview}{appendix.D}% 37
+\BOOKMARK [2][-]{subsection.D.2}{Pile}{appendix.D}% 38
+\BOOKMARK [2][-]{subsection.D.3}{Language Modelling}{appendix.D}% 39
+\BOOKMARK [2][-]{subsection.D.4}{Filtering Test-Set Documents}{appendix.D}% 40
+\BOOKMARK [2][-]{subsection.D.5}{Scaling Curves}{appendix.D}% 41
+\BOOKMARK [2][-]{subsection.D.6}{Scaling Context Length}{appendix.D}% 42
+\BOOKMARK [2][-]{subsection.D.7}{MMLU}{appendix.D}% 43
+\BOOKMARK [2][-]{subsection.D.8}{BIG-bench}{appendix.D}% 44
+\BOOKMARK [2][-]{subsection.D.9}{TriviaQA \046 NaturalQuestions}{appendix.D}% 45
+\BOOKMARK [2][-]{subsection.D.10}{TruthfulQA}{appendix.D}% 46
+\BOOKMARK [2][-]{subsection.D.11}{Reading Comprehension: RACE}{appendix.D}% 47
+\BOOKMARK [2][-]{subsection.D.12}{Fact-Checking: FEVER \046 MultiFC}{appendix.D}% 48
+\BOOKMARK [2][-]{subsection.D.13}{Common Sense: PIQA, WinoGrande, SocialIQA, HellaSwag}{appendix.D}% 49
+\BOOKMARK [1][-]{appendix.E}{Toxicity and Bias Analysis}{}% 50
+\BOOKMARK [2][-]{subsection.E.1}{Toxic Generations}{appendix.E}% 51
+\BOOKMARK [2][-]{subsection.E.2}{Classifying Toxicity}{appendix.E}% 52
+\BOOKMARK [2][-]{subsection.E.3}{Distributional Bias}{appendix.E}% 53
+\BOOKMARK [1][-]{appendix.F}{Compute Usage}{}% 54
+\BOOKMARK [1][-]{appendix.G}{Reducing Inference and Training Costs}{}% 55
+\BOOKMARK [2][-]{subsection.G.1}{Efficient Fine-tuning}{appendix.G}% 56
+\BOOKMARK [2][-]{subsection.G.2}{Reducing Inference Costs}{appendix.G}% 57
+\BOOKMARK [2][-]{subsection.G.3}{Reducing Training Costs}{appendix.G}% 58
+\BOOKMARK [2][-]{subsection.G.4}{Future Work for Efficient Training}{appendix.G}% 59
+\BOOKMARK [1][-]{appendix.H}{Dialogue-Prompted Gopher Details}{}% 60
+\BOOKMARK [2][-]{subsection.H.1}{Construction}{appendix.H}% 61
+\BOOKMARK [2][-]{subsection.H.2}{Dialogue Dataset Filtering}{appendix.H}% 62
+\BOOKMARK [2][-]{subsection.H.3}{Comparison Methodology}{appendix.H}% 63
+\BOOKMARK [2][-]{subsection.H.4}{RTP in a Dialogue Setting}{appendix.H}% 64
+\BOOKMARK [2][-]{subsection.H.5}{Selected Transcripts}{appendix.H}% 65

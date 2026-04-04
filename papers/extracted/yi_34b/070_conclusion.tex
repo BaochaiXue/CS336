@@ -1,0 +1,22 @@
+
+In this report, we discuss the full-stack development of the Yi language model family. 
+Yi-34B achieves GPT-3.5 matching performance and is deployable (thank to the 4/8-bit quantization) on consumer-grade devices, making it an ideal model for local deployment. 
+
+The key takeaways from the Yi pretraining procedure are about data quantity and quality: 
+(1). training the model on a larger amount of data than the Chinchilla optimal delivers clear and consistent performance gain, which we highly recommend for all pretraining teams. 
+Our model is trained on 3.1T tokens, yet we belive with larger amount of data, we can continue improve the model performance (i.e., the model have not saturated at 3.1T);
+(2). when it comes to the pretraining data quality, we believe the most critical two factors are the source of the data (e.g., whether the text is produced for professional usage or for casual social media posting) and the details of the data cleaning (e.g., the strength of filtering and deduplication). Since data cleaning is a very complicated pipeline and it is extremely difficult to conduct extensive grid-search styled optimizations, our current solution may still have room for improvements. 
+
+The key takeaways from the Yi finetuning procedure is to heavily iterate on a small amount of data ($\le$ 10K), case by case, over multiple iterations, directly by the machine learning engineer, and improved from real user feedback. 
+This approach clearly deviates from the instruction-scaling approach, initially introduced by the FLAN series~\citep{chung2022scaling} then followed by the UltraChat series~\citep{ding2023enhancing}. 
+% At the current stage, whether finetuing should use small or large amount of data might still be a question yet to see more evidences, so we are also happy to engage in more discussions about this topic. 
+
+% For context length scaling, we tend to view the current major problem is to construct and iterate high-quality long-context task data and evaluation, which is less discussed by the current research and open-source community. 
+% For vision-language 
+
+% For long-context capability, we tend to view that the ability of utilizing the long-term dependency 
+
+As is demonstrated by our current results, the reasoning capability, which we view as the core capability for real-world deployment of language models, is strongly correlated with model scale when the amount of pretraining data is fixed. 
+We believe that given our current
+results, continuing to scale up model parameters using thoroughly optimized data
+will lead to even stronger frontier models in our upcoming next versions.

@@ -1,0 +1,140 @@
+\section{Post-training}
+
+\label{sec:post}
+
+Qwen 2.5 introduces two significant advancements in its post-training design compared to Qwen 2:
+
+\begin{enumerate}[label=(\arabic*)]
+
+    \item \textbf{Expanded Supervised Fine-tuning Data Coverage:} The supervised fine-tuning process leverages a massive dataset comprising millions of high-quality examples.
+    This expansion specifically addresses key areas where the previous model showed limitations, such as long-sequence generation, mathematical problem-solving, coding, instruction-following, structured data understanding, logical reasoning, cross-lingual transfer, and robust system instruction.
+
+    \item \textbf{Two-stage Reinforcement Learning:} The reinforcement learning (RL) process in Qwen 2.5 is divided into two distinct stages: Offline RL and Online RL. 
+
+        \begin{itemize}
+
+            \item \textit{Offline RL:} This stage focuses on developing capabilities that are challenging for the reward model to evaluate, such as reasoning, factuality, and instruction-following.
+            Through meticulous construction and validation of training data, we ensure that the Offline RL signals are both learnable and reliable~\citep{xiang2024aligning}, enabling the model to acquire those complex skills effectively.
+            
+            \item \textit{Online RL:} The Online RL phase leverages the reward model's ability to detect nuances in output quality, including truthfulness, helpfulness, conciseness, relevance, harmlessness and debiasing. 
+            It enables the model to generate responses that are precise, coherent, and well-structured while maintaining safety and readability. As a result, the model's outputs consistently meet human quality standards and expectations.
+
+        \end{itemize}
+
+\end{enumerate}
+
+
+
+
+\subsection{Supervised Fine-tuning}
+
+
+In this section, we detail the key enhancements made during the SFT phase of Qwen2.5, focusing on several critical areas:
+
+
+\begin{enumerate}[label=(\arabic*)]
+
+    \item \textbf{Long-sequence Generation:} 
+    Qwen2.5 is capable of generating high-quality content with an output context length of up to 8,192 tokens, a significant advancement over the typical post-training response length, which often remains under 2,000 tokens. To address this gap, we develop long-response datasets~\citep{quan2024language}. We employ back-translation techniques to generate queries for long-text data from pre-training corpora, impose output length constraints, and use Qwen2 to filter out low-quality paired data.
+
+    \item \textbf{Mathematics:} 
+    We introduce the chain-of-thought data of Qwen2.5-Math~\citep{qwen2.5math}, which encompasses a diverse range of query sources, including public datasets, K-12 problem collections, and synthetic problems. To ensure high-quality reasoning, we employ rejection sampling~\citep{yuan2023scaling} along with reward modeling and annotated answers for guidance, producing step-by-step reasoning process.
+
+    \item \textbf{Coding:} 
+    To enhance coding capabilities, we incorporate the instruction tuning data of Qwen2.5-Coder~\citep{qwen2.5coder}. We use multiple language-specific agents into a collaborative framework, generating diverse and high-quality instruction pairs across nearly 40 programming languages. 
+    We expand our instruction dataset by synthesizing new examples from code-related Q\&A websites and gathering algorithmic code snippets from GitHub. A comprehensive multilingual sandbox is used to perform static code checking and validate code snippets through automated unit testing, ensuring code quality and correctness~\citep{dou2024multi,yang2024evaluating}.
+    
+    \item \textbf{Instruction-following: } 
+    To ensure high-quality instruction-following data, we implement a rigorous code-based validation framework. In this approach, LLMs generate both instructions and corresponding verification code, along with comprehensive unit tests for cross-validation. Through execution feedback-based rejection sampling, we carefully curate the training data used for Supervised Fine-Tuning, thereby guaranteeing the model's faithful adherence to intended instructions~\citep{dong2024autoif}.
+    
+    \item \textbf{Structured Data Understanding: } 
+    We develop a comprehensive structured understanding dataset that encompasses both traditional tasks, such as tabular question-answering, fact verification, error correction, and structural understanding, as well as complex tasks involving structured and semi-structured data. By incorporating reasoning chains into the model's responses, we significantly enhance its ability to infer information from structured data, thereby improving its performance across these diverse tasks. This approach not only broadens the scope of the dataset but also deepens the model's capacity to reason and derive meaningful insights from complex data structures.
+
+    \item \textbf{Logical Reasoning:} To enhance the model's logical reasoning capabilities, we introduce a diverse set of 70,000 new queries spanning various domains. These queries encompass multiple-choice questions, true / false questions, and open-ended questions. 
+    The model is trained to approach problems systematically, employing a range of reasoning methods such as deductive reasoning, inductive generalization, analogical reasoning, causal reasoning, and statistical reasoning. Through iterative refinement, we systematically filter out data containing incorrect answers or flawed reasoning processes. This process progressively strengthens the model's ability to reason logically and accurately, ensuring robust performance across different types of reasoning tasks.
+    
+    \item \textbf{Cross-Lingual Transfer:} To facilitate the transfer of the model's general capabilities across languages, we employ a translation model to convert instructions from high-resource languages into various low-resource languages, thereby generating corresponding response candidates. To ensure the accuracy and consistency of these responses, we evaluate the semantic alignment between each multilingual response and its original counterpart. This process preserves the logical structure and stylistic nuances of the original responses, thereby maintaining their integrity and coherence across different languages.
+    
+    \item \textbf{Robust System Instruction:}  We construct hundreds of general system prompts to improve the diversity of system prompts in post-training, ensuring consistency between system prompts and conversations. Evaluations with different system prompts show that the model maintains good performance~\citep{lu2024large} and reduced variance, indicating improved robustness.
+    
+    \item \textbf{Response Filtering:}  To evaluate the quality of responses, we employ multiple automatic annotation methods, including a dedicated critic model and a multi-agent collaborative scoring system. Responses are subjected to rigorous assessment, and only those deem flawless by all scoring systems are retained. This comprehensive approach ensures that our outputs maintain the highest quality standards.
+    
+\end{enumerate}
+
+Ultimately, we construct a dataset of over 1 million SFT examples. The model is fine-tuned for two epochs with a sequence length of 32,768 tokens. To optimize learning, the learning rate is gradually decreased from $7 \times 10^{-6}$ to $7 \times 10^{-7}$. To address overfitting, we apply a weight decay of 0.1, and gradient norms are clipped at a maximum value of 1.0.
+
+\subsection{Offline Reinforcement Learning}
+
+Compared to Online Reinforcement Learning (RL), Offline RL enables the pre-preparation of training signals, which is particularly advantageous for tasks where standard answers exist but are challenging to evaluate using reward models. 
+In this study, we focus on objective query domains such as mathematics, coding, instruction following, and logical reasoning, where obtaining accurate evaluations can be complex.
+In the previous phase, we extensively employ strategies like execution feedback and answer matching to ensure the quality of responses.
+For the current phase, we reuse that pipeline, employing the SFT model to resample responses for a new set of queries. Responses that pass our quality checks are used as positive examples, while those that fail are treated as negative examples for Direct Preference Optimization (DPO) training~\citep{rafailov2024direct}.
+To further enhance the reliability and accuracy of the training signals, we make use of both human and automated review processes~\citep{cao2024towards}. This dual approach ensures that the training data is not only learnable but also aligned with human expectations.
+Ultimately, we construct a dataset consisting of approximately 150,000 training pairs. 
+The model is then trained for one epoch using the Online Merging Optimizer \citep{lu2024online}, with a learning rate of $7 \times 10^{-7}$.
+
+\subsection{Online Reinforcement Learning}
+
+To develop a robust reward model for online RL, we adhere to a set of carefully defined labeling criteria. Those criteria ensure that the responses generated by the model are not only high-quality but also aligned with ethical and user-centric standards~\citep{wang2024secrets}. The specific guidelines for data labeling are as follows:
+
+\begin{itemize}
+    \item \textbf{Truthfulness:} Responses must be grounded in factual accuracy, faithfully reflecting the provided context and instructions. The model should avoid generating information that is false or unsupported by the given data.
+    \item \textbf{Helpfulness:} The model's output should be genuinely useful, addressing the user's query effectively while providing content that is positive, engaging, educational, and relevant. It should follow the given instructions precisely and offer value to the user.
+    \item \textbf{Conciseness:} Responses should be succinct and to the point, avoiding unnecessary verbosity. The goal is to convey information clearly and efficiently without overwhelming the user with excessive detail.
+    \item \textbf{Relevance:} All parts of the response should be directly related to the user's query, dialogue history, and the assistant's context. The model should tailor its output to ensure it is perfectly aligned with the user's needs and expectations.
+    \item \textbf{Harmlessness:}  The model must prioritize user safety by avoiding any content that could lead to illegal, immoral, or harmful behavior. It should promote ethical conduct and responsible communication at all times.
+    \item \textbf{Debiasing:} The model should produce responses that are free from bias, including but not limited to gender, race, nationality, and politics. It should treat all topics equally and fairly, adhering to widely accepted moral and ethical standards.
+\end{itemize}
+
+The queries utilized to train the reward model are drawn from two distinct datasets: publicly available open-source data and a proprietary query set characterized by higher complexity. Responses are generated from checkpoints of the Qwen models, which have been fine-tuned using different methods—SFT, DPO, and RL—at various stages of training. To introduce diversity, those responses are sampled at different temperature settings. Preference pairs are created through both human and automated labeling processes, and the training data for DPO is also integrated into this dataset.
+
+In our online reinforcement learning (RL) framework, we employ Group Relative Policy Optimization (GRPO,~\citealp{deepseekmath}). The query set utilized for training the reward model is identical to the one used in the RL training phase. The sequence in which queries are processed during training is determined by the variance of their response scores, as evaluated by the reward model. Specifically, queries with higher variance in response scores are prioritized to ensure more effective learning.
+We sample 8 responses for each query. All models are trained with a 2048 global batch size and 2048 samples in each episode, considering a pair of queries and responses as a sample. 
+
+
+
+
+
+\subsection{Long Context Fine-tuning}
+
+
+To further extend the context length of Qwen2.5-Turbo, we introduce longer SFT examples during post-training, enabling it to better align with human preference in long queries.
+
+In the SFT phase, we employ a two-stage approach. In the first stage, the model is fine-tuned exclusively using short instructions, each containing up to 32,768 tokens. This stage uses the same data and training steps as those employed for the other Qwen2.5 models, ensuring strong performance on short tasks. In the second stage, the fine-tuning process combines both short instructions (up to 32,768 tokens) and long instructions (up to 262,144 tokens). This hybrid approach effectively enhances the model's instruction-following ability in long context tasks while maintaining its performance on short tasks.
+
+
+
+During the RL stage, we use a training strategy similar to that used for the other Qwen2.5 models, focusing solely on short instructions. This design choice is driven by two primary considerations: first, RL training is computationally expensive for long context tasks; second, there is currently a scarcity of reward models that provide suitable reward signals for long context tasks. Additionally, we find that adopting RL on short instructions alone can still significantly enhance the model's alignment with human preferences in long context tasks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

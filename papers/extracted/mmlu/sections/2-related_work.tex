@@ -1,0 +1,29 @@
+\section{Related Work}
+\paragraph{Pretraining.} 
+The dominant paradigm in NLP is to pretrain large models on massive text corpora including educational books and websites. In the process, these models are exposed to information about a wide range of topics.
+% past work has shown that these models acquire knowledge from pretraining but
+% Indeed, these models are starting to be able to learn and apply expert knowledge in different fields, effectively serving as knowledge bases 
+\citet{petroni2019languagemodelsasknowledgebase} found that recent models learn enough information from pretraining that they can serve as knowledge bases.
+However, no prior work has comprehensively measured the knowledge models have across many real-world domains. 
+
+Until recently, researchers primarily used fine-tuned models on downstream tasks \citep{BERTDevlin2019}. However, larger pretrained models like GPT-3 \citep{brown2020gpt3} have made it possible to achieve competitive performance without fine-tuning by using few-shot learning, which removes the need for a large fine-tuning set. With the advent of strong zero-shot and few-shot learning, it is now possible to curate a diverse set of tasks for evaluation and remove the possibility of models on ``spurious cues'' \citep{geirhos2020shortcut,Hendrycks2019NaturalAE} in a dataset to achieve high performance.
+
+\paragraph{Benchmarks.} 
+Many recent benchmarks aim to assess a model's general world knowledge and basic reasoning ability by testing its ``commonsense.'' A number of commonsense benchmarks have been proposed in the past year, but recent models are already nearing human-level performance on several of these, including HellaSwag \citep{zellers2019hellaswag}, Physical IQA \citep{bisk2019physicaliqa}, and CosmosQA \citep{huang2019cosmosqa}. By design, these datasets assess abilities that almost every child has. In contrast, we include harder specialized subjects that people must study to learn. 
+
+Some researchers have suggested that the future of NLP evaluation should focus on Natural Language Generation (NLG) \citep{zellers2020turingadvice}, an idea that reaches back to the Turing Test \citep{Turing1990TuringTest}. However, NLG is notoriously difficult to evaluate and lacks a standard metric \citep{Sai2020NLGSurvey}. Consequently, we instead create a simple-to-evaluate test that measures classification accuracy on multiple choice questions.
+% Maybe we can work in "beyond accuracy" around here, but it doesn't feel too natural to me right now. 
+
+While several question answering benchmarks exist, they are comparatively limited in scope. Most either cover easy topics like grade school subjects for which models can already achieve strong performance \citep{Clark2018ARCAI2, khot2019qasc, OpenBookQA2018,Clark2019RegentsScienceExams}, or are focused on linguistic understanding in the form of reading comprehension \citep{lai2017race, richardson-etal-2013-mctest}. In contrast, we include a wide range of difficult subjects that go far beyond linguistic understanding.
+
+
+
+% \dan{commented out comments for space}
+% LMs as knowledge bases
+% commonsense - complement of what we're doing
+% more details about GPT-3? 
+% T5 (text-to-text, not autoregressive)
+
+% \collin{Maybe also mention common sense. In general this section is quite short right now.}
+% \mantas{Yeah, we have to position our work wrt common sense benchmarks. I could see us getting one or two reviewers from a common sense paper, given how many of them there are. Our work does have significant differences, but we'll probably need more analysis bolstering the raw results to be accepted by this crowd, because the few common sense dataset papers I've looked at have substantial analysis.
+% Differences: 1) We have much broader coverage of branches of knowledge. 2) Instead of measuring how well models use a training set, we measure how much models already know. 3) Our benchmark is more difficult than commonsense benchmarks and allows diagnosing blind spots in particular subject areas. 4) (maybe not a useful point) Language models learn by studying text, not by acting in the world. Humans acquire academic knowledge by studying text and common sense by acting in the world. It makes sense to evaluate language models on academic knowledge.}

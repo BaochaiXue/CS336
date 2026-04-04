@@ -1,0 +1,185 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+% \usepackage{style/usenix-2020-09}
+% \usepackage{style/usenix2019_v3}
+\usepackage{style/usenix}
+
+% \documentclass[sigplan,10pt]{acmart}
+% \renewcommand\footnotetextcopyrightpermission[1]{}
+% \setcopyright{none}
+% \settopmatter{printacmref=false, printccs=false, printfolios=true}
+
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{algorithmicx,algorithm}
+\usepackage[noend]{algpseudocode}
+%\usepackage{algpseudocode}
+%\usepackage{subfigure}
+\usepackage{enumitem} % for concise list env
+\usepackage{times}
+\usepackage{xspace}
+% \usepackage[table]{xcolor}
+\usepackage{latexsym}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+%\usepackage{flushend}
+\usepackage{balance}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{pifont}
+\svgsetup{
+    inkscapepath=i/svg-inkscape/
+}
+\svgpath{{svg/}}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{etoolbox}
+\usepackage[all]{nowidow}
+\usepackage{authblk}
+\usepackage{enumitem}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+\usepackage{multirow}  % Required for multirow cells
+\usepackage{array}  % Required for specifying column widths
+\usepackage{dblfloatfix}
+
+\setlist{nolistsep}
+\setlength{\textfloatsep}{15pt}
+%\setlength{\floatsep}{7pt}
+%\setlength{\intextsep}{7pt}
+
+\newcommand{\para}{\medskip\noindent}
+\newcommand{\parabf}[1]{\medskip\noindent\textbf{#1}}
+\newcommand{\parait}[1]{\medskip\noindent\textit{#1}}
+\newcommand{\paraf}[1]{\noindent\textbf{#1}}
+\newcommand{\cut}[1]{}
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\eg}{{e.g.}}
+\newcommand{\ie}{{i.e.}}
+
+\newcommand{\sysname}{MegaScale\xspace}
+
+\newcommand{\revision}[1]{{#1}}
+\newcommand{\revisionnew}[1]{\textcolor{black}{#1}}
+\newcommand{\xin}[1]{\textcolor{blue}{(XIN: #1)}}
+\newcommand{\todo}[1]{\textcolor{red}{(TODO: #1)}}
+\newcommand{\yinmin}[1]{\textcolor{violet}{(YINMIN: #1)}}
+\newcommand{\ziheng}[1]{\textcolor{blue}{(Ziheng: #1)}}
+\newcommand{\lixiang}[1]{\textcolor{orange}{(LiXiang: #1)}}
+\newcommand{\zhi}[1]{\textcolor{blue}{(Zhi: #1)}}
+\newcommand{\yrchen}[1]{\textcolor{brown}{(Yangrui: #1)}}
+\newcommand{\yhpeng}[1]{\textcolor{brown}{(Yanghua: #1)}}
+% \patchcmd{\maketitle}
+%  {\@maketitle}
+%  {\@maketitle\vspace{-5em}}% change the value as needed
+% {}
+% {}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{remark}{Remark}[section]
+
+\begin{document}
+\sloppy
+\date{}
+
+\definecolor{ao}{rgb}{0.0, 0.5, 0.0}
+\definecolor{method}{rgb}{0., 0., 0.}
+
+\title{MegaScale: Scaling Large Language Model Training to More Than 10,000 GPUs}
+
+% \author{
+% \vspace{-0.1in}
+% Paper 1067, \pageref{sec:conclusion} Pages, Operational Systems Track
+% % \vspace{-0.5in}
+% } % end author
+
+\author{
+\vspace{-0.1in}
+\rm{
+    Ziheng Jiang$^{\text{1}, *}$ \enskip
+    Haibin Lin$^{\text{1}, *}$ \enskip
+    Yinmin Zhong$^{\text{2}, *}$ \enskip
+    Qi Huang$^{\text{1}}$ \enskip
+    Yangrui Chen$^{\text{1}}$ \enskip
+    Zhi Zhang$^{\text{1}}$ \enskip\\
+}
+\vspace{-0.1in}
+\rm{
+    Yanghua Peng$^{\text{1}}$ \enskip
+    Xiang Li$^{\text{1}}$ \enskip
+    Cong Xie$^{\text{1}}$ \enskip
+    Shibiao Nong$^{\text{1}}$ \enskip
+    Yulu Jia$^{\text{1}}$ \enskip
+    Sun He$^{\text{1}}$ \enskip
+    Hongmin Chen$^{\text{1}}$ \enskip\\
+}
+\vspace{-0.1in}
+\rm{
+    Zhihao Bai$^{\text{1}}$ \enskip
+    Qi Hou$^{\text{1}}$ \enskip
+    Shipeng Yan$^{\text{1}}$ \enskip
+    Ding Zhou$^{\text{1}}$ \enskip
+    Yiyao Sheng$^{\text{1}}$ \enskip
+    Zhuo Jiang$^{\text{1}}$ \enskip\\
+}
+\vspace{-0.1in}
+\rm{
+    Haohan Xu$^{\text{1}}$ \enskip
+    Haoran Wei$^{\text{1}}$ \enskip
+    Zhang Zhang$^{\text{1}}$ \enskip
+    Pengfei Nie$^{\text{1}}$ \enskip
+    Leqi Zou$^{\text{1}}$ \enskip
+    Sida Zhao$^{\text{1}}$ \enskip\\
+}
+\vspace{-0.1in}
+\rm{
+    Liang Xiang$^{\text{1}}$ \enskip
+    Zherui Liu$^{\text{1}}$ \enskip
+    Zhe Li$^{\text{1}}$ \enskip
+    Xiaoying Jia$^{\text{1}}$ \enskip
+    Jianxi Ye$^{\text{1}}$ \enskip
+    Xin Jin$^{\text{2}, \dag}$ \enskip
+    Xin Liu$^{\text{1}, \dag}$ \enskip\\
+}
+
+{$^{\text{1}}$\textit{ByteDance}\enskip $^{\text{2}}$\textit{Peking University}\enskip}
+}
+
+\maketitle
+\pagestyle{plain}
+\captionsetup[figure]{font=small}
+\captionsetup[table]{font=small}
+
+{\let\thefootnote\relax\footnote{{$^*$Equal contribution.}}}
+{\let\thefootnote\relax\footnote{{$^\dag$Corresponding authors.}}}
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/background}
+%\input{sections/overview}
+\input{sections/design.optimization}
+\input{sections/design.fault_tolerance}
+\input{sections/design.monitor}
+\input{sections/experience}
+\input{sections/lessons}
+\input{sections/related}
+\input{sections/conclusion}
+\label{lastpage}
+
+% \clearpage
+{%\small
+\bibliographystyle{ieeetr}
+% \balance
+\bibliography{paper}}
+
+\clearpage
+% \input{./appendix.tex}
+
+\end{document}

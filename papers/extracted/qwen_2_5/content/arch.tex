@@ -1,0 +1,32 @@
+\section{Architecture \& Tokenizer}
+
+Basically, the Qwen2.5 series include dense models for opensource, namely Qwen2.5-0.5B / 1.5B / 3B / 7B / 14B / 32B / 72B, and MoE models for API service, namely Qwen2.5-Turbo and Qwen2.5-Plus. Below, we provide details about the architecture of models.
+
+For dense models, we maintain the Transformer-based decoder architecture~\citep{transformer,gpt} as Qwen2~\citep{qwen2}. The architecture incorporates several key components: Grouped Query Attention (GQA, \citealp{gqa}) for efficient KV cache utilization, SwiGLU activation function~\citep{glu} for non-linear activation, Rotary Positional Embeddings (RoPE, \citealp{rope}) for encoding position information, QKV bias~\citep{qkv_bias} in the attention mechanism and RMSNorm~\citep{rmsnorm} with pre-normalization to ensure stable training.
+
+Building upon the dense model architectures, we extend it to MoE model architectures. This is achieved by replacing standard feed-forward network (FFN) layers with specialized MoE layers, where each layer comprises multiple FFN experts and a routing mechanism that dispatches tokens to the top-K experts. Following the approaches demonstrated in Qwen1.5-MoE~\citep{qwen2}, we implement fine-grained expert segmentation~\citep{deepseekmoe} and shared experts routing~\citep{deepspeedmoe, deepseekmoe}. These architectural innovations have yielded substantial improvements in model performance across downstream tasks.
+
+
+
+
+
+For tokenization, we utilize Qwen's tokenizer~\citep{qwen}, which implements byte-level byte-pair encoding (BBPE,~\citealp{gpt3,wang2020neural,sennirch2016neural}) with a vocabulary of 151,643 regular tokens. We have expanded the set of control tokens from 3 to 22 compared to previous Qwen versions, adding two new tokens for tool functionality and allocating the remainder for other model capabilities. This expansion establishes a unified vocabulary across all Qwen2.5 models, enhancing consistency and reducing potential compatibility issues.
+
+\begin{table}[tbp]
+\caption{Model architecture and license of Qwen2.5 open-weight models.}
+\small
+\centering
+\begin{tabular}{@{}lcccccccc@{}} 
+\toprule
+Models  & Layers & Heads (Q / KV) & Tie Embedding & Context / Generation Length  & License \\
+\midrule
+0.5B  & 24 & 14 / 2 & Yes & 32K / 8K & Apache 2.0 \\
+1.5B  & 28 & 12 / 2 & Yes & 32K / 8K & Apache 2.0 \\
+3B  & 36 & 16 / 2 & Yes & 32K / 8K & Qwen Research \\
+7B  & 28 & 28 / 4 & No & 128K / 8K & Apache 2.0 \\
+14B & 48 & 40 / 8 & No & 128K / 8K & Apache 2.0 \\
+32B & 64 & 40 / 8 & No & 128K / 8K & Apache 2.0 \\
+72B  & 80 & 64 / 8 & No & 128K / 8K & Qwen \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,38 @@
+\begin{table*}[th!]
+\centering
+\scriptsize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccc}
+\toprule
+{} & ST5-XL & LASER2 & MiniLM-L12 \footnote{\url{https://hf.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2}} & MPNet\footnote{\url{https://hf.co/sentence-transformers/https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2}} & LaBSE & SGPT-BLOOM-1.7B & SGPT-BLOOM-7.1B \\
+\midrule
+\multicolumn{8}{c}{\emph{Embedding classification performance on MASSIVE~\citep{fitzgerald2022massive} scored using accuracy}} \\
+\midrule
+Arabic (ar) & 4.18 & 37.16 & 51.43 & 45.14 & 50.86 & 54.59 & \textbf{59.25} \\
+Bengali (bn) & 2.60 & 42.51 & 48.79 & 35.34 & 58.22 & 57.76 & \textbf{61.59} \\
+English (en) & \textbf{72.09} & 47.91 & 69.32 & 66.84 & 61.46 & 66.69 & 69.67 \\
+Spanish (es) & 57.97 & 45.44 & 64.43 & 59.66 & 58.32 & 61.77 & \textbf{66.35} \\
+French (fr) & 60.99 & 46.13 & 64.82 & 60.25 & 60.47 & 64.58 & \textbf{66.95} \\
+Hindi (hi) & 3.02 & 40.20 & 62.77 & 58.37 & 59.40 & 60.74 & \textbf{63.54} \\
+Indonesian (id) & 41.53 & 45.81 & \textbf{65.43} & 59.85 & 61.12 & 60.07 & 64.06 \\
+Kannada (kn) & 2.79 & 4.32 & 50.63 & 40.98 & \textbf{56.24} & 48.56 & 53.54 \\
+Malayalam (ml) & 2.98 & 41.33 & 54.34 & 42.41 & 57.91 & 55.10 & \textbf{58.27} \\
+Portuguese (pt) & 57.95 & 48.55 & 64.89 & 61.27 & 60.16 & 62.52 & \textbf{66.69} \\
+Swahili (sw) & 30.60 & 31.89 & 31.95 & 29.57 & \textbf{51.62} & 43.90 & 49.81 \\
+Tamil (ta) & 1.79 & 29.63 & 50.17 & 36.77 & 55.04 & 52.66 & \textbf{56.40} \\
+Telugu (te) & 2.26 & 36.03 & 52.82 & 40.72 & \textbf{58.32} & 49.32 & 54.71 \\
+Urdu (ur) & 2.70 & 26.11 & 56.37 & 52.80 & 56.70 & 51.00 & \textbf{56.75} \\
+Vietnamese (vi) & 21.47 & 44.33 & 59.68 & 56.61 & 56.67 & 59.85 & \textbf{64.53} \\
+\midrule
+\multicolumn{8}{c}{\emph{Semantic textual similarity on STS22~\citep{madabushi2022semeval} scored using spearman correlation of cosine similarities}} \\
+\midrule
+Arabic (ar) & 29.60 & 42.57 & 52.19 & 46.20 & 57.67 & 48.64 & \textbf{58.67} \\
+English (en) & 64.32 & 39.76 & 63.06 & 61.72 & 60.97 & 61.45 & \textbf{66.13} \\
+Spanish (es) & 58.16 & 54.92 & 59.91 & 56.56 & 63.18 & 61.81 & \textbf{65.41} \\
+French (fr) & 77.49 & 58.61 & 74.30 & 70.55 & 77.95 & 73.18 & \textbf{80.38} \\
+Chinese (zh) & 33.55 & 49.41 & 61.75 & 58.75 & 63.02 & 58.53 & \textbf{66.78} \\
+\bottomrule
+\end{tabular}}
+\caption{Performance of BLOOM models finetuned for sentence embeddings on classification and STS datasets from MTEB~\citep{muennighoff2022crosslingual}.}
+\label{tab:bloom:emb}
+\end{table*}

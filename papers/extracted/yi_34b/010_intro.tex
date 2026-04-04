@@ -1,0 +1,50 @@
+
+Recent breakthroughs in large language models have revolutionized the whole field of artificial intelligence and potentially radiate across the entire human society. 
+Our vision for large language models is to make them the next generation computational platform and empower the whole community with significantly amplified intelligence. 
+As a step towards this mission, we present the Yi model series, 6B and 34B language models pretrained from scratch on 3.1T highly-engineered large amount of data, and finetuned on a small but meticulously polished alignment data. 
+Due to the data quality resulting from our substantial engineering efforts, which we will detail in the upcoming sections, Yi achieves near GPT-3.5 benchmark scores and human preferences. 
+
+In designing the Yi model series, we are mostly concerned on the following dimensions regarding
+\textit{model scale, data scale, and data quality}:
+(1). when choosing model scale, the desiderata is to have small enough model that is feasible for inference on consumer-grade hardware like the RTX 4090 where the bounding factor is its limited 24G memory, yet still large enough with complex reasoning and emergent abilities. This is why we found 34B gives a nice performance-cost balance;
+(2). since 34B is smaller than the conventional 70B used by Chinchilla~\citep{hoffmann2022training} and LLaMA~\citep{llama2}, we increase the pretrain data scale to 3.1T tokens to compensate for the decreased compute flops. This makes the model-data scale combination fall into the post Chinchilla optimal regime~\citep{sardana2023beyond}, i.e., we overtrain the model on more tokens (3T) than the compute optimal (around 1T). The benefit is from the inference side, as we achieve stronger performance with reduced serving cost: after int4~\citep{wu2023understanding} quantization, one can serve the 34B chat model on 24G GPU memory with almost no performance drop;
+(3). our data engineering principle is to promote quality over quantity for both pretraining and finetuning.
+The pretraining data quality is guaranteed by a sophisticated data cleaning pipeline with cascaded filtering methods and intentionally increased deduplication strength;
+(4). for finetuning data we heavily emphasize quality by handcrafting less than 10K instructions over multiple iterations based on user feedback. This approach significantly deviates from the quantity-scaling styled instruction tuning works like FLAN~\citep{chung2022scaling} and UltraChat~\citep{ding2023enhancing}, but aligns more with the handcrafting styled works like LIMA~\citep{zhou2023lima}.
+
+Our pretraining data cleaning system features a sophisticated filtering pipeline based on language, heuristic textual features, perplexity, semantics, topic, and safety, as well as a cascaded deduplication process based on paragraph, MinHash, and exact matching. 
+This thorough pipeline leads to a much higher removal ratio than existing pipelines like CCNet~\citep{wenzek2019ccnet}, RefinedWeb~\citep{penedo2023refinedweb} and RedPajama~\citep{together2023redpajama}, which we believe is key to the success of data engineering.
+The underlying principle is although pretraining requires data scaling, one would like to make sure the data used are of high quality, rather than training the model on large raw data, i.e.,  
+we prefer 3T tokens over sophasticated engineering over 10T tokens without extensive filtering. 
+Regarding the model architecture, we use standard implementation of the Transformer architecture with Grouped-Query Attention (GQA)~\citep{gqa}, SwiGLU~\citep{swiglu} activation, and RoPE with an adjusted base frequency (RoPE ABF)~\citep{xiong2023effective}.
+This design choice is the standard approach rooted from the Transformer original paper~\citep{Vaswani:2017aa}, later modified by GPT-3 and Chinchilla~\citep{hoffmann2022training}, then followed by LLaMA~\citep{llama2}, Baichuan~\citep{Yang:2023aa}, Qwen~\citep{Bai:2023aa} and many related works. 
+
+
+To approach GPT-3.5-matching human preferences, our finetuning dataset is curated from carefully selected multi-turn instruction-response pairs, annotated directly by our team of machine learning engineers then polished over multiple iterations of user feedback.
+As mentioned above, the size of our finetuning dataset is less than 10K, but improved over and over again across the model development timeline. 
+Benefiting from the dataset's manageable size, we employed an extensive grid search to identify the optimal data composition, promote diversity, and discover effective hyperparameters. 
+After 8-bit and 4-bit quantization, the final chat model can be deployed on consumer-grade GPUs nearly without performance degradation compared to the bf16 format.
+
+We further extend the Yi model capability from three dimensions: context scaling, vision-language adaptation, and depth-upscaling. 
+To achive 200K context length, we continue pretrain the model on about 5B length-upsampled data, similar to the concurrent work in~\citet{fu2024data}. 
+To adapt the model to vision-language tasks, we integrate a vision encoder and develop a multi-stage training method, following and improving the practice of~\citet{liu2023visual}. 
+We also study the effectiveness of depth-upscailng~\citep{kim2023solar}, i.e., making the model deeper by continual pretraining, and confirming its effectiveness to further improve model performance.
+
+
+Our infrastructure provides strong support for the full-stack development of the Yi model series, from pretraining to finetuning to serving. 
+To support pretraining, we develop cross-cloud elastic task scheduling, automatic failure recovery, and topology-aware resource allocation which collectively enable us to run tasks according to the real-time available GPU nodes cross clusters with limited switching overhead. 
+To support finetuning, we build a hierarchical scheduling framework supporting different distributed backends for different models (e.g., Megatron~\citep{megatron-lm} for the policy model and DeepSpeed~\citep{zero} for the reward model). 
+For efficient inference, we use 4-bit model and 8-bit KV cache quantization, combining with PagedAttention~\citep{kwon2023efficient} and Dynamic Batching. 
+
+
+Extensive experiments demonstrate that Yi-34B can match GPT-3.5 in both performance and efficiency. 
+On most standard benchmarks like MMLU~\citep{hendrycks2020measuring} (for the base model) and LMSys ELO Rating~\citep{zheng2023judging} (for the chat model), Yi-34B generally achieves scores on par with GPT-3.5. 
+After model parameter and KV cache quantization, the inference cost is also controlled such that a wide range of the community can deploy the model on cost effective devices. 
+We further report a detailed performance comparison between Yi and major LLMs on commonsense reasoning, college exams, math, coding, reading comprehension, and human preference win-rate on multiple evaluation benchmarks. 
+
+
+Since its release, the Yi model series has  benefited the community from the following perspectives: 
+(1). it provides GPT-3.5-matching quality yet cost-effective models to researchers, and enables developers to build AI-native applications like language model based agents;
+(2). it empowers end users with locally runnable chatbots, which consequently helps protecting user data privacy; 
+(3). it sheds light on the direction on further data and model scaling to achieve even stronger frontier models. 
+for both research and commercial use.

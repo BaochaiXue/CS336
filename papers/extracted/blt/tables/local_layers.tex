@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+
+\begin{tabular}{@{}lllr@{}}
+\toprule
+
+
+Ngram Embeddings & Encoder Layers & Decoder Layers & Train Dist BPB \\
+
+\midrule
+False &      1 &        9 &       0.850 \\
+False &      5 &        5 &       0.843 \\
+\midrule
+True  &      5 &        5 &       0.844 \\
+True  &      3 &        7 &       0.824 \\
+True  &      1 &        9 &       0.822 \\
+\bottomrule
+\end{tabular}
+
+\caption{
+When paired with hash n-gram embeddings, a light-weight local encoder is sufficient. More layers can then be allocated to the decoder for the same cost.
+}
+\label{tab:local_layers}
+\end{table}

@@ -1,0 +1,12 @@
+To enhance the model's trustworthiness and safety, we develop a full-stack Responsible AI Safety Engine (RAISE). 
+RAISE ensures safe pretraining, alignment, and deployment.
+This section discusses our safety measures in the pretraining and alignment stages.
+
+\paragraph{Safety in Pretraining}
+Aligning with standard pretraining data safety practices~\citep{llama2, rae2021scaling, brown2020language}, we build a set of filters based on heuristic rules, keyword matching, and learned classifiers
+to remove text containing personal identifiers and private data, and reduce sexual, violent, and extremist content. 
+
+\paragraph{Safety in Alignment}
+Informed by existing research in~\citep{glaese2022improving, ji2023beavertails}, we first build a comprehensive safety taxonomy. 
+This taxonomy covers a broad spectrum of potential concerns, including environmental disharmony, superstitious, religious sensitivities, discriminatory practices, substance abuse, violent behavior, illegal activities, hate speech, ethical violations, privacy breaches, self-harm, sexually explicit content, mental health issues, and cybersecurity threats. We curated datasets reflecting these categories for a robust alignment, and mix them with our dialog SFT data.
+We also include a targeted set of prompts simulating attack scenarios in the alignment phase, which effectively improved the model's resilience against malicious use.

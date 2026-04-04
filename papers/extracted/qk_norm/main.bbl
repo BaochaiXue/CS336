@@ -1,0 +1,843 @@
+\begin{thebibliography}{121}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abnar et~al.(2021)Abnar, Dehghani, Neyshabur, and
+  Sedghi]{abnar2021exploring}
+Samira Abnar, Mostafa Dehghani, Behnam Neyshabur, and Hanie Sedghi.
+\newblock Exploring the limits of large scale pre-training.
+\newblock \emph{arXiv preprint arXiv:2110.02095}, 2021.
+
+\bibitem[Adler et~al.(2020)Adler, Brandstetter, Widrich, Mayr, Kreil, Kopp,
+  Klambauer, and Hochreiter]{Adler2020CrossDomainFL}
+Thomas Adler, Johannes Brandstetter, Michael Widrich, Andreas Mayr, David~P.
+  Kreil, Michael Kopp, G{\"u}nter Klambauer, and Sepp Hochreiter.
+\newblock Cross-domain few-shot learning by representation fusion.
+\newblock \emph{arXiv preprint arXiv:2010.06498}, 2020.
+
+\bibitem[Aka et~al.(2021)Aka, Burke, Bauerle, Greer, and
+  Mitchell]{aka2021measuring}
+Osman Aka, Ken Burke, Alex Bauerle, Christina Greer, and Margaret Mitchell.
+\newblock Measuring model biases in the absence of ground truth.
+\newblock In \emph{Proceedings of the 2021 AAAI/ACM Conference on AI, Ethics,
+  and Society}, pages 327--335, 2021.
+
+\bibitem[Alabdulmohsin and Lucic(2021)]{alabdulmohsin2021}
+Ibrahim Alabdulmohsin and Mario Lucic.
+\newblock A near optimal algorithm for debiasing trained machine learning
+  models.
+\newblock In \emph{{NeurIPS}}, 2021.
+
+\bibitem[Andreassen et~al.(2021)Andreassen, Bahri, Neyshabur, and
+  Roelofs]{andreassen2021effective_robustness}
+Anders Andreassen, Yasaman Bahri, Behnam Neyshabur, and Rebecca Roelofs.
+\newblock The evolution of out-of-distribution robustness throughout
+  fine-tuning.
+\newblock \emph{arXiv preprint arXiv:2106.15831}, 2021.
+
+\bibitem[Arnab et~al.(2021)Arnab, Dehghani, Heigold, Sun, Lu{\v{c}}i{\'c}, and
+  Schmid]{arnab2021vivit}
+Anurag Arnab, Mostafa Dehghani, Georg Heigold, Chen Sun, Mario Lu{\v{c}}i{\'c},
+  and Cordelia Schmid.
+\newblock {ViViT}: A video vision transformer.
+\newblock In \emph{{CVPR}}, 2021.
+
+\bibitem[Ba et~al.(2016)Ba, Kiros, and Hinton]{ba2016layer}
+Jimmy~Lei Ba, Jamie~Ryan Kiros, and Geoffrey~E Hinton.
+\newblock Layer normalization.
+\newblock \emph{arXiv preprint arXiv:1607.06450}, 2016.
+
+\bibitem[Barbu et~al.(2019)Barbu, Mayo, Alverio, Luo, Wang, Gutfreund,
+  Tenenbaum, and Katz]{barbu2019objectnet}
+Andrei Barbu, David Mayo, Julian Alverio, William Luo, Christopher Wang, Dan
+  Gutfreund, Josh Tenenbaum, and Boris Katz.
+\newblock {ObjectNet}: {A} large-scale bias-controlled dataset for pushing the
+  limits of object recognition models.
+\newblock In \emph{{NeurIPS}}, pages 9448--9458, 2019.
+
+\bibitem[Beattie et~al.(2016)Beattie, Leibo, Teplyashin, Ward, Wainwright,
+  K{\"u}ttler, Lefrancq, Green, Vald{\'e}s, Sadik, et~al.]{beattie2016deepmind}
+Charles Beattie, Joel~Z Leibo, Denis Teplyashin, Tom Ward, Marcus Wainwright,
+  Heinrich K{\"u}ttler, Andrew Lefrancq, Simon Green, V{\'\i}ctor Vald{\'e}s,
+  Amir Sadik, et~al.
+\newblock Deepmind lab.
+\newblock \emph{arXiv preprint arXiv:1612.03801}, 2016.
+
+\bibitem[Beyer et~al.(2020)Beyer, H{\'e}naff, Kolesnikov, Zhai, and
+  Oord]{beyer2020we}
+Lucas Beyer, Olivier~J H{\'e}naff, Alexander Kolesnikov, Xiaohua Zhai, and
+  A{\"a}ron van~den Oord.
+\newblock Are we done with imagenet?
+\newblock \emph{arXiv preprint arXiv:2006.07159}, 2020.
+
+\bibitem[Beyer et~al.(2022{\natexlab{a}})Beyer, Izmailov, Kolesnikov, Caron,
+  Kornblith, Zhai, Minderer, Tschannen, Alabdulmohsin, and
+  Pavetic]{beyer2022flexivit}
+Lucas Beyer, Pavel Izmailov, Alexander Kolesnikov, Mathilde Caron, Simon
+  Kornblith, Xiaohua Zhai, Matthias Minderer, Michael Tschannen, Ibrahim
+  Alabdulmohsin, and Filip Pavetic.
+\newblock Flexivit: One model for all patch sizes.
+\newblock \emph{arXiv preprint arXiv:2212.08013}, 2022{\natexlab{a}}.
+
+\bibitem[Beyer et~al.(2022{\natexlab{b}})Beyer, Zhai, Royer, Markeeva, Anil,
+  and Kolesnikov]{beyer2022knowledge}
+Lucas Beyer, Xiaohua Zhai, Am{\'e}lie Royer, Larisa Markeeva, Rohan Anil, and
+  Alexander Kolesnikov.
+\newblock Knowledge distillation: A good teacher is patient and consistent.
+\newblock In \emph{{CVPR}}, pages 10925--10934, 2022{\natexlab{b}}.
+
+\bibitem[Bradbury et~al.(2018)Bradbury, Frostig, Hawkins, Johnson, Leary,
+  Maclaurin, Necula, Paszke, Vander{P}las, Wanderman-{M}ilne, and
+  Zhang]{jax2018github}
+James Bradbury, Roy Frostig, Peter Hawkins, Matthew~James Johnson, Chris Leary,
+  Dougal Maclaurin, George Necula, Adam Paszke, Jake Vander{P}las, Skye
+  Wanderman-{M}ilne, and Qiao Zhang.
+\newblock {JAX}: composable transformations of {P}ython+{N}um{P}y programs,
+  2018.
+\newblock URL \url{http://github.com/google/jax}.
+
+\bibitem[Buolamwini and Gebru(2018)]{buolamwini2018gender}
+Joy Buolamwini and Timnit Gebru.
+\newblock Gender shades: Intersectional accuracy disparities in commercial
+  gender classification.
+\newblock In \emph{{FAccT}}, 2018.
+
+\bibitem[Byrd et~al.(1995)Byrd, Lu, Nocedal, and Zhu]{byrd1995limited}
+Richard~H Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu.
+\newblock A limited memory algorithm for bound constrained optimization.
+\newblock \emph{SIAM Journal on scientific computing}, 16\penalty0
+  (5):\penalty0 1190--1208, 1995.
+
+\bibitem[Caliskan et~al.(2017)Caliskan, Bryson, and
+  Narayanan]{caliskan2017semantics}
+Aylin Caliskan, Joanna~J Bryson, and Arvind Narayanan.
+\newblock Semantics derived automatically from language corpora contain
+  human-like biases.
+\newblock \emph{Science}, 356\penalty0 (6334), 2017.
+
+\bibitem[Chen et~al.(2022)Chen, Wang, Changpinyo, Piergiovanni, Padlewski,
+  Salz, Goodman, Grycner, Mustafa, Beyer, Kolesnikov, Puigcerver, Ding, Rong,
+  Akbari, Mishra, Xue, Thapliyal, Bradbury, Kuo, Seyedhosseini, Jia, Ayan,
+  Riquelme, Steiner, Angelova, Zhai, Houlsby, and Soricut]{chen2022pali}
+Xi~Chen, Xiao Wang, Soravit Changpinyo, A.~J. Piergiovanni, Piotr Padlewski,
+  Daniel Salz, Sebastian Goodman, Adam Grycner, Basil Mustafa, Lucas Beyer,
+  Alexander Kolesnikov, Joan Puigcerver, Nan Ding, Keran Rong, Hassan Akbari,
+  Gaurav Mishra, Linting Xue, Ashish Thapliyal, James Bradbury, Weicheng Kuo,
+  Mojtaba Seyedhosseini, Chao Jia, Burcu~Karagol Ayan, Carlos Riquelme, Andreas
+  Steiner, Anelia Angelova, Xiaohua Zhai, Neil Houlsby, and Radu Soricut.
+\newblock {PaLI}: {A} jointly-scaled multilingual language-image model.
+\newblock \emph{arXiv preprint arXiv:2209.06794}, 2022.
+
+\bibitem[Cheng et~al.(2017)Cheng, Han, and Lu]{cheng2017remote}
+Gong Cheng, Junwei Han, and Xiaoqiang Lu.
+\newblock Remote sensing image scene classification: Benchmark and state of the
+  art.
+\newblock \emph{Proceedings of the IEEE}, 105\penalty0 (10):\penalty0
+  1865--1883, 2017.
+
+\bibitem[Chowdhery et~al.(2022)Chowdhery, Narang, Devlin, Bosma, Mishra,
+  Roberts, Barham, Chung, Sutton, Gehrmann, et~al.]{chowdhery2022palm}
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra,
+  Adam Roberts, Paul Barham, Hyung~Won Chung, Charles Sutton, Sebastian
+  Gehrmann, et~al.
+\newblock {PaLM}: Scaling language modeling with pathways.
+\newblock \emph{arXiv preprint arXiv:2204.02311}, 2022.
+
+\bibitem[Chung et~al.(2022)Chung, Hou, Longpre, Zoph, Tay, Fedus, Li, Wang,
+  Dehghani, Brahma, et~al.]{chung2022scaling}
+Hyung~Won Chung, Le~Hou, Shayne Longpre, Barret Zoph, Yi~Tay, William Fedus,
+  Eric Li, Xuezhi Wang, Mostafa Dehghani, Siddhartha Brahma, et~al.
+\newblock Scaling instruction-finetuned language models.
+\newblock \emph{arXiv preprint arXiv:2210.11416}, 2022.
+
+\bibitem[Cimpoi et~al.(2014)Cimpoi, Maji, Kokkinos, Mohamed, and
+  Vedaldi]{cimpoi2014describing}
+Mircea Cimpoi, Subhransu Maji, Iasonas Kokkinos, Sammy Mohamed, and Andrea
+  Vedaldi.
+\newblock Describing textures in the wild.
+\newblock In \emph{{CVPR}}, pages 3606--3613, 2014.
+
+\bibitem[Collier et~al.(2021)Collier, Mustafa, Kokiopoulou, Jenatton, and
+  Berent]{collier2021correlated}
+Mark Collier, Basil Mustafa, Efi Kokiopoulou, Rodolphe Jenatton, and Jesse
+  Berent.
+\newblock Correlated input-dependent label noise in large-scale image
+  classification.
+\newblock In \emph{{CVPR}}, pages 1551--1560, 2021.
+
+\bibitem[Cordonnier et~al.(2019)Cordonnier, Loukas, and
+  Jaggi]{cordonnier2019relationship}
+Jean-Baptiste Cordonnier, Andreas Loukas, and Martin Jaggi.
+\newblock On the relationship between self-attention and convolutional layers.
+\newblock \emph{arXiv preprint arXiv:1911.03584}, 2019.
+
+\bibitem[Cui et~al.(2018)Cui, Song, Sun, Howard, and Belongie]{cui2018large}
+Yin Cui, Yang Song, Chen Sun, Andrew Howard, and Serge Belongie.
+\newblock Large scale fine-grained categorization and domain-specific transfer
+  learning.
+\newblock In \emph{{CVPR}}, pages 4109--4118, 2018.
+
+\bibitem[Dehghani et~al.(2021{\natexlab{a}})Dehghani, Arnab, Beyer, Vaswani,
+  and Tay]{dehghani2021efficiency}
+Mostafa Dehghani, Anurag Arnab, Lucas Beyer, Ashish Vaswani, and Yi~Tay.
+\newblock The efficiency misnomer.
+\newblock \emph{arXiv preprint arXiv:2110.12894}, 2021{\natexlab{a}}.
+
+\bibitem[Dehghani et~al.(2021{\natexlab{b}})Dehghani, Tay, Gritsenko, Zhao,
+  Houlsby, Diaz, Metzler, and Vinyals]{dehghani2021benchmark}
+Mostafa Dehghani, Yi~Tay, Alexey~A Gritsenko, Zhe Zhao, Neil Houlsby, Fernando
+  Diaz, Donald Metzler, and Oriol Vinyals.
+\newblock The benchmark lottery.
+\newblock \emph{arXiv preprint arXiv:2107.07002}, 2021{\natexlab{b}}.
+
+\bibitem[Dehghani et~al.(2022)Dehghani, Gritsenko, Arnab, Minderer, and
+  Tay]{dehghani2021scenic}
+Mostafa Dehghani, Alexey Gritsenko, Anurag Arnab, Matthias Minderer, and
+  Yi~Tay.
+\newblock Scenic: A jax library for computer vision research and beyond.
+\newblock In \emph{{CVPR}}, 2022.
+
+\bibitem[Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and
+  Fei-Fei]{deng2009imagenet}
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li~Fei-Fei.
+\newblock {ImageNet}: A large-scale hierarchical image database.
+\newblock In \emph{{CVPR}}, pages 248--255, 2009.
+
+\bibitem[Deuschel et~al.(2020)Deuschel, Finzel, and
+  Rieger]{deuschel2020uncovering}
+Jessica Deuschel, Bettina Finzel, and Ines Rieger.
+\newblock Uncovering the bias in facial expressions.
+\newblock \emph{arXiv preprint arXiv:2011.11311}, 2020.
+
+\bibitem[Djolonga et~al.(2020)Djolonga, Hubis, Minderer, Nado, Nixon,
+  Romijnders, Tran, and Lucic]{djolonga2020robustness}
+Josip Djolonga, Frances Hubis, Matthias Minderer, Zachary Nado, Jeremy Nixon,
+  Rob Romijnders, Dustin Tran, and Mario Lucic.
+\newblock {R}obustness {M}etrics, 2020.
+\newblock URL \url{https://github.com/google-research/robustness_metrics}.
+
+\bibitem[Djolonga et~al.(2021)Djolonga, Yung, Tschannen, Romijnders, Beyer,
+  Kolesnikov, Puigcerver, Minderer, D'Amour, Moldovan, Gelly, Houlsby, Zhai,
+  and Lucic]{djolonga2021robustness_transferability}
+Josip Djolonga, Jessica Yung, Michael Tschannen, Rob Romijnders, Lucas Beyer,
+  Alexander Kolesnikov, Joan Puigcerver, Matthias Minderer, Alexander D'Amour,
+  Dan Moldovan, Sylvain Gelly, Neil Houlsby, Xiaohua Zhai, and Mario Lucic.
+\newblock On robustness and transferability of convolutional neural networks.
+\newblock In \emph{{CVPR}}, pages 16458--16468, 2021.
+
+\bibitem[Dosovitskiy et~al.(2021)Dosovitskiy, Beyer, Kolesnikov, Weissenborn,
+  Zhai, Unterthiner, Dehghani, Minderer, Heigold, Gelly, Uszkoreit, and
+  Houlsby]{dosovitskiy2020image}
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn,
+  Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg
+  Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock In \emph{{ICLR}}, 2021.
+
+\bibitem[Dwork et~al.(2012)Dwork, Hardt, Pitassi, Reingold, and
+  Zemel]{dwork2012fairness}
+Cynthia Dwork, Moritz Hardt, Toniann Pitassi, Omer Reingold, and Richard Zemel.
+\newblock Fairness through awareness.
+\newblock In \emph{Innovations in Theoretical Computer Science}, 2012.
+
+\bibitem[Eigen et~al.(2014)Eigen, Puhrsch, and Fergus]{eigen2014depth}
+David Eigen, Christian Puhrsch, and Rob Fergus.
+\newblock Depth map prediction from a single image using a multi-scale deep
+  network.
+\newblock In \emph{{NeurIPS}}, 2014.
+
+\bibitem[El-Yaniv and Wiener(2010)]{el2010foundations}
+Ran El-Yaniv and Yair Wiener.
+\newblock On the foundations of noise-free selective classification.
+\newblock \emph{Journal of Machine Learning Research}, 11\penalty0 (5), 2010.
+
+\bibitem[Evci et~al.(2022)Evci, Dumoulin, Larochelle, and Mozer]{evci22h2t}
+Utku Evci, Vincent Dumoulin, Hugo Larochelle, and Michael~C Mozer.
+\newblock {H}ead2{T}oe: Utilizing intermediate representations for better
+  transfer learning.
+\newblock In \emph{{ICML}}, 2022.
+
+\bibitem[Everingham et~al.(2010)Everingham, Van~Gool, Williams, Winn, and
+  Zisserman]{everingham2010pascal}
+Mark Everingham, Luc Van~Gool, Christopher~KI Williams, John Winn, and Andrew
+  Zisserman.
+\newblock The pascal visual object classes ({VOC}) challenge.
+\newblock \emph{{IJCV}}, 2010.
+
+\bibitem[Fedus et~al.(2021)Fedus, Zoph, and Shazeer]{fedus2021switch}
+William Fedus, Barret Zoph, and Noam Shazeer.
+\newblock Switch transformers: Scaling to trillion parameter models with simple
+  and efficient sparsity, 2021.
+
+\bibitem[Fort et~al.(2021)Fort, Ren, and Lakshminarayanan]{fort2021exploring}
+Stanislav Fort, Jie Ren, and Balaji Lakshminarayanan.
+\newblock Exploring the limits of out-of-distribution detection.
+\newblock In \emph{{NeurIPS}}, pages 7068--7081, 2021.
+
+\bibitem[Geiger et~al.(2013)Geiger, Lenz, Stiller, and
+  Urtasun]{geiger2013vision}
+Andreas Geiger, Philip Lenz, Christoph Stiller, and Raquel Urtasun.
+\newblock Vision meets robotics: The kitti dataset.
+\newblock \emph{The International Journal of Robotics Research}, 32\penalty0
+  (11):\penalty0 1231--1237, 2013.
+
+\bibitem[Geirhos et~al.(2019)Geirhos, Rubisch, Michaelis, Bethge, Wichmann, and
+  Brendel]{geirhos2019imagenet}
+Robert Geirhos, Patricia Rubisch, Claudio Michaelis, Matthias Bethge, Felix~A
+  Wichmann, and Wieland Brendel.
+\newblock {ImageNet-trained CNNs} are biased towards texture; increasing shape
+  bias improves accuracy and robustness.
+\newblock In \emph{{ICLR}}, 2019.
+
+\bibitem[Geirhos et~al.(2021)Geirhos, Narayanappa, Mitzkus, Thieringer, Bethge,
+  Wichmann, and Brendel]{geirhos2021partial}
+Robert Geirhos, Kantharaju Narayanappa, Benjamin Mitzkus, Tizian Thieringer,
+  Matthias Bethge, Felix~A Wichmann, and Wieland Brendel.
+\newblock Partial success in closing the gap between human and machine vision.
+\newblock In \emph{{NeurIPS}}, pages 23885--23899, 2021.
+
+\bibitem[Gilmer et~al.(2023)Gilmer, Schioppa, and Cohen]{gilmer2023intriguing}
+Justin Gilmer, Andrea Schioppa, and Jeremy Cohen.
+\newblock {Intriguing Properties of Transformer Training Instabilities}, 2023.
+\newblock To appear.
+
+\bibitem[Guo et~al.(2017)Guo, Pleiss, Sun, and Weinberger]{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q Weinberger.
+\newblock On calibration of modern neural networks.
+\newblock In \emph{{ICML}}, 2017.
+
+\bibitem[Heek et~al.(2020)Heek, Levskaya, Oliver, Ritter, Rondepierre, Steiner,
+  and van {Z}ee]{flax2020github}
+Jonathan Heek, Anselm Levskaya, Avital Oliver, Marvin Ritter, Bertrand
+  Rondepierre, Andreas Steiner, and Marc van {Z}ee.
+\newblock {F}lax: A neural network library and ecosystem for {JAX}, 2020.
+\newblock URL \url{http://github.com/google/flax}.
+
+\bibitem[Helber et~al.(2019)Helber, Bischke, Dengel, and
+  Borth]{helber2019eurosat}
+Patrick Helber, Benjamin Bischke, Andreas Dengel, and Damian Borth.
+\newblock Eurosat: A novel dataset and deep learning benchmark for land use and
+  land cover classification.
+\newblock \emph{IEEE Journal of Selected Topics in Applied Earth Observations
+  and Remote Sensing}, 12\penalty0 (7):\penalty0 2217--2226, 2019.
+
+\bibitem[Hendricks et~al.(2018)Hendricks, Burns, Saenko, Darrell, and
+  Rohrbach]{hendricks2018women}
+Lisa~Anne Hendricks, Kaylee Burns, Kate Saenko, Trevor Darrell, and Anna
+  Rohrbach.
+\newblock Women also snowboard: Overcoming bias in captioning models.
+\newblock In \emph{{ECCV}}, 2018.
+
+\bibitem[Hendrycks and Dietterich(2019)]{hendrycks2019benchmarking}
+Dan Hendrycks and Thomas Dietterich.
+\newblock Benchmarking neural network robustness to common corruptions and
+  perturbations.
+\newblock \emph{arXiv preprint arXiv:1903.12261}, 2019.
+
+\bibitem[Hendrycks et~al.(2019)Hendrycks, Basart, Mazeika, Mostajabi,
+  Steinhardt, and Song]{hendrycks2019scaling}
+Dan Hendrycks, Steven Basart, Mantas Mazeika, Mohammadreza Mostajabi, Jacob
+  Steinhardt, and Dawn Song.
+\newblock Scaling out-of-distribution detection for real-world settings.
+\newblock \emph{arXiv preprint arXiv:1911.11132}, 2019.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Basart, Mu, Kadavath, Wang, Dorundo,
+  Desai, Zhu, Parajuli, Guo, Song, Steinhardt, and
+  Gilmer]{hendrycks2020imagenet_r}
+Dan Hendrycks, Steven Basart, Norman Mu, Saurav Kadavath, Frank Wang, Evan
+  Dorundo, Rahul Desai, Tyler Zhu, Samyak Parajuli, Mike Guo, Dawn Song, Jacob
+  Steinhardt, and Justin Gilmer.
+\newblock The many faces of robustness: {A} critical analysis of
+  out-of-distribution generalization.
+\newblock \emph{arXiv preprint arXiv:2006.16241}, 2020.
+
+\bibitem[Hendrycks et~al.(2021)Hendrycks, Zhao, Basart, Steinhardt, and
+  Song]{hendrycks2021imagenet_a}
+Dan Hendrycks, Kevin Zhao, Steven Basart, Jacob Steinhardt, and Dawn Song.
+\newblock Natural adversarial examples.
+\newblock In \emph{{CVPR}}, pages 15262--15271, 2021.
+
+\bibitem[Hermann et~al.(2020)Hermann, Ruf, Weinmann, and Hinz]{hermann2020self}
+Max Hermann, Boitumelo Ruf, Martin Weinmann, and Stefan Hinz.
+\newblock Self-supervised learning for monocular depth estimation from aerial
+  imagery.
+\newblock \emph{arXiv preprint arXiv:2008.07246}, 2020.
+
+\bibitem[Hinton et~al.(2015)Hinton, Vinyals, Dean,
+  et~al.]{hinton2015distilling}
+Geoffrey Hinton, Oriol Vinyals, Jeff Dean, et~al.
+\newblock Distilling the knowledge in a neural network.
+\newblock \emph{arXiv preprint arXiv:1503.02531}, 2\penalty0 (7), 2015.
+
+\bibitem[Jia et~al.(2021)Jia, Yang, Xia, Chen, Parekh, Pham, Le, Sung, Li, and
+  Duerig]{align}
+Chao Jia, Yinfei Yang, Ye~Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc Le,
+  Yun-Hsuan Sung, Zhen Li, and Tom Duerig.
+\newblock Scaling up visual and vision-language representation learning with
+  noisy text supervision.
+\newblock In \emph{{ICML}}, pages 4904--4916, 2021.
+
+\bibitem[Johnson et~al.(2017)Johnson, Hariharan, Van Der~Maaten, Fei-Fei,
+  Lawrence~Zitnick, and Girshick]{johnson2017clevr}
+Justin Johnson, Bharath Hariharan, Laurens Van Der~Maaten, Li~Fei-Fei,
+  C~Lawrence~Zitnick, and Ross Girshick.
+\newblock {CLEVR}: A diagnostic dataset for compositional language and
+  elementary visual reasoning.
+\newblock In \emph{{CVPR}}, pages 2901--2910, 2017.
+
+\bibitem[Jouppi et~al.(2020)Jouppi, Yoon, Kurian, Li, Patil, Laudon, Young, and
+  Patterson]{jouppi2020domain}
+Norman~P Jouppi, Doe~Hyun Yoon, George Kurian, Sheng Li, Nishant Patil, James
+  Laudon, Cliff Young, and David Patterson.
+\newblock A domain-specific supercomputer for training deep neural networks.
+\newblock \emph{Communications of the ACM}, 63\penalty0 (7):\penalty0 67--78,
+  2020.
+
+\bibitem[Kaggle and EyePacs(2015)]{kaggle-diabetic-retinopathy}
+Kaggle and EyePacs.
+\newblock Kaggle diabetic retinopathy detection, 2015.
+\newblock URL
+  \url{https://www.kaggle.com/c/diabetic-retinopathy-detection/data}.
+
+\bibitem[Kather et~al.(2016)Kather, Weis, Bianconi, Melchers, Schad, Gaiser,
+  Marx, and Z{\"o}llner]{kather2016multi}
+Jakob~Nikolas Kather, Cleo-Aron Weis, Francesco Bianconi, Susanne~M Melchers,
+  Lothar~R Schad, Timo Gaiser, Alexander Marx, and Frank~Gerrit Z{\"o}llner.
+\newblock Multi-class texture analysis in colorectal cancer histology.
+\newblock \emph{Scientific reports}, 6:\penalty0 27988, 2016.
+
+\bibitem[Kay et~al.(2017)Kay, Carreira, Simonyan, Zhang, Hillier,
+  Vijayanarasimhan, Viola, Green, Back, Natsev, et~al.]{kay2017kinetics}
+Will Kay, Joao Carreira, Karen Simonyan, Brian Zhang, Chloe Hillier, Sudheendra
+  Vijayanarasimhan, Fabio Viola, Tim Green, Trevor Back, Paul Natsev, et~al.
+\newblock The kinetics human action video dataset.
+\newblock \emph{arXiv preprint arXiv:1705.06950}, 2017.
+
+\bibitem[Khalifa et~al.(2022)Khalifa, Mozer, Sedghi, Neyshabur, and
+  Alabdulmohsin]{khalifa2022}
+Amr Khalifa, Michael~C. Mozer, Hanie Sedghi, Behnam Neyshabur, and Ibrahim
+  Alabdulmohsin.
+\newblock Layer-stack temperature scaling.
+\newblock \emph{arXiv preprint arXiv:2211.10193}, 2022.
+
+\bibitem[Kingma and Ba(2015)]{kingma2014adam}
+Diederik~P Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock In \emph{{ICLR}}, 2015.
+
+\bibitem[Kivlichan et~al.(2021)Kivlichan, Lin, Liu, and
+  Vasserman]{kivlichan2021measuring}
+Ian~D Kivlichan, Zi~Lin, Jeremiah Liu, and Lucy Vasserman.
+\newblock Measuring and improving model-moderator collaboration using
+  uncertainty estimation.
+\newblock \emph{arXiv preprint arXiv:2107.04212}, 2021.
+
+\bibitem[Kolesnikov et~al.(2020)Kolesnikov, Beyer, Zhai, Puigcerver, Yung,
+  Gelly, and Houlsby]{kolesnikov2020big}
+Alexander Kolesnikov, Lucas Beyer, Xiaohua Zhai, Joan Puigcerver, Jessica Yung,
+  Sylvain Gelly, and Neil Houlsby.
+\newblock {Big Transfer ({BiT}): General visual representation learning}.
+\newblock In \emph{{ECCV}}, pages 491--507, 2020.
+
+\bibitem[Krause et~al.(2013)Krause, Stark, Deng, and
+  Fei-Fei]{KrauseStarkDengFei-Fei_3DRR2013}
+Jonathan Krause, Michael Stark, Jia Deng, and Li~Fei-Fei.
+\newblock 3d object representations for fine-grained categorization.
+\newblock In \emph{4th International IEEE Workshop on 3D Representation and
+  Recognition}, 2013.
+
+\bibitem[Krizhevsky et~al.(2009)Krizhevsky, Hinton,
+  et~al.]{krizhevsky2009learning}
+Alex Krizhevsky, Geoffrey Hinton, et~al.
+\newblock Learning multiple layers of features from tiny images, 2009.
+\newblock Technical Report, University of Toronto.
+
+\bibitem[Kudo and Richardson(2018)]{kudo-richardson-2018-sentencepiece}
+Taku Kudo and John Richardson.
+\newblock {S}entence{P}iece: A simple and language independent subword
+  tokenizer and detokenizer for neural text processing.
+\newblock In \emph{EMNLP}, pages 66--71, November 2018.
+
+\bibitem[Kumar et~al.(2022)Kumar, Houlsby, Kalchbrenner, and
+  Cubuk]{kumar2022do}
+Manoj Kumar, Neil Houlsby, Nal Kalchbrenner, and Ekin~Dogus Cubuk.
+\newblock Do better imagenet classifiers assess perceptual similarity better?
+\newblock \emph{{{Transactions on Machine Learning Research}}}, 2022.
+
+\bibitem[LeCun et~al.(2004)LeCun, Huang, and Bottou]{lecun2004learning}
+Yann LeCun, Fu~Jie Huang, and Leon Bottou.
+\newblock Learning methods for generic object recognition with invariance to
+  pose and lighting.
+\newblock In \emph{{CVPR}}, volume~2, 2004.
+
+\bibitem[Li et~al.(2022)Li, Andreeto, Ranzato, and
+  Perona]{li_andreeto_ranzato_perona_2022}
+Fei-Fei Li, Marco Andreeto, Marc'Aurelio Ranzato, and Pietro Perona.
+\newblock Caltech 101, 2022.
+\newblock CaltechDATA, doi: 10.22002/D1.20086.
+
+\bibitem[Liu et~al.(2015)Liu, Luo, Wang, and Tang]{liu2015faceattributes}
+Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang.
+\newblock Deep learning face attributes in the wild.
+\newblock In \emph{{ICCV}}, 2015.
+
+\bibitem[Loshchilov and Hutter(2017)]{loshchilov2016sgdr}
+Ilya Loshchilov and Frank Hutter.
+\newblock {SGDR}: Stochastic gradient descent with warm restarts.
+\newblock In \emph{{ICLR}}, 2017.
+
+\bibitem[Mahajan et~al.(2018)Mahajan, Girshick, Ramanathan, He, Paluri, Li,
+  Bharambe, and Van Der~Maaten]{mahajan2018exploring}
+Dhruv Mahajan, Ross Girshick, Vignesh Ramanathan, Kaiming He, Manohar Paluri,
+  Yixuan Li, Ashwin Bharambe, and Laurens Van Der~Maaten.
+\newblock Exploring the limits of weakly supervised pretraining.
+\newblock In \emph{{ECCV}}, pages 181--196, 2018.
+
+\bibitem[Matthey et~al.(2017)Matthey, Higgins, Hassabis, and
+  Lerchner]{dsprites17}
+Loic Matthey, Irina Higgins, Demis Hassabis, and Alexander Lerchner.
+\newblock {dSprites}: Disentanglement testing sprites dataset, 2017.
+\newblock URL \url{https://github.com/deepmind/dsprites-dataset/}.
+
+\bibitem[Minderer et~al.(2021)Minderer, Djolonga, Romijnders, Hubis, Zhai,
+  Houlsby, Tran, and Lucic]{minderer2021revisiting}
+Matthias Minderer, Josip Djolonga, Rob Romijnders, Frances Hubis, Xiaohua Zhai,
+  Neil Houlsby, Dustin Tran, and Mario Lucic.
+\newblock Revisiting the calibration of modern neural networks.
+\newblock \emph{{NeurIPS}}, 34:\penalty0 15682--15694, 2021.
+
+\bibitem[Mitchell et~al.(2019)Mitchell, Wu, Zaldivar, Barnes, Vasserman,
+  Hutchinson, Spitzer, Raji, and Gebru]{mitchell2019model}
+Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman,
+  Ben Hutchinson, Elena Spitzer, Inioluwa~Deborah Raji, and Timnit Gebru.
+\newblock Model cards for model reporting.
+\newblock In \emph{{FAccT}}, pages 220--229, 2019.
+
+\bibitem[Monfort et~al.(2019)Monfort, Andonian, Zhou, Ramakrishnan, Bargal,
+  Yan, Brown, Fan, Gutfreund, Vondrick, et~al.]{monfort2019moments}
+Mathew Monfort, Alex Andonian, Bolei Zhou, Kandan Ramakrishnan, Sarah~Adel
+  Bargal, Tom Yan, Lisa Brown, Quanfu Fan, Dan Gutfreund, Carl Vondrick, et~al.
+\newblock Moments in time dataset: one million videos for event understanding.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 42\penalty0 (2), 2019.
+
+\bibitem[Mottaghi et~al.(2014)Mottaghi, Chen, Liu, Cho, Lee, Fidler, Urtasun,
+  and Yuille]{mottaghi2014role}
+Roozbeh Mottaghi, Xianjie Chen, Xiaobai Liu, Nam-Gyu Cho, Seong-Whan Lee, Sanja
+  Fidler, Raquel Urtasun, and Alan Yuille.
+\newblock The role of context for object detection and semantic segmentation in
+  the wild.
+\newblock In \emph{{CVPR}}, 2014.
+
+\bibitem[Naeini et~al.(2015)Naeini, Cooper, and
+  Hauskrecht]{naeini2015obtaining}
+Mahdi~Pakdaman Naeini, Gregory Cooper, and Milos Hauskrecht.
+\newblock Obtaining well calibrated probabilities using bayesian binning.
+\newblock In \emph{{AAAI}}, 2015.
+
+\bibitem[Netzer et~al.(2011)Netzer, Wang, Coates, Bissacco, Wu, and
+  Ng]{netzer2011reading}
+Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo~Wu, and Andrew~Y.
+  Ng.
+\newblock Reading digits in natural images with unsupervised feature learning.
+\newblock In \emph{NIPS Workshop on Deep Learning and Unsupervised Feature
+  Learning 2011}, 2011.
+
+\bibitem[Nilsback and Zisserman(2008)]{nilsback2008automated}
+Maria-Elena Nilsback and Andrew Zisserman.
+\newblock Automated flower classification over a large number of classes.
+\newblock In \emph{Indian Conference on Computer Vision, Graphics \& Image
+  Processing}, pages 722--729, 2008.
+
+\bibitem[Pan and Yang(2010)]{pan2009survey}
+Sinno~Jialin Pan and Qiang Yang.
+\newblock A survey on transfer learning.
+\newblock \emph{IEEE Transactions on Knowledge and Data Engineering},
+  22\penalty0 (10):\penalty0 1345--1359, 2010.
+
+\bibitem[Parkhi et~al.(2012)Parkhi, Vedaldi, Zisserman, and
+  Jawahar]{parkhi2012cats}
+Omkar~M Parkhi, Andrea Vedaldi, Andrew Zisserman, and CV~Jawahar.
+\newblock Cats and dogs.
+\newblock In \emph{2012 IEEE conference on computer vision and pattern
+  recognition}, pages 3498--3505. IEEE, 2012.
+
+\bibitem[Pham et~al.(2021)Pham, Dai, Ghiasi, Liu, Yu, Luong, Tan, and
+  Le]{basic}
+Hieu Pham, Zihang Dai, Golnaz Ghiasi, Hanxiao Liu, Adams~Wei Yu, Minh-Thang
+  Luong, Mingxing Tan, and Quoc~V Le.
+\newblock Combined scaling for zero-shot transfer learning.
+\newblock \emph{arXiv preprint arXiv:2111.10050}, 2021.
+
+\bibitem[Pope et~al.(2022)Pope, Douglas, Chowdhery, Devlin, Bradbury, Levskaya,
+  Heek, Xiao, Agrawal, and Dean]{pope2022efficiently}
+Reiner Pope, Sholto Douglas, Aakanksha Chowdhery, Jacob Devlin, James Bradbury,
+  Anselm Levskaya, Jonathan Heek, Kefan Xiao, Shivani Agrawal, and Jeff Dean.
+\newblock Efficiently scaling transformer inference.
+\newblock \emph{arXiv preprint arXiv:2211.05102}, 2022.
+
+\bibitem[Radford et~al.(2021)Radford, Kim, Hallacy, Ramesh, Goh, Agarwal,
+  Sastry, Askell, Mishkin, Clark, et~al.]{clip}
+Alec Radford, Jong~Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh,
+  Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark,
+  et~al.
+\newblock Learning transferable visual models from natural language
+  supervision.
+\newblock In \emph{{ICML}}, pages 8748--8763, 2021.
+
+\bibitem[Raffel et~al.(2019)Raffel, Shazeer, Roberts, Lee, Narang, Matena,
+  Zhou, Li, and Liu]{t5paper}
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael
+  Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu.
+\newblock Exploring the limits of transfer learning with a unified text-to-text
+  transformer.
+\newblock \emph{arXiv preprint arXiv:1910.10683}, 2019.
+
+\bibitem[Ranftl et~al.(2021)Ranftl, Bochkovskiy, and Koltun]{ranftl2021vision}
+Ren{\'e} Ranftl, Alexey Bochkovskiy, and Vladlen Koltun.
+\newblock Vision transformers for dense prediction.
+\newblock In \emph{{CVPR}}, pages 12179--12188, 2021.
+
+\bibitem[Recht et~al.(2019)Recht, Roelofs, Schmidt, and
+  Shankar]{recht2019imagenet_v2}
+Benjamin Recht, Rebecca Roelofs, Ludwig Schmidt, and Vaishaal Shankar.
+\newblock Do {ImageNet} classifiers generalize to {ImageNet}?
+\newblock In \emph{{ICML}}, 2019.
+
+\bibitem[Riquelme et~al.(2021)Riquelme, Puigcerver, Mustafa, Neumann, Jenatton,
+  Susano~Pinto, Keysers, and Houlsby]{riquelme2021scaling}
+Carlos Riquelme, Joan Puigcerver, Basil Mustafa, Maxim Neumann, Rodolphe
+  Jenatton, Andr{\'e} Susano~Pinto, Daniel Keysers, and Neil Houlsby.
+\newblock Scaling vision with sparse mixture of experts.
+\newblock In \emph{{NeurIPS}}, volume~34, pages 8583--8595, 2021.
+
+\bibitem[Saharia et~al.(2022)Saharia, Chan, Saxena, Li, Whang, Denton,
+  Ghasemipour, Ayan, Mahdavi, Lopes, et~al.]{imagen}
+Chitwan Saharia, William Chan, Saurabh Saxena, Lala Li, Jay Whang, Emily
+  Denton, Seyed Kamyar~Seyed Ghasemipour, Burcu~Karagol Ayan, S~Sara Mahdavi,
+  Rapha~Gontijo Lopes, et~al.
+\newblock Photorealistic text-to-image diffusion models with deep language
+  understanding.
+\newblock \emph{NeurIPS}, 2022.
+
+\bibitem[Strudel et~al.(2021)Strudel, Garcia, Laptev, and
+  Schmid]{strudel2021segmenter}
+Robin Strudel, Ricardo Garcia, Ivan Laptev, and Cordelia Schmid.
+\newblock Segmenter: Transformer for semantic segmentation.
+\newblock In \emph{{ICCV}}, 2021.
+
+\bibitem[Sun et~al.(2017)Sun, Shrivastava, Singh, and Gupta]{sun2017revisiting}
+Chen Sun, Abhinav Shrivastava, Saurabh Singh, and Abhinav Gupta.
+\newblock Revisiting unreasonable effectiveness of data in deep learning era.
+\newblock In \emph{{CVPR}}, pages 843--852, 2017.
+
+\bibitem[Sun et~al.(2020)Sun, Kretzschmar, Dotiwalla, Chouard, Patnaik, Tsui,
+  Guo, Zhou, Chai, Caine, et~al.]{sun2020scalability}
+Pei Sun, Henrik Kretzschmar, Xerxes Dotiwalla, Aurelien Chouard, Vijaysai
+  Patnaik, Paul Tsui, James Guo, Yin Zhou, Yuning Chai, Benjamin Caine, et~al.
+\newblock Scalability in perception for autonomous driving: Waymo open dataset.
+\newblock In \emph{{CVPR}}, 2020.
+
+\bibitem[Sundararajan et~al.(2017)Sundararajan, Taly, and
+  Yan]{sundararajan2017axiomatic}
+Mukund Sundararajan, Ankur Taly, and Qiqi Yan.
+\newblock Axiomatic attribution for deep networks.
+\newblock In \emph{{ICML}}, pages 3319--3328, 2017.
+
+\bibitem[Szegedy et~al.(2015)Szegedy, Liu, Jia, Sermanet, Reed, Anguelov,
+  Erhan, Vanhoucke, and Rabinovich]{szegedy2015going}
+Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir
+  Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich.
+\newblock Going deeper with convolutions.
+\newblock In \emph{{CVPR}}, 2015.
+
+\bibitem[Taori et~al.(2020)Taori, Dave, Shankar, Carlini, Recht, and
+  Schmidt]{taori2020measuring_robustness}
+Rohan Taori, Achal Dave, Vaishaal Shankar, Nicholas Carlini, Benjamin Recht,
+  and Ludwig Schmidt.
+\newblock Measuring robustness to natural distribution shifts in image
+  classification.
+\newblock In \emph{{NeurIPS}}, 2020.
+
+\bibitem[Tay et~al.(2022)Tay, Dehghani, Tran, Garcia, Bahri, Schuster, Zheng,
+  Houlsby, and Metzler]{tay2022unifying}
+Yi~Tay, Mostafa Dehghani, Vinh~Q Tran, Xavier Garcia, Dara Bahri, Tal Schuster,
+  Huaixiu~Steven Zheng, Neil Houlsby, and Donald Metzler.
+\newblock Unifying language learning paradigms.
+\newblock \emph{arXiv preprint arXiv:2205.05131}, 2022.
+
+\bibitem[Teh and Taylor(2019)]{teh2019metric}
+Eu~Wern Teh and Graham~W Taylor.
+\newblock Metric learning for patch classification in digital pathology.
+\newblock In \emph{International Conference on Medical Imaging with Deep
+  Learning--Extended Abstract Track}, 2019.
+
+\bibitem[Touvron et~al.(2022)Touvron, Cord, and J{\'e}gou]{touvron2022deit}
+Hugo Touvron, Matthieu Cord, and Herv{\'e} J{\'e}gou.
+\newblock {DeiT III}: Revenge of the {ViT}.
+\newblock In \emph{{ECCV}}, 2022.
+
+\bibitem[Tran et~al.(2022)Tran, Liu, Dusenberry, Phan, Collier, Ren, Han, Wang,
+  Mariet, Hu, et~al.]{tran2022plex}
+Dustin Tran, Jeremiah Liu, Michael~W Dusenberry, Du~Phan, Mark Collier, Jie
+  Ren, Kehang Han, Zi~Wang, Zelda Mariet, Huiyi Hu, et~al.
+\newblock Plex: Towards reliability using pretrained large model extensions.
+\newblock \emph{arXiv preprint arXiv:2207.07411}, 2022.
+
+\bibitem[Wah et~al.(2011)Wah, Branson, Welinder, Perona, and
+  Belongie]{WahCUB_200_2011}
+C.~Wah, S.~Branson, P.~Welinder, P.~Perona, and S.~Belongie.
+\newblock The {Caltech}-{UCSD} {Birds}-200-2011 dataset.
+\newblock Technical Report CNS-TR-2011-001, California Institute of Technology,
+  2011.
+
+\bibitem[Wang and Komatsuzaki(2021)]{gpt-j}
+Ben Wang and Aran Komatsuzaki.
+\newblock {GPT-J-6B: A 6 Billion Parameter Autoregressive Language Model}.
+\newblock \url{https://github.com/kingoflolz/mesh-transformer-jax}, May 2021.
+
+\bibitem[Wang et~al.(2022{\natexlab{a}})Wang, Wei, Sabne, Davis, Ilbeyi,
+  Hechtman, Chen, Murthy, Maggioni, Zhang, Kumar, Guo, Xu, and
+  Zhou]{wang2022overlap}
+Shibo Wang, Jinliang Wei, Amit Sabne, Andy Davis, Berkin Ilbeyi, Blake
+  Hechtman, Dehao Chen, Karthik~Srinivasa Murthy, Marcello Maggioni, Qiao
+  Zhang, Sameer Kumar, Tongfei Guo, Yuanzhong Xu, and Zongwei Zhou.
+\newblock Overlap communication with dependent computation via decomposition in
+  large deep learning models.
+\newblock In \emph{ACM International Conference on Architectural Support for
+  Programming Languages and Operating Systems}, pages 93--–106,
+  2022{\natexlab{a}}.
+
+\bibitem[Wang et~al.(2022{\natexlab{b}})Wang, Li, Li, He, Huang, Zhao, Zhang,
+  Xu, Liu, Wang, Xing, Chen, Pan, Yu, Wang, Wang, and
+  Qiao]{wang2022internvideo}
+Yi~Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Hongjie
+  Zhang, Jilan Xu, Yi~Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jiashuo
+  Yu, Yali Wang, Limin Wang, and Yu~Qiao.
+\newblock Internvideo: General video foundation models via generative and
+  discriminative learning.
+\newblock \emph{arXiv preprint arXiv:2212.03191}, 2022{\natexlab{b}}.
+
+\bibitem[Wang et~al.(2020)Wang, Qinami, Karakozis, Genova, Nair, Hata, and
+  Russakovsky]{wang2020towards}
+Zeyu Wang, Klint Qinami, Ioannis~Christos Karakozis, Kyle Genova, Prem Nair,
+  Kenji Hata, and Olga Russakovsky.
+\newblock Towards fairness in visual recognition: Effective strategies for bias
+  mitigation.
+\newblock In \emph{{CVPR}}, 2020.
+
+\bibitem[Wei et~al.(2022)Wei, Tay, Bommasani, Raffel, Zoph, Borgeaud, Yogatama,
+  Bosma, Zhou, Metzler, et~al.]{wei2022emergent}
+Jason Wei, Yi~Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian
+  Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, et~al.
+\newblock Emergent abilities of large language models.
+\newblock \emph{arXiv preprint arXiv:2206.07682}, 2022.
+
+\bibitem[Wen et~al.(2019)Wen, Tran, and Ba]{wen2019batchensemble}
+Yeming Wen, Dustin Tran, and Jimmy Ba.
+\newblock Batchensemble: an alternative approach to efficient ensemble and
+  lifelong learning.
+\newblock In \emph{{ICLR}}, 2019.
+
+\bibitem[Xiao et~al.(2010)Xiao, Hays, Ehinger, Oliva, and
+  Torralba]{xiao2010sun}
+Jianxiong Xiao, James Hays, Krista~A Ehinger, Aude Oliva, and Antonio Torralba.
+\newblock Sun database: Large-scale scene recognition from abbey to zoo.
+\newblock In \emph{{CVPR}}, pages 3485--3492, 2010.
+
+\bibitem[Xiao et~al.(2018)Xiao, Liu, Zhou, Jiang, and Sun]{xiao2018unified}
+Tete Xiao, Yingcheng Liu, Bolei Zhou, Yuning Jiang, and Jian Sun.
+\newblock Unified perceptual parsing for scene understanding.
+\newblock In \emph{{ECCV}}, 2018.
+
+\bibitem[Yang and Newsam(2010)]{yang2010bag}
+Yi~Yang and Shawn Newsam.
+\newblock Bag-of-visual-words and spatial extensions for land-use
+  classification.
+\newblock In \emph{SIGSPATIAL international conference on advances in
+  geographic information systems}, pages 270--279, 2010.
+
+\bibitem[Yu et~al.(2022{\natexlab{a}})Yu, Wang, Vasudevan, Yeung,
+  Seyedhosseini, and Wu]{yu2022coca}
+Jiahui Yu, Zirui Wang, Vijay Vasudevan, Legg Yeung, Mojtaba Seyedhosseini, and
+  Yonghui Wu.
+\newblock Coca: Contrastive captioners are image-text foundation models.
+\newblock \emph{{{Transactions on Machine Learning Research}}},
+  2022{\natexlab{a}}.
+
+\bibitem[Yu et~al.(2022{\natexlab{b}})Yu, Xu, Koh, Luong, Baid, Wang,
+  Vasudevan, Ku, Yang, Ayan, et~al.]{parti}
+Jiahui Yu, Yuanzhong Xu, Jing~Yu Koh, Thang Luong, Gunjan Baid, Zirui Wang,
+  Vijay Vasudevan, Alexander Ku, Yinfei Yang, Burcu~Karagol Ayan, et~al.
+\newblock Scaling autoregressive models for content-rich text-to-image
+  generation.
+\newblock \emph{{{Transactions on Machine Learning Research}}},
+  2022{\natexlab{b}}.
+
+\bibitem[Zafar et~al.(2017)Zafar, Valera, Gomez~Rodriguez, and
+  Gummadi]{zafar2017fairness}
+Muhammad~Bilal Zafar, Isabel Valera, Manuel Gomez~Rodriguez, and Krishna~P
+  Gummadi.
+\newblock Fairness beyond disparate treatment \& disparate impact: Learning
+  classification without disparate mistreatment.
+\newblock In \emph{International Conference on World Wide Web}, 2017.
+
+\bibitem[Zhai et~al.(2019)Zhai, Puigcerver, Kolesnikov, Ruyssen, Riquelme,
+  Lucic, Djolonga, Pinto, Neumann, Dosovitskiy, et~al.]{zhai2019large}
+Xiaohua Zhai, Joan Puigcerver, Alexander Kolesnikov, Pierre Ruyssen, Carlos
+  Riquelme, Mario Lucic, Josip Djolonga, Andre~Susano Pinto, Maxim Neumann,
+  Alexey Dosovitskiy, et~al.
+\newblock A large-scale study of representation learning with the visual task
+  adaptation benchmark.
+\newblock \emph{arXiv preprint arXiv:1910.04867}, 2019.
+
+\bibitem[Zhai et~al.(2022{\natexlab{a}})Zhai, Kolesnikov, Houlsby, and
+  Beyer]{zhai2022scaling}
+Xiaohua Zhai, Alexander Kolesnikov, Neil Houlsby, and Lucas Beyer.
+\newblock Scaling vision transformers.
+\newblock In \emph{{CVPR}}, pages 12104--12113, 2022{\natexlab{a}}.
+
+\bibitem[Zhai et~al.(2022{\natexlab{b}})Zhai, Wang, Mustafa, Steiner, Keysers,
+  Kolesnikov, and Beyer]{lit}
+Xiaohua Zhai, Xiao Wang, Basil Mustafa, Andreas Steiner, Daniel Keysers,
+  Alexander Kolesnikov, and Lucas Beyer.
+\newblock {LiT}: Zero-shot transfer with locked-image text tuning.
+\newblock In \emph{{CVPR}}, pages 18123--18133, 2022{\natexlab{b}}.
+
+\bibitem[Zhang and Sennrich(2019)]{zhang2019root}
+Biao Zhang and Rico Sennrich.
+\newblock Root mean square layer normalization.
+\newblock \emph{Advances in Neural Information Processing Systems}, 32, 2019.
+
+\bibitem[Zhang et~al.(2018)Zhang, Isola, Efros, Shechtman, and
+  Wang]{zhang2018perceptual}
+Richard Zhang, Phillip Isola, Alexei~A Efros, Eli Shechtman, and Oliver Wang.
+\newblock The unreasonable effectiveness of deep features as a perceptual
+  metric.
+\newblock In \emph{CVPR}, 2018.
+
+\bibitem[Zhao et~al.(2017)Zhao, Wang, Yatskar, Ordonez, and Chang]{zhao2017men}
+Jieyu Zhao, Tianlu Wang, Mark Yatskar, Vicente Ordonez, and Kai-Wei Chang.
+\newblock Men also like shopping: Reducing gender bias amplification using
+  corpus-level constraints.
+\newblock \emph{arXiv preprint arXiv:1707.09457}, 2017.
+
+\bibitem[Zhou et~al.(2017{\natexlab{a}})Zhou, Lapedriza, Khosla, Oliva, and
+  Torralba]{zhou2017places}
+Bolei Zhou, Agata Lapedriza, Aditya Khosla, Aude Oliva, and Antonio Torralba.
+\newblock Places: A 10 million image database for scene recognition.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 40\penalty0 (6):\penalty0 1452--1464, 2017{\natexlab{a}}.
+
+\bibitem[Zhou et~al.(2017{\natexlab{b}})Zhou, Zhao, Puig, Fidler, Barriuso, and
+  Torralba]{zhou2017scene}
+Bolei Zhou, Hang Zhao, Xavier Puig, Sanja Fidler, Adela Barriuso, and Antonio
+  Torralba.
+\newblock Scene parsing through {ADE20K} dataset.
+\newblock In \emph{{CVPR}}, 2017{\natexlab{b}}.
+
+\end{thebibliography}

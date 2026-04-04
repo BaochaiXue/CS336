@@ -1,0 +1,140 @@
+\begin{thebibliography}{28}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Ali et~al.(2023)Ali, Fromm, Thellmann, Rutmann, L{\"{u}}bbering, Leveling, Klug, Ebert, Doll, Buschhoff, Jain, Weber, Jurkschat, Abdelwahab, John, Suarez, Ostendorff, Weinbach, Sifa, Kesselheim, and Flores{-}Herr}]{ali2024tokenizer}
+Mehdi Ali, Michael Fromm, Klaudia Thellmann, Richard Rutmann, Max L{\"{u}}bbering, Johannes Leveling, Katrin Klug, Jan Ebert, Niclas Doll, Jasper~Schulze Buschhoff, Charvi Jain, Alexander~Arno Weber, Lena Jurkschat, Hammam Abdelwahab, Chelsea John, Pedro~Ortiz Suarez, Malte Ostendorff, Samuel Weinbach, Rafet Sifa, Stefan Kesselheim, and Nicolas Flores{-}Herr. 2023.
+\newblock Tokenizer choice for {LLM} training: Negligible or crucial?
+\newblock \emph{arXiv:2310.08754}.
+
+\bibitem[{Aved’yan(1995)}]{cmac}
+Eduard Aved’yan. 1995.
+\newblock \href {https://api.semanticscholar.org/CorpusID:59747040} {The cerebellar model articulation controller (cmac)}.
+
+\bibitem[{Bojanowski et~al.(2017)Bojanowski, Grave, Joulin, and Mikolov}]{fasttext}
+Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tom{\'{a}}s Mikolov. 2017.
+\newblock \href {https://doi.org/10.1162/TACL\_A\_00051} {Enriching word vectors with subword information}.
+\newblock \emph{Trans. Assoc. Comput. Linguistics}, 5:135--146.
+
+\bibitem[{Brack et~al.(2024)Brack, Ostendorff, and Ortiz}]{brack2024occiglot}
+Manuel Brack, Malte Ostendorff, and Pedro Ortiz. 2024.
+\newblock Occiglot fineweb v0.5.
+
+\bibitem[{Clark et~al.(2022)Clark, Garrette, Turc, and Wieting}]{canine}
+Jonathan~H. Clark, Dan Garrette, Iulia Turc, and John Wieting. 2022.
+\newblock \href {https://doi.org/10.1162/TACL\_A\_00448} {Canine: Pre-training an efficient tokenization-free encoder for language representation}.
+\newblock \emph{Trans. Assoc. Comput. Linguistics}, 10:73--91.
+
+\bibitem[{Deiseroth et~al.(2024)Deiseroth, Meuer, Gritsch, Eichenberg, Schramowski, A{\ss}enmacher, and Kersting}]{deiseroth2024divergent}
+Bj{\"{o}}rn Deiseroth, Max Meuer, Nikolas Gritsch, Constantin Eichenberg, Patrick Schramowski, Matthias A{\ss}enmacher, and Kristian Kersting. 2024.
+\newblock Divergent token metrics: Measuring degradation to prune away {LLM} components - and optimize quantization.
+\newblock In \emph{Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL)}.
+
+\bibitem[{Gomez(2024)}]{cohere2024commandr}
+Aidan Gomez. 2024.
+\newblock \href {https://cohere.com/blog/command-r} {Command r: Retrieval-augmented generation at production scale}.
+
+\bibitem[{Jabbar(2024)}]{jabbar2024morphpiece}
+Haris Jabbar. 2024.
+\newblock Morphpiece : A linguistic tokenizer for large language models.
+\newblock \emph{arXi:2307.07262}.
+
+\bibitem[{Jiang et~al.(2023)Jiang, Sablayrolles, Mensch, Bamford, Chaplot, de~Las~Casas, Bressand, Lengyel, Lample, Saulnier, Lavaud, Lachaux, Stock, Scao, Lavril, Wang, Lacroix, and Sayed}]{jiang2023mistral}
+Albert~Q. Jiang, Alexandre Sablayrolles, Arthur Mensch, Chris Bamford, Devendra~Singh Chaplot, Diego de~Las~Casas, Florian Bressand, Gianna Lengyel, Guillaume Lample, Lucile Saulnier, L{\'{e}}lio~Renard Lavaud, Marie{-}Anne Lachaux, Pierre Stock, Teven~Le Scao, Thibaut Lavril, Thomas Wang, Timoth{\'{e}}e Lacroix, and William~El Sayed. 2023.
+\newblock Mistral 7b.
+\newblock \emph{arXiv:2310.06825}.
+
+\bibitem[{Kudo and Richardson(2018)}]{kudo2018sentencepiece}
+Taku Kudo and John Richardson. 2018.
+\newblock Sentencepiece: A simple and language independent subword tokenizer and detokenizer for neural text processing.
+\newblock \emph{arXiv preprint arXiv:1808.06226}.
+
+\bibitem[{Mesnard et~al.(2024)Mesnard, Hardin, Dadashi, Bhupatiraju, Pathak, Sifre, Rivi{\`{e}}re, Kale, Love, Tafti, Hussenot, Chowdhery, Roberts, Barua, Botev, Castro{-}Ros, Slone, H{\'{e}}liou, Tacchetti, Bulanova, Paterson, Tsai, Shahriari, Lan, Choquette{-}Choo, Crepy, Cer, Ippolito, Reid, Buchatskaya, Ni, Noland, Yan, Tucker, Muraru, Rozhdestvenskiy, Michalewski, Tenney, Grishchenko, Austin, Keeling, Labanowski, Lespiau, Stanway, Brennan, Chen, Ferret, Chiu, and et~al.}]{mesnard2024gemma}
+Thomas Mesnard, Cassidy Hardin, Robert Dadashi, Surya Bhupatiraju, Shreya Pathak, Laurent Sifre, Morgane Rivi{\`{e}}re, Mihir~Sanjay Kale, Juliette Love, Pouya Tafti, L{\'{e}}onard Hussenot, Aakanksha Chowdhery, Adam Roberts, Aditya Barua, Alex Botev, Alex Castro{-}Ros, Ambrose Slone, Am{\'{e}}lie H{\'{e}}liou, Andrea Tacchetti, Anna Bulanova, Antonia Paterson, Beth Tsai, Bobak Shahriari, Charline~Le Lan, Christopher~A. Choquette{-}Choo, Cl{\'{e}}ment Crepy, Daniel Cer, Daphne Ippolito, David Reid, Elena Buchatskaya, Eric Ni, Eric Noland, Geng Yan, George Tucker, George{-}Cristian Muraru, Grigory Rozhdestvenskiy, Henryk Michalewski, Ian Tenney, Ivan Grishchenko, Jacob Austin, James Keeling, Jane Labanowski, Jean{-}Baptiste Lespiau, Jeff Stanway, Jenny Brennan, Jeremy Chen, Johan Ferret, Justin Chiu, and et~al. 2024.
+\newblock Gemma: Open models based on gemini research and technology.
+\newblock \emph{arXiv:2403.08295}.
+
+\bibitem[{Meta(2024)}]{meta2024llama3}
+Meta. 2024.
+\newblock \href {https://ai.meta.com/blog/meta-llama-3} {Introducing meta llama 3: The most capable openly available llm to date}.
+
+\bibitem[{Mikolov et~al.(2013{\natexlab{a}})Mikolov, Le, and Sutskever}]{nikolov2013exploiting}
+Tom{\'{a}}s Mikolov, Quoc~V. Le, and Ilya Sutskever. 2013{\natexlab{a}}.
+\newblock \href {https://arxiv.org/abs/1309.4168} {Exploiting similarities among languages for machine translation}.
+\newblock abs/1309.4168.
+
+\bibitem[{Mikolov et~al.(2013{\natexlab{b}})Mikolov, Sutskever, Chen, Corrado, and Dean}]{mikolov2013distributed}
+Tom{\'{a}}s Mikolov, Ilya Sutskever, Kai Chen, Gregory~S. Corrado, and Jeffrey Dean. 2013{\natexlab{b}}.
+\newblock Distributed representations of words and phrases and their compositionality.
+\newblock In \emph{Proceedings of the Advances in Neural Information Processing Systems: Annual Conference on Neural Information Processing Systems ({NeurIPS})}.
+
+\bibitem[{Nation(2006)}]{nation2006large}
+I~Nation. 2006.
+\newblock How large a vocabulary is needed for reading and listening?
+\newblock \emph{Canadian modern language review}, 63(1):59--82.
+
+\bibitem[{Press and Wolf(2017)}]{press2017using}
+Ofir Press and Lior Wolf. 2017.
+\newblock Using the output embedding to improve language models.
+\newblock In \emph{Proceedings of the Conference of the European Chapter of the Association for Computational Linguistics ({EACL})}.
+
+\bibitem[{Rust et~al.(2021)Rust, Pfeiffer, Vulic, Ruder, and Gurevych}]{rust2021howGood}
+Phillip Rust, Jonas Pfeiffer, Ivan Vulic, Sebastian Ruder, and Iryna Gurevych. 2021.
+\newblock How good is your tokenizer? on the monolingual performance of multilingual language models.
+\newblock In \emph{Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL)}.
+
+\bibitem[{Sennrich(2016)}]{sennrich2016bpe}
+Rico Sennrich. 2016.
+\newblock How grammatical is character-level neural machine translation? assessing mt quality with contrastive translation pairs.
+\newblock \emph{arXiv preprint arXiv:1612.04629}.
+
+\bibitem[{Soboleva et~al.(2023)Soboleva, Al-Khateeb, Myers, Steeves, Hestness, and Dey}]{cerebras2023slimpajama}
+Daria Soboleva, Faisal Al-Khateeb, Robert Myers, Jacob~R Steeves, Joel Hestness, and Nolan Dey. 2023.
+\newblock \href {https://huggingface.co/datasets/cerebras/SlimPajama-627B} {{SlimPajama: A 627B token cleaned and deduplicated version of RedPajama}}.
+
+\bibitem[{Straka(2018)}]{straka-2018-udpipe}
+Milan Straka. 2018.
+\newblock \href {https://doi.org/10.18653/v1/K18-2020} {{UDP}ipe 2.0 prototype at {C}o{NLL} 2018 {UD} shared task}.
+\newblock In \emph{Proceedings of the {C}o{NLL} 2018 Shared Task: Multilingual Parsing from Raw Text to Universal Dependencies}, pages 197--207, Brussels, Belgium. Association for Computational Linguistics.
+
+\bibitem[{Su et~al.(2024)Su, Ahmed, Lu, Pan, Bo, and Liu}]{rotary}
+Jianlin Su, Murtadha H.~M. Ahmed, Yu~Lu, Shengfeng Pan, Wen Bo, and Yunfeng Liu. 2024.
+\newblock \href {https://doi.org/10.1016/J.NEUCOM.2023.127063} {Roformer: Enhanced transformer with rotary position embedding}.
+\newblock \emph{Neurocomputing}, 568:127063.
+
+\bibitem[{Svenstrup et~al.(2017)Svenstrup, Hansen, and Winther}]{hashembed}
+Dan Svenstrup, Jonas~Meinertz Hansen, and Ole Winther. 2017.
+\newblock \href {https://proceedings.neurips.cc/paper/2017/hash/f0f6ba4b5e0000340312d33c212c3ae8-Abstract.html} {Hash embeddings for efficient word representations}.
+\newblock In \emph{Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, December 4-9, 2017, Long Beach, CA, {USA}}, pages 4928--4936.
+
+\bibitem[{Tay et~al.(2022)Tay, Tran, Ruder, Gupta, Chung, Bahri, Qin, Baumgartner, Yu, and Metzler}]{charformer}
+Yi~Tay, Vinh~Q. Tran, Sebastian Ruder, Jai~Prakash Gupta, Hyung~Won Chung, Dara Bahri, Zhen Qin, Simon Baumgartner, Cong Yu, and Donald Metzler. 2022.
+\newblock \href {https://openreview.net/forum?id=JtBRnrlOEFN} {Charformer: Fast character transformers via gradient-based subword tokenization}.
+\newblock In \emph{The Tenth International Conference on Learning Representations, {ICLR} 2022, Virtual Event, April 25-29, 2022}. OpenReview.net.
+
+\bibitem[{Touvron et~al.(2023)Touvron, Martin, Stone, Albert, Almahairi, Babaei, Bashlykov, Batra, Bhargava, Bhosale, Bikel, Blecher, Canton{-}Ferrer, Chen, Cucurull, Esiobu, Fernandes, Fu, Fu, Fuller, Gao, Goswami, Goyal, Hartshorn, Hosseini, Hou, Inan, Kardas, Kerkez, Khabsa, Kloumann, Korenev, Koura, Lachaux, Lavril, Lee, Liskovich, Lu, Mao, Martinet, Mihaylov, Mishra, Molybog, Nie, Poulton, Reizenstein, Rungta, Saladi, Schelten, Silva, Smith, Subramanian, Tan, Tang, Taylor, Williams, Kuan, Xu, Yan, Zarov, Zhang, Fan, Kambadur, Narang, Rodriguez, Stojnic, Edunov, and Scialom}]{touvron2023llama2}
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, Dan Bikel, Lukas Blecher, Cristian Canton{-}Ferrer, Moya Chen, Guillem Cucurull, David Esiobu, Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller, Cynthia Gao, Vedanuj Goswami, Naman Goyal, Anthony Hartshorn, Saghar Hosseini, Rui Hou, Hakan Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit~Singh Koura, Marie{-}Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao, Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric~Michael Smith, Ranjan Subramanian, Xiaoqing~Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian~Xiang Kuan, Puxin Xu, Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aur{\'{e}}lien Rodriguez, Robert Stojnic, Sergey Edunov,
+  and Thomas Scialom. 2023.
+\newblock Llama 2: Open foundation and fine-tuned chat models.
+\newblock \emph{arXiv:2307.09288}.
+
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017.
+\newblock Attention is all you need.
+\newblock In \emph{Proceedings of the Advances in Neural Information Processing Systems: Annual Conference on Neural Information Processing Systems ({NeurIPS})}.
+
+\bibitem[{Wang et~al.(2024)Wang, Gangavarapu, Yan, and Rush}]{wang2024mambabyte}
+Junxiong Wang, Tushaar Gangavarapu, Jing~Nathan Yan, and Alexander~M. Rush. 2024.
+\newblock Mambabyte: Token-free selective state space model.
+\newblock \emph{arXiv:2401.13660}.
+
+\bibitem[{Xue and Aletras(2022)}]{hashformer}
+Huiyin Xue and Nikolaos Aletras. 2022.
+\newblock \href {https://doi.org/10.18653/V1/2022.EMNLP-MAIN.536} {Hashformers: Towards vocabulary-independent pre-trained transformers}.
+\newblock In \emph{Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, {EMNLP} 2022, Abu Dhabi, United Arab Emirates, December 7-11, 2022}, pages 7862--7874. Association for Computational Linguistics.
+
+\bibitem[{Yu et~al.(2023)Yu, Simig, Flaherty, Aghajanyan, Zettlemoyer, and Lewis}]{megabyte}
+Lili Yu, Daniel Simig, Colin Flaherty, Armen Aghajanyan, Luke Zettlemoyer, and Mike Lewis. 2023.
+\newblock \href {http://papers.nips.cc/paper\_files/paper/2023/hash/f8f78f8043f35890181a824e53a57134-Abstract-Conference.html} {{MEGABYTE:} predicting million-byte sequences with multiscale transformers}.
+\newblock In \emph{Advances in Neural Information Processing Systems 36: Annual Conference on Neural Information Processing Systems 2023, NeurIPS 2023, New Orleans, LA, USA, December 10 - 16, 2023}.
+
+\end{thebibliography}

@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item State the formal definition of autoregressive language modeling.
+  \item Explain how the chain rule of probability decomposes sequence modeling into next-token prediction.
+  \item Differentiate between generation (sampling) and scoring (likelihood calculation).
+  \item Understand the fundamental bottleneck of language modeling: context dependency versus computational feasibility.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +16,128 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:06:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Everything in natural language processing experienced a paradigm shift when researchers realized a profound, counterintuitive truth: predicting the next word in a sequence is not just a parlor trick. It is a conceptually simple objective that, when scaled up, forces a neural network to learn syntax, semantics, logic, and common sense. 
+
+To accurately predict the next word in ``The cat sat on the \_\_\_'', a model only needs to know English grammar and common idioms. But to predict the next word in ``If we heat the metal to $2000^\circ$C, its tensile strength will \_\_\_'', the model must understand physics and materials science. By training a single architecture to predict the next token across all of human text, we obtain a general-purpose reasoning engine.
+
+This chapter forms the conceptual bridge from the information theory in Chapter 1 to the neural implementations in Chapters 8 and beyond. We establish the fundamental mathematical problem that all generative language models---from n-grams to GPT-4---solve.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:06:sec:setup}
 
-TODO: Define notation and state assumptions.
+We treat language as a sequence of discrete units called \textbf{tokens}. (We will discuss exactly how text is split into tokens in Chapter 7; for now, consider them words or characters).
+
+Let our vocabulary be a finite set $\vocab$. A sequence of length $T$ is denoted $\vx = (x_1, x_2, \ldots, x_T)$, where each $x_t \in \vocab$. The language modeling problem is to estimate the joint probability distribution of the entire sequence:
+\begin{equation}
+\label{eq:06:joint_prob}
+P(X_1 = x_1, X_2 = x_2, \ldots, X_T = x_T) = P(\vx).
+\end{equation}
+
+Here, $X_t$ is the random variable representing the token at position $t$, and $x_t$ is the specific realization of that random variable.
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{Autoregressive Decomposition}
 \label{ch:06:sec:main}
 
-TODO: Core technical content.
+Directly estimating $P(\vx)$ is intractable. If our vocabulary has $|\vocab| = 50,000$ and we consider sequences of length $T=100$, there are $50,000^{100}$ possible sequences. We cannot simply count frequencies in a training corpus; almost all sequences will occur exactly zero times.
+
+To make the problem tractable, we apply the \textbf{chain rule of probability}:
+\begin{equation}
+\label{eq:06:chain_rule}
+P(x_1, x_2, \ldots, x_T) = P(x_1) P(x_2 \mid x_1) P(x_3 \mid x_1, x_2) \cdots P(x_T \mid x_1, \ldots, x_{T-1}).
+\end{equation}
+Using product notation:
+\begin{equation}
+\label{eq:06:product_form}
+P(\mathbf{x}) = \prod_{t=1}^T P(x_t \mid x_{<t}),
+\end{equation}
+where $x_{<t} = (x_1, x_2, \ldots, x_{t-1})$ represents the \textbf{context} or \textbf{history} up to position $t$.
+
+\paragraph{Symbol table.} $P(\vx)$ is the joint probability of the sequence. $P(x_t \mid x_{<t})$ is the conditional probability of the next token given all previous tokens.
+
+\paragraph{Interpretation.} The chain rule tells us that modeling an entire sequence is mathematically equivalent to modeling a single next token, provided we condition on all previous tokens. This transforms language modeling from a massive joint distribution problem into a sequence of classification problems. A model that predicts one step at a time and feeds its own predictions back as input is called \textbf{autoregressive}.
+
+\section{Scoring versus Generation}
+
+An autoregressive language model has two primary uses: scoring existing text and generating new text.
+
+\subsection{Scoring}
+\label{ch:06:sec:scoring}
+We can use a language model to compute the likelihood of a given sequence. Recall from Chapter~1 that we typically work with log-probabilities to avoid arithmetic underflow:
+\begin{equation}
+\label{eq:06:log_prob}
+\log P(\vx) = \sum_{t=1}^T \log P(x_t \mid x_{<t}).
+\end{equation}
+This is the heart of model evaluation (perplexity) and training (cross-entropy loss minimization).
+
+\subsection{Generation}
+\label{ch:06:sec:generation}
+To generate text, we sample from the model one token at a time:
+\begin{enumerate}
+    \item Start with a prompt context $x_{<1}$.
+    \item Sample $x_1 \sim P(\cdot \mid x_{<1})$.
+    \item Append $x_1$ to the context: $x_{<2} = (x_{<1}, x_1)$.
+    \item Sample $x_2 \sim P(\cdot \mid x_{<2})$.
+    \item Repeat until a special stop token is generated.
+\end{enumerate}
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Computing Sequence Probability}
 \label{ch:06:sec:example}
 
-TODO: Complete worked example.
+Suppose our vocabulary is $\vocab = \{\text{the}, \text{cat}, \text{sat}\}$. We want to score the sequence $\vx = (\text{the}, \text{cat}, \text{sat})$. Our model provides the following conditional probabilities:
+\begin{align*}
+    P(x_1 = \text{the}) &= 0.2 \\
+    P(x_2 = \text{cat} \mid x_1 = \text{the}) &= 0.4 \\
+    P(x_3 = \text{sat} \mid x_1 = \text{the}, x_2 = \text{cat}) &= 0.8
+\end{align*}
+
+The joint probability of the sequence is:
+\begin{align*}
+    P(\vx) &= P(\text{the}) \times P(\text{cat} \mid \text{the}) \times P(\text{sat} \mid \text{the}, \text{cat}) \\
+           &= 0.2 \times 0.4 \times 0.8 = 0.064
+\end{align*}
+
+In minus log-likelihood (base $e$):
+\begin{align*}
+    -\log(0.064) &= - (\log(0.2) + \log(0.4) + \log(0.8)) \\
+                 &= - (-1.609 - 0.916 - 0.223) = 2.748 \text{ nats}
+\end{align*}
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:06:sec:systems}
 
-TODO: Implementation and performance implications.
+The autoregressive decomposition \cref{eq:06:product_form} dictates the computational architecture of all modern generative AI. 
+
+\textbf{During training (scoring):} Because we are scoring a known sequence $x_1, \dots, x_T$, the context $x_{<t}$ is fixed for all $t$. This means we can compute the probabilities for all $T$ positions in parallel. This parallelism is the defining advantage of the Transformer architecture over older recurrent networks.
+
+\textbf{During inference (generation):} Because we must wait to sample $x_t$ before we can append it to the context and predict $x_{t+1}$, generation is inherently sequential. This makes decoding highly latency-bound and memory bandwidth-bound. We cannot parallelize across time steps during generation. This dichotomy---parallel training, serial inference---drives the engineering constraints discussed in Chapters 14–18.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Predictive Coding and Language Generation}
   \paragraph{Where the analogy helps.}
-  TODO
+  The human brain has been theorized to function as a ``prediction machine,'' constantly anticipating upcoming sensory input. Similarly, as you read this sentence, your brain is likely anticipating the next word before your eyes reach it. An autoregressive language model formalizes this exact hypothesis into a mathematical framework.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Human language generation is hierarchical and goal-directed. A speaker starts with an abstract communicative intent, forms a syntactic chunk, and then articulates words. An autoregressive LLM, by contrast, operates purely left-to-right at the token level, with no explicit internal mechanism separating high-level intent from low-level token choice.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Think of the language modeling objective as pure prediction. The model learns everything it knows about grammar and reasoning simply as a byproduct of trying to reduce surprise about the future.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:06:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``Language models understand text, then generate it.''} Language models are function approximators mapping contexts to probability distributions. Any semantic ``understanding'' is entirely implicit in the structure of the conditional distribution $P(x_t \mid x_{<t})$.
+  \item \textbf{``The model predicts the most likely entire sequence.''} Usually, models perform greedy decoding (picking the highest probability token at each step) or sampling. Finding the global maximum probability sequence over the entire sequence length is intractable.
+  \item \textbf{``Generative modeling algorithms are specific to text.''} The autoregressive formulation applies to any sequence. The exact same objective is used for image generation (treating images as sequences of pixels) and audio generation (as sequences of audio waveforms).
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,30 +145,30 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item Suppose a model assigns a probability of $0.1$ to the true next token at every position in a sequence of length 5. What is the overall joint probability of the sequence? What is the log-probability?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Show that if $x_t$ is completely independent of the context $x_{<t}$, the autoregressive model reduces to a unigram model where $P(\mathbf{x}) = \prod_{t=1}^T P(x_t)$. What is the context size required to capture all dependencies in natural language?
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Implement a basic loop in Python that demonstrates autoregressive generation given a dummy prediction function \texttt{def predict\_next\_token(context): return token}.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item Discuss why bidirectional models (like BERT, which predict missing words given both left and right context) are popular for classification tasks but struggle mathematically with the task of text generation. How does the chain rule map to bidirectionality?
 \end{enumerate}
+
 
 % ─── Further Reading ───
 \section{Further Reading}
 \label{ch:06:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{bengio2003}: A Neural Probabilistic Language Model. The seminal paper framing language modeling as a neural task based on the Markov assumption.
+  \item \textcite{gpt2}: Language Models are Unsupervised Multitask Learners. This OpenAI paper demonstrated that autoregressive next-token prediction, scaled massively, naturally gives rise to zero-shot task performance.
 \end{itemize}

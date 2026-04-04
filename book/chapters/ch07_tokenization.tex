@@ -5,9 +5,11 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Explain why language models operate on discrete tokens rather than raw text.
+  \item Describe the trade-offs between word, character, and subword tokenization.
+  \item Implement the Byte-Pair Encoding (BPE) algorithm from scratch.
+  \item Understand the Unigram tokenization algorithm and its probabilistic formulation.
+  \item Discuss the motivation and architecture of byte-level and token-free models.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +17,155 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:07:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Before a neural network can process text, the text must be converted into numbers. This process is called \textbf{tokenization}. It sits at the very edge of the model, transforming a continuous stream of characters or bytes into a sequence of discrete integers.
+
+Historically, NLP systems used words as the fundamental unit of text. However, natural language is fraught with complications: morphology (``run'', ``running'', ``ran''), agglutination (languages like German or Turkish that glue words together), and typos. If we tokenize by words, our vocabulary grows uncontrollably, leading to the ``out-of-vocabulary'' (OOV) problem. If we tokenize by characters, the vocabulary is small (e.g., 256 for ASCII), but sequences become extremely long, which computationally burdens the Transformer architecture.
+
+The modern solution is \textbf{subword tokenization}. Algorithms like Byte-Pair Encoding (BPE) strike a data-driven balance: common words remain single tokens, while rare words are broken down into smaller, frequent chunks (or individual characters). Nearly every major language model today (GPT-4, LLaMA, DeepSeek) uses a variant of subword tokenization.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:07:sec:setup}
 
-TODO: Define notation and state assumptions.
+Let $\mathcal{C}$ be our base character set (e.g., all 256 possible bytes, or all Unicode characters). A \textbf{corpus} is a string sequence over $\mathcal{C}$.
+
+A \textbf{tokenizer} consists of two functions:
+\begin{enumerate}
+    \item An \textbf{encoder}: $E: \mathcal{C}^* \to \vocab^*$, mapping a string of characters to a sequence of token IDs from a fixed integer vocabulary $\vocab = \{1, 2, \dots, V\}$.
+    \item A \textbf{decoder}: $D: \vocab^* \to \mathcal{C}^*$, mapping a sequence of token IDs back to a string.
+\end{enumerate}
+
+A proper tokenizer must be lossless: for any valid text $s$, $D(E(s)) = s$.
+
+\paragraph{Vocabulary size.} The size of the vocabulary $V$ is a crucial hyperparameter. Typical values range from $32,000$ (LLaMA-2) to $128,000$ (GPT-4). A larger vocabulary means shorter sequences (good for compute) but requires a larger embedding matrix (bad for memory).
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{Byte-Pair Encoding (BPE)}
 \label{ch:07:sec:main}
 
-TODO: Core technical content.
+BPE was originally a data compression algorithm introduced by \textcite{sennrich_2016} to the NLP world. It is a greedy, bottom-up algorithm that builds a vocabulary by iteratively merging the most frequent pairs of units.
+
+\subsection{The BPE Training Algorithm}
+To ``train'' a BPE tokenizer on a corpus, we perform the following steps:
+\begin{enumerate}
+    \item Initialize the vocabulary with the base vocabulary $\mathcal{C}$ (usually all 256 ASCII/UTF-8 bytes).
+    \item Represent the training corpus as a sequence of these base tokens.
+    \item Count the frequency of all adjacent token pairs.
+    \item Find the most frequent pair $(t_1, t_2)$.
+    \item Create a new token $t_{\text{new}} = t_1 \circ t_2$ by concatenating them.
+    \item Add $t_{\text{new}}$ to the vocabulary.
+    \item Replace all non-overlapping occurrences of the pair $(t_1, t_2)$ in the corpus with $t_{\text{new}}$.
+    \item Repeat steps 3--7 until the vocabulary reaches the desired size $V$.
+\end{enumerate}
+
+\subsection{Encoding with BPE}
+Once trained, the sequence of merges defines the encoding process. Given a new string, we first split it into base tokens (bytes). We then apply the merge operations in the exact same order they were learned during training.
+
+\begin{warningbox}
+\textbf{Order matters!} If ``e'' + ``r'' $\to$ ``er'' was learned before ``t'' + ``h'' $\to$ ``th'', you must apply the ``er'' merge to your new text before looking for ``th''.
+\end{warningbox}
+
+\section{The Unigram Language Model Tokenizer}
+
+While BPE is bottom-up and greedy, the \textbf{Unigram} tokenizer operates top-down and probabilistically.
+
+\begin{enumerate}
+    \item Initialize a massive vocabulary of potential subwords (e.g., all substrings up to length $L$ in the corpus).
+    \item Train a unigram language model over these subwords. Let $p(x_i)$ be the probability of subword $x_i$. The probability of a tokenization $\vx = (x_1, \ldots, x_T)$ is assumed to be $\prod p(x_i)$.
+    \item Find the optimal tokenization for the corpus (using the Viterbi algorithm) to maximize likelihood under the current probabilities.
+    \item Compute the ``loss'' for each subword: how much does the overall log-likelihood drop if we remove this subword from the vocabulary?
+    \item Discard the bottom 20\% of subwords (those with the smallest loss).
+    \item Repeat until the vocabulary shrinks to the desired size $V$.
+\end{enumerate}
+
+Unigram tokenization has the advantage of supporting \textbf{subword regularization}: because it is probabilistically grounded, we can sample different valid tokenizations for the same word during training, which makes the model more robust to misspellings.
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: BPE Training}
 \label{ch:07:sec:example}
 
-TODO: Complete worked example.
+Suppose our training corpus is the string: \texttt{l o w e s t l o w e r}
+(We insert spaces merely to show the current token boundaries).
+
+\textbf{Initialization:}
+Base vocabulary: $\{\text{l}, \text{o}, \text{w}, \text{e}, \text{s}, \text{t}, \text{r}\}$
+
+\textbf{Iteration 1:}
+Frequencies of adjacent pairs:
+\begin{itemize}
+    \item (\text{l}, \text{o}): 2
+    \item (\text{o}, \text{w}): 2
+    \item (\text{w}, \text{e}): 2
+    \item (\text{e}, \text{s}): 1
+    \item (\text{s}, \text{t}): 1
+    \item (\text{t}, \text{l}): 1
+    \item (\text{e}, \text{r}): 1
+\end{itemize}
+The pair (\text{l}, \text{o}) is tied for the most frequent. We merge it.
+New token: \texttt{lo}.
+Corpus becomes: \texttt{lo w e s t lo w e r}
+
+\textbf{Iteration 2:}
+Frequencies of pairs:
+\begin{itemize}
+    \item (\texttt{lo}, \text{w}): 2
+    \item (\text{w}, \text{e}): 2
+    \item (\text{e}, \text{s}): 1
+    \dots
+\end{itemize}
+Merge (\texttt{lo}, \text{w}).
+New token: \texttt{low}.
+Corpus becomes: \texttt{low e s t low e r}
+
+\textbf{Iteration 3:}
+Merge (\text{w}, \text{e})? No, ``w'' is now part of ``low''.
+The pair (\texttt{low}, \text{e}) occurs twice. Merge it.
+New token: \texttt{lowe}.
+Corpus becomes: \texttt{lowe s t lowe r}
+
+After 3 merges, our vocabulary is $\{\text{l}, \text{o}, \text{w}, \text{e}, \text{s}, \text{t}, \text{r}, \text{lo}, \text{low}, \text{lowe}\}$. The word ``lowest'' is tokenized as [\texttt{lowe}, \text{s}, \text{t}], and ``lower'' is [\texttt{lowe}, \text{r}]. The tokenizer learned the root morphological structure purely statistically!
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:07:sec:systems}
 
-TODO: Implementation and performance implications.
+Tokenization is notoriously complex in engineering systems:
+\begin{itemize}
+    \item \textbf{Pre-tokenization:} Before BPE, we typically use regex to split text into words and punctuation. If we don't, BPE might create tokens that span across word boundaries (e.g., merging the end of one word and the start of the next), which damages syntactic generalization.
+    \item \textbf{Byte-Fallbacks:} To ensure the tokenizer can encode \textit{any} string without ``[UNK]'' (unknown) tokens, modern tokenizers (like LLaMA's) operate on UTF-8 bytes rather than Unicode characters.
+    \item \textbf{Embedding Matrix Size:} The dimension of the first and last weight matrices in the model is exactly $V \times d$. For $V=100,000$ and $d=4096$, the embedding matrix takes $1.6$ GB of memory in fp32. This is often a significant portion of a smaller model's parameter count.
+\end{itemize}
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Phonemes and Visual Features vs. Tokens}
   \paragraph{Where the analogy helps.}
-  TODO
+  Just as humans decompose spoken language into a finite set of phonemes (sound units) or written words into visual strokes/features, an LLM decomposes text into a finite set of subword tokens. In both cases, the complex continuous signal of language is chunked into discrete components that the processing system can handle.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Human chunking is profoundly influenced by semantics and morphology; we parse ``unbelievable'' into prefix, root, and suffix because of their meanings. BPE is purely statistical and frequency-driven. If a typo appears often enough in the training data, BPE will happily dedicate a dedicated token to it.
 
   \paragraph{What intuition to keep.}
-  TODO
+  Tokens are the fundamental ``atoms'' of meaning for the model. However, these atoms are derived from compression algorithms, not linguistic theory. The model's ``understanding'' of a word is heavily dependent on how the tokenizer happened to slice it.
 \end{analogybox}
+
+% ─── 2026 Update Card ───
+\begin{updatecard}{Byte-Level and Token-Free Models}
+While BPE is dominant, the field is actively researching ways to eliminate tokenizers entirely. Operating directly on raw bytes removes the complexity of the tokenizer pipeline and prevents issues where BPE behaves poorly on heavily numeric data (arithmetic), code spacing, or languages underrepresented in the tokenizer's training data. 
+
+Systems like \textbf{Megabyte}~\parencite{megabyte_2023} and \textbf{BLT}~\parencite{blt_2024} propose hierarchical architectures: a small recurrent or local module processes raw bytes and clusters them into ``patch'' representations, which are then processed by a global Transformer. This provides the flexibility of bytes without the massive sequence-length scaling penalty in the attention mechanism.
+\end{updatecard}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:07:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``One token equals one word.''} On average in English, 1 token is about 0.75 words, or 4 characters. But common words (``the'') are 1 token, while rare/complex words (``neuroscience'') might be 2 or 3 tokens.
+  \item \textbf{``The model sees the characters inside a token.''} It does not. If ``cat'' is tokenized as ID \#2503, the model simply receives a vector mapping to \#2503. It has no way of knowing that ``c'', ``a'', and ``t'' are the constituent letters unless it deduces it statistically from other tokens containing those letters. This is why LLMs struggle with character-level tasks like ``how many r's in strawberry''.
+  \item \textbf{``Tokenization is learned alongside the language model.''} Tokenization is completely disjoint. The tokenizer is trained once on a corpus to build a fixed mapping dictionary. The neural network is trained later using that fixed dictionary.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,30 +173,32 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item If your text corpus has $1,000,000$ characters and your vocabulary size is $1000$, what is the absolute minimum and maximum number of tokens it could take to encode the corpus?
+  \item Why do LLMs typically learn a completely separate token for a capitalized word (e.g., ``Apple'') vs its lowercase version (``apple''), rather than sending a ``capitalization'' token?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Let the vocabulary size $V$ grow arbitrarily large. Trace the impact of this on (a) sequence length, (b) embedding memory usage, and (c) the probability of an OOV (out-of-vocabulary) word. What prevents us from setting $V = 1,000,000$?
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Write a Python script to train a basic BPE tokenizer. Input: a list of strings (using characters as initial tokens). Output: a sequence of merge rules. Show the state of your vocabulary after 10 merges.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item Discuss how BPE tokenization impacts multi-lingual language models. If the training data corpus is 90\% English and 10\% Chinese, what will the resulting BPE vocabulary look like, and how will this affect the efficiency of inferencing Chinese text?
 \end{enumerate}
+
 
 % ─── Further Reading ───
 \section{Further Reading}
 \label{ch:07:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{sennrich_2016}: Neural Machine Translation of Rare Words with Subword Units. The paper that introduced BPE to NLP.
+  \item \textcite{blt_2024}: BLT: Byte Latent Transformer. A cutting-edge architecture exploring how to replace subword tokenization entirely with byte-level latent processing.
+  \item \textcite{byt5_2021}: ByT5: Towards a token-free future with pre-trained byte-to-byte models.
 \end{itemize}

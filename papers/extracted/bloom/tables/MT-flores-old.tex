@@ -1,0 +1,176 @@
+\begin{table}[!ht]
+ \centering\footnotesize
+ \begin{subtable}[t]{0.48\textwidth}
+ \scalebox{0.86}{
+  \begin{tabular}{llrrrrr}
+  \toprule
+  Src$\downarrow$ & Trg$\rightarrow$ & eng & ben & hin & swh & yor  \\
+  \midrule
+  \multirow{2}{*}{eng}
+  & M2M & -- & 23.04 & 28.15 & 29.65 & 2.17  \\
+  %& mT0 & \\
+  & BLOOM & -- & 25.52 & 27.57 & 21.7 & 2.8 \\
+  \midrule
+  \multirow{2}{*}{ben}
+  & M2M & 22.86 & -- & 21.76 & 14.88 & 0.54  \\
+  %& mT0 & \\
+  & BLOOM & 30.23 & -- & 16.4 & -- & -- \\
+  \midrule
+  \multirow{2}{*}{hin}
+  & M2M & 27.89 & 21.77 & -- & 16.8 & 0.61  \\
+  %& mT0 & \\
+  & BLOOM & 35.40 & 23.0 & -- &-- & -- \\
+  \midrule
+  \multirow{2}{*}{swh}
+  & M2M & 30.43 & 16.43 & 19.19 & -- & 1.29 \\
+  %& mT0 & \\
+  & BLOOOM & 37.9 & -- & -- & -- & 1.43 \\
+  \midrule
+  \multirow{2}{*}{yor}
+  & M2M & 4.18 & 1.27 & 1.94 & 1.93 & -- \\
+  %& mT0 & \\
+  & BLOOM & 3.8 & -- & -- & 0.84 & -- \\
+  \bottomrule
+\end{tabular}}
+\caption{Low-resource languages}
+\label{tab:flores101_summary:high-low}
+\end{subtable}
+%
+\hfill
+%
+ \begin{subtable}[t]{0.48\textwidth}
+ \centering\footnotesize
+  \scalebox{0.86}{
+ \begin{tabular}{llrrrr}
+    \toprule
+    Src$\downarrow$ & Trg$\rightarrow$  & cat & spa & fre & por  \\
+    \midrule
+    \multirow{2}{*}{cat}
+    & M2M & -- & 25.17 & 35.08 & 35.15  \\
+    % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+    %& mT0 \\
+    & BLOOM & -- & 29.12 & 34.89 & 36.11  \\
+    \midrule
+    \multirow{2}{*}{spa}
+    & M2M & 23.12 & -- & 29.33 & 28.1 \\
+    % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+    %& mT0 \\
+    & BLOOM & 31.82 & -- & 24.48 & 28.0  \\
+    \midrule
+    \multirow{2}{*}{glg}
+    & M2M & 30.07 & 27.65 & 37.06 & 34.81 \\
+    % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+    %& mT0 \\
+    & BLOOM & 38.21 & 27.24 & 36.21 & 34.59  \\
+    \midrule
+    \multirow{2}{*}{fre}
+    & M2M & 28.74 & 25.6 & -- & 37.84 \\
+    % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+    %& mT0 \\
+    & BLOOM & 38.13 & 27.40 & -- & 39.60 \\
+    \midrule
+    \multirow{2}{*}{por}
+    & M2M & 30.68 & 25.88 & 40.17 & --  \\
+    % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+    %& mT0 \\
+    & BLOOM &  40.02 & 28.1 & 40.55 & -- \\
+    \bottomrule
+  \end{tabular}}
+\caption{Romance languages}
+\label{tab:flores101_summary:same-fami}
+\end{subtable}
+
+\vspace{1em}
+
+\begin{subtable}[b]{0.48\textwidth}
+ \centering\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{llrrrrr}
+\toprule
+ Src $\downarrow$ & Trg $\rightarrow$ & ara & fre & eng & chi & spa \\
+\midrule
+\multirow{4}{*}{ara}
+  & M2M & -- & 25.7 & 25.5 & 13.1 & 16.74  \\
+  %& GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  & XGLM & -- & 17.9 & 27.7 & --  & --  \\
+  & AlexaTM & -- & 35.5 & 41.8 & -- & 23.2 \\
+  & BLOOM & -- & 33.26 & 40.59 & 18.88 & 23.33\\
+\midrule
+\multirow{4}{*}{fre}
+  & M2M & 15.4 & -- & 37.2 & 17.61 & 25.6  \\
+  %& GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  & XGLM & 5.9 & -- & 40.4 & -- &  --\\
+  & AlexaTM & 24.7 & -- & 47.1 & -- & 26.3   \\
+  & BLOOM & 23.30 & -- & 45.11 & 22.8 & 27.4 \\
+\midrule
+\multirow{4}{*}{eng}
+  & M2M & 17.9 & 42.0 & -- & 19.33 & 25.6  \\
+  %& GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  & XGLM & 11.5 & 36.0 & -- & -- & --  \\
+  & AlexaTM & 32.0 & 50.7 & -- & -- & 31.0  \\
+  & BLOOM & 28.54 & 44.4 & -- & 27.29  & 30.1 \\
+\midrule
+\multirow{4}{*}{chi}
+  & M2M & 11.55 & 24.32 & 20.91 & -- & 15.92 \\
+  %& GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  & XGLM & -- & -- & -- & -- & -- \\
+  & AlexaTM & -- & -- & -- & -- & -- \\
+  & BLOOM & 15.58 & 25.9 & 30.60 & -- &  20.78 \\
+\midrule
+\multirow{4}{*}{spa}
+  & M2M & 12.1 & 29.3 & 25.1 & 14.86 & --  \\
+  %& GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  & XGLM & -- & -- & -- & -- & -- \\
+  & AlexaTM & 20.8 & 33.4 & 34.6 & ?? & --  \\
+  & BLOOM & 18.69 & 24.48 & 33.63 &  20.06 & -- \\
+\bottomrule
+\end{tabular}}
+\caption{High-resource language pairs.}
+\label{tab:flores101_summary:high-high}
+\end{subtable}
+%
+\hfill
+%
+\begin{subtable}[b]{0.48\textwidth}
+\centering\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{llrrrrr}
+  \toprule
+  Src $\downarrow$ & Trg $\rightarrow$ & eng & fre & hin & ind & vie  \\
+  \midrule
+  \multirow{2}{*}{eng}
+  & M2M & -- & 41.99 & 28.15 & 37.26 & 35.1  \\
+  % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  %& mT0 \\
+  & BLOOM & -- & 44.4 & 27.57 & 38.75 &28.83\\
+  \midrule
+  \multirow{2}{*}{fre}
+  & M2M & 37.17 & -- & 22.91 & 29.14 & 30.26  \\
+  % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  %& mT0 \\
+  & BLOOM & 45.11 & -- & 17.04 & 29.50  & 31.66 \\
+  \midrule
+  \multirow{2}{*}{hin}
+  & M2M  & 27.89 & 25.88 & -- & 21.03 & 23.85  \\
+  % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  %& mT0 \\
+  & BLOOM & 35.40 & 27.83 & -- &  --  & -- \\
+  \midrule
+  \multirow{2}{*}{ind}
+  & M2M & 33.74 & 30.81 &  22.18 & -- & 31.4 \\
+  % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  %& mT0 \\
+  & BLOOM & 44.59 & 29.75 & -- & --  & -- \\
+  \midrule
+  \multirow{2}{*}{vie}
+  & M2M & 29.51 & 28.52 & 20.35 & 27.1 & --  \\
+  % & GPT-3 6.7B & 32 & & & & & & & & & & & & \\
+  %& mT0 \\
+  & BLOOM & 38.77 & 28.57 & -- & --  & -- \\
+  \bottomrule
+\end{tabular}}
+\caption{High$\rightarrow$mid-resource language pairs.}
+\label{tab:flores101:high-mid}
+\end{subtable}
+\caption{\label{tab:flores-results}1-shot MT results (spBLEU) on the Flores-101 devtest set. }
+\end{table}

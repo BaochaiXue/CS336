@@ -1,0 +1,14 @@
+\section{Conclusion}
+\label{sec: conclusion}
+
+
+Major advances in deep learning have resulted from powerful architectural innovations enabling previously-handcrafted features to be learned from data,
+from CNNs learning visual features~\citep{AlexNet} to Transformers discovering linguistic patterns~\citep{Transformer}.
+\textbf{H-Nets} similarly unlock the ability to remove another layer of pre-processing, such as tokenizers, and instead learn them end-to-end.
+This ability results from a set of new techniques we introduce that work together to form a \textbf{dynamic chunking} mechanism,
+which is able to learn content- and context- dependent discrete segmentation strategies through standard gradient-based optimization.
+A single-stage byte-level H-Net already exceeds the performance of standard tokenized language models,
+and recursive H-Nets with multiple stages of dynamic chunking further improve its scaling.
+H-Nets substantially remedy issues with tokenizers, display very strong performance on diverse languages and language-like modalities,
+and more broadly may serve as the backbone of general foundation models that do \emph{more learning} with \emph{less processing}.
+

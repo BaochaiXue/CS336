@@ -1,4 +1,16 @@
 {
-  "failures": [],
-  "last_updated": "2026-04-03T20:49:00-04:00"
+  "failures": [
+    {
+      "title": "The FLOPs Calculus of Language Model Training",
+      "primary_key": "bahdanau_training_costs",
+      "status": "download_failed",
+      "details": {
+        "status": "download_failed",
+        "url": "https://medium.com/@dzmitrybahdanau/the-flops-calculus-of-language-model-training-3b19c1f025e4",
+        "title": "The FLOPs Calculus of Language Model Training"
+      },
+      "timestamp": "2026-04-03T21:05:10.258926"
+    }
+  ],
+  "last_updated": "2026-04-03T21:10:43.820457"
 }

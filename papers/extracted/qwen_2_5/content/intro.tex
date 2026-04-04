@@ -1,0 +1,26 @@
+\section{Introduction}
+\label{sec:intro}
+
+The sparks of artificial general intelligence (AGI) are increasingly visible through the fast development of large foundation models, notably large language models (LLMs)~\citep{gpt3,gpt4,gpt4o,gemini,claude,claude2,claude3,qwen,qwen2,llama,llama2,llama3}. The continuous advancement in model and data scaling, combined with the paradigm of large-scale pre-training followed by high-quality supervised fine-tuning (SFT) and reinforcement learning from human feedback (RLHF)~\citep{instructgpt}, has enabled large language models (LLMs) to develop emergent capabilities in language understanding, generation, and reasoning. Building on this foundation, recent breakthroughs in inference time scaling, particularly demonstrated by o1~\citep{o1}, have enhanced LLMs' capacity for deep thinking through step-by-step reasoning and reflection. These developments have elevated the potential of language models, suggesting they may achieve significant breakthroughs in scientific exploration as they continue to demonstrate emergent capabilities indicative of more general artificial intelligence.
+
+Besides the fast development of model capabilities, the recent two years have witnessed a burst of open (open-weight) large language models in the LLM community, for example, the Llama series~\citep{llama, llama2, llama3}, Mistral series~\citep{mistral, mixtral}, and our Qwen series~\citep{qwen, qwen2, codeqwen, qwen2.5coder, qwen2math, qwen2.5math}. The open-weight models have democratized the access of large language models to common users and developers, enabling broader research participation, fostering innovation through community collaboration, and accelerating the development of AI applications across diverse domains.
+
+
+
+Recently, we release the details of our latest version of the Qwen series, Qwen2.5. In terms of the open-weight part, we release pre-trained and instruction-tuned models of 7 sizes, including 0.5B, 1.5B, 3B, 7B, 14B, 32B, and 72B, and we provide not only the original models in bfloat16 precision but also the quantized models in different precisions. Specifically, the flagship model Qwen2.5-72B-Instruct demonstrates competitive performance against the state-of-the-art open-weight model, Llama-3-405B-Instruct, which is around 5 times larger. Additionally, we also release the proprietary models of Mixture-of-Experts (MoE, \citealp{gshard, switch_transformer, stmoe}), namely Qwen2.5-Turbo and Qwen2.5-Plus\footnote{Qwen2.5-Turbo is identified as \texttt{qwen-turbo-2024-11-01} and Qwen2.5-Plus is identified as \texttt{qwen-plus-2024-xx-xx} (to be released) in the API.}, which performs competitively against GPT-4o-mini and GPT-4o respectively. 
+
+
+
+
+In this technical report, we introduce Qwen2.5, the result of our continuous endeavor to create better LLMs. Below, we show the key features of the latest version of Qwen:
+
+\begin{itemize}
+    \item \textbf{Better in Size}: Compared with Qwen2, in addition to 0.5B, 1.5B, 7B, and 72B models, Qwen2.5 brings back the 3B, 14B, and 32B models, which are more cost-effective for resource-limited scenarios and are under-represented in the current field of open foundation models. Qwen2.5-Turbo and Qwen2.5-Plus offer a great balance among accuracy, latency, and cost.
+    
+    \item \textbf{Better in Data}: The pre-training and post-training data have been improved significantly.
+    The pre-training data increased from 7 trillion tokens to 18 trillion tokens, with focus on knowledge, coding, and mathematics.
+    The pre-training is staged to allow transitions among different mixtures.
+    The post-training data amounts to 1 million examples, across the stage of supervised finetuning (SFT, \citealp{instructgpt}), direct preference optimization (DPO, \citealp{rafailov2024direct}), and group relative policy optimization (GRPO, ~\citealp{deepseekmath}).
+    
+    \item \textbf{Better in Use}: Several key limitations of Qwen2 in use have been eliminated, including larger generation length (from 2K tokens to 8K tokens), better support for structured input and output, (e.g., tables and JSON), and easier tool use. In addition, Qwen2.5-Turbo supports a context length of up to 1 million tokens.
+\end{itemize}

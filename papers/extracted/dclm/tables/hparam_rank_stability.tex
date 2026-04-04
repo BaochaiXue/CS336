@@ -1,0 +1,26 @@
+%
+%
+\begin{tabular}{llcccc}
+\toprule
+Hyperparameters & Dataset & \makecell{Learning \\Rate (LR)} & \makecell{Weight \\Decay (WD)} & \lowvar & \aggscore \\
+\midrule
+\multirow{3}{*}{\texttt{0.1x} Learning Rate}&  \cfour & 3.0e-04 & 3.3e-01 & 22.1 & 11.6 \\
+&  \rpj & 3.0e-04 & 3.3e-01 & 23.0 & 11.8 \\
+&  \hqpool & 3.0e-04 & 3.3e-01 & \textbf{26.3} & \textbf{14.4} \\
+\midrule
+\multirow{3}{*}{\texttt{0.1x} Weight Decay}&  \cfour & 3.0e-03 & 3.3e-03 & 21.8 & 11.6 \\
+&  \rpj & 3.0e-03 & 3.3e-03 & 23.0 & 11.8 \\
+&  \hqpool & 3.0e-03 & 3.3e-03 & \textbf{28.3} & \textbf{15.1} \\
+\midrule
+\multirow{3}{*}{Default}&  \cfour & 3.0e-03 & 3.3e-02 & 23.7 & 12.5 \\
+&  \rpj & 3.0e-03 & 3.3e-02 & 25.7 & 13.5 \\
+&  \hqpool & 3.0e-03 & 3.3e-02 & \textbf{30.2} & \textbf{15.4} \\
+\midrule
+\multirow{3}{*}{\texttt{10x} Weight Decay}&  \cfour & 3.0e-03 & 3.3e-01 & 21.8 & 12.0 \\
+&  \rpj & 3.0e-03 & 3.3e-01 & 22.5 & 11.9 \\
+&  \hqpool & 3.0e-03 & 3.3e-01 & \textbf{27.1} & \textbf{14.0} \\
+\midrule
+\multirow{3}{*}{\texttt{10x} Learning Rate}&  \cfour & 3.0e-02 & 3.3e-03 & 22.7 & 12.3 \\
+&  \rpj & 3.0e-02 & 3.3e-03 & 26.0 & 13.2 \\
+&  \hqpool & 3.0e-02 & 3.3e-03 & \textbf{29.0} & \textbf{15.0} \\\bottomrule
+\end{tabular}

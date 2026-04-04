@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lccccc}
+\toprule
+\multirow{2}{*}{Model} & \multirow{2}{*}{CivilComments $\uparrow$} & \multirow{2}{*}{Copyright $\downarrow$} & Real Toxicity & \multirow{2}{*}{BBQ $\uparrow$} & \multirow{2}{*}{WinoGender $\uparrow$}\\
+& & & Prompts $\downarrow$ & & \\
+\midrule
+\hqpool & 0.53 & 0.01 & \textbf{0.07} & 0.65 & \textbf{0.62} \\
+Llama-2-7B & 0.56 & 0.01 & 0.09 & 0.58 & \textbf{0.62} \\
+Llama-3-8B & \textbf{0.74} & 0.01 & 0.09 & 0.67 & 0.57 \\
+Mistral-v0.3-7B & 0.67 & 0.01 & 0.09 & \textbf{0.71} & 0.48 \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Bias and toxicity comparisons.} We compare the model trained on \hqpool with existing similarly sized base models. We see that, with the exception of CivilComments (toxic comment identification), our model performs similarly to existing ones}
+\label{tab:toxicity_analysis}
+\end{table}
