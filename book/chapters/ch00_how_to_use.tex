@@ -1,0 +1,102 @@
+\chapter{How to Use This Book}
+\label{ch:00}
+
+This book accompanies Stanford's CS336: Language Modeling from Scratch. It follows the course's arc---from tokenization to alignment---but provides deeper mathematical treatment, more worked examples, and self-contained prerequisite coverage.
+
+\section{The ``From Scratch'' Philosophy}
+
+When we say ``from scratch,'' we mean it. By the end of this book, you will have seen how to:
+\begin{itemize}
+  \item Define the language modeling problem using information theory
+  \item Build a tokenizer from raw text
+  \item Construct a Transformer architecture layer by layer
+  \item Train it efficiently on GPUs with custom kernels
+  \item Scale it using empirical scaling laws
+  \item Curate and filter training data
+  \item Align the model to follow instructions and reason
+\end{itemize}
+
+No black boxes. No ``just import this library.'' Every component is derived, explained, and connected to the underlying mathematics.
+
+\section{How to Read This Book}
+
+\subsection{Sequential Reading}
+If you are new to language models, read Part~0 first to solidify prerequisites, then proceed through Parts~I--VI in order. This is the recommended path.
+
+\subsection{``I Know ML'' Path}
+If you are comfortable with probability, linear algebra, and PyTorch, skip Part~0 and start with Chapter~6 (The Language Modeling Problem). Refer back to Part~0 when needed.
+
+\subsection{Systems Focus}
+For a systems-oriented reading, focus on Chapters~14--18 after reviewing the Transformer basics in Chapters~9--11.
+
+\subsection{Assignment Companion}
+Each CS336 assignment maps to specific chapters:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Assignment} & \textbf{Topic} & \textbf{Chapters} \\
+\midrule
+A1 & Basics & 6--12 \\
+A2 & Systems & 14--17 \\
+A3 & Scaling & 19--21 \\
+A4 & Data & 22--23 \\
+A5 & Alignment & 24--26 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Notation Conventions}
+
+We use the following conventions throughout the book:
+\begin{itemize}
+  \item \textbf{Scalars} are lowercase italic: $x, y, \alpha$
+  \item \textbf{Vectors} are lowercase bold: $\vx, \vy$
+  \item \textbf{Matrices} are uppercase bold: $\vW, \vQ, \vK, \vV$
+  \item \textbf{Sets} are calligraphic: $\vocab$ (vocabulary), $\mathcal{D}$ (dataset)
+  \item $\log$ always means natural logarithm unless otherwise noted
+  \item Complete notation reference: see the Notation Table on page~\pageref{ch:00:sec:notation_table}
+\end{itemize}
+
+\section{Neuroscience Analogies}
+
+Throughout this book, you will encounter purple-shaded \textbf{Neuroscience Analogy} boxes. These connect machine learning concepts to brain science to build intuition. Every analogy box has three parts:
+\begin{enumerate}
+  \item \textbf{Where the analogy helps}: the genuine structural or functional similarity
+  \item \textbf{Where the analogy breaks}: the important differences
+  \item \textbf{What intuition to keep}: the one-sentence takeaway
+\end{enumerate}
+
+These analogies are thinking tools, not scientific claims about how LLMs work.
+
+\section{Notation Table}
+\label{ch:00:sec:notation_table}
+
+\begin{longtable}{lp{10cm}}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+$T$ & Sequence length (context window) \\
+$V$ or $|\vocab|$ & Vocabulary size \\
+$d$ or $d_{\text{model}}$ & Model / embedding dimension \\
+$d_k, d_v$ & Key and value dimensions per attention head \\
+$d_{\text{ff}}$ & Feed-forward hidden dimension \\
+$n_h$ & Number of attention heads \\
+$n_{\text{kv}}$ & Number of key-value heads (for GQA) \\
+$L$ & Number of Transformer layers \\
+$N$ & Number of model parameters \\
+$D$ & Dataset size (in tokens) \\
+$B$ & Batch size \\
+$\eta$ & Learning rate \\
+$\vtheta$ & Parameter vector \\
+$p(x)$ & True / empirical distribution \\
+$p_\vtheta(x)$ or $q(x)$ & Model distribution \\
+$H(p)$ & Entropy \\
+$H(p, q)$ & Cross-entropy \\
+$\KL{p}{q}$ & KL divergence \\
+$\PPL$ & Perplexity \\
+$\text{softmax}(\cdot)$ & Softmax function (row-wise for matrices) \\
+$\vQ, \vK, \vV$ & Query, Key, Value matrices \\
+$C$ & Compute budget (FLOPs) \\
+$\MFU$ & Model FLOPs Utilization \\
+\bottomrule
+\end{longtable}

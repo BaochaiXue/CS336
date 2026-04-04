@@ -1,0 +1,336 @@
+% =============================================================================
+% CS336: Language Modeling from Scratch — Textbook
+% Main document file
+% Build with: lualatex textbook.tex && biber textbook && lualatex textbook.tex
+% =============================================================================
+\documentclass[11pt, openright, twoside]{book}
+
+% ─── Engine check ───
+\usepackage{iftex}
+\ifluatex\else
+  \errmessage{This document must be compiled with LuaLaTeX}
+\fi
+
+% ─── Encoding and Fonts ───
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+
+% ─── Mathematics ───
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{bm}  % Bold math symbols
+
+% ─── Typography ───
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+% ─── Page Layout ───
+\usepackage[
+  paper=letterpaper,
+  margin=1in,
+  inner=1.2in,
+  outer=1in,
+  top=1in,
+  bottom=1.2in
+]{geometry}
+
+% ─── Headers and Footers ───
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\leftmark}
+\fancyhead[RO]{\small\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ─── Graphics ───
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{subcaption}
+
+% ─── Tables ───
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+% ─── Colors ───
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+
+% ─── Boxes (analogies, capsules, update cards) ───
+\usepackage[most]{tcolorbox}
+
+% Neuroscience analogy box
+\newtcolorbox{analogybox}[1]{
+  colback=Lavender!15,
+  colframe=MediumPurple,
+  coltitle=white,
+  fonttitle=\bfseries\sffamily,
+  title={🧠~Neuroscience Analogy: #1},
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  before upper={\parindent=0pt},
+}
+
+% Prerequisite capsule
+\newtcolorbox{prereqcapsule}[1]{
+  colback=LightCyan!15,
+  colframe=SteelBlue,
+  coltitle=white,
+  fonttitle=\bfseries\sffamily,
+  title={📋~Prerequisite: #1},
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+}
+
+% 2026 update card
+\newtcolorbox{updatecard}[1]{
+  colback=LemonChiffon!20,
+  colframe=Goldenrod,
+  coltitle=black,
+  fonttitle=\bfseries\sffamily,
+  title={🔄~2026 Update: #1},
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+}
+
+% Key insight box
+\newtcolorbox{keyinsight}[1][]{
+  colback=Honeydew!20,
+  colframe=ForestGreen,
+  coltitle=white,
+  fonttitle=\bfseries\sffamily,
+  title={💡~Key Insight},
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  #1
+}
+
+% Warning box
+\newtcolorbox{warningbox}[1][]{
+  colback=MistyRose!20,
+  colframe=Crimson,
+  coltitle=white,
+  fonttitle=\bfseries\sffamily,
+  title={⚠️~Common Pitfall},
+  arc=3mm,
+  boxrule=1pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  #1
+}
+
+% ─── Algorithms ───
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+
+% ─── Code Listings ───
+\usepackage{listings}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{MidnightBlue}\bfseries,
+  commentstyle=\color{OliveGreen}\itshape,
+  stringstyle=\color{BrickRed},
+  numberstyle=\tiny\color{Gray},
+  numbers=left,
+  numbersep=8pt,
+  frame=single,
+  framesep=6pt,
+  framerule=0.5pt,
+  rulecolor=\color{LightGray},
+  backgroundcolor=\color{Snow},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=4,
+  captionpos=b,
+}
+
+% ─── Diagrams ───
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes, calc, fit, backgrounds, decorations.pathreplacing}
+
+% ─── Bibliography ───
+\usepackage[
+  backend=biber,
+  style=numeric-comp,
+  sorting=none,
+  maxbibnames=6,
+  minbibnames=3,
+  doi=false,
+  isbn=false,
+  url=true,
+  eprint=true,
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+% ─── Cross-references ───
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+  urlcolor=RoyalBlue,
+  pdfauthor={CS336 Textbook Project},
+  pdftitle={Language Modeling from Scratch},
+  pdfsubject={Stanford CS336},
+}
+\usepackage[capitalise, noabbrev]{cleveref}
+
+% ─── Theorem-like Environments ───
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+
+% ─── Custom Math Commands ───
+% Vectors and matrices
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\ve}{\mathbf{e}}
+\newcommand{\vW}{\mathbf{W}}
+\newcommand{\vQ}{\mathbf{Q}}
+\newcommand{\vK}{\mathbf{K}}
+\newcommand{\vV}{\mathbf{V}}
+\newcommand{\vO}{\mathbf{O}}
+\newcommand{\vI}{\mathbf{I}}
+\newcommand{\vtheta}{\boldsymbol{\theta}}
+\newcommand{\vphi}{\boldsymbol{\phi}}
+
+% Operators
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator{\ReLU}{ReLU}
+\DeclareMathOperator{\GeLU}{GeLU}
+\DeclareMathOperator{\SiLU}{SiLU}
+\DeclareMathOperator{\SwiGLU}{SwiGLU}
+\DeclareMathOperator{\LN}{LayerNorm}
+\DeclareMathOperator{\RMSNorm}{RMSNorm}
+\DeclareMathOperator{\FFN}{FFN}
+\DeclareMathOperator{\Attn}{Attn}
+\DeclareMathOperator{\RoPE}{RoPE}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+% Information theory
+\newcommand{\KL}[2]{D_{\mathrm{KL}}\!\left(#1 \,\|\, #2\right)}
+\newcommand{\Ent}[1]{H\!\left(#1\right)}
+\newcommand{\CrossEnt}[2]{H\!\left(#1,\, #2\right)}
+\DeclareMathOperator{\PPL}{PPL}
+\DeclareMathOperator{\MFU}{MFU}
+
+% Sets and expectations
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\vocab}{\mathcal{V}}
+
+% Miscellaneous
+\newcommand{\dd}{\mathrm{d}}  % Differential d
+\newcommand{\T}{\mathsf{T}}   % Transpose
+\newcommand{\bigO}{\mathcal{O}}
+
+% ═════════════════════════════════════════════════════════════════════════════
+% DOCUMENT
+% ═════════════════════════════════════════════════════════════════════════════
+\title{
+  \Huge\bfseries Language Modeling from Scratch \\[12pt]
+  \Large A Comprehensive Guide to Building Large Language Models \\[8pt]
+  \large Based on Stanford CS336
+}
+\author{CS336 Textbook Project}
+\date{\today}
+
+\begin{document}
+
+% ─── Front Matter ───
+\frontmatter
+\maketitle
+\input{frontmatter/preface}
+\tableofcontents
+\listoffigures
+\listoftables
+
+% ─── Main Matter ───
+\mainmatter
+
+% ── Part 0: Orientation and Prerequisites ──
+\part{Orientation and Prerequisites}
+\include{chapters/ch00_how_to_use}
+\include{chapters/ch01_probability_entropy}
+\include{chapters/ch02_linalg_matcalc}
+\include{chapters/ch03_pytorch}
+\include{chapters/ch04_cuda_gpu}
+\include{chapters/ch05_linguistics}
+
+% ── Part I: Language Modeling Foundations ──
+\part{Language Modeling Foundations}
+\include{chapters/ch06_lm_problem}
+\include{chapters/ch07_tokenization}
+\include{chapters/ch08_ngram_to_neural}
+
+% ── Part II: Transformer Internals ──
+\part{Transformer Internals}
+\include{chapters/ch09_attention}
+\include{chapters/ch10_transformer_blocks}
+\include{chapters/ch11_norms_position}
+\include{chapters/ch12_hyperparameters}
+\include{chapters/ch13_variants}
+
+% ── Part III: Systems and Implementation ──
+\part{Systems and Implementation}
+\include{chapters/ch14_resource_accounting}
+\include{chapters/ch15_gpus_tpus}
+\include{chapters/ch16_kernels_triton}
+\include{chapters/ch17_parallelism}
+\include{chapters/ch18_inference}
+
+% ── Part IV: Scaling, Evaluation, and Recipes ──
+\part{Scaling, Evaluation, and Recipes}
+\include{chapters/ch19_scaling_laws}
+\include{chapters/ch20_model_recipes}
+\include{chapters/ch21_evaluation}
+
+% ── Part V: Data ──
+\part{Data}
+\include{chapters/ch22_data_sources}
+\include{chapters/ch23_filtering_dedup}
+
+% ── Part VI: Alignment and Reasoning ──
+\part{Alignment and Reasoning}
+\include{chapters/ch24_instruction_tuning}
+\include{chapters/ch25_rlhf_dpo_grpo}
+\include{chapters/ch26_safety}
+
+% ─── Back Matter ───
+\appendix
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
+\include{appendices/appendix_a_proofs}
+\include{appendices/appendix_b_cuda_triton}
+\include{appendices/appendix_c_linguistics}
+\include{appendices/appendix_d_neuro_index}
+\include{appendices/appendix_e_reproducibility}
+
+% ─── Bibliography ───
+\backmatter
+\printbibliography[heading=bibintoc, title={References}]
+
+% ─── Index ───
+% \printindex  % Enable if using makeindex
+
+\end{document}
