@@ -34,7 +34,7 @@ We abstract the GPU as two separate domains: \textbf{Compute} and \textbf{Memory
     \item \textbf{Bandwidth (Memory)}: Bytes per second. This is how fast data can be moved from the storage to the compute units.
 \end{itemize}
 
-A \textbf{kernel} is a small program (usually written in CUDA C++ or Triton) that is compiled by the CPU but executed natively on the GPU. PyTorch hides these kernels behind clean API calls (e.g., `tensor.matmul()`).
+A \textbf{kernel} is a small program (usually written in CUDA C++ or Triton) that is compiled by the CPU but executed natively on the GPU. PyTorch hides these kernels behind clean API calls (e.g., \texttt{tensor.matmul()}).
 
 % ─── Main Ideas ───
 \section{The Compute Hierarchy: Grids, Blocks, Threads}
@@ -97,14 +97,14 @@ z = y + 1.0
 \end{lstlisting}
 
 What actually happens on the GPU?
-1. PyTorch launches the `multiply` kernel.
-2. The GPU reads `x` from HBM, multiplies by 2, and writes intermediate `y` to HBM.
-3. PyTorch launches the `add` kernel.
-4. The GPU reads `y` from HBM, adds 1.0, and writes `z` to HBM.
+1. PyTorch launches the \texttt{multiply} kernel.
+2. The GPU reads \texttt{x} from HBM, multiplies by 2, and writes intermediate \texttt{y} to HBM.
+3. PyTorch launches the \texttt{add} kernel.
+4. The GPU reads \texttt{y} from HBM, adds 1.0, and writes \texttt{z} to HBM.
 
-Total HBM accesses: 1 read of `x`, 1 write of `y`, 1 read of `y`, 1 write of `z`. 
+Total HBM accesses: 1 read of \texttt{x}, 1 write of \texttt{y}, 1 read of \texttt{y}, 1 write of \texttt{z}. 
 
-If we fused this into a single kernel (`z = x * 2.0 + 1.0`), the GPU would read `x` \emph{once}, do both math operations in registers, and write `z` \emph{once}. Kernel fusion cuts the memory traffic in half. This principle is what drives technologies like `torch.compile` and FlashAttention.
+If we fused this into a single kernel (\texttt{z = x * 2.0 + 1.0}), the GPU would read \texttt{x} \emph{once}, do both math operations in registers, and write \texttt{z} \emph{once}. Kernel fusion cuts the memory traffic in half. This principle is what drives technologies like \texttt{torch.compile} and FlashAttention.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}

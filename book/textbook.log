@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  3 APR 2026 21:16
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  3 APR 2026 21:17
  restricted system commands enabled.
 **textbook.tex
 (./textbook.tex
@@ -1490,22 +1490,7 @@ Package cleveref Info: no abbreviation of names on input line 7852.
 
 (./textbook.aux (./chapters/ch00_how_to_use.aux)
 (./chapters/ch01_probability_entropy.aux) (./chapters/ch02_linalg_matcalc.aux)
-(./chapters/ch03_pytorch.aux) (./chapters/ch04_cuda_gpu.aux)
-(./chapters/ch05_linguistics.aux) (./chapters/ch06_lm_problem.aux)
-(./chapters/ch07_tokenization.aux) (./chapters/ch08_ngram_to_neural.aux)
-(./chapters/ch09_attention.aux) (./chapters/ch10_transformer_blocks.aux)
-(./chapters/ch11_norms_position.aux) (./chapters/ch12_hyperparameters.aux)
-(./chapters/ch13_variants.aux) (./chapters/ch14_resource_accounting.aux)
-(./chapters/ch15_gpus_tpus.aux) (./chapters/ch16_kernels_triton.aux)
-(./chapters/ch17_parallelism.aux) (./chapters/ch18_inference.aux)
-(./chapters/ch19_scaling_laws.aux) (./chapters/ch20_model_recipes.aux)
-(./chapters/ch21_evaluation.aux) (./chapters/ch22_data_sources.aux)
-(./chapters/ch23_filtering_dedup.aux) (./chapters/ch24_instruction_tuning.aux)
-(./chapters/ch25_rlhf_dpo_grpo.aux) (./chapters/ch26_safety.aux)
-(./appendices/appendix_a_proofs.aux) (./appendices/appendix_b_cuda_triton.aux)
-(./appendices/appendix_c_linguistics.aux)
-(./appendices/appendix_d_neuro_index.aux)
-(./appendices/appendix_e_reproducibility.aux))
+(./chapters/ch03_pytorch.aux))
 \openout1 = textbook.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 258.
@@ -1781,33 +1766,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 
 [3])
 
-[4] (./textbook.toc
-
-[5
-
-]
-
-[6]
-
-[7]
-
-[8]
-
-[9]
-
-[10]
-
-[11]
-
-[12])
+[4] (./textbook.toc)
 \tf@toc=\write6
 
 \openout6 = textbook.toc
 
 
-[13]
+[5
 
-[14
+]
+
+[6
 
 ] (./textbook.lof)
 \tf@lof=\write7
@@ -1815,9 +1784,9 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 \openout7 = textbook.lof
 
 
-[15]
+[7]
 
-[16
+[8
 
 ] (./textbook.lot)
 \tf@lot=\write8
@@ -1825,9 +1794,9 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 \openout8 = textbook.lot
 
 
-[17]
+[9]
 
-[18
+[10
 
 ]
 
@@ -1937,7 +1906,7 @@ Overfull \hbox (5.93814pt too wide) in paragraph at lines 73--74
  (./chapters/ch03_pytorch.tex
 Chapter 4.
 
-Underfull \vbox (badness 6708) has occurred while \output is active []
+Underfull \vbox (badness 2103) has occurred while \output is active []
 
 
 
@@ -1957,22 +1926,239 @@ LaTeX Font Warning: Font shape `TU/LatinModernMono(0)/b/n' undefined
 
 
 [25]
+Underfull \vbox (badness 4303) has occurred while \output is active []
+
+
+
+[26]
+
+[27])
+
+[28]
+\openout2 = chapters/ch04_cuda_gpu.aux
+ (./chapters/ch04_cuda_gpu.tex
+Chapter 5.
+
+
+[29
+
+
+
+
+]
+
+[30]
+
+[31]
+
+[32])
+
+[33]
+\openout2 = chapters/ch05_linguistics.aux
+ (./chapters/ch05_linguistics.tex
+
+[34
+
+
+
+
+]
+Chapter 6.
+
+Underfull \vbox (badness 2150) has occurred while \output is active []
+
+
+
+[35]
+
+[36]
+
+[37]
+Underfull \vbox (badness 4621) has occurred while \output is active []
+
+
+
+[38])
+
+[39]
+
+[40
+
+
+
+]
+
+[41]
+
+[42]
+\openout2 = chapters/ch06_lm_problem.aux
+ (./chapters/ch06_lm_problem.tex
+Chapter 7.
+
+
+[43
+
+
+]
+
+[44]
+
+LaTeX Warning: Reference `eq:06:product_form' on page 1 undefined on input line
+ 112.
+
+
+
+[45]
+
+[46])
+
+[47]
+\openout2 = chapters/ch07_tokenization.aux
+ (./chapters/ch07_tokenization.tex
+
+[48
+
+
+
+
+]
+Chapter 8.
+
+
+[49]
+
+[50]
+
+[51]
+
+[52]
+
+LaTeX Warning: Citation 'megabyte_2023' on page 53 undefined on input line 155.
+
+
+
+LaTeX Warning: Citation 'blt_2024' on page 53 undefined on input line 155.
+
+
+
+[53]
+
+LaTeX Warning: Citation 'blt_2024' on page 54 undefined on input line 202.
+
+
+LaTeX Warning: Citation 'byt5_2021' on page 54 undefined on input line 203.
+
+)
+
+[54]
+\openout2 = chapters/ch08_ngram_to_neural.aux
+ (./chapters/ch08_ngram_to_neural.tex
+Chapter 9.
+
+
+[55
+
+
+
+
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 35.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 35.
+
+
+
+[56]
+Overfull \hbox (10.50726pt too wide) in paragraph at lines 69--72
+[]\TU/LatinModernRoman(0)/m/n/10.95 1. Count the his-tory: $\OML/cmm/m/it/10.95
+ C\OT1/cmr/m/n/10.95 ([]\OML/cmm/m/it/10.95 ; []\OT1/cmr/m/n/10.95 ) = 2$\TU/La
+tinModernRoman(0)/m/n/10.95 . 2. Count the full tri-gram: $\OML/cmm/m/it/10.95 
+C\OT1/cmr/m/n/10.95 ([]\OML/cmm/m/it/10.95 ; []; []\OT1/cmr/m/n/10.95 ) =
+ []
+
+
+
+[57]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[58]
+
+[59]
+Overfull \hbox (1.40991pt too wide) in paragraph at lines 165--166
+[]\TU/LatinModernRoman(0)/b/n/10.95 [Pre-pares for CS336 A1] \TU/LatinModernRom
+an(0)/m/n/10.95 Write a Py-Torch class \TU/LatinModernMono(0)/b/n/10.95 SimpleNP
+LM \TU/LatinModernRoman(0)/m/n/10.95 that in-her-its from \TU/LatinModernMono(0
+)/b/n/10.95 nn.Module\TU/LatinModernRoman(0)/m/n/10.95 .
+ []
+
+
+LaTeX Warning: Citation 'mikolov2013' on page 60 undefined on input line 180.
+
+)
+
+[60]
+
+[61
+
+
+
+]
+
+[62]
+\openout2 = chapters/ch09_attention.aux
+ (./chapters/ch09_attention.tex
+Chapter 10.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[63
+
+
+]
+
+LaTeX Warning: Reference `eq:09:attention' on page 1 undefined on input line 58
+.
+
+
+
+[64]
+
+LaTeX Warning: Reference `eq:09:causal_attn' on page 1 undefined on input line 
+82.
+
+
+
+[65]
+Underfull \vbox (badness 1325) has occurred while \output is active []
+
+
+
+[66]
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.106 ...ck:} Why scale the loss by `accumulation_
-                                                  steps`? Because the loss f...
+l.157 ...1]} Implement a PyTorch function `causal_
+                                                  attention(q, k, v)` using ...
 
 Here is how much of LuaTeX's memory you used:
- 50052 strings out of 475506
+ 49383 strings out of 475506
  156465,2373549 words of node,token memory allocated
- 41950 words of node memory still in use:
-   1440 hlist, 2 vlist, 788 rule, 82 disc, 14 local_par, 1 dir, 923 glue, 865 ke
-rn, 42 penalty, 284 glyph, 666 attribute, 94 glue_spec, 666 attribute_list, 1 te
-mp, 3 if_stack, 1 write, 24 pdf_literal, 10 pdf_dest, 1154 pdf_colorstack nodes
-   avail lists: 1:1,2:791,3:386,4:1984,5:1725,6:111,7:5453,8:92,9:3992,10:26,11:
-423
- 71271 multiletter control sequences out of 65536+600000
- 106 fonts using 10145407 bytes
+ 7082 words of node memory still in use:
+   74 hlist, 2 vlist, 15 rule, 3 mark, 23 disc, 10 local_par, 1 dir, 13 math, 16
+3 glue, 31 kern, 42 penalty, 6 margin_kern, 351 glyph, 261 attribute, 107 glue_s
+pec, 261 attribute_list, 1 temp, 3 if_stack, 1 shape, 4 write, 24 pdf_literal, 8
+ pdf_dest, 32 pdf_colorstack nodes
+   avail lists: 1:4,2:1603,3:381,4:3106,5:2613,6:61,7:6156,8:91,9:6133,10:26,11:
+559
+ 70656 multiletter control sequences out of 65536+600000
+ 139 fonts using 12611575 bytes
  98i,13n,97p,1004b,1495s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, no output PDF file produced!

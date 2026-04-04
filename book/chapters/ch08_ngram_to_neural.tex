@@ -118,7 +118,7 @@ These three flaws---vanishing gradients, state bottlenecks, and serial execution
 The transition from $n$-grams to neural models shifted NLP from memory-bound table lookups to compute-bound dense linear algebra.
 
 \begin{itemize}
-    \item \textbf{Embedding tables} are sparse lookups. We do not actually multiply $\ve_v^\T \vW_E$ (which is mostly zeros), we simply index into the $v$-th row in PyTorch using `nn.Embedding`.
+    \item \textbf{Embedding tables} are sparse lookups. We do not actually multiply $\ve_v^\T \vW_E$ (which is mostly zeros), we simply index into the $v$-th row in PyTorch using \texttt{nn.Embedding}.
     \item \textbf{The Softmax Bottleneck}: The final projection matrix $\vW_{\text{out}} \in \R^{d \times V}$ is massive. If $d=4096$ and $V=100,000$, computing the logits takes a huge number of FLOPs. The softmax operation itself requires calculating the sum of exponentials across the entire vocabulary $V$ for every batch item and token position. Early NPLMs used approximations like hierarchical softmax or negative sampling to avoid computing the full denominator, but modern hardware is fast enough that we simply compute the full softmax.
 \end{itemize}
 
@@ -162,7 +162,7 @@ The transition from $n$-grams to neural models shifted NLP from memory-bound tab
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item \textbf{[Prepares for CS336 A1]} Write a PyTorch class `SimpleNPLM` that inherits from `nn.Module`. It should take a sequence of $(n-1)$ integer tokens, map them through an `nn.Embedding`, concatenate them, pass them through a linear layer and a ReLU, and finally output logits over the vocabulary.
+  \item \textbf{[Prepares for CS336 A1]} Write a PyTorch class \texttt{SimpleNPLM} that inherits from \texttt{nn.Module}. It should take a sequence of $(n-1)$ integer tokens, map them through an \texttt{nn.Embedding}, concatenate them, pass them through a linear layer and a ReLU, and finally output logits over the vocabulary.
 \end{enumerate}
 
 \subsection*{Open-Ended}

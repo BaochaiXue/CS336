@@ -18,7 +18,7 @@ After reading this chapter, you will be able to:
 
 Mathematical formulas in papers must eventually hit silicon. PyTorch is the dominant framework in modern AI research because it strikes an elegant balance between pythonic imperativity and high-performance compiled execution. 
 
-However, writing \emph{correct} PyTorch code is not the same as writing \emph{fast} PyTorch code. To build language models from scratch, you cannot just memorize API calls (`self.linear = nn.Linear(...)`). You must understand what happens underneath the hood: how numbers are sequenced linearly in RAM, how strides allow constant-time reshaping, how broadcasting avoids massive copying, and how the autograd engine secretly builds a directed acyclic graph behind your back.
+However, writing \emph{correct} PyTorch code is not the same as writing \emph{fast} PyTorch code. To build language models from scratch, you cannot just memorize API calls (\texttt{self.linear = nn.Linear(...)}). You must understand what happens underneath the hood: how numbers are sequenced linearly in RAM, how strides allow constant-time reshaping, how broadcasting avoids massive copying, and how the autograd engine secretly builds a directed acyclic graph behind your back.
 
 This chapter bridges the gap between the matrix math of Chapter 2 and the hardware realities we will face in Chapter 14.
 
@@ -103,14 +103,14 @@ for step, (x, y) in enumerate(dataloader):
         model.zero_grad()
 \end{lstlisting}
 
-\paragraph{Sanity Check:} Why scale the loss by `accumulation_steps`? Because the loss function (like CrossEntropy) averages over the batch. If you process 8 micro-batches and add their gradients, you effectively summed the loss instead of averaged it over all 64 elements. Scaling by $\frac{1}{8}$ perfectly recreates the exact mathematics of processing a batch of 64 globally.
+\paragraph{Sanity Check:} Why scale the loss by \texttt{accumulation\_steps}? Because the loss function (like CrossEntropy) averages over the batch. If you process 8 micro-batches and add their gradients, you effectively summed the loss instead of averaged it over all 64 elements. Scaling by $\frac{1}{8}$ perfectly recreates the exact mathematics of processing a batch of 64 globally.
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:03:sec:systems}
 
 A huge source of slow training is CPU-GPU sync.
-If you call \texttt{loss.item()} or \texttt{print(tensor)}, the CPU must immediately halt and wait for the GPU to finish all queued computation just to fetch that single number. This breaks the asynchronous execution pipeline. Keep printing and `.item()` fetching strictly to boundaries, such as once every 100 log steps.
+If you call \texttt{loss.item()} or \texttt{print(tensor)}, the CPU must immediately halt and wait for the GPU to finish all queued computation just to fetch that single number. This breaks the asynchronous execution pipeline. Keep printing and \texttt{.item()} fetching strictly to boundaries, such as once every 100 log steps.
 
 % ─── Neuroscience Analogy ───
 \begin{analogybox}{Synaptic Plasticity vs. Autograd}
@@ -151,7 +151,7 @@ If you call \texttt{loss.item()} or \texttt{print(tensor)}, the CPU must immedia
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item \textbf{[Prepares for CS336 A1]} Write a function `rope(x)` that takes a tensor `x` of shape `(B, T, d)` and correctly applies broadcasting to add a learned positional encoding `bias` of shape `(T, d)` to it without using loops or `.expand()`.
+  \item \textbf{[Prepares for CS336 A1]} Write a function \texttt{rope(x)} that takes a tensor \texttt{x} of shape \texttt{(B, T, d)} and correctly applies broadcasting to add a learned positional encoding \texttt{bias} of shape \texttt{(T, d)} to it without using loops or \texttt{.expand()}.
 \end{enumerate}
 
 \subsection*{Open-Ended}
