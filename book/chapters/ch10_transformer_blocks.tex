@@ -5,9 +5,10 @@
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Construct a full Transformer block, integrating Multi-Head Attention, MLPs, LayerNorm, and Residual Connections.
+  \item Explain the necessity of the SwiGLU / Feed-Forward layer for storing world knowledge.
+  \item Distinguish between Pre-Norm and Post-Norm architectures and explain why Pre-Norm is used in all modern LLMs.
+  \item Understand the mathematical function of Residual Connections in mitigating the vanishing gradient problem.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,53 +16,140 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:10:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+Chapter 9 gave us the engine (Attention) that allows tokens to talk to each other. But an engine is useless without a chassis, transmission, and fuel. 
+
+A \textbf{Transformer Block} is the self-contained, repeated unit that comprises a language model. It takes an input sequence $\mathbf{X}$, allows the tokens to communicate via Attention, updates their individual internal representations via a Feed-Forward network, and stabilizes the signal via normalization and residual pathways, outputting a new sequence $\mathbf{X}'$ of the exact same shape.
+
+By stacking $N$ of these blocks identically (e.g., $N=12$ for GPT-2, $N=80$ for LLaMA-2), the network gradually refines its representation of the text from shallow lexical features (in the first layers) to deep semantic concepts (in the final layers) until the final representation is rich enough to predict the next token.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:10:sec:setup}
 
-TODO: Define notation and state assumptions.
+Let $\vx \in \R^{d_m}$ be the representation of a single token at some intermediate layer.
+A Transformer block applies a sequence of non-linear transformations to $\vx$.
+\begin{itemize}
+    \item \textbf{Attention}: $\text{MHA}(\mathbf{X})$. Mixes information across the sequence length $T$.
+    \item \textbf{Feed-Forward}: $\text{FFN}(\vx)$. Mixes information across the model dimension $d_m$, independently for each token.
+    \item \textbf{LayerNorm}: $\text{LN}(\vx)$. Standardizes the vector to mean 0, variance 1.
+\end{itemize}
 
 % ─── Main Ideas ───
-\section{Main Ideas}
+\section{The Residual Connection}
 \label{ch:10:sec:main}
 
-TODO: Core technical content.
+Deep neural networks suffer from optimization collapse: as the network gets deeper, gradients vanish. He et al. solved this by introducing the \textbf{Residual Connection} (or Skip Connection). 
+
+Instead of a layer computing the \emph{new} representation directly ($f(\vx) = \vx_{\text{new}}$), the layer only computes the \emph{change} or \emph{residual} ($\Delta \vx$). The operation becomes:
+\begin{equation}
+\vx_{\text{new}} = \vx + \sublayer(\vx)
+\end{equation}
+
+Mathematically, when you take the derivative of the loss with respect to $\vx$, you get:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \vx} = \frac{\partial \mathcal{L}}{\partial \vx_{\text{new}}} \left( \vI + \frac{\partial \sublayer(\vx)}{\partial \vx} \right)
+\end{equation}
+The identity matrix $\vI$ guarantees that the gradient can always flow backward cleanly, completely bypassing the complex derivatives of the sublayer if necessary. 
+
+\section{Layer Normalization: Pre-Norm vs Post-Norm}
+
+To keep activations from exploding as we sum hundreds of residuals, we apply Layer Normalization. 
+\begin{equation}
+\text{LN}(\vx) = \frac{\vx - \mu}{\sqrt{\sigma^2 + \epsilon}} \odot \boldsymbol{\gamma} + \boldsymbol{\beta}
+\end{equation}
+(We will cover RMSNorm, a modern optimization, in Chapter 11).
+
+The original 2017 Transformer used \textbf{Post-Norm}:
+$\vx = \text{LN}(\vx + \sublayer(\vx))$
+
+This proved highly unstable to train from scratch for very deep models. The gradients through the massive sequence of LayerNorms degraded. Currently, all major LLMs use \textbf{Pre-Norm}:
+$\vx = \vx + \sublayer(\text{LN}(\vx))$
+
+In Pre-Norm, the residual pathway $\vx_{\text{in}} \rightarrow \vx_{\text{out}}$ never passes through \emph{any} non-linearities or normalizations. The entire LLM backbone is just one uninterrupted addition highway from layer 1 to layer $N$.
+
+\section{The Position-Wise Feed-Forward Network (FFN)}
+
+Attention computes \emph{which} tokens should interact. But once token A receives the vector representation from token B, it must update its internal state to reflect that new knowledge. This requires an MLP.
+
+The standard Transformer FFN is a two-layer perceptron applied identically to every token:
+\begin{equation}
+\text{FFN}(\vx) = \text{ReLU}(\vx \vW_1 + \mathbf{b}_1) \vW_2 + \mathbf{b}_2
+\end{equation}
+
+Crucially, the hidden dimension of this FFN is traditionally heavily expanded, usually to $4 \times d_m$. If $d_m = 4096$, the FFN projects the token up to $16384$ dimensions, applies a non-linearity, and projects it back down to $4096$.
+
+\paragraph{Why the FFN?}
+Attention has no non-linearities (other than the routing softmax). It is just a weighted average of vectors. The FFN provides the non-linear capacity required to memorize facts. Recent interpretability research conceptualizes the FFN as a Key-Value Memory Bank: $\vW_1$ acts as a set of keys detecting specific linguistic patterns in $\vx$, and $\vW_2$ outputs the corresponding associated knowledge values back into the residual stream.
+
+Modern models (like LLaMA) replace the ReLU MLP with a \textbf{SwiGLU} variant, which performs a gating mechanism:
+\begin{equation}
+\text{SwiGLU}(\vx) = (\text{Swish}(\vx\vW_1) \odot (\vx\vW_V)) \vW_2
+\end{equation}
+We will code this explicitly in Assignment 1.
+
+\section{Assembling the Final Block}
+With these components, the standard decoder-only Transformer Block (using Pre-Norm) is exactly two equations:
+\begin{align}
+\vx_{\text{mid}} &= \vx + \text{MHA}(\text{LN}(\vx)) \\
+\vx_{\text{out}} &= \vx_{\text{mid}} + \text{FFN}(\text{LN}(\vx_{\text{mid}}))
+\end{align}
+
+No magic. Just an input vector $\vx$, two normalizations, an attention sweep and a neural expansion, added back to the input. We replicate this block $N$ times.
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Parameter Counting}
 \label{ch:10:sec:example}
 
-TODO: Complete worked example.
+Let's calculate the exact number of learnable parameters in a single block where $d_m = 512$, $h=8$, and the FFN expansion is $4\times$ ($d_{\text{ff}} = 2048$). We assume no bias vectors, conforming to modern LLM standards (like PaLM and LLaMA).
+
+1. \textbf{Attention Sublayer}:
+   - $\vW_Q \in \R^{512 \times 512} \implies 262,144$ parameters.
+   - $\vW_K \in \R^{512 \times 512} \implies 262,144$ parameters.
+   - $\vW_V \in \R^{512 \times 512} \implies 262,144$ parameters.
+   - $\vW_O \in \R^{512 \times 512} \implies 262,144$ parameters.
+   - \emph{Subtotal: $1,048,576$ parameters.}
+
+2. \textbf{FFN Sublayer}:
+   - $\vW_1 \in \R^{512 \times 2048} \implies 1,048,576$ parameters.
+   - $\vW_2 \in \R^{2048 \times 512} \implies 1,048,576$ parameters.
+   - \emph{Subtotal: $2,097,152$ parameters.}
+
+3. \textbf{LayerNorms} (2 per block):
+   - $\boldsymbol{\gamma}_{1}, \boldsymbol{\gamma}_{2} \in \R^{512} \implies 1,024$ parameters.
+   - \emph{Subtotal: $1,024$ parameters.}
+
+\textbf{Total per block}: $3,146,752$ parameters. 
+Notice that the FFN contains $\sim 66\%$ of the parameters in the entire block. The "Attention" mechanism is actually the minority shareholder in an LLM's capacity!
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:10:sec:systems}
 
-TODO: Implementation and performance implications.
+Memory limits everything. During training, Autograd must cache the input to \emph{every} matrix multiplication to compute the backward pass.
+For a batch size of $B$, sequence length $T$, and model dimension $d$, caching $\vx_{\text{in}}$ across 80 blocks consumes monumental amounts of VRAM. This leads to \textbf{Activation Checkpointing} (or Gradient Checkpointing): instead of saving the activations in memory, we simply delete them during the forward pass, and physically \emph{recompute} them from scratch during the backward pass. We trade TFLOPs of compute to save Gigabytes of VRAM.
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Cortical Columns and the Residual Stream}
   \paragraph{Where the analogy helps.}
-  TODO
+  The neocortex is physically structured into vertical columns where sensory information flows sequentially up through layers. At every step, local computation creates complex representations, and the result is passed upward. The Transformer block is an exact computational analog to this layered processing. The residual connection acts like the heavy vertical axonal bundles that ensure raw sensory signals don't degrade entirely before reaching higher cognitive centers.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  The brain possesses massive top-down feedback loops (higher layers predicting lower layers). A Transformer is strictly feedforward during a single timestep. 
 
   \paragraph{What intuition to keep.}
-  TODO
+  The residual stream ($\vx$) is a global "bulletin board" that persists from the input of the model all the way to the output. Every block (column) reads from this bulletin board (via LN), computes some specialized insight (via MHA and FFN), and "adds" its insight back onto the board for the next layer to read.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:10:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``LayerNorm acts across the batch.''} That is BatchNorm (used in ResNets). LayerNorm normalizes across the $d_m$ feature dimensions of a \emph{single} token. The mean and variance are unique to that token independently of the batch or the sequence.
+  \item \textbf{``The FFN mixes information between words.''} Absolutely not. The FFN matrix multiplication is applied to the $T$ dimension independently. Only the Attention layer allows tokens $t_1$ and $t_2$ to exchange data. The FFN is purely intra-token processing.
 \end{enumerate}
+
 
 % ─── Exercises ───
 \section{Exercises}
@@ -69,22 +157,23 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item State the difference between Pre-Norm and Post-Norm equations.
+  \item In a Transformer with $d_m=1024$ and an FFN expansion of 4, what are the exact dimensions of the two FFN weight matrices?
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Assume you stack 100 Pre-Norm Transformer blocks: $\vx_{i} = \vx_{i-1} + f_i(\vx_{i-1})$. Write the equation for $\vx_{100}$ in terms of $\vx_0$ and the sum of the sublayer outputs. Then derive $\frac{\partial \vx_{100}}{\partial \vx_0}$ to clearly prove why gradients do not vanish.
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item \textbf{[Prepares for CS336 A1]} Implement a PyTorch `nn.Module` named `TransformerBlock`. It should take `x` (shape $B, T, d_m$), pass it through your simulated MHA and FFN modules using standard PyTorch `nn.LayerNorm`, and output the residual-summed tensor. Use no biases in the linear layers.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item If the residual stream $\vx$ allows the model to bypass layers entirely by setting sublayer outputs to 0, what prevents the model from lazily doing nothing and just passing the raw input embeddings all the way to the output?
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +181,6 @@ TODO: Implementation and performance implications.
 \label{ch:10:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{he2016}: Deep Residual Learning for Image Recognition. The ResNet paper that introduced the $\vx + f(\vx)$ mathematical trick.
+  \item \textcite{xiong2020}: On Layer Normalization in the Transformer Architecture. A rigorous mathematical analysis of why Post-Norm fails and why Pre-Norm stabilizes deep training.
 \end{itemize}
