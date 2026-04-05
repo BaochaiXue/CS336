@@ -1,13 +1,15 @@
-\chapter{Architectural Variants and Extensions}
+\chapter{Mixture of Experts}
 \label{ch:13}
 
 % ─── Learning Goals ───
 \begin{keyinsight}
 After reading this chapter, you will be able to:
 \begin{enumerate}
-  \item TODO: Learning goal 1
-  \item TODO: Learning goal 2
-  \item TODO: Learning goal 3
+  \item Explain why Mixture of Experts (MoE) decouples total model parameters from per-token computation, and why this matters for scaling.
+  \item Formalize the gating function, top-$k$ routing, and capacity factor, and work through the math of a single MoE forward pass.
+  \item Identify and analyze the failure modes of sparse routing: expert collapse, load imbalance, and token dropping, and explain the auxiliary losses designed to mitigate them.
+  \item Describe how expert parallelism distributes experts across devices, including the all-to-all communication pattern and its systems cost.
+  \item Compare the training and inference tradeoffs of sparse MoE models (Switch, GShard, Mixtral, DeepSeek) against dense baselines.
 \end{enumerate}
 \end{keyinsight}
 
@@ -15,52 +17,388 @@ After reading this chapter, you will be able to:
 \section{Big Picture}
 \label{ch:13:sec:big_picture}
 
-TODO: Situate this chapter in the overall narrative.
+In Chapters 9 and 10, we built the standard Transformer block: attention followed by a feedforward network (FFN). The FFN contains the majority of the model's parameters. In GPT-3 (175B), roughly two-thirds of all parameters live inside the FFN layers. These parameters encode the model's ``knowledge''---factual associations, linguistic patterns, and world models compressed from the training data.
+
+A natural question arises: \emph{can we scale up the model's knowledge capacity without proportionally scaling the computation required for every single token?}
+
+The answer is \textbf{Mixture of Experts (MoE)}. The core idea is deceptively simple: instead of one large FFN, use $E$ smaller FFNs (called \textbf{experts}) and a learned \textbf{router} (or \textbf{gating network}) that selects which experts process each token. If the router activates only $k \ll E$ experts per token, then:
+\begin{itemize}
+  \item The \textbf{total parameter count} scales with $E$ (more experts = more knowledge capacity).
+  \item The \textbf{per-token FLOPs} scale with $k$ (only a few experts fire per token).
+\end{itemize}
+
+This is \emph{conditional computation}: different tokens take different computational paths through the network. A token about chemistry might activate expert 3 and expert 7; a token about syntax might activate expert 1 and expert 5. The model allocates its capacity dynamically.
+
+MoE is not a niche research curiosity. It is a core production technique:
+\begin{itemize}
+  \item Mixtral 8$\times$7B uses 8 experts with top-2 routing, achieving ``7B-class'' inference cost with ``47B-class'' quality.
+  \item DeepSeek-V3 uses 256 routed experts with top-8 routing plus 1 shared expert, totaling 671B parameters but activating only 37B per token.
+  \item Google's Switch Transformer demonstrated that even top-1 routing (one expert per token) can work if the auxiliary losses are designed correctly.
+\end{itemize}
+
+CS336 dedicates an entire lecture (L4) to MoE because it represents a fundamental design axis: the tradeoff between \emph{parameter capacity} and \emph{active computation}.
 
 % ─── Formal Setup ───
 \section{Formal Setup and Notation}
 \label{ch:13:sec:setup}
 
-TODO: Define notation and state assumptions.
+We work within a single Transformer block. Recall the standard dense FFN from Chapter 10:
+\begin{equation}
+\FFN(\vx) = \vW_2 \cdot \sigma(\vW_1 \vx)
+\end{equation}
+where $\vx \in \R^d$ is the hidden state for a single token, $\vW_1 \in \R^{d_{\text{ff}} \times d}$, $\vW_2 \in \R^{d \times d_{\text{ff}}}$, and $\sigma$ is a nonlinearity (typically SwiGLU in modern architectures).
+
+An \textbf{MoE layer} replaces this single FFN with:
+\begin{itemize}
+  \item $E$ expert networks $\{f_1, f_2, \ldots, f_E\}$, each an independent FFN with its own parameters.
+  \item A \textbf{router} (gating network) $G: \R^d \to \R^E$ that produces a score for each expert given an input token.
+\end{itemize}
+
+We define:
+\begin{align}
+  T &= \text{number of tokens in the batch} \\
+  E &= \text{number of experts} \\
+  k &= \text{number of experts activated per token (top-}k\text{)} \\
+  C &= \text{expert capacity (max tokens an expert can process)} \\
+  d &= \text{model dimension} \\
+  d_{\text{ff}} &= \text{FFN hidden dimension per expert}
+\end{align}
 
 % ─── Main Ideas ───
-\section{Main Ideas}
-\label{ch:13:sec:main}
+\section{The Router: From Dense to Sparse}
+\label{ch:13:sec:router}
 
-TODO: Core technical content.
+\subsection{Gating Function}
+
+The router computes a score vector over all experts for each token $\vx$:
+\begin{equation}
+\mathbf{s}(\vx) = \vW_g \vx
+\end{equation}
+where $\vW_g \in \R^{E \times d}$ is the gating weight matrix. Each entry $s_i(\vx)$ represents how relevant expert $i$ is for token $\vx$.
+
+\subsection{Top-$k$ Selection}
+
+We select the top-$k$ experts by score and apply softmax \emph{only over the selected experts} to get the gating weights:
+\begin{equation}
+\label{eq:13:topk}
+g_i(\vx) = \begin{cases}
+  \frac{e^{s_i(\vx)}}{\sum_{j \in \text{TopK}(\mathbf{s}, k)} e^{s_j(\vx)}} & \text{if } i \in \text{TopK}(\mathbf{s}(\vx), k) \\
+  0 & \text{otherwise}
+\end{cases}
+\end{equation}
+
+The output of the MoE layer is the weighted combination of the selected experts:
+\begin{equation}
+\label{eq:13:moe_output}
+\text{MoE}(\vx) = \sum_{i=1}^{E} g_i(\vx) \cdot f_i(\vx)
+\end{equation}
+
+Because $g_i = 0$ for all but $k$ experts, only $k$ expert forward passes are computed. This is where the computational saving comes from.
+
+\subsection{Top-1 vs.\ Top-2 Routing}
+
+\textbf{Top-1} (Switch Transformer): Each token goes to exactly one expert. Maximally sparse. Simplest dispatch logic. But the gradient signal through the router is noisier because each token only ``sees'' one expert.
+
+\textbf{Top-2} (GShard, Mixtral): Each token goes to two experts and their outputs are blended by the gating weights. Smoother gradients, better quality, but double the computation per token compared to top-1.
+
+Modern systems like DeepSeek-V3 use higher $k$ (top-8 out of 256 experts) combined with a \textbf{shared expert} that processes every token regardless of routing, providing a stable baseline representation.
+
+\section{Capacity Factor and Token Dropping}
+\label{ch:13:sec:capacity}
+
+\subsection{The Load Imbalance Problem}
+
+If the router assigns 90\% of tokens to expert~3 and 1\% to expert~7, we have a catastrophic load imbalance. Expert~3 is overwhelmed; expert~7 is wasted. In a distributed setting where each expert lives on a different device, one GPU is overloaded while others sit idle.
+
+\subsection{Capacity Factor}
+
+To manage this, we define the \textbf{expert capacity}:
+\begin{equation}
+  C = \left\lceil \frac{T}{E} \cdot c_f \right\rceil
+\end{equation}
+where $c_f$ is the \textbf{capacity factor}, typically $c_f \in [1.0, 1.5]$. With $c_f = 1.0$, each expert can handle exactly its ``fair share'' of tokens ($T/E$). With $c_f = 1.25$, each expert gets a 25\% buffer.
+
+\subsection{Token Dropping}
+
+When an expert's buffer is full ($C$ tokens already assigned), additional tokens routed to that expert are \textbf{dropped}: they skip the expert computation entirely and their representation passes through unchanged via the residual connection.
+
+Token dropping has real consequences:
+\begin{itemize}
+  \item Dropped tokens lose the benefit of the FFN computation at that layer.
+  \item The model may develop blind spots for certain token types that consistently overflow popular experts.
+  \item During training, dropped tokens still produce gradients for the router (encouraging it to spread load), but the expert parameters miss those training signals.
+\end{itemize}
+
+\section{Auxiliary Load Balancing Loss}
+\label{ch:13:sec:aux_loss}
+
+The gating function is differentiable (softmax over top-$k$ scores), so the router learns via gradient descent. But left to its own devices, the router tends to collapse: it discovers that a few experts are ``good enough'' and routes almost all tokens to them. This is a positive feedback loop---popular experts get more training signal, become even better, attract even more tokens.
+
+To prevent this, we add an \textbf{auxiliary load balancing loss} to the training objective.
+
+\subsection{The Switch Transformer Formulation}
+
+Define two quantities over a batch of $T$ tokens:
+\begin{align}
+  f_i &= \frac{1}{T} \sum_{t=1}^{T} \mathbf{1}[\text{token } t \text{ is routed to expert } i] 
+  \quad \text{(fraction of tokens dispatched to expert $i$)} \\
+  p_i &= \frac{1}{T} \sum_{t=1}^{T} g_i(\vx_t) 
+  \quad \text{(mean gating probability for expert $i$)}
+\end{align}
+
+The auxiliary loss is:
+\begin{equation}
+\label{eq:13:aux_loss}
+\mathcal{L}_{\text{aux}} = \alpha \cdot E \cdot \sum_{i=1}^{E} f_i \cdot p_i
+\end{equation}
+where $\alpha$ is a small coefficient (typically $\alpha = 0.01$).
+
+\textbf{Why does this work?} The product $f_i \cdot p_i$ is minimized when both $f_i$ and $p_i$ are uniform across experts (i.e., $f_i = 1/E$ and $p_i = 1/E$ for all $i$). If expert~3 is overloaded ($f_3 \gg 1/E$) and has high average probability ($p_3 \gg 1/E$), the product $f_3 \cdot p_3$ is large, and the loss penalizes this imbalance. The factor $E$ normalizes the loss magnitude.
+
+\subsection{Aux-Loss-Free Approaches}
+
+Recent work (DeepSeek-V3) has explored removing the auxiliary loss entirely, replacing it with per-expert bias terms that are adjusted dynamically during training to maintain balance. The motivation: the auxiliary loss can conflict with the primary language modeling objective, forcing suboptimal routing for the sake of balance. Bias-based approaches decouple load balancing from the gradient signal.
+
+\section{Expert Collapse and Training Instability}
+\label{ch:13:sec:collapse}
+
+MoE training is notoriously fragile. Common failure modes include:
+
+\begin{enumerate}
+  \item \textbf{Expert collapse}: One or more experts receive negligible traffic and their parameters stop updating. Once collapsed, an expert is effectively dead---the router has learned to avoid it, and the expert has no gradient signal to recover.
+  
+  \item \textbf{Router collapse}: The router learns a near-deterministic mapping (always picks the same experts regardless of input), losing the benefits of conditional computation.
+  
+  \item \textbf{Training spikes}: MoE models exhibit more frequent loss spikes during training than dense models. When the router suddenly shifts its assignments (a ``routing earthquake''), entire batches of tokens hit unfamiliar experts, causing loss spikes.
+  
+  \item \textbf{$z$-loss}: To stabilize training, some implementations add a penalty on the magnitude of the router logits: $\mathcal{L}_z = \frac{1}{T}\sum_t \left(\log \sum_i e^{s_i(\vx_t)}\right)^2$. This prevents the logits from becoming too large, which would make the softmax too sharp and the routing too deterministic.
+\end{enumerate}
+
+\section{Dispatch and Combine: Implementation}
+\label{ch:13:sec:dispatch}
+
+In practice, the MoE forward pass involves two key operations:
+
+\textbf{Dispatch}: Reorganize tokens from their natural batch order into per-expert groups. Token $t$ (originally at position $t$ in the batch) must be sent to its selected experts. This creates $E$ variable-length buffers, each containing the tokens assigned to that expert (up to capacity $C$).
+
+\textbf{Expert computation}: Each expert processes its assigned tokens independently. Because experts are independent FFNs, this step is embarrassingly parallel.
+
+\textbf{Combine}: After expert computation, route the outputs back to their original positions in the batch and weight them by the gating coefficients $g_i(\vx_t)$.
+
+In a single-device implementation, dispatch and combine are index-gathering operations. In a multi-device setting, they become \textbf{all-to-all communication} operations.
+
+\section{All-to-All Communication}
+\label{ch:13:sec:alltoall}
+
+When experts are distributed across $P$ devices (expert parallelism), the dispatch step requires an \textbf{all-to-all collective}: each device sends a subset of its local tokens to every other device (wherever the selected experts reside), and receives tokens from all other devices for its local experts.
+
+This is fundamentally different from the all-reduce used in data parallelism:
+\begin{itemize}
+  \item \textbf{All-reduce} (data parallelism): Every device sends the same quantity of data (gradient tensors). Communication volume is predictable.
+  \item \textbf{All-to-all} (expert parallelism): Each device sends a \emph{variable} amount of data depending on routing decisions. Communication is data-dependent and potentially imbalanced.
+\end{itemize}
+
+Two all-to-all operations are required per MoE layer: one for dispatch (tokens $\to$ experts) and one for combine (expert outputs $\to$ original positions). For a model with $L_{\text{MoE}}$ MoE layers, this is $2 L_{\text{MoE}}$ all-to-all operations per forward pass.
+
+\section{Expert Parallelism}
+\label{ch:13:sec:expert_par}
+
+\textbf{Expert parallelism} (EP) distributes the $E$ experts across $P$ devices, with each device hosting $E/P$ experts. It is orthogonal to other parallelism strategies:
+
+\begin{itemize}
+  \item \textbf{Data parallelism} (DP): Replicates the full model; splits the batch. Communication: all-reduce on gradients.
+  \item \textbf{Tensor parallelism} (TP): Splits individual weight matrices across devices. Communication: all-reduce on activations.
+  \item \textbf{Pipeline parallelism} (PP): Splits layers across devices. Communication: point-to-point activation transfers.
+  \item \textbf{Expert parallelism} (EP): Splits experts across devices. Communication: all-to-all on tokens.
+\end{itemize}
+
+In practice, these are composed. DeepSeek-V3 uses a combination of DP + TP + PP + EP. The key constraint is that EP requires high-bandwidth interconnect between the expert-parallel group because every MoE layer triggers all-to-all communication.
 
 % ─── Worked Example ───
-\section{Worked Example}
+\section{Worked Example: Routing 8 Tokens Through 4 Experts}
 \label{ch:13:sec:example}
 
-TODO: Complete worked example.
+Consider a batch of $T = 8$ tokens, $E = 4$ experts, top-$k = 2$ routing, and capacity factor $c_f = 1.25$.
+
+\textbf{Step 1: Compute expert capacity.}
+\[
+C = \left\lceil \frac{8}{4} \times 1.25 \right\rceil = \lceil 2.5 \rceil = 3
+\]
+Each expert can handle at most 3 tokens.
+
+\textbf{Step 2: Router scores.}
+Suppose the router produces these scores (after softmax over top-2):
+
+\begin{center}
+\begin{tabular}{c|cccc}
+Token & $g_1$ & $g_2$ & $g_3$ & $g_4$ \\
+\hline
+$t_1$ & \textbf{0.7} & 0 & \textbf{0.3} & 0 \\
+$t_2$ & 0 & \textbf{0.6} & \textbf{0.4} & 0 \\
+$t_3$ & \textbf{0.5} & \textbf{0.5} & 0 & 0 \\
+$t_4$ & 0 & 0 & \textbf{0.8} & \textbf{0.2} \\
+$t_5$ & \textbf{0.9} & 0 & \textbf{0.1} & 0 \\
+$t_6$ & \textbf{0.4} & \textbf{0.6} & 0 & 0 \\
+$t_7$ & 0 & 0 & \textbf{0.3} & \textbf{0.7} \\
+$t_8$ & 0 & \textbf{0.5} & \textbf{0.5} & 0 \\
+\end{tabular}
+\end{center}
+
+\textbf{Step 3: Count dispatches per expert.}
+\begin{itemize}
+  \item Expert 1: tokens $t_1, t_3, t_5, t_6$ (4 tokens) $\to$ exceeds capacity $C=3$!
+  \item Expert 2: tokens $t_2, t_3, t_6, t_8$ (4 tokens) $\to$ exceeds capacity!
+  \item Expert 3: tokens $t_1, t_2, t_4, t_5, t_7, t_8$ (6 tokens!) $\to$ exceeds capacity!
+  \item Expert 4: tokens $t_4, t_7$ (2 tokens) $\to$ within capacity.
+\end{itemize}
+
+\textbf{Step 4: Apply capacity constraints} (process in order, drop overflows).
+\begin{itemize}
+  \item Expert 1 accepts $t_1, t_3, t_5$; \textbf{drops} $t_6$'s request for Expert 1.
+  \item Expert 2 accepts $t_2, t_3, t_6$; \textbf{drops} $t_8$'s request for Expert 2.
+  \item Expert 3 accepts $t_1, t_2, t_4$; \textbf{drops} $t_5, t_7, t_8$.
+\end{itemize}
+
+Token $t_8$ had both selected experts overflow. It passes through the residual connection with no expert computation---this is a dropped token.
+
+\textbf{Step 5: Combine.}
+For token $t_1$ (routed to experts 1 and 3, both accepted):
+\[
+\text{output}(t_1) = 0.7 \cdot f_1(\vx_{t_1}) + 0.3 \cdot f_3(\vx_{t_1})
+\]
+
+For token $t_8$ (both experts overflowed):
+\[
+\text{output}(t_8) = \vx_{t_8} \quad \text{(residual only)}
+\]
 
 % ─── Systems Consequences ───
 \section{Systems and Implementation Consequences}
 \label{ch:13:sec:systems}
 
-TODO: Implementation and performance implications.
+\subsection{Training: Memory and Throughput}
+
+MoE models have a paradoxical systems profile:
+\begin{itemize}
+  \item \textbf{FLOPs per token}: Roughly $k/E$ of the dense equivalent. A 47B MoE with $k=2, E=8$ uses about the same FLOPs as a 12B dense model.
+  \item \textbf{Memory}: The \emph{full} $E$ expert parameter sets must be stored, even though only $k$ are active per token. A 47B parameter MoE requires 47B parameters' worth of memory, not 12B. Optimizer states (Adam moments) scale with total parameters, not active parameters.
+  \item \textbf{Communication}: Each MoE layer requires two all-to-all operations. For $L_{\text{MoE}} = 32$ MoE layers, that is 64 all-to-all calls per forward pass. This can dominate training time on clusters with limited inter-node bandwidth.
+  \item \textbf{Throughput}: MoE training throughput (tokens/second) is typically 30--60\% of a compute-equivalent dense model, because the all-to-all overhead and load imbalance reduce GPU utilization.
+\end{itemize}
+
+\subsection{Inference: Latency, Throughput, and Cache}
+
+Inference with MoE models creates unique challenges:
+\begin{itemize}
+  \item \textbf{Latency}: During autoregressive generation, each token must be routed to its experts. If experts reside on different devices, this requires network communication for every single generated token.
+  \item \textbf{Throughput}: Large batch serving can amortize the all-to-all cost. But small-batch (e.g., single-user) inference hits the worst case: full all-to-all latency for one token.
+  \item \textbf{KV cache}: The KV cache is shared across all experts (it belongs to the attention layers, which are dense). MoE does not change KV cache size.
+  \item \textbf{Expert memory}: All $E$ experts must be resident in memory even though only $k$ are used per token. This makes MoE models much harder to serve on memory-limited hardware.
+  \item \textbf{Expert offloading}: Some inference systems offload inactive experts to CPU and load them on-demand, trading latency for memory. This is practical for moderate $E$ but breaks down for $E = 256$.
+\end{itemize}
+
+\subsection{Sparse vs.\ Dense Tradeoffs}
+
+The fundamental tradeoff:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Property} & \textbf{Dense} & \textbf{MoE (Sparse)} \\
+\midrule
+Parameters & $N$ & $\sim E \cdot N / k$ \\
+Active FLOPs/token & $N$ & $\sim N$ (same as small dense) \\
+Memory (weights) & $N$ & $E \cdot N / k$ (all experts stored) \\
+Memory (optimizer) & $3N$ (Adam) & $3 \cdot E \cdot N / k$ \\
+Communication & All-reduce & All-reduce + All-to-all \\
+Training stability & Stable & Requires aux loss, $z$-loss \\
+Quality per FLOP & Baseline & 2--4$\times$ better \\
+Serving complexity & Simple & Expert routing, load balancing \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The headline result is that MoE models achieve the quality of a much larger dense model at the compute cost of a much smaller one. But this comes at the price of higher memory, more complex communication, less stable training, and more complex serving infrastructure.
+
+\begin{warningbox}
+\textbf{``More parameters'' $\neq$ ``more computation per token.''} A 671B MoE model that activates 37B parameters per token is \emph{not} doing 671B parameters' worth of work on each token. It is doing roughly 37B parameters' worth of computation, but drawing on a much larger pool of stored knowledge. Confusing total parameters with active parameters is one of the most common errors when comparing MoE and dense models.
+\end{warningbox}
+
+\section{The MoE Landscape}
+\label{ch:13:sec:landscape}
+
+\subsection{Sparsely-Gated MoE (Shazeer et al., 2017)}
+The foundational paper \cite{moe_2017} demonstrated that a learned gating network could route tokens to a subset of experts, achieving dramatic improvements in translation quality. Used top-2 routing with a noisy gating mechanism (adding Gaussian noise to the logits before top-$k$ selection) to encourage exploration. Introduced the importance-based auxiliary loss.
+
+\subsection{GShard (Lepikhin et al., 2020)}
+GShard \cite{gshard2020} scaled MoE to 600B parameters across 2048 TPUs. Its key contributions:
+\begin{itemize}
+  \item Formalized the \textbf{capacity factor} $c_f$ and token dropping.
+  \item Introduced \textbf{random routing} for the second expert in top-2: the second expert is sampled proportionally to its gating weight rather than deterministically selected. This reduces dispatch imbalance.
+  \item Demonstrated \textbf{expert parallelism} as a practical parallelism strategy composable with data and model parallelism.
+\end{itemize}
+
+\subsection{Switch Transformer (Fedus et al., 2022)}
+Switch Transformers \cite{switch_transformers_2021} simplified MoE by using \textbf{top-1 routing}: each token goes to exactly one expert. This halves the compute per MoE layer compared to top-2, simplifies dispatch (no weighted combination), and still achieves strong results. The paper introduced the $f_i \cdot p_i$ auxiliary loss formulation shown in~\cref{eq:13:aux_loss} and carefully studied the interaction between capacity factor, batch size, and expert count.
+
+\subsection{Mixtral (Mistral, 2024)}
+Mixtral 8$\times$7B \cite{mixtral} is a landmark open-source MoE model: 8 experts with top-2 routing at every layer. Total parameters: 47B. Active parameters: $\sim$13B. It matches or exceeds LLaMA-2 70B on most benchmarks while requiring roughly $6\times$ less compute per token. Mixtral demonstrated that MoE could be practical for open-source deployment, not just internal research.
+
+\subsection{DeepSeek-V2 and V3}
+DeepSeek-V2 \cite{deepseek_v2} introduced two innovations:
+\begin{itemize}
+  \item \textbf{Multi-head Latent Attention (MLA)}: compresses the KV cache via low-rank projection.
+  \item \textbf{Fine-grained expert segmentation}: Instead of 8 large experts, DeepSeek uses 160+ small experts with top-6 routing, achieving better load balance and specialization.
+\end{itemize}
+DeepSeek-V3 \cite{deepseek_v3} scaled this to 671B total parameters (37B active), 256 routed experts + 1 shared expert, and introduced an \textbf{aux-loss-free} \cite{auxfree_2024} load balancing approach using per-expert bias terms adjusted via a simple sequential algorithm during training.
+
+\section{Fine-Tuning Risks}
+\label{ch:13:sec:finetuning}
+
+Fine-tuning MoE models carries specific dangers:
+\begin{itemize}
+  \item \textbf{Expert forgetting}: If the fine-tuning data is narrow (e.g., only code), the router may collapse to routing everything to a few code-specialized experts, causing other experts to degrade.
+  \item \textbf{Load imbalance amplification}: Fine-tuning datasets are typically much smaller and less diverse than pretraining data. The router may overfit to the narrow distribution, creating severe imbalance.
+  \item \textbf{Auxiliary loss tuning}: The $\alpha$ coefficient for the auxiliary loss may need re-calibration during fine-tuning. Too small $\alpha$ allows collapse; too large $\alpha$ forces unnatural routing that hurts task performance.
+\end{itemize}
+
+\section{MoE, Long Context, and Deployment Cost}
+\label{ch:13:sec:deployment}
+
+MoE interacts with long-context and deployment in subtle ways:
+\begin{itemize}
+  \item \textbf{Long context}: MoE does not change the attention mechanism, so KV cache scaling with sequence length is unchanged. However, longer sequences mean more tokens per batch, which actually \emph{helps} MoE by providing better load balance across experts (more tokens $\to$ closer to uniform distribution by the law of large numbers).
+  \item \textbf{Deployment cost}: The full expert parameter set must be in memory. A 671B MoE model requires the same weight storage as a 671B dense model, even though it uses only 5\% of those parameters per token. This makes MoE models expensive to deploy on single machines and practically requires multi-GPU serving.
+  \item \textbf{Quantization}: MoE models respond well to weight quantization (INT8, INT4) because each expert is a standard FFN. However, the router weights must typically remain in higher precision to maintain routing quality.
+\end{itemize}
 
 % ─── Neuroscience Analogy ───
-\begin{analogybox}{TODO: Title}
+\begin{analogybox}{Cortical Specialization and Sparse Activation}
   \paragraph{Where the analogy helps.}
-  TODO
+  The mammalian cortex exhibits \emph{functional specialization}: the fusiform face area (FFA) preferentially responds to faces, Broca's area to language production, and area MT to visual motion. When you read text, your visual word form area activates strongly while your motor cortex for leg movements is relatively quiescent. This mirrors MoE routing: not all computational subunits are equally active for all inputs. Different inputs preferentially recruit different specialized modules, and the brain's total neural capacity far exceeds what is active at any given moment.
 
   \paragraph{Where the analogy breaks.}
-  TODO
+  Crucially, the brain does not have an explicit top-$k$ router that gates information flow with a learned weight matrix. Cortical specialization emerges from developmental wiring, experience-dependent plasticity, and anatomical connectivity---not from a differentiable softmax over a set of discrete modules. There is no ``capacity factor'' in the brain; neural populations can flexibly handle variable load through rate coding and population dynamics. The timescales of biological adaptation (milliseconds for neural dynamics, days to years for synaptic plasticity) bear no resemblance to the single-step gradient update that trains an MoE router.
 
   \paragraph{What intuition to keep.}
-  TODO
+  The key insight is: \emph{sparse, input-dependent activation of specialized subnetworks can be more efficient than dense, uniform computation.} Specialization enables capacity without proportional cost---but coordination and routing between specialized modules introduces its own overhead and failure modes, whether in brains or in Transformers.
 \end{analogybox}
+
 
 % ─── Misconceptions ───
 \section{Common Misconceptions}
 \label{ch:13:sec:misconceptions}
 
 \begin{enumerate}
-  \item \textbf{Misconception 1.} TODO: State and correct.
-  \item \textbf{Misconception 2.} TODO: State and correct.
-  \item \textbf{Misconception 3.} TODO: State and correct.
+  \item \textbf{``An MoE model with 671B parameters is 671B parameters smart.''} No. On any given token, only $\sim$37B parameters are active. The model's per-token computational depth is comparable to a 37B dense model. The 671B figure represents stored capacity (like a library with many books), not active reasoning power (like reading speed).
+
+  \item \textbf{``MoE saves memory because fewer parameters are active.''}  Incorrect. All $E$ expert parameter tensors and their Adam optimizer states must be stored in GPU memory. MoE saves \emph{FLOPs}, not \emph{memory}. In fact, MoE models require \emph{more} total memory than a compute-equivalent dense model.
+
+  \item \textbf{``Experts naturally specialize into interpretable topics like `code' or `math'.''} This is sometimes true but often overstated. Empirical analysis of expert activation patterns shows that specialization is typically at the level of token-level syntactic patterns (punctuation, whitespace, certain morphological patterns) rather than clean semantic categories. A few experts may show domain affinity, but most exhibit mixed-domain activation.
+
+  \item \textbf{``MoE is just dropout applied to FFN layers.''} Dropout randomly zeroes out neurons during training for regularization. MoE \emph{selectively routes} tokens to entire expert FFNs based on a learned gating function. The selection is deterministic (given the input) and learned, not random. The purposes are entirely different: dropout prevents overfitting; MoE enables conditional computation for capacity scaling.
+
+  \item \textbf{``MoE models are harder to fine-tune, so you should always use dense models.''} MoE fine-tuning has specific risks (expert forgetting, load collapse), but modern techniques (freezing the router, using lower learning rates for experts) make it practical. Mixtral and DeepSeek are routinely fine-tuned for specific applications.
 \end{enumerate}
 
 % ─── Exercises ───
@@ -69,22 +407,32 @@ TODO: Implementation and performance implications.
 
 \subsection*{Warmup}
 \begin{enumerate}
-  \item TODO
+  \item In a model with $E = 16$ experts and top-$k = 2$ routing, what fraction of the expert parameters are active per token?
+  \item If the capacity factor is $c_f = 1.0$ and there are $T = 1024$ tokens in a batch with $E = 8$ experts, what is the maximum number of tokens each expert can process? What happens to the 129th token routed to a single expert?
+  \item Write the auxiliary loss $\mathcal{L}_{\text{aux}}$ value for a perfectly balanced routing scenario where $f_i = 1/E$ and $p_i = 1/E$ for all $i$, given $E = 8$ and $\alpha = 0.01$.
 \end{enumerate}
 
 \subsection*{Derivation}
 \begin{enumerate}
-  \item TODO
+  \item Show that the auxiliary loss $\mathcal{L}_{\text{aux}} = \alpha \cdot E \cdot \sum_i f_i \cdot p_i$ is minimized (subject to $\sum_i f_i = k$ and $\sum_i p_i = k$) when $f_i = k/E$ and $p_i = k/E$ for all $i$. (Hint: use the AM-GM inequality or Cauchy-Schwarz.)
+  \item Derive the total FLOPs for a single MoE layer with $E$ experts, each having hidden dimension $d_{\text{ff}}$, model dimension $d$, top-$k$ routing, and $T$ tokens. Compare this to a dense FFN with hidden dimension $E \cdot d_{\text{ff}}$ processing the same $T$ tokens.
 \end{enumerate}
 
 \subsection*{Implementation}
 \begin{enumerate}
-  \item TODO
+  \item Implement a simple MoE layer in PyTorch with $E=4$ experts and top-2 routing. Your implementation should include:
+  \begin{enumerate}
+    \item A linear router $\vW_g \in \R^{E \times d}$.
+    \item Top-$k$ selection with softmax renormalization.
+    \item A capacity-limited dispatch buffer.
+    \item Weighted combination of expert outputs.
+  \end{enumerate}
+  Verify that exactly 2 experts fire per token and that tokens exceeding capacity are dropped.
 \end{enumerate}
 
 \subsection*{Open-Ended}
 \begin{enumerate}
-  \item TODO
+  \item DeepSeek-V3 removed the auxiliary loss entirely, replacing it with adaptive bias terms. What are the theoretical advantages and risks of this approach compared to the Switch Transformer's $f_i \cdot p_i$ formulation? Under what training scenarios might aux-loss-free routing fail?
 \end{enumerate}
 
 % ─── Further Reading ───
@@ -92,7 +440,9 @@ TODO: Implementation and performance implications.
 \label{ch:13:sec:further}
 
 \begin{itemize}
-  \item TODO: Annotated reference 1
-  \item TODO: Annotated reference 2
-  \item TODO: Annotated reference 3
+  \item \textcite{moe_2017}: \emph{Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer.} The foundational paper introducing learned sparse routing for conditional computation. Establishes the mathematical framework and demonstrates scaling to 137B parameters.
+  \item \textcite{switch_transformers_2021}: \emph{Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity.} Simplifies MoE to top-1 routing, introduces the $f_i \cdot p_i$ auxiliary loss, and provides extensive ablations on capacity factor, expert count, and training stability.
+  \item \textcite{gshard2020}: \emph{GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding.} The systems paper for MoE at scale. Introduces expert parallelism, capacity factor, and random routing for top-2 gating.
+  \item \textcite{mixtral}: \emph{Mixtral of Experts.} The first widely available open-source MoE model, demonstrating that sparse MoE provides excellent quality-per-FLOP tradeoffs in a practical, deployable package.
+  \item \textcite{deepseek_v3}: \emph{DeepSeek-V3 Technical Report.} Pushes MoE to 671B parameters with 256 fine-grained experts and aux-loss-free load balancing, representing the current state of the art in sparse MoE design.
 \end{itemize}

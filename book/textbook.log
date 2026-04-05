@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  3 APR 2026 21:20
+This is LuaHBTeX, Version 1.21.0 (TeX Live 2025)  (format=lualatex 2025.3.8)  5 APR 2026 12:37
  restricted system commands enabled.
 **textbook.tex
 (./textbook.tex
@@ -1494,7 +1494,7 @@ Package cleveref Info: no abbreviation of names on input line 7852.
 (./chapters/ch05_linguistics.aux) (./chapters/ch06_lm_problem.aux)
 (./chapters/ch07_tokenization.aux) (./chapters/ch08_ngram_to_neural.aux)
 (./chapters/ch09_attention.aux) (./chapters/ch10_transformer_blocks.aux)
-(./chapters/ch11_norms_position.aux) (./chapters/ch12_hyperparameters.aux)
+(./chapters/ch11_position.aux) (./chapters/ch12_initialization.aux)
 (./chapters/ch13_variants.aux) (./chapters/ch14_resource_accounting.aux)
 (./chapters/ch15_gpus_tpus.aux) (./chapters/ch16_kernels_triton.aux)
 (./chapters/ch17_parallelism.aux) (./chapters/ch18_inference.aux)
@@ -1508,26 +1508,26 @@ Package cleveref Info: no abbreviation of names on input line 7852.
 (./appendices/appendix_e_reproducibility.aux))
 \openout1 = textbook.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 258.
-LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 262.
+LaTeX Font Info:    ... okay on input line 262.
 
 Package fontspec Info: 
 (fontspec)             Adjusting the maths setup (use [no-math] to avoid
@@ -1535,82 +1535,82 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 258.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 258.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 258.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 258.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 258.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 258.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 258.
-LaTeX Font Info:    Redeclaring math accent \check on input line 258.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 258.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 258.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 258.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 258.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 258.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 262.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 262.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 262.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 262.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 262.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 262.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 262.
+LaTeX Font Info:    Redeclaring math accent \check on input line 262.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 262.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 262.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 262.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 262.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 262.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 258.
+(Font)              `operators' in the math version `normal' on input line 262.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/LatinModernRoman(0)/m/n on input lin
-e 258.
+e 262.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 258.
+(Font)              `operators' in the math version `bold' on input line 262.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/m/n on input li
-ne 258.
+ne 262.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/m
-/n on input line 258.
+/n on input line 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/LatinModernRoman(0)/m/it on input l
-ine 258.
+ine 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/LatinModernRoman(0)/b/n on input li
-ne 258.
+ne 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
 (Font)                  OT1/cmss/m/n --> TU/LatinModernSans(0)/m/n on input lin
-e 258.
+e 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
 (Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/m/n on input lin
-e 258.
+e 262.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/LatinModernRoman(0)/m/n --> TU/LatinModernRoman(0)/b
-/n on input line 258.
+/n on input line 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/LatinModernRoman(0)/b/it on input 
-line 258.
+line 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/LatinModernSans(0)/b/n on input li
-ne 258.
+ne 262.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/LatinModernMono(0)/b/n on input lin
-e 258.
-LaTeX Info: Redefining \microtypecontext on input line 258.
-Package microtype Info: Applying patch `item' on input line 258.
-Package microtype Info: Applying patch `toc' on input line 258.
-Package microtype Info: Applying patch `eqnum' on input line 258.
-Package microtype Info: Applying patch `footnote' on input line 258.
-Package microtype Info: Applying patch `verbatim' on input line 258.
-LaTeX Info: Redefining \microtypesetup on input line 258.
+e 262.
+LaTeX Info: Redefining \microtypecontext on input line 262.
+Package microtype Info: Applying patch `item' on input line 262.
+Package microtype Info: Applying patch `toc' on input line 262.
+Package microtype Info: Applying patch `eqnum' on input line 262.
+Package microtype Info: Applying patch `footnote' on input line 262.
+Package microtype Info: Applying patch `verbatim' on input line 262.
+LaTeX Info: Redefining \microtypesetup on input line 262.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 258.
+LaTeX Info: Redefining \showhyphens on input line 262.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
@@ -1733,6 +1733,13 @@ Package biblatex Warning: The following entry could not be found
 
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
+(biblatex)                glorot2010
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
 (biblatex)                he2016
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
@@ -1754,6 +1761,27 @@ Package biblatex Warning: The following entry could not be found
 
 Package biblatex Warning: The following entry could not be found
 (biblatex)                in the database:
+(biblatex)                press2021
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                radford2019
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                su2021
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
 (biblatex)                vaswani2017
 (biblatex)                Please verify the spelling and rerun
 (biblatex)                LaTeX afterwards.
@@ -1766,14 +1794,14 @@ Package biblatex Warning: The following entry could not be found
 (biblatex)                LaTeX afterwards.
 
 )
-Package biblatex Info: Reference section=0 on input line 258.
-Package biblatex Info: Reference segment=0 on input line 258.
-Package hyperref Info: Link coloring ON on input line 258.
+Package biblatex Info: Reference section=0 on input line 262.
+Package biblatex Info: Reference segment=0 on input line 262.
+Package hyperref Info: Link coloring ON on input line 262.
  (./textbook.out) (./textbook.out)
 \@outlinefile=\write5
 
 \openout5 = textbook.out
-LaTeX Font Info:    Trying to load font information for U+msa on input line 263
+LaTeX Font Info:    Trying to load font information for U+msa on input line 267
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1782,7 +1810,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 263
+LaTeX Font Info:    Trying to load font information for U+msb on input line 267
 .
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1827,23 +1855,23 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 
 [11]
 
-[12])
+[12]
+
+[13])
 \tf@toc=\write6
 
 \openout6 = textbook.toc
 
 
-[13]
-
-[14
-
-] (./textbook.lof)
+[14] (./textbook.lof)
 \tf@lof=\write7
 
 \openout7 = textbook.lof
 
 
-[15]
+[15
+
+]
 
 [16
 
@@ -2231,9 +2259,12 @@ LaTeX Warning: Citation 'xiong2020' on page 74 undefined on input line 185.
 )
 
 [74]
-\openout2 = chapters/ch11_norms_position.aux
- (./chapters/ch11_norms_position.tex
+\openout2 = chapters/ch11_position.aux
+ (./chapters/ch11_position.tex
 Chapter 12.
+
+Underfull \vbox (badness 2452) has occurred while \output is active []
+
 
 
 [75
@@ -2241,149 +2272,99 @@ Chapter 12.
 
 
 
-])
+]
 
 [76]
-\openout2 = chapters/ch12_hyperparameters.aux
- (./chapters/ch12_hyperparameters.tex
-Chapter 13.
 
-
-[77
-
-
-
-
-])
+[77]
 
 [78]
+
+LaTeX Warning: Citation 'su2021' on page 79 undefined on input line 171.
+
+
+LaTeX Warning: Citation 'press2021' on page 79 undefined on input line 172.
+
+)
+
+[79]
+\openout2 = chapters/ch12_initialization.aux
+ (./chapters/ch12_initialization.tex
+
+[80
+
+
+
+
+]
+Chapter 13.
+
+Underfull \vbox (badness 6808) has occurred while \output is active []
+
+
+
+[81]
+
+[82]
+
+[83]
+
+[84]
+
+LaTeX Warning: Citation 'glorot2010' on page 85 undefined on input line 170.
+
+
+LaTeX Warning: Citation 'radford2019' on page 85 undefined on input line 171.
+
+)
+
+[85]
 \openout2 = chapters/ch13_variants.aux
  (./chapters/ch13_variants.tex
+
+[86
+
+
+
+
+]
 Chapter 14.
 
 
-[79
-
-
-
-
-])
-
-[80]
-
-[81
-
-
-
-]
-
-[82]
-\openout2 = chapters/ch14_resource_accounting.aux
- (./chapters/ch14_resource_accounting.tex
-Chapter 15.
-
-
-[83
-
-
-])
-
-[84]
-\openout2 = chapters/ch15_gpus_tpus.aux
- (./chapters/ch15_gpus_tpus.tex
-Chapter 16.
-
-
-[85
-
-
-
-
-])
-
-[86]
-\openout2 = chapters/ch16_kernels_triton.aux
- (./chapters/ch16_kernels_triton.tex
-Chapter 17.
-
-
-[87
-
-
-
-
-])
+[87]
 
 [88]
-\openout2 = chapters/ch17_parallelism.aux
- (./chapters/ch17_parallelism.tex
-Chapter 18.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 79.
 
 
-[89
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 79.
 
 
 
-
-])
+[89]
 
 [90]
-\openout2 = chapters/ch18_inference.aux
- (./chapters/ch18_inference.tex
-Chapter 19.
 
-
-[91
-
-
-
-
-])
+[91]
 
 [92]
 
-[93
-
-
-
-]
+[93]
 
 [94]
-\openout2 = chapters/ch19_scaling_laws.aux
- (./chapters/ch19_scaling_laws.tex
-Chapter 20.
 
-
-[95
-
-
-])
+[95]
 
 [96]
-\openout2 = chapters/ch20_model_recipes.aux
- (./chapters/ch20_model_recipes.tex
-Chapter 21.
 
-
-[97
-
-
-
-
-])
+[97]
 
 [98]
-\openout2 = chapters/ch21_evaluation.aux
- (./chapters/ch21_evaluation.tex
-Chapter 22.
 
-
-[99
-
-
-
-
-])
+[99])
 
 [100]
 
@@ -2394,9 +2375,9 @@ Chapter 22.
 ]
 
 [102]
-\openout2 = chapters/ch22_data_sources.aux
- (./chapters/ch22_data_sources.tex
-Chapter 23.
+\openout2 = chapters/ch14_resource_accounting.aux
+ (./chapters/ch14_resource_accounting.tex
+Chapter 15.
 
 
 [103
@@ -2405,9 +2386,9 @@ Chapter 23.
 ])
 
 [104]
-\openout2 = chapters/ch23_filtering_dedup.aux
- (./chapters/ch23_filtering_dedup.tex
-Chapter 24.
+\openout2 = chapters/ch15_gpus_tpus.aux
+ (./chapters/ch15_gpus_tpus.tex
+Chapter 16.
 
 
 [105
@@ -2418,28 +2399,35 @@ Chapter 24.
 ])
 
 [106]
+\openout2 = chapters/ch16_kernels_triton.aux
+ (./chapters/ch16_kernels_triton.tex
+Chapter 17.
+
 
 [107
 
 
 
-]
+
+])
 
 [108]
-\openout2 = chapters/ch24_instruction_tuning.aux
- (./chapters/ch24_instruction_tuning.tex
-Chapter 25.
+\openout2 = chapters/ch17_parallelism.aux
+ (./chapters/ch17_parallelism.tex
+Chapter 18.
 
 
 [109
 
 
+
+
 ])
 
 [110]
-\openout2 = chapters/ch25_rlhf_dpo_grpo.aux
- (./chapters/ch25_rlhf_dpo_grpo.tex
-Chapter 26.
+\openout2 = chapters/ch18_inference.aux
+ (./chapters/ch18_inference.tex
+Chapter 19.
 
 
 [111
@@ -2450,40 +2438,149 @@ Chapter 26.
 ])
 
 [112]
-\openout2 = chapters/ch26_safety.aux
- (./chapters/ch26_safety.tex
-Chapter 27.
-
 
 [113
+
+
+
+]
+
+[114]
+\openout2 = chapters/ch19_scaling_laws.aux
+ (./chapters/ch19_scaling_laws.tex
+Chapter 20.
+
+
+[115
+
+
+])
+
+[116]
+\openout2 = chapters/ch20_model_recipes.aux
+ (./chapters/ch20_model_recipes.tex
+Chapter 21.
+
+
+[117
 
 
 
 
 ])
 
-[114]
+[118]
+\openout2 = chapters/ch21_evaluation.aux
+ (./chapters/ch21_evaluation.tex
+Chapter 22.
 
-[115
+
+[119
+
+
+
+
+])
+
+[120]
+
+[121
 
 
 
 ]
 
-[116]
+[122]
+\openout2 = chapters/ch22_data_sources.aux
+ (./chapters/ch22_data_sources.tex
+Chapter 23.
+
+
+[123
+
+
+])
+
+[124]
+\openout2 = chapters/ch23_filtering_dedup.aux
+ (./chapters/ch23_filtering_dedup.tex
+Chapter 24.
+
+
+[125
+
+
+
+
+])
+
+[126]
+
+[127
+
+
+
+]
+
+[128]
+\openout2 = chapters/ch24_instruction_tuning.aux
+ (./chapters/ch24_instruction_tuning.tex
+Chapter 25.
+
+
+[129
+
+
+])
+
+[130]
+\openout2 = chapters/ch25_rlhf_dpo_grpo.aux
+ (./chapters/ch25_rlhf_dpo_grpo.tex
+Chapter 26.
+
+
+[131
+
+
+
+
+])
+
+[132]
+\openout2 = chapters/ch26_safety.aux
+ (./chapters/ch26_safety.tex
+Chapter 27.
+
+
+[133
+
+
+
+
+])
+
+[134]
+
+[135
+
+
+
+]
+
+[136]
 \openout2 = appendices/appendix_a_proofs.aux
  (./appendices/appendix_a_proofs.tex
 Appendix A.
 )
 
-[117
+[137
 
 
 ]
 \openout2 = appendices/appendix_b_cuda_triton.aux
  (./appendices/appendix_b_cuda_triton.tex
 
-[118
+[138
 
 
 
@@ -2492,11 +2589,11 @@ Appendix A.
 Appendix B.
 )
 
-[119]
+[139]
 \openout2 = appendices/appendix_c_linguistics.aux
  (./appendices/appendix_c_linguistics.tex
 
-[120
+[140
 
 
 
@@ -2505,11 +2602,11 @@ Appendix B.
 Appendix C.
 )
 
-[121]
+[141]
 \openout2 = appendices/appendix_d_neuro_index.aux
  (./appendices/appendix_d_neuro_index.tex
 
-[122
+[142
 
 
 
@@ -2518,11 +2615,11 @@ Appendix C.
 Appendix D.
 )
 
-[123]
+[143]
 \openout2 = appendices/appendix_e_reproducibility.aux
  (./appendices/appendix_e_reproducibility.tex
 
-[124
+[144
 
 
 
@@ -2531,15 +2628,15 @@ Appendix D.
 Appendix E.
 )
 
-[125]
+[145]
 
-[126
+[146
 
 
 
 ]
 
-[127
+[147
 
 ] (./textbook.aux (./chapters/ch00_how_to_use.aux)
 (./chapters/ch01_probability_entropy.aux) (./chapters/ch02_linalg_matcalc.aux)
@@ -2547,7 +2644,7 @@ Appendix E.
 (./chapters/ch05_linguistics.aux) (./chapters/ch06_lm_problem.aux)
 (./chapters/ch07_tokenization.aux) (./chapters/ch08_ngram_to_neural.aux)
 (./chapters/ch09_attention.aux) (./chapters/ch10_transformer_blocks.aux)
-(./chapters/ch11_norms_position.aux) (./chapters/ch12_hyperparameters.aux)
+(./chapters/ch11_position.aux) (./chapters/ch12_initialization.aux)
 (./chapters/ch13_variants.aux) (./chapters/ch14_resource_accounting.aux)
 (./chapters/ch15_gpus_tpus.aux) (./chapters/ch16_kernels_triton.aux)
 (./chapters/ch17_parallelism.aux) (./chapters/ch18_inference.aux)
@@ -2567,56 +2664,64 @@ L3 programming layer <2025-01-18>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `textbook.out' has not changed.
-(rerunfilecheck)             Checksum: FAC426808606E6B861A88110CC64A684;51395.
+(rerunfilecheck)             Checksum: DC4CF79F2454F13E8BFC00A8F85E977C;58760.
+
+Package biblatex Warning: Please rerun LaTeX.
+
 Package logreq Info: Writing requests to 'textbook.run.xml'.
 
 \openout1 = textbook.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 51661 strings out of 475506
- 156465,2373549 words of node,token memory allocated
- 1914 words of node memory still in use:
+ 51922 strings out of 475506
+ 244494,2373549 words of node,token memory allocated
+ 2102 words of node memory still in use:
    32 hlist, 2 vlist, 14 rule, 1 local_par, 4 glue, 4 kern, 1 penalty, 1 margin_
-kern, 4 glyph, 165 attribute, 95 glue_spec, 165 attribute_list, 2 write, 24 pdf_
-literal, 3 pdf_action, 24 pdf_colorstack nodes
-   avail lists: 1:2,2:1802,3:429,4:3122,5:2777,6:122,7:6675,8:101,9:6184,10:26,1
-1:591
- 71822 multiletter control sequences out of 65536+600000
- 139 fonts using 12611575 bytes
- 98i,13n,97p,1004b,1495s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-italic.otf
-></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.o
-tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.ot
-f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.o
-tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.
-otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regula
-r.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold
-.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-regul
-ar.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bo
-ld.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-it
-alic.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-
-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman
-12-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmro
-man12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cme
-xtra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8
-.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.
-pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmi
-b8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
-pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
-r/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
-local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on textbook.pdf (145 pages, 528864 bytes).
+kern, 4 glyph, 206 attribute, 95 glue_spec, 206 attribute_list, 2 write, 24 pdf_
+literal, 7 pdf_action, 24 pdf_colorstack nodes
+   avail lists: 1:1,2:2294,3:436,4:4734,5:4007,6:117,7:8928,8:101,9:9470,10:26,1
+1:710
+ 71956 multiletter control sequences out of 65536+600000
+ 152 fonts using 13696943 bytes
+ 98i,13n,97p,1004b,1497s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman6-bold.otf><
+/usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-italic.otf>
+</usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman6-regular.ot
+f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-bold.otf
+></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans8-regular.ot
+f></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-italic.o
+tf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regular
+.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.
+otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman8-regula
+r.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bol
+d.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-ita
+lic.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-r
+egular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman1
+2-regular.otf></usr/local/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmrom
+an12-bold.otf></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmex
+tra/cmex8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.
+pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.p
+fb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib
+8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
+fb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
+/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
+/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/l
+ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/loca
+l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/t
+exlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on textbook.pdf (165 pages, 630751 bytes).
 
-PDF statistics: 3002 PDF objects out of 3580 (max. 8388607)
- 2750 compressed objects within 28 object streams
- 1061 named destinations out of 1200 (max. 131072)
- 2624 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 3381 PDF objects out of 3580 (max. 8388607)
+ 3101 compressed objects within 32 object streams
+ 1188 named destinations out of 1200 (max. 131072)
+ 2888 words of extra memory for PDF output out of 10000 (max. 100000000)
 

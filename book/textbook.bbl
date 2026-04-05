@@ -90,13 +90,231 @@
       \verb https://arxiv.org/abs/1508.07909
       \endverb
     \endentry
+    \entry{moe_2017}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=8b36e9207c24c76e6719268e49201d94}{%
+           family={Google},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \strng{bibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorbibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authornamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Moe}
+      \verb{eprint}
+      \verb 1701.06538
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/pdf/1701.06538.pdf
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/pdf/1701.06538.pdf
+      \endverb
+    \endentry
+    \entry{gshard2020}{article}{}{}
+      \name{author}{9}{}{%
+        {{hash=2ca508543b6fa5af72e4238da74cff35}{%
+           family={Lepikhin},
+           familyi={L\bibinitperiod},
+           given={Dmitry},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d46801cad0f09d95419d45b0fdf9810c}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={HyoukJoong},
+           giveni={H\bibinitperiod}}}%
+        {{hash=aeb9612f51171ed2578e46a49f685b97}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Yuanzhong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=96afffbf89c868701856413526dfe118}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Dehao},
+           giveni={D\bibinitperiod}}}%
+        {{hash=199f475d073184300c78ea1ea7d001e1}{%
+           family={Firat},
+           familyi={F\bibinitperiod},
+           given={Orhan},
+           giveni={O\bibinitperiod}}}%
+        {{hash=346a2c7017c020c4a8448409f0e3daf7}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Yanping},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8c2ce3e06666676855e01e5bb2466d92}{%
+           family={Krikun},
+           familyi={K\bibinitperiod},
+           given={Maxim},
+           giveni={M\bibinitperiod}}}%
+        {{hash=62efade83d70f0323fe248755e6c90c5}{%
+           family={Shazeer},
+           familyi={S\bibinitperiod},
+           given={Noam},
+           giveni={N\bibinitperiod}}}%
+        {{hash=c0d10aaf985cebf8d0497e1828f9313f}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zhifeng},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{009e19e9afb80b8366545bca06b25160}
+      \strng{fullhash}{c2210189d57f5fd2dfdc87562d252001}
+      \strng{fullhashraw}{c2210189d57f5fd2dfdc87562d252001}
+      \strng{bibnamehash}{37ca2fb4de989768f145f3d069e93c4b}
+      \strng{authorbibnamehash}{37ca2fb4de989768f145f3d069e93c4b}
+      \strng{authornamehash}{009e19e9afb80b8366545bca06b25160}
+      \strng{authorfullhash}{c2210189d57f5fd2dfdc87562d252001}
+      \strng{authorfullhashraw}{c2210189d57f5fd2dfdc87562d252001}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{note}{Introduced expert parallelism, capacity factor, random routing for top-2 gating in MoE at scale. 600B parameter MoE model.}
+      \field{title}{GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding}
+      \field{year}{2020}
+      \verb{eprint}
+      \verb 2006.16668
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2006.16668
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2006.16668
+      \endverb
+    \endentry
+    \entry{switch_transformers_2021}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=8b36e9207c24c76e6719268e49201d94}{%
+           family={Google},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \strng{bibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorbibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authornamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Switch Transformers}
+      \verb{eprint}
+      \verb 2101.03961
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2101.03961
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2101.03961
+      \endverb
+    \endentry
+    \entry{mixtral}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=539134de8ffd78af38bb1627d8507ce9}{%
+           family={Mistral},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{fullhash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{fullhashraw}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{bibnamehash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{authorbibnamehash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{authornamehash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{authorfullhash}{539134de8ffd78af38bb1627d8507ce9}
+      \strng{authorfullhashraw}{539134de8ffd78af38bb1627d8507ce9}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Mixtral}
+      \verb{eprint}
+      \verb 2401.04088
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/pdf/2401.04088.pdf
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/pdf/2401.04088.pdf
+      \endverb
+    \endentry
+    \entry{deepseek_v2}{article}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Deepseek V2}
+      \verb{eprint}
+      \verb 2405.04434
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2405.04434
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2405.04434
+      \endverb
+    \endentry
+    \entry{deepseek_v3}{article}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Deepseek V3}
+      \verb{eprint}
+      \verb 2412.19437
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/pdf/2412.19437.pdf
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/pdf/2412.19437.pdf
+      \endverb
+    \endentry
+    \entry{auxfree_2024}{article}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{title}{Auxfree}
+      \verb{eprint}
+      \verb 2408.15664
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2408.15664
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2408.15664
+      \endverb
+    \endentry
   \enddatalist
   \missing{bahdanau2014}
   \missing{blt_2024}
   \missing{byt5_2021}
+  \missing{glorot2010}
   \missing{he2016}
   \missing{megabyte_2023}
   \missing{mikolov2013}
+  \missing{press2021}
+  \missing{radford2019}
+  \missing{su2021}
   \missing{vaswani2017}
   \missing{xiong2020}
 \endrefsection

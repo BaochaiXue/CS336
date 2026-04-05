@@ -26,3 +26,16 @@ All major decisions with rationale. Chronological order.
 
 ### Decision: Full paper source download
 **Rationale**: Having local LaTeX sources allows direct quotation verification, notation comparison, and precise citation. The disk cost (~2-5 GB) is acceptable.
+
+---
+
+## 2026-04-05: Harness engineering overhaul
+
+### Decision: Fix textbook.tex includes (ch11, ch12)
+**Rationale**: Discovered that `textbook.tex` was including stub files (`ch11_norms_position.tex`, `ch12_hyperparameters.tex`) instead of the mature content files (`ch11_position.tex`, `ch12_initialization.tex`). The compiled PDF showed TODO placeholders for chapters that had complete content. Fixed by pointing includes to the mature files.
+
+### Decision: MoE goes into ch13_variants.tex as full chapter
+**Rationale**: CS336 Lecture 4 is entirely dedicated to MoE. The current `ch13_variants.tex` is a pure stub (213 words, all TODO). Rather than creating a new chapter and renumbering everything, we repurpose this stub as a dedicated MoE chapter. The previous title "Architectural Variants and Extensions" was too vague. Other architectural variants (linear attention, Mamba/SSM, MLA) can be handled via 2026 Update Cards or appendices. Exec plan: `docs/exec_plans/active/moe_chapter.md`.
+
+### Decision: GShard to be added to paper manifest
+**Rationale**: GShard (Lepikhin et al. 2020, arXiv: 2006.16668) is a key MoE paper that describes the foundational concepts of expert parallelism and capacity factor. It was missing from the manifest despite being directly relevant to the Ch13 MoE content.
